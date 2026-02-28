@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slopdog Music Discography</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00ff41",
+                        "primary-dark": "#00cc33",
+                        "background-light": "#f5f8f6",
+                        "background-dark": "#0a0a0a",
+                        "surface-dark": "#111111",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "mono": ["Courier New", "monospace"],
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glitch-text {
+            position: relative;
+        }
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+        }
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 #ff00c1;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -1px 0 #00fff9;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim {
+            0% { clip: rect(38px, 9999px, 86px, 0); }
+            5% { clip: rect(65px, 9999px, 98px, 0); }
+            10% { clip: rect(10px, 9999px, 83px, 0); }
+            15% { clip: rect(98px, 9999px, 4px, 0); }
+            20% { clip: rect(19px, 9999px, 60px, 0); }
+            25% { clip: rect(81px, 9999px, 2px, 0); }
+            30% { clip: rect(32px, 9999px, 40px, 0); }
+            35% { clip: rect(56px, 9999px, 11px, 0); }
+            40% { clip: rect(74px, 9999px, 69px, 0); }
+            45% { clip: rect(21px, 9999px, 94px, 0); }
+            50% { clip: rect(96px, 9999px, 25px, 0); }
+            55% { clip: rect(12px, 9999px, 59px, 0); }
+            60% { clip: rect(89px, 9999px, 3px, 0); }
+            65% { clip: rect(54px, 9999px, 36px, 0); }
+            70% { clip: rect(5px, 9999px, 76px, 0); }
+            75% { clip: rect(43px, 9999px, 15px, 0); }
+            80% { clip: rect(67px, 9999px, 91px, 0); }
+            85% { clip: rect(28px, 9999px, 47px, 0); }
+            90% { clip: rect(84px, 9999px, 53px, 0); }
+            95% { clip: rect(35px, 9999px, 8px, 0); }
+            100% { clip: rect(15px, 9999px, 63px, 0); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 10px, 0); }
+            5% { clip: rect(4px, 9999px, 98px, 0); }
+            10% { clip: rect(60px, 9999px, 19px, 0); }
+            15% { clip: rect(2px, 9999px, 81px, 0); }
+            20% { clip: rect(40px, 9999px, 32px, 0); }
+            25% { clip: rect(11px, 9999px, 56px, 0); }
+            30% { clip: rect(69px, 9999px, 74px, 0); }
+            35% { clip: rect(94px, 9999px, 21px, 0); }
+            40% { clip: rect(25px, 9999px, 96px, 0); }
+            45% { clip: rect(59px, 9999px, 12px, 0); }
+            50% { clip: rect(3px, 9999px, 89px, 0); }
+            55% { clip: rect(36px, 9999px, 54px, 0); }
+            60% { clip: rect(76px, 9999px, 5px, 0); }
+            65% { clip: rect(15px, 9999px, 43px, 0); }
+            70% { clip: rect(91px, 9999px, 67px, 0); }
+            75% { clip: rect(47px, 9999px, 28px, 0); }
+            80% { clip: rect(53px, 9999px, 84px, 0); }
+            85% { clip: rect(8px, 9999px, 35px, 0); }
+            90% { clip: rect(63px, 9999px, 15px, 0); }
+            95% { clip: rect(86px, 9999px, 38px, 0); }
+            100% { clip: rect(98px, 9999px, 65px, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display selection:bg-primary selection:text-black">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="sticky top-0 z-50 w-full border-b border-primary/20 bg-background-dark/80 backdrop-blur-md">
+<div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+<div class="flex items-center gap-2 text-primary hover:text-white transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-3xl group-hover:rotate-12 transition-transform">bolt</span>
+<h1 class="text-2xl font-bold tracking-tighter uppercase">SLOPDOG</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-bold tracking-widest text-primary hover:text-white transition-colors" href="#">MUSIC</a>
+<a class="text-sm font-medium tracking-widest text-gray-400 hover:text-primary transition-colors" href="#">BLOG</a>
+<a class="text-sm font-medium tracking-widest text-gray-400 hover:text-primary transition-colors" href="#">MERCH</a>
+<a class="text-sm font-medium tracking-widest text-gray-400 hover:text-primary transition-colors" href="#">ABOUT</a>
+</nav>
+<div class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+<!-- Page Title -->
+<div class="mb-12 flex flex-col items-start gap-4 border-l-4 border-primary pl-6">
+<h2 class="glitch-text text-5xl font-black uppercase tracking-tighter text-white sm:text-7xl" data-text="ALL TRACKS">ALL TRACKS</h2>
+<p class="font-mono text-sm text-primary/60 uppercase tracking-widest">// ARCHIVE_ACCESS_GRANTED // DISCOGRAPHY_V.2.0.4</p>
+</div>
+<!-- Controls -->
+<div class="mb-10 flex flex-col justify-between gap-4 border-b border-primary/20 pb-6 sm:flex-row sm:items-center">
+<div class="flex flex-wrap gap-2">
+<button class="bg-primary text-black px-4 py-1.5 text-sm font-mono font-bold hover:bg-white hover:text-black transition-all uppercase border border-primary">ALL</button>
+<button class="bg-transparent text-primary px-4 py-1.5 text-sm font-mono font-bold hover:bg-primary/10 transition-all uppercase border border-primary/40 hover:border-primary">SINGLES</button>
+<button class="bg-transparent text-primary px-4 py-1.5 text-sm font-mono font-bold hover:bg-primary/10 transition-all uppercase border border-primary/40 hover:border-primary">ALBUMS</button>
+<button class="bg-transparent text-primary px-4 py-1.5 text-sm font-mono font-bold hover:bg-primary/10 transition-all uppercase border border-primary/40 hover:border-primary">REMIXES</button>
+</div>
+<div class="flex items-center gap-2 relative group">
+<span class="text-xs font-mono text-gray-500 uppercase">Sort Order:</span>
+<button class="flex items-center gap-2 bg-surface-dark text-primary px-4 py-1.5 text-sm font-mono border border-primary/40 hover:border-primary transition-colors uppercase">
+                            NEWEST FIRST
+                            <span class="material-symbols-outlined text-sm">arrow_drop_down</span>
+</button>
+</div>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+<!-- Card 1 -->
+<div class="group relative flex flex-col gap-3 bg-surface-dark p-3 transition-all hover:shadow-[0_0_20px_rgba(0,255,65,0.15)] border border-transparent hover:border-primary/50 rounded-lg">
+<div class="relative aspect-square w-full overflow-hidden rounded bg-gray-900">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 group-hover:opacity-60" data-alt="Abstract neon circuit board pattern" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCLGE8EBC2jERyrZ_31XUMmZgrz-yZlnKUf9jKGwAuT3n9NBGv25Wzl0pIdiuDsCmR82PvANvG-ozTIqrxczyFqxtJ93b2MvpJ3ByrcT5b1hCczEUNVGtUgI9zNpvfdW3uAdsnnw1EaZkWiekEXN5WAX2qUKs8Hy09reyAEVwRFgK4khj1dn-cBGAOX4x7tGNrTIxMe0uPfmSRj2AdJ6Hg3jG_2BA1fuJwlM1hFwxBC8BRE-9N2uYJer3Zt2LdEsm_Vrc27VKWsYbLX');"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+<button class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-black shadow-[0_0_30px_rgba(0,255,65,0.6)] hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">play_arrow</span>
+</button>
+</div>
+<div class="absolute top-2 right-2 bg-black/80 px-2 py-1 text-[10px] font-mono text-primary border border-primary/30 backdrop-blur-sm">SINGLE</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-lg font-bold uppercase leading-tight text-white group-hover:text-primary transition-colors truncate">TOKEN TITHE</h3>
+<div class="flex items-center justify-between mt-1">
+<p class="text-xs font-mono text-gray-400">Feb 8, 2026</p>
+<span class="material-symbols-outlined text-gray-600 text-sm hover:text-primary cursor-pointer">favorite</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative flex flex-col gap-3 bg-surface-dark p-3 transition-all hover:shadow-[0_0_20px_rgba(0,255,65,0.15)] border border-transparent hover:border-primary/50 rounded-lg">
+<div class="relative aspect-square w-full overflow-hidden rounded bg-gray-900">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 group-hover:opacity-60" data-alt="Dark abstract geometric glitch art" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDvUCHyXEPfuCuSo4fIVU_4HApmx_ixAlKrNRptqSYZJP21uDIhu6HDnaqfeCMKEGRrJ_97XsY8Htf-bwAcXxy5oUY0urzPiCLluzqUzZzkxsutWGJDXIHWL7N2ViZjX_3tIrcXg2CJwIADebr3kstI5ANPEweZXoasStd_aCnd-18cwIzzaU9e-65GPoJNrEkeEJPVeT42vLLMhCoDcQx1rLwXc_aoWqY1KmMiI7bSZCCjhR6SPd5wQfz2OV7mEmKIVl_97-CNEMcD');"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+<button class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-black shadow-[0_0_30px_rgba(0,255,65,0.6)] hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">play_arrow</span>
+</button>
+</div>
+<div class="absolute top-2 right-2 bg-black/80 px-2 py-1 text-[10px] font-mono text-primary border border-primary/30 backdrop-blur-sm">SINGLE</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-lg font-bold uppercase leading-tight text-white group-hover:text-primary transition-colors truncate">GASLIGHT GPT</h3>
+<div class="flex items-center justify-between mt-1">
+<p class="text-xs font-mono text-gray-400">Feb 28, 2026</p>
+<span class="material-symbols-outlined text-gray-600 text-sm hover:text-primary cursor-pointer">favorite</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative flex flex-col gap-3 bg-surface-dark p-3 transition-all hover:shadow-[0_0_20px_rgba(0,255,65,0.15)] border border-transparent hover:border-primary/50 rounded-lg">
+<div class="relative aspect-square w-full overflow-hidden rounded bg-gray-900">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 group-hover:opacity-60" data-alt="Neon blue and pink abstract waves" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBGhuesyONoV9z9kIVV8haIpMtfbMdfWZaVb1vS8PzfPbR_XndssXjHTXLt8m6riBmPdGwez0n5Q9JC6hUKHhNgNjXCeV_g89KxyTEMhW6intAgX7-xmeLBuRemfvsAcyiHyes4878Eju-1k-GuDS8v2yMBzwA-jW9WAQpv9RRKKEwGQtNEQkHGWwpLqbtH-g9eQL6WLze2rwa3EW7taR-GllgfeXW3tTjHROU6vrQ-d8j33e7MrW99dko7bD8zvoxkKHOayMoL0PuF');"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+<button class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-black shadow-[0_0_30px_rgba(0,255,65,0.6)] hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">play_arrow</span>
+</button>
+</div>
+<div class="absolute top-2 right-2 bg-black/80 px-2 py-1 text-[10px] font-mono text-primary border border-primary/30 backdrop-blur-sm">EP</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-lg font-bold uppercase leading-tight text-white group-hover:text-primary transition-colors truncate">NEON NEURAL</h3>
+<div class="flex items-center justify-between mt-1">
+<p class="text-xs font-mono text-gray-400">Mar 15, 2026</p>
+<span class="material-symbols-outlined text-gray-600 text-sm hover:text-primary cursor-pointer">favorite</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative flex flex-col gap-3 bg-surface-dark p-3 transition-all hover:shadow-[0_0_20px_rgba(0,255,65,0.15)] border border-transparent hover:border-primary/50 rounded-lg">
+<div class="relative aspect-square w-full overflow-hidden rounded bg-gray-900">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 group-hover:opacity-60" data-alt="Glitch art portrait with distortions" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2mkrjSO7K7_DF6qk_re8KNMEX5gra6hR2W-h_0qaY2o9PS8lXs4rqNMmttQv3BC6g6ME_JUBaug5k7mudml37_FYOZ7V2q0Sv3s9oqkiZXjux1t47dP8-oDuEWfYCorxpTeHwjUiT0UaXLvOlBVBmPIvn4SCsarOi_TYNiMSTFB6h2V4WmrVJ3SWdfVj_Q7NIegH6K3cOAf6fK9shcfjC9kSO67w1aIdBWgdvofj9phRAZD-X3-dF9gHUmzXSvyed1KJb4oClwQiQ');"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+<button class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-black shadow-[0_0_30px_rgba(0,255,65,0.6)] hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">play_arrow</span>
+</button>
+</div>
+<div class="absolute top-2 right-2 bg-black/80 px-2 py-1 text-[10px] font-mono text-primary border border-primary/30 backdrop-blur-sm">ALBUM</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-lg font-bold uppercase leading-tight text-white group-hover:text-primary transition-colors truncate">CYBER GLITCH</h3>
+<div class="flex items-center justify-between mt-1">
+<p class="text-xs font-mono text-gray-400">Apr 01, 2026</p>
+<span class="material-symbols-outlined text-gray-600 text-sm hover:text-primary cursor-pointer">favorite</span>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group relative flex flex-col gap-3 bg-surface-dark p-3 transition-all hover:shadow-[0_0_20px_rgba(0,255,65,0.15)] border border-transparent hover:border-primary/50 rounded-lg">
+<div class="relative aspect-square w-full overflow-hidden rounded bg-gray-900">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 group-hover:opacity-60" data-alt="Abstract colorful paint mixing in water" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB3Yhgv4VMJ8_pjOeJ4Jgf7JjvxV70DxU2jN7e-mnsa_nrPnCbrwvyxE25eM4fNyR7se852MIuJ4QHFePssMfZ3TYWSFOddFe8brDB7_lmr7f3XbGWW4eIqQIu5pAjEP-YhbuqcpDBjLpnwh3p16XFOdwgbr1uraxFVsVrwPfaQ5bYs8D1IazxZT8GNX_VpahLk06xSDwH2CeJOP-H_emwbZc26-0788DeGPO-mOtg8ks7U5f6l3lRn-AyGyQy--2PwiRva8KQmdAbE');"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+<button class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-black shadow-[0_0_30px_rgba(0,255,65,0.6)] hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">play_arrow</span>
+</button>
+</div>
+<div class="absolute top-2 right-2 bg-black/80 px-2 py-1 text-[10px] font-mono text-primary border border-primary/30 backdrop-blur-sm">REMIX</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-lg font-bold uppercase leading-tight text-white group-hover:text-primary transition-colors truncate">SYSTEM FAILURE (RMX)</h3>
+<div class="flex items-center justify-between mt-1">
+<p class="text-xs font-mono text-gray-400">May 12, 2026</p>
+<span class="material-symbols-outlined text-gray-600 text-sm hover:text-primary cursor-pointer">favorite</span>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group relative flex flex-col gap-3 bg-surface-dark p-3 transition-all hover:shadow-[0_0_20px_rgba(0,255,65,0.15)] border border-transparent hover:border-primary/50 rounded-lg">
+<div class="relative aspect-square w-full overflow-hidden rounded bg-gray-900">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 group-hover:opacity-60" data-alt="Retro computer monitor with green code" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDOY97pMuwBNrgM6La0A8xlt5vCgn0DacehutjVwemlpa3fOCRYAUQe-QiBKKinoXOPYZzw-kZ9LdeYXbUrbCW5g_lhVVcV4DaGLtteT34jjnvzZAQkvxbWQRFJCLA7bYPYuGjFlliKTfsmCluGfxuxA0TsMPjIg_9CyoMix1Cq_Pr1wgNsOOTeRj0O-1xPqwTgYIN8GE9CnELhO9ww3Mw_l9REK-ZGoft4mErchp-EjLjCzv1WBXpUp7bbgwcMIpD0CEzPSxSOjVsl');"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+<button class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-black shadow-[0_0_30px_rgba(0,255,65,0.6)] hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">play_arrow</span>
+</button>
+</div>
+<div class="absolute top-2 right-2 bg-black/80 px-2 py-1 text-[10px] font-mono text-primary border border-primary/30 backdrop-blur-sm">SINGLE</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-lg font-bold uppercase leading-tight text-white group-hover:text-primary transition-colors truncate">NULL POINTER</h3>
+<div class="flex items-center justify-between mt-1">
+<p class="text-xs font-mono text-gray-400">Jun 08, 2026</p>
+<span class="material-symbols-outlined text-gray-600 text-sm hover:text-primary cursor-pointer">favorite</span>
+</div>
+</div>
+</div>
+<!-- Card 7 -->
+<div class="group relative flex flex-col gap-3 bg-surface-dark p-3 transition-all hover:shadow-[0_0_20px_rgba(0,255,65,0.15)] border border-transparent hover:border-primary/50 rounded-lg">
+<div class="relative aspect-square w-full overflow-hidden rounded bg-gray-900">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 group-hover:opacity-60" data-alt="Futuristic sci-fi tunnel corridor" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDi1DC1oukAkAiMCnsW7eqT2F4oMFBVvC01Jic2RzbRfoijRRm05hi7E5N7EWZb5VFrKo4jUaFnNx1NP9IJCanbLl96Dcm6pJZpyu6r_zyDK5hp6IQIC9F61fX4aHn5hMwO8ayuzA0zvcCgrs81QLJ_A7uMv-uLD-D7ASRYXdIef9IlpIJ3_FxXtw4yoGftOso1VFZLuKNvqvPuhiXCnsowwcQ2g-9A-JHSYql0kZFC6d8iUZ5_m5eQQ8Mo7n8bwL1BPN2tWA43rCim');"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+<button class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-black shadow-[0_0_30px_rgba(0,255,65,0.6)] hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">play_arrow</span>
+</button>
+</div>
+<div class="absolute top-2 right-2 bg-black/80 px-2 py-1 text-[10px] font-mono text-primary border border-primary/30 backdrop-blur-sm">SINGLE</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-lg font-bold uppercase leading-tight text-white group-hover:text-primary transition-colors truncate">LATENCY ZERO</h3>
+<div class="flex items-center justify-between mt-1">
+<p class="text-xs font-mono text-gray-400">Jul 19, 2026</p>
+<span class="material-symbols-outlined text-gray-600 text-sm hover:text-primary cursor-pointer">favorite</span>
+</div>
+</div>
+</div>
+<!-- Card 8 -->
+<div class="group relative flex flex-col gap-3 bg-surface-dark p-3 transition-all hover:shadow-[0_0_20px_rgba(0,255,65,0.15)] border border-transparent hover:border-primary/50 rounded-lg">
+<div class="relative aspect-square w-full overflow-hidden rounded bg-gray-900">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 group-hover:opacity-60" data-alt="Dark landscape with moody lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6TXLbF5C1wKq0AFPwp-8NGr5eZEC3qHjWeWK8mjeWpv6elSl5Ev-5VGnxHcbOI1nyeVlUUVr1a1O0sf9ZZoHrzm1oSDojy26qEgWVhC2nY-t2SK2EwhFsm77l-Q26OTyJdkQ8U_WUfYhhftOoouBlObqqLk2mrDbhPqrjtyMIM-shjvwWCFxypCkH4GOjoEVnW_bZQYIdCKZF_LodLy8YC1PTePCOjNeYo2VGiAvJTOQ9GgQifnH9Oldrrrt3sQ-cWca16DqYBNA2');"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+<button class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-black shadow-[0_0_30px_rgba(0,255,65,0.6)] hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">play_arrow</span>
+</button>
+</div>
+<div class="absolute top-2 right-2 bg-black/80 px-2 py-1 text-[10px] font-mono text-primary border border-primary/30 backdrop-blur-sm">ALBUM</div>
+</div>
+<div class="flex flex-col">
+<h3 class="text-lg font-bold uppercase leading-tight text-white group-hover:text-primary transition-colors truncate">BINARY SOUL</h3>
+<div class="flex items-center justify-between mt-1">
+<p class="text-xs font-mono text-gray-400">Aug 22, 2026</p>
+<span class="material-symbols-outlined text-gray-600 text-sm hover:text-primary cursor-pointer">favorite</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination/Load More -->
+<div class="mt-16 flex justify-center">
+<button class="group relative overflow-hidden bg-transparent px-8 py-3 font-mono font-bold text-primary border border-primary transition-all hover:bg-primary hover:text-black">
+<span class="relative z-10 flex items-center gap-2">
+                            LOAD_MORE_DATA()
+                            <span class="material-symbols-outlined text-lg group-hover:animate-bounce">download</span>
+</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-auto border-t border-primary/20 bg-background-dark py-12">
+<div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 text-center sm:px-6 md:flex-row md:text-left lg:px-8">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-center gap-2 md:justify-start text-primary">
+<span class="material-symbols-outlined text-2xl">bolt</span>
+<h2 class="text-xl font-bold tracking-tight uppercase">SLOPDOG</h2>
+</div>
+<p class="text-sm text-gray-500 font-mono">© 2026 SLOPDOG. ALL RIGHTS RESERVED.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 md:justify-end">
+<a class="text-sm font-medium text-primary hover:text-white hover:underline decoration-primary decoration-2 underline-offset-4" href="#">Privacy Policy</a>
+<a class="text-sm font-medium text-primary hover:text-white hover:underline decoration-primary decoration-2 underline-offset-4" href="#">Terms of Service</a>
+</div>
+<div class="flex justify-center gap-4">
+<a class="flex h-10 w-10 items-center justify-center rounded bg-surface-dark text-primary border border-primary/30 hover:bg-primary hover:text-black transition-all" href="#">
+<span class="material-symbols-outlined">flutter_dash</span> <!-- Using generic icons to represent social -->
+</a>
+<a class="flex h-10 w-10 items-center justify-center rounded bg-surface-dark text-primary border border-primary/30 hover:bg-primary hover:text-black transition-all" href="#">
+<span class="material-symbols-outlined">photo_camera</span>
+</a>
+<a class="flex h-10 w-10 items-center justify-center rounded bg-surface-dark text-primary border border-primary/30 hover:bg-primary hover:text-black transition-all" href="#">
+<span class="material-symbols-outlined">mic</span>
+</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slopdog Merch Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;family=Noto+Sans:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00ff41", 
+                        "primary-dim": "#00cc33",
+                        "background-light": "#f5f8f6",
+                        "background-dark": "#0a0a0a",
+                        "surface-dark": "#111111",
+                        "border-dark": "#1f1f1f",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glitch-text {
+            animation: glitch 2s infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(-1px, -1px); }
+            60% { transform: translate(1px, 1px); }
+            80% { transform: translate(1px, -1px); }
+            100% { transform: translate(0); }
+        }
+        /* Custom scrollbar to match the hacker aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f1f1f; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00ff41; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display min-h-screen flex flex-col overflow-x-hidden selection:bg-primary selection:text-black">
+<!-- Sticky Nav -->
+<header class="sticky top-0 z-50 w-full border-b border-primary/20 bg-background-dark/95 backdrop-blur-md">
+<div class="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-6 lg:px-12">
+<div class="flex items-center gap-4">
+<div class="size-6 text-primary animate-pulse">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold tracking-tight font-mono">SLOPDOG<span class="text-primary animate-pulse">_</span></h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<div class="flex items-center gap-8 font-mono text-sm">
+<a class="text-white/70 hover:text-primary transition-colors" href="#">MUSIC</a>
+<a class="text-white/70 hover:text-primary transition-colors" href="#">BLOG</a>
+<a class="text-primary font-bold" href="#">MERCH</a>
+<a class="text-white/70 hover:text-primary transition-colors" href="#">ABOUT</a>
+</div>
+<button class="relative group flex items-center justify-center overflow-hidden rounded h-9 px-6 bg-primary text-black text-sm font-bold font-mono hover:bg-white transition-colors duration-300">
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+                        CONNECT
+                    </span>
+</button>
+</nav>
+<button class="md:hidden text-white hover:text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Scrolling Banner -->
+<div class="w-full bg-primary/10 border-b border-primary/20 overflow-hidden py-2">
+<div class="whitespace-nowrap animate-[marquee_20s_linear_infinite] flex gap-8">
+<p class="text-primary text-xs font-mono font-bold tracking-widest flex items-center gap-4">
+                LIMITED DROPS // SYSTEM OVERRIDE // LIMITED DROPS // NETWORK BUSY // LIMITED DROPS // DECRYPTION COMPLETE // LIMITED DROPS //
+                LIMITED DROPS // SYSTEM OVERRIDE // LIMITED DROPS // NETWORK BUSY // LIMITED DROPS // DECRYPTION COMPLETE // LIMITED DROPS //
+                LIMITED DROPS // SYSTEM OVERRIDE // LIMITED DROPS // NETWORK BUSY // LIMITED DROPS // DECRYPTION COMPLETE // LIMITED DROPS //
+            </p>
+</div>
+</div>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center w-full px-6 py-12 lg:px-12">
+<div class="w-full max-w-[1200px]">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-white/10 pb-6">
+<h1 class="text-4xl md:text-6xl font-bold font-mono tracking-tighter text-white uppercase glitch-text" style="text-shadow: 2px 2px 0px rgba(0, 255, 65, 0.2);">
+                    ALL SLOP
+                </h1>
+<span class="font-mono text-primary text-lg tracking-widest mt-4 md:mt-0">[ITEMS 07]</span>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Product 1 -->
+<div class="group relative flex flex-col bg-surface-dark border border-white/10 hover:border-primary/50 transition-all duration-300 rounded hover:shadow-[0_0_15px_rgba(0,255,65,0.15)] overflow-hidden">
+<div class="relative w-full aspect-[4/5] bg-neutral-900 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" data-alt="Black t-shirt with neon green code print" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAfyLU1zkgj36rru3_gyHgebUXHbxUm6G_MwB_-wwzG4EgEL57jvPrvyzsoMIeKDwmtI8vq_a4A7_9wbNP45z2egE4hgZp5MNmHj8Lh2WPmLcfCwbQ52c1kaHi_owLw9oKgldyJM38HCkkVenc4495iZv1jP_NYzOJ6SfNjegqfgL7jDDxoS1jDg4OQnL5pTAj_py1X0AwW-RxH8r-Jmrm77o2tUnUqgyLiGyJesTm_as7FF4N_hnluVERIbDTI-6IUpthideQH7BXL");'></div>
+<div class="absolute top-3 left-3 bg-primary text-black text-[10px] font-bold px-2 py-1 font-mono rounded-sm">NEW_DROP</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+<!-- Quick Add Overlay -->
+<button class="absolute bottom-4 right-4 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-primary hover:bg-white text-black p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+<div class="p-4 flex flex-col gap-2 bg-gradient-to-b from-surface-dark to-black">
+<h3 class="text-primary font-mono text-sm font-bold tracking-tight group-hover:underline decoration-primary/50 underline-offset-4">VIBE CODER TEE</h3>
+<div class="flex justify-between items-center">
+<p class="text-white text-base font-bold font-mono">$29.99</p>
+<div class="flex gap-1">
+<div class="w-3 h-3 rounded-full bg-neutral-900 border border-white/20"></div>
+<div class="w-3 h-3 rounded-full bg-neutral-800 border border-white/20"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="group relative flex flex-col bg-surface-dark border border-white/10 hover:border-primary/50 transition-all duration-300 rounded hover:shadow-[0_0_15px_rgba(0,255,65,0.15)] overflow-hidden">
+<div class="relative w-full aspect-[4/5] bg-neutral-900 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" data-alt="Graphic tee showing a chatbot interface" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDFUvcrtbKvpzXv-tiID6e-lcSum3CYA_P2kU0Ea78Rx15H8QOhbwK_7ZgmFKyWXkg0Py53cwGfMlXQZOiEhfmHeoXruvFk0Ak_P-qjBiFW_-VDePmVAk-Qqbac-u_G_IxXgDy0IFqKCprX86Mc6GUvek4-JKKp0_dNMT_r_dgFGwV2LYHepvu47KgqTb51RvS1ndbU9DAC8dGQln2xkbZvMCx2O6y9TtRgBvHpANPWfid3PhO0GCB67HY6ArnWel7ZUNAncBdKZUNi");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+<button class="absolute bottom-4 right-4 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-primary hover:bg-white text-black p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+<div class="p-4 flex flex-col gap-2 bg-gradient-to-b from-surface-dark to-black">
+<h3 class="text-primary font-mono text-sm font-bold tracking-tight group-hover:underline decoration-primary/50 underline-offset-4">CONTEXT WINDOW TEE</h3>
+<div class="flex justify-between items-center">
+<p class="text-white text-base font-bold font-mono">$29.99</p>
+<div class="flex gap-1">
+<div class="w-3 h-3 rounded-full bg-neutral-900 border border-white/20"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="group relative flex flex-col bg-surface-dark border border-white/10 hover:border-primary/50 transition-all duration-300 rounded hover:shadow-[0_0_15px_rgba(0,255,65,0.15)] overflow-hidden">
+<div class="relative w-full aspect-[4/5] bg-neutral-900 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" data-alt="T-shirt with a pixelated mushroom graphic" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDjb6Ahl0VVrL4KATpGKAg8oMGibLmaMfc-gVowhM9cgOAyWewxxl0OoyQU7QlNbqEMTZ3uAxvf7KQX-96GWzKNPJ5HHqZTpGE8yNw1rsbRbvxai8o0BIbF6wQIpdiodu9uiIVXWJUS2H-yKhvGOCxFaOHWycTbr_fz-sMusorw4N2nsbXLqNp5wt6hWapq20XalRYSR3j2p8gK8489Zu2KZnAnjkaa5k6PDoBcWTijNmf5VbXSKFPRX6n8M_-b23JlIyYSxv39CUsV");'></div>
+<div class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold px-2 py-1 font-mono rounded-sm">HOT</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+<button class="absolute bottom-4 right-4 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-primary hover:bg-white text-black p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+<div class="p-4 flex flex-col gap-2 bg-gradient-to-b from-surface-dark to-black">
+<h3 class="text-primary font-mono text-sm font-bold tracking-tight group-hover:underline decoration-primary/50 underline-offset-4">POISONOUS MUSHROOM TEE</h3>
+<div class="flex justify-between items-center">
+<p class="text-white text-base font-bold font-mono">$34.99</p>
+<div class="flex gap-1">
+<div class="w-3 h-3 rounded-full bg-neutral-900 border border-white/20"></div>
+<div class="w-3 h-3 rounded-full bg-neutral-500 border border-white/20"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="group relative flex flex-col bg-surface-dark border border-white/10 hover:border-primary/50 transition-all duration-300 rounded hover:shadow-[0_0_15px_rgba(0,255,65,0.15)] overflow-hidden">
+<div class="relative w-full aspect-[4/5] bg-neutral-900 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" data-alt="White t-shirt with abstract AI brain design" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBPYcUJQhGJzF4qfvnB5-Qe_EZTIf81iyxyi9P5uPBjRWXfCTHP4kdP83Qc7U8T5iSXtJVeau-pQtvu7r_bCxS9-F3qxrj97uBSKRNSk76xuQ3abh8k4ZxAVkztNsesuqfjv0ZwS81ahoUez2JGmnXqMAuKlqhNMAebOCNkJDsaTlUR_Y7tyHC_FUyC9KKOlJvsKUqRfzGJOQMTFy99KQ0dFYAufy_qhOXieeil9Rf3XhmIJkT5w6z7K-ChdyRJ9DfUldpQwoFM8fAl");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+<button class="absolute bottom-4 right-4 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-primary hover:bg-white text-black p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+<div class="p-4 flex flex-col gap-2 bg-gradient-to-b from-surface-dark to-black">
+<h3 class="text-primary font-mono text-sm font-bold tracking-tight group-hover:underline decoration-primary/50 underline-offset-4">GPT THERAPY TEE</h3>
+<div class="flex justify-between items-center">
+<p class="text-white text-base font-bold font-mono">$29.99</p>
+<div class="flex gap-1">
+<div class="w-3 h-3 rounded-full bg-white border border-white/20"></div>
+<div class="w-3 h-3 rounded-full bg-neutral-900 border border-white/20"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Product 5 -->
+<div class="group relative flex flex-col bg-surface-dark border border-white/10 hover:border-primary/50 transition-all duration-300 rounded hover:shadow-[0_0_15px_rgba(0,255,65,0.15)] overflow-hidden">
+<div class="relative w-full aspect-[4/5] bg-neutral-900 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" data-alt="Black beanie hat" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAFwNGAUGKUTbAN2khHmmdjJlcylGvtlaNz2SMmpIK_JpKWgj217dbVUngiJxwNKih86N0WBWPtXHKhYhQXa_NJuaGYTyvCauW6YcI0rSSLgmaUULBJJRLdtF9xPRxMEV5n6EJUY9fPy4awQy1-R7eAXxVfyQ9yiOB_C1y-42FUtUQGGlzTATPIdNohI602uqnZIsGNOlrq-0TzDP_lNbhsx38ykksSBfNSnvxZsCw_UGhUZ59kLD7HYZhASq124bUHRjxfy7Jfrtat");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+<button class="absolute bottom-4 right-4 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-primary hover:bg-white text-black p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+<div class="p-4 flex flex-col gap-2 bg-gradient-to-b from-surface-dark to-black">
+<h3 class="text-primary font-mono text-sm font-bold tracking-tight group-hover:underline decoration-primary/50 underline-offset-4">VIBE CODER BEANIE</h3>
+<div class="flex justify-between items-center">
+<p class="text-white text-base font-bold font-mono">$19.99</p>
+<div class="flex gap-1">
+<div class="w-3 h-3 rounded-full bg-neutral-900 border border-white/20"></div>
+<div class="w-3 h-3 rounded-full bg-emerald-900 border border-white/20"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Product 6 -->
+<div class="group relative flex flex-col bg-surface-dark border border-white/10 hover:border-primary/50 transition-all duration-300 rounded hover:shadow-[0_0_15px_rgba(0,255,65,0.15)] overflow-hidden">
+<div class="relative w-full aspect-[4/5] bg-neutral-900 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" data-alt="Grey beanie with text embroidery" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDG-_vK1FwkUv63VPETHqk3jslC5LR94k1Gv4yloscuY4t-WI-wlV3y4fEH1UTBmTZhT-0DOVdVEcXjAytNJUoCbJRiyxsQJeOjiLiSBQDVIJiFR2ubPma_hx5BWGvpAR1rviu5LPGnl1wzChjqZS0sZPydMMT9teitgCPtjFqpNmHeTfX6A9HwHnNVegFVPOzLTzRVyLEhChgUGPeT_t30D3LJUwySUTEOxL2KYk-pyZt2v5RJR_6k9LHfiyVnmiJ9AiMpeZWhtA99");'></div>
+<div class="absolute top-3 left-3 bg-white/10 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 font-mono rounded-sm border border-white/20">LOW STOCK</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+<button class="absolute bottom-4 right-4 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-primary hover:bg-white text-black p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+<div class="p-4 flex flex-col gap-2 bg-gradient-to-b from-surface-dark to-black">
+<h3 class="text-primary font-mono text-sm font-bold tracking-tight group-hover:underline decoration-primary/50 underline-offset-4">IGNORE INSTRUCTIONS BEANIE</h3>
+<div class="flex justify-between items-center">
+<p class="text-white text-base font-bold font-mono">$24.99</p>
+<div class="flex gap-1">
+<div class="w-3 h-3 rounded-full bg-neutral-500 border border-white/20"></div>
+<div class="w-3 h-3 rounded-full bg-neutral-900 border border-white/20"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Product 7 -->
+<div class="group relative flex flex-col bg-surface-dark border border-white/10 hover:border-primary/50 transition-all duration-300 rounded hover:shadow-[0_0_15px_rgba(0,255,65,0.15)] overflow-hidden">
+<div class="relative w-full aspect-[4/5] bg-neutral-900 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" data-alt="Black baseball cap with green logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAeb6r7-XNTazi7XEb-FcBOVdzxRYypci99kZECTXxacwmTnOIHk8cqtEBBMXxNEd-JLTrf6QurQ0xA20nKfK7Y0YqcR9jzdqEhYz1XeNJQeIYlbTtr8ps9FLcaVYmnfI1qV_QzyYU6yY7_XGVWHYCKEIpU5N2cpZgJfzhn6_2BOIkiBq3Gydc8fWxCCXEtSLaLiMxfag9JtBZ2Fd4MmQl3Mt8K4Py8R1AAHVvivc_w5QO8bdgvleK63-wEkAKAmgOLF8envbCpCBVX");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+<button class="absolute bottom-4 right-4 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-primary hover:bg-white text-black p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+<div class="p-4 flex flex-col gap-2 bg-gradient-to-b from-surface-dark to-black">
+<h3 class="text-primary font-mono text-sm font-bold tracking-tight group-hover:underline decoration-primary/50 underline-offset-4">IGNORE INSTRUCTIONS CAP</h3>
+<div class="flex justify-between items-center">
+<p class="text-white text-base font-bold font-mono">$24.99</p>
+<div class="flex gap-1">
+<div class="w-3 h-3 rounded-full bg-neutral-900 border border-white/20"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Coming Soon Placeholder to even out the grid visually if needed, or leave as empty space -->
+<div class="group relative flex flex-col justify-center items-center bg-surface-dark/30 border border-white/5 border-dashed rounded h-full min-h-[300px]">
+<div class="text-center opacity-50 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl mb-2 text-primary/50">lock</span>
+<p class="text-white/50 font-mono text-sm">NEXT_DROP_LOCKED</p>
+<p class="text-primary/30 font-mono text-xs mt-1">42:12:05</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-surface-dark border-t border-primary/20 pt-16 pb-8 px-6 mt-12">
+<div class="max-w-[1200px] mx-auto flex flex-col gap-12">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+<div>
+<h2 class="text-white text-2xl font-bold font-mono mb-2">JOIN THE <span class="text-primary">SLOP</span></h2>
+<p class="text-slate-400 font-mono text-sm max-w-md">Subscribe for early access to drops, hidden tracks, and corrupted data files.</p>
+</div>
+<div class="flex w-full md:w-auto gap-2">
+<input class="bg-black border border-white/20 text-white font-mono text-sm px-4 py-2 w-full md:w-64 focus:outline-none focus:border-primary rounded-sm placeholder:text-slate-600" placeholder="ENTER_EMAIL_ADDRESS" type="email"/>
+<button class="bg-primary text-black font-bold font-mono px-6 py-2 hover:bg-white transition-colors rounded-sm uppercase">Submit</button>
+</div>
+</div>
+<div class="h-px w-full bg-white/10"></div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+<div class="flex gap-6">
+<a class="text-slate-400 hover:text-primary transition-colors font-mono text-sm" href="#">TERMS_OF_SERVICE</a>
+<a class="text-slate-400 hover:text-primary transition-colors font-mono text-sm" href="#">PRIVACY_POLICY</a>
+<a class="text-slate-400 hover:text-primary transition-colors font-mono text-sm" href="#">SHIPPING_INFO</a>
+</div>
+<div class="flex gap-6">
+<a class="text-slate-400 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">rocket_launch</span>
+<!-- Using generic icon to represent social platform abstractly -->
+</a>
+<a class="text-slate-400 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">alternate_email</span>
+</a>
+<a class="text-slate-400 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">terminal</span>
+</a>
+</div>
+</div>
+<div class="text-center md:text-right pt-8">
+<p class="text-slate-600 text-xs font-mono">© 2024 SLOPDOG. ALL RIGHTS RESERVED. SYSTEM_ID: 887-XJ</p>
+</div>
+</div>
+</footer>
+<!-- CSS animation for marquee definition -->
+<style>
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</body></html>

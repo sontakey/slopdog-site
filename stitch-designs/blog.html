@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slopdog - From The Lab</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00ff3c",
+                        "background-light": "#f5f8f6",
+                        "background-dark": "#0a0a0a", // Updated to darker black as requested
+                        "surface-dark": "#121212",
+                        "border-dark": "#2a2a2a",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"}, // Tightened radii for tech feel
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for cyberpunk feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a2a; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00ff3c; 
+        }
+        
+        .glitch-text {
+            position: relative;
+        }
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 #ff00c1;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -1px 0 #00fff9;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim {
+            0% { clip: rect(31px, 9999px, 94px, 0); }
+            5% { clip: rect(70px, 9999px, 21px, 0); }
+            10% { clip: rect(6px, 9999px, 83px, 0); }
+            15% { clip: rect(22px, 9999px, 6px, 0); }
+            20% { clip: rect(87px, 9999px, 95px, 0); }
+            25% { clip: rect(11px, 9999px, 32px, 0); }
+            30% { clip: rect(54px, 9999px, 28px, 0); }
+            35% { clip: rect(7px, 9999px, 73px, 0); }
+            40% { clip: rect(28px, 9999px, 49px, 0); }
+            45% { clip: rect(49px, 9999px, 15px, 0); }
+            50% { clip: rect(85px, 9999px, 38px, 0); }
+            55% { clip: rect(48px, 9999px, 5px, 0); }
+            60% { clip: rect(13px, 9999px, 59px, 0); }
+            65% { clip: rect(63px, 9999px, 80px, 0); }
+            70% { clip: rect(21px, 9999px, 26px, 0); }
+            75% { clip: rect(76px, 9999px, 5px, 0); }
+            80% { clip: rect(10px, 9999px, 55px, 0); }
+            85% { clip: rect(56px, 9999px, 37px, 0); }
+            90% { clip: rect(26px, 9999px, 7px, 0); }
+            95% { clip: rect(69px, 9999px, 46px, 0); }
+            100% { clip: rect(38px, 9999px, 10px, 0); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            5% { clip: rect(5px, 9999px, 67px, 0); }
+            10% { clip: rect(85px, 9999px, 26px, 0); }
+            15% { clip: rect(13px, 9999px, 96px, 0); }
+            20% { clip: rect(55px, 9999px, 11px, 0); }
+            25% { clip: rect(35px, 9999px, 59px, 0); }
+            30% { clip: rect(98px, 9999px, 54px, 0); }
+            35% { clip: rect(22px, 9999px, 8px, 0); }
+            40% { clip: rect(81px, 9999px, 3px, 0); }
+            45% { clip: rect(62px, 9999px, 45px, 0); }
+            50% { clip: rect(29px, 9999px, 91px, 0); }
+            55% { clip: rect(3px, 9999px, 23px, 0); }
+            60% { clip: rect(77px, 9999px, 69px, 0); }
+            65% { clip: rect(41px, 9999px, 39px, 0); }
+            70% { clip: rect(18px, 9999px, 72px, 0); }
+            75% { clip: rect(92px, 9999px, 15px, 0); }
+            80% { clip: rect(44px, 9999px, 86px, 0); }
+            85% { clip: rect(8px, 9999px, 48px, 0); }
+            90% { clip: rect(53px, 9999px, 61px, 0); }
+            95% { clip: rect(33px, 9999px, 19px, 0); }
+            100% { clip: rect(66px, 9999px, 78px, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col antialiased">
+<!-- Header / Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-white/10 bg-background-dark/80 px-6 py-4 backdrop-blur-md">
+<div class="flex items-center gap-3">
+<div class="flex size-8 items-center justify-center rounded bg-primary text-background-dark">
+<span class="material-symbols-outlined text-2xl">terminal</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-white">SLOPDOG<span class="text-primary animate-pulse">_</span></h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-slate-400 hover:text-primary transition-colors duration-200" href="#">MUSIC</a>
+<a class="text-sm font-bold text-primary border-b-2 border-primary pb-0.5" href="#">BLOG</a>
+<a class="text-sm font-medium text-slate-400 hover:text-primary transition-colors duration-200" href="#">MERCH</a>
+<a class="text-sm font-medium text-slate-400 hover:text-primary transition-colors duration-200" href="#">ABOUT</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center text-slate-400 hover:text-primary md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:flex size-2 rounded-full bg-primary shadow-[0_0_10px_#00ff3c]"></div>
+<span class="hidden md:block text-xs font-mono text-primary/80">SYS.ONLINE</span>
+</div>
+</header>
+<main class="flex-1 w-full max-w-7xl mx-auto px-4 md:px-8 py-10">
+<!-- Page Title -->
+<div class="mb-12 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-primary/60 text-xs font-mono mb-2">
+<span>ROOT</span>
+<span>/</span>
+<span>DATA_LOGS</span>
+<span>/</span>
+<span>PUBLIC</span>
+</div>
+<h2 class="glitch-text text-5xl md:text-7xl font-black uppercase tracking-tighter text-primary leading-none" data-text="FROM THE LAB">FROM THE LAB</h2>
+<p class="text-slate-400 font-mono text-sm max-w-lg mt-2 border-l-2 border-primary/30 pl-3">
+                // SYSTEM LOGS :: ARCHIVE OF AUDIO SYNTHESIS EXPERIMENTS AND NEURAL NETWORK HALLUCINATIONS.
+            </p>
+</div>
+<!-- Featured Post -->
+<section class="mb-16">
+<div class="group relative overflow-hidden rounded-xl bg-surface-dark border border-white/5 hover:border-primary/50 transition-all duration-300">
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-0">
+<!-- Image -->
+<div class="lg:col-span-3 relative h-64 lg:h-auto overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent to-surface-dark z-10 hidden lg:block"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dark to-transparent z-10 lg:hidden"></div>
+<div class="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Abstract dark cyberpunk cityscape with neon lights and glitch effects" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBK78WFCftI-xIMulwrQBj02ddrLk3Cbfg6bSqUGP1nGw60ImpaHeMH5BVKXv6JgXFk-8cCPllnpXipyeCpWAwTlCAOCikcuEnjIDOszxY8b-dlDZ7dTZ3BcQnIS1fTp756ZHgXZ9SHVVussRWC4zCKx0gwQuD9m612Z9CKmzVKOnzaijWnV1TLdvIZA-39ezyTc4YRFjQS_Je3OE1-9rpmllQV_lF5pClN91KQWBEI8sA60OZ_74cB_Gkmt3uK314SPGbzpqLQ8NIY');">
+</div>
+<div class="absolute top-4 left-4 z-20">
+<span class="inline-flex items-center bg-primary text-background-dark text-xs font-bold px-3 py-1 rounded-sm">
+<span class="material-symbols-outlined text-[16px] mr-1">star</span> FEATURED_TRANSMISSION
+                            </span>
+</div>
+</div>
+<!-- Content -->
+<div class="lg:col-span-2 p-6 md:p-10 flex flex-col justify-center relative">
+<div class="mb-4 flex items-center gap-3 text-xs font-mono text-primary/70">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>OCT 24, 2023</span>
+<span class="text-slate-600">|</span>
+<span>AUDIO_ENG</span>
+</div>
+<h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight group-hover:text-primary transition-colors">
+                            NEURAL NETWORK SYMPHONY: DECODING THE STATIC
+                        </h3>
+<p class="text-slate-400 text-sm md:text-base leading-relaxed mb-8 border-l border-white/10 pl-4">
+                            We pushed the limits of the new audio generation model last night. The results were unexpected glitch artifacts that formed a perfect melody amidst the chaos. Is the ghost in the machine finally singing back to us?
+                        </p>
+<div class="mt-auto">
+<a class="inline-flex items-center justify-between w-full md:w-auto min-w-[160px] px-6 py-3 bg-white/5 hover:bg-primary text-primary hover:text-background-dark border border-primary/30 hover:border-primary transition-all duration-300 font-mono text-sm font-bold tracking-wide group/btn" href="#">
+<span>READ_LOG_ENTRY</span>
+<span class="material-symbols-outlined group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Filters / Categories -->
+<div class="mb-8 flex flex-wrap gap-3 pb-4 border-b border-white/10">
+<button class="px-4 py-1.5 rounded-full bg-primary text-background-dark text-sm font-bold border border-primary">
+                ALL_LOGS
+            </button>
+<button class="px-4 py-1.5 rounded-full bg-transparent hover:bg-white/5 text-slate-300 hover:text-primary text-sm font-medium border border-white/10 hover:border-primary/50 transition-all">
+                // AUDIO_DEV
+            </button>
+<button class="px-4 py-1.5 rounded-full bg-transparent hover:bg-white/5 text-slate-300 hover:text-primary text-sm font-medium border border-white/10 hover:border-primary/50 transition-all">
+                // VISUALS
+            </button>
+<button class="px-4 py-1.5 rounded-full bg-transparent hover:bg-white/5 text-slate-300 hover:text-primary text-sm font-medium border border-white/10 hover:border-primary/50 transition-all">
+                // RANTS
+            </button>
+<button class="px-4 py-1.5 rounded-full bg-transparent hover:bg-white/5 text-slate-300 hover:text-primary text-sm font-medium border border-white/10 hover:border-primary/50 transition-all">
+                // TOUR_DATA
+            </button>
+</div>
+<!-- Blog Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+<!-- Card 1 -->
+<article class="flex flex-col group h-full">
+<div class="relative overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-colors duration-300 rounded-lg mb-4 aspect-video">
+<div class="absolute inset-0 bg-primary/10 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<img alt="Cyberpunk computer terminal setup with green code" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 filter grayscale group-hover:grayscale-0 contrast-125" data-alt="Retro computer terminal with glowing green code" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCdOOfVyLLbSx6IEJE2UscU8ep0auDUYeTPtXded98pAeizRA5c-SE4d_tUHls2t9b6ITw4JBXspattWDOeRqxNNh7O2p1zXTidlfOCdCevv3BTeGd2MC695jRxXEFgWXSkdzsHW2jTbIy1eyl4TiEOK5uAMOjpxykNJEugB54prt9SMO4vNMdQWgJepAaIxDBNGzcbC3oZg6ieLWpF56CVqTFaPQlzmKLUIwuAbFMvSb584cDykwxYyzhlJpP6-oQuVnQnK-EQcKl"/>
+<div class="absolute top-2 right-2 z-20">
+<span class="px-2 py-0.5 bg-background-dark/90 border border-primary text-[10px] text-primary font-mono uppercase tracking-widest">
+                             HARDWARE
+                         </span>
+</div>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex items-center gap-2 text-xs font-mono text-slate-500 mb-2">
+<span>OCT 12, 2023</span>
+<span class="text-primary/50">//</span>
+<span>SYSTEM_UPGRADE</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 leading-tight group-hover:text-primary transition-colors">
+                        Rebuilding the Server Rack for Maximum Latency
+                    </h3>
+<p class="text-slate-400 text-sm line-clamp-2 mb-4 flex-1">
+                        We decided to route all audio through a stack of 90s servers just to see if the hum added character. Spoiler: It did.
+                    </p>
+<a class="text-primary text-sm font-mono font-bold hover:underline decoration-primary decoration-2 underline-offset-4 inline-flex items-center gap-1 w-max" href="#">
+                        READ_MORE <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</a>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="flex flex-col group h-full">
+<div class="relative overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-colors duration-300 rounded-lg mb-4 aspect-video">
+<div class="absolute inset-0 bg-primary/10 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<img alt="Close up of motherboard circuitry with neon lighting" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 filter grayscale group-hover:grayscale-0 contrast-125" data-alt="Detailed motherboard circuitry glowing with blue and pink light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJzArnXA8kQw1UbGxgWIZS7fYBlaecbREhKeIUBVMw2NEA2WJ7zWLDj6kIYNzHamXYjvtn299L2f7jbn6mkyfNS8DoIAEW12yNzYrOSYlDlmBpEKx3-UtwPGL2Cfq0jMmFd1zOwE-3ERqgVTEGUPodsPvMxgcDsy0ZvsJncnrme7Il7uSRmSggTZrTkyjpRF2mC757nknHkFeGkEk7IFsFcwAI51Q2KDVgq1K5xJ40jNg1P3dwblld3Zf4c7s5dlUrbRXL4Zq4XQrH"/>
+<div class="absolute top-2 right-2 z-20">
+<span class="px-2 py-0.5 bg-background-dark/90 border border-primary text-[10px] text-primary font-mono uppercase tracking-widest">
+                             AI_MODELS
+                         </span>
+</div>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex items-center gap-2 text-xs font-mono text-slate-500 mb-2">
+<span>SEP 28, 2023</span>
+<span class="text-primary/50">//</span>
+<span>GENERATION</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 leading-tight group-hover:text-primary transition-colors">
+                        Training the Beast: 4000 Hours of White Noise
+                    </h3>
+<p class="text-slate-400 text-sm line-clamp-2 mb-4 flex-1">
+                        Why training an AI on pure static resulted in the most calming ambient track we've ever produced. The data doesn't lie.
+                    </p>
+<a class="text-primary text-sm font-mono font-bold hover:underline decoration-primary decoration-2 underline-offset-4 inline-flex items-center gap-1 w-max" href="#">
+                        READ_MORE <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</a>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="flex flex-col group h-full">
+<div class="relative overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-colors duration-300 rounded-lg mb-4 aspect-video">
+<div class="absolute inset-0 bg-primary/10 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<img alt="Glitch art abstract background" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 filter grayscale group-hover:grayscale-0 contrast-125" data-alt="Distorted digital noise pattern representing visual glitch art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCd0RYhZUjP5Wk_4Aoa0FU6EoJdR9n8HPKwuSGvWH7A9vdoHevb-WC0KaIEuw16ZMks-GFrbiN8KL3_r7cKIoHmrfDVw1xn93FZJglxHLOA9vTuH6C_E12JMdLoVWUZHkK1jQGUIj-FoKP-tdu35YNTJE7RUbmBZlWjNHU9S1isI6Ps6WBDgbYRDXFqpCgPm99jI-A15EOnPnKohR2EtVEB0vquabR0x1lUbIYHLirzejhKBE565pQZqep81-hTUPQpFr7zj-Cqff0j"/>
+<div class="absolute top-2 right-2 z-20">
+<span class="px-2 py-0.5 bg-background-dark/90 border border-primary text-[10px] text-primary font-mono uppercase tracking-widest">
+                             VISUALS
+                         </span>
+</div>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex items-center gap-2 text-xs font-mono text-slate-500 mb-2">
+<span>SEP 15, 2023</span>
+<span class="text-primary/50">//</span>
+<span>ART_DIR</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 leading-tight group-hover:text-primary transition-colors">
+                        The Aesthetics of Error: Why We Love Glitches
+                    </h3>
+<p class="text-slate-400 text-sm line-clamp-2 mb-4 flex-1">
+                        Imperfection is the new perfection. Exploring how digital decay creates a unique visual language for the Slopdog brand.
+                    </p>
+<a class="text-primary text-sm font-mono font-bold hover:underline decoration-primary decoration-2 underline-offset-4 inline-flex items-center gap-1 w-max" href="#">
+                        READ_MORE <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</a>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="flex flex-col group h-full">
+<div class="relative overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-colors duration-300 rounded-lg mb-4 aspect-video">
+<div class="absolute inset-0 bg-primary/10 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<img alt="Neon sign in dark alleyway" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 filter grayscale group-hover:grayscale-0 contrast-125" data-alt="Dark moody alleyway illuminated by neon lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOw_AzyfEj9fd62tS97RM9jgXPjPkhPTM5WiJXqZC4aokDrk9zA5Jlhsdg19rbFA3z7zoUwTPJ4aca2ryQltAGKsnqgSpTL7pix2YleRbCKX-dt8F8YOEiqIMlqJTp_V_mfB05IJPAZZVxEgd-k8wOj-YAE_CTC-91hT0bN5VqIcZFJc8XAoZZqvxmdOy7PaJZ0rn7YjbnWkj17F7ePx8Qt_uN-zQMSAFtzVspOnFQyxwL-d2VqJ_1fh2_kNeLTGeUrxUQz4d-J-mq"/>
+<div class="absolute top-2 right-2 z-20">
+<span class="px-2 py-0.5 bg-background-dark/90 border border-primary text-[10px] text-primary font-mono uppercase tracking-widest">
+                             TOUR_LIFE
+                         </span>
+</div>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex items-center gap-2 text-xs font-mono text-slate-500 mb-2">
+<span>AUG 30, 2023</span>
+<span class="text-primary/50">//</span>
+<span>OFFLINE</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 leading-tight group-hover:text-primary transition-colors">
+                        Tokyo Underground: Field Recordings
+                    </h3>
+<p class="text-slate-400 text-sm line-clamp-2 mb-4 flex-1">
+                        Armed with a field recorder and zero sleep, I captured the sounds of the subway system at 3 AM.
+                    </p>
+<a class="text-primary text-sm font-mono font-bold hover:underline decoration-primary decoration-2 underline-offset-4 inline-flex items-center gap-1 w-max" href="#">
+                        READ_MORE <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</a>
+</div>
+</article>
+<!-- Card 5 -->
+<article class="flex flex-col group h-full">
+<div class="relative overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-colors duration-300 rounded-lg mb-4 aspect-video">
+<div class="absolute inset-0 bg-primary/10 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<img alt="Old CRT Monitor displaying code" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 filter grayscale group-hover:grayscale-0 contrast-125" data-alt="Vintage CRT monitor displaying green terminal code" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqkuru-BUtIpCzcuB4O-RleWJOPtVPCmpvYzKBUVmTa7O3XOWGxlxcF0qWzXkd43ITdlndmzV9HIt1xJdj38oGdEak4fr4EGeTMBsGxzc5sv4QcHMh4WZLNO4w9cDqw5-b4q9jq9o_HPY3lSzVXOaY41JF0lXvgBR6mUrmW6ERePz8R-JYxH9gG5dzPWo-FQ-M2tHYvQEtIfuQMG15z5JUB9zEZ-n68-_y8uDJTQN00cUzBpdLwX6wyaOUD8sw5kRT4rKixSd7zo6l"/>
+<div class="absolute top-2 right-2 z-20">
+<span class="px-2 py-0.5 bg-background-dark/90 border border-primary text-[10px] text-primary font-mono uppercase tracking-widest">
+                             RANT
+                         </span>
+</div>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex items-center gap-2 text-xs font-mono text-slate-500 mb-2">
+<span>AUG 14, 2023</span>
+<span class="text-primary/50">//</span>
+<span>OPINION</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 leading-tight group-hover:text-primary transition-colors">
+                        Why Analog synths will never truly die
+                    </h3>
+<p class="text-slate-400 text-sm line-clamp-2 mb-4 flex-1">
+                        Digital is clean. Digital is precise. But digital doesn't have the warmth of a capacitor that's about to explode.
+                    </p>
+<a class="text-primary text-sm font-mono font-bold hover:underline decoration-primary decoration-2 underline-offset-4 inline-flex items-center gap-1 w-max" href="#">
+                        READ_MORE <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</a>
+</div>
+</article>
+<!-- Card 6 -->
+<article class="flex flex-col group h-full">
+<div class="relative overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-colors duration-300 rounded-lg mb-4 aspect-video">
+<div class="absolute inset-0 bg-primary/10 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<img alt="Abstract digital waveform visualization" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 filter grayscale group-hover:grayscale-0 contrast-125" data-alt="Bright neon green digital audio waveform on black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfTdLh-LcmVoOY-NVRf37RupDyDe2AUbQYWgLXUbd4mOxpSWDrZ8Kf3xZveaKMX1vyDQTK8rsK21EyAaO5iDzGieZTOtTNBpt5trdOGb_y_HXm-z_NhsS5DnIopJzTvsCKNyK8eR4Ehq53ELpCsdeLnSRzioRL1GUnFZ3r8iCWFAm3Mv8LeK2VL0xkFGrYyMcKHW2pyMFsBv_r5gzTcnfgDuYAcBwhARBgopIbiGgHSF97NEfjxM1lt675f7ggD60cxoiDnHgtwxuQ"/>
+<div class="absolute top-2 right-2 z-20">
+<span class="px-2 py-0.5 bg-background-dark/90 border border-primary text-[10px] text-primary font-mono uppercase tracking-widest">
+                             MUSIC
+                         </span>
+</div>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex items-center gap-2 text-xs font-mono text-slate-500 mb-2">
+<span>JUL 22, 2023</span>
+<span class="text-primary/50">//</span>
+<span>RELEASE</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 leading-tight group-hover:text-primary transition-colors">
+                        Deconstructing 'Binary Soul' - Track Breakdown
+                    </h3>
+<p class="text-slate-400 text-sm line-clamp-2 mb-4 flex-1">
+                        A deep dive into the Ableton project file. Download the stems and remix it yourself (if you dare).
+                    </p>
+<a class="text-primary text-sm font-mono font-bold hover:underline decoration-primary decoration-2 underline-offset-4 inline-flex items-center gap-1 w-max" href="#">
+                        READ_MORE <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</a>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="mt-20 flex justify-center">
+<nav class="flex items-center gap-2 bg-surface-dark p-2 rounded border border-white/10">
+<button class="size-10 flex items-center justify-center rounded bg-white/5 text-slate-500 hover:text-white hover:bg-white/10 transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded bg-primary text-background-dark font-bold">1</button>
+<button class="size-10 flex items-center justify-center rounded hover:bg-white/10 text-slate-400 font-medium transition-colors">2</button>
+<button class="size-10 flex items-center justify-center rounded hover:bg-white/10 text-slate-400 font-medium transition-colors">3</button>
+<span class="px-2 text-slate-600">...</span>
+<button class="size-10 flex items-center justify-center rounded bg-white/5 text-slate-500 hover:text-white hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</nav>
+</div>
+</main>
+<!-- Footer -->
+<footer class="border-t border-white/10 bg-background-dark py-12 px-6 mt-12">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col items-center md:items-start gap-4">
+<h2 class="text-2xl font-bold text-white">SLOPDOG<span class="text-primary">.AI</span></h2>
+<p class="text-slate-500 text-sm max-w-xs text-center md:text-left">
+                    Generative audio experiments from the digital void.
+                    <br/>All systems nominal.
+                </p>
+</div>
+<div class="flex gap-6">
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="sr-only">Twitter</span>
+<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24">
+<path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+</svg>
+</a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="sr-only">GitHub</span>
+<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24">
+<path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path>
+</svg>
+</a>
+</div>
+</div>
+<div class="mt-8 text-center">
+<p class="text-xs text-slate-700 font-mono">© 2023 SLOPDOG INDUSTRIES. NO RIGHTS RESERVED. COPYLEFT.</p>
+</div>
+</footer>
+</body></html>
