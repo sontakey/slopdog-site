@@ -36,8 +36,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default function TrackPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function TrackPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
 
   try {
     const { frontmatter, content } = getMdxBySlug<TrackFrontmatter>("content/music", slug);
