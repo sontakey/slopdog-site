@@ -67,14 +67,14 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             ) : null}
 
             <div className="flex flex-wrap gap-2">
-              {frontmatter.streamingLinks?.soundcloud ? (
+              {frontmatter.streamingLinks?.spotify ? (
                 <a
                   className="rounded-md bg-primary px-4 py-2 text-sm font-bold text-black hover:opacity-90"
-                  href={frontmatter.streamingLinks.soundcloud}
+                  href={frontmatter.streamingLinks.spotify}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  SOUNDCLOUD
+                  SPOTIFY
                 </a>
               ) : null}
               {frontmatter.streamingLinks?.spotify ? (

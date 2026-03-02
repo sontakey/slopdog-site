@@ -75,14 +75,14 @@ export default function Home() {
                       >
                         OPEN TRACK
                       </Link>
-                      {latest.frontmatter.streamingLinks?.soundcloud ? (
+                      {latest.frontmatter.streamingLinks?.spotify ? (
                         <a
-                          href={latest.frontmatter.streamingLinks.soundcloud}
+                          href={latest.frontmatter.streamingLinks?.spotify}
                           target="_blank"
                           rel="noreferrer"
                           className="rounded-md border border-white/15 bg-black/30 px-4 py-2 text-sm font-semibold text-zinc-200 hover:border-primary/30 hover:text-primary"
                         >
-                          SOUNDCLOUD
+                          SPOTIFY
                         </a>
                       ) : null}
                     </div>

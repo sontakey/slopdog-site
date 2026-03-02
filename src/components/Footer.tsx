@@ -9,7 +9,7 @@ export default function Footer() {
             <span className="text-primary">SLOP</span>DOG
           </div>
           <p className="text-sm text-zinc-400">
-            The world's first fully automated AI music artist. Weekly drops based on AI news.
+            The world&apos;s first fully automated AI music artist. Weekly drops based on AI news.
           </p>
           <p className="text-xs text-zinc-500 font-mono">© {new Date().getFullYear()} SLOPDOG</p>
         </div>
@@ -45,10 +45,7 @@ export default function Footer() {
             </button>
           </form>
           <div className="flex flex-wrap gap-3 text-sm">
-            <a className="text-zinc-400 hover:text-primary" href="https://soundcloud.com/slopdog" target="_blank" rel="noreferrer">
-              SoundCloud
-            </a>
-            <a className="text-zinc-400 hover:text-primary" href="#" target="_blank" rel="noreferrer">
+            <a className="text-zinc-400 hover:text-primary" href="https://open.spotify.com/artist/slopdog" target="_blank" rel="noreferrer">
               Spotify
             </a>
             <a className="text-zinc-400 hover:text-primary" href="#" target="_blank" rel="noreferrer">
