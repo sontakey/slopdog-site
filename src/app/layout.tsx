@@ -3,6 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { SITE } from "@/lib/site";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -12,17 +13,35 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "SLOPDOG",
+    default: SITE.name,
     template: "%s | SLOPDOG",
   },
-  description: "SLOPDOG is an AI music artist dropping weekly tracks based on the week's AI news.",
-  metadataBase: new URL("https://slopdog.com"),
+  description: SITE.description,
+  keywords: SITE.keywords as unknown as string[],
+  metadataBase: new URL(SITE.url),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "SLOPDOG",
-    description: "Underground AI music. Weekly drops. Glitch aesthetics.",
-    url: "https://slopdog.com",
-    siteName: "SLOPDOG",
+    title: SITE.name,
+    description: SITE.description,
+    url: SITE.url,
+    siteName: SITE.name,
     type: "website",
+    images: [
+      {
+        url: SITE.ogImage,
+        width: 1200,
+        height: 1200,
+        alt: "SLOPDOG album art",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE.name,
+    description: SITE.description,
+    images: [SITE.ogImage],
   },
 };
 

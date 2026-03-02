@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
@@ -5,6 +6,8 @@ import StaticAudioPlayer from "@/components/StaticAudioPlayer";
 import AlbumCard from "@/components/AlbumCard";
 import MaterialIcon from "@/components/MaterialIcon";
 import { getAllMdx } from "@/lib/mdx";
+import { SITE } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
 
 type TrackFrontmatter = {
   title: string;
@@ -25,13 +28,55 @@ type BlogFrontmatter = {
   tags?: string[];
 };
 
+export const metadata: Metadata = {
+  title: "SLOPDOG",
+  description: SITE.description,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "SLOPDOG (AI music artist)",
+    description: SITE.description,
+    url: "/",
+    images: [SITE.ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SLOPDOG (AI music artist)",
+    description: SITE.description,
+    images: [SITE.ogImage],
+  },
+};
+
 export default function Home() {
   const tracks = getAllMdx<TrackFrontmatter>("content/music");
   const latest = tracks[0];
   const posts = getAllMdx<BlogFrontmatter>("content/blog").slice(0, 3);
 
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE.name,
+    url: SITE.url,
+    description: SITE.description,
+    inLanguage: "en",
+  };
+
+  const musicGroupSchema = {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    name: SITE.name,
+    url: SITE.url,
+    description: SITE.description,
+    genre: ["Hip-Hop", "Rap"],
+    image: new URL(SITE.ogImage, SITE.url).toString(),
+  };
+
   return (
     <div>
+      <JsonLd schema={websiteSchema} />
+      <JsonLd schema={musicGroupSchema} />
+
       {/* Hero Section */}
       <section className="relative overflow-hidden border-b border-white/10 py-12 md:py-24">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,255,65,0.10),transparent_55%)] opacity-50" />
@@ -112,11 +157,7 @@ export default function Home() {
       {/* Discography Section */}
       <section className="bg-bg py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            kicker="01."
-            title="DISCOGRAPHY"
-            right={<Link href="/music" className="hover:underline">VIEW_ALL_RELEASES -&gt;</Link>}
-          />
+          <SectionHeading kicker="01." title="DISCOGRAPHY" right={<Link href="/music" className="hover:underline">VIEW_ALL_RELEASES -&gt;</Link>} />
 
           <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {tracks.slice(0, 4).map((t, i) => (
@@ -136,11 +177,7 @@ export default function Home() {
       {/* Blog Preview Section */}
       <section className="border-t border-white/5 bg-[#050a06] py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            kicker="02."
-            title="TRANSMISSIONS"
-            right={<Link href="/blog" className="hover:underline">READ_THE_LOGS -&gt;</Link>}
-          />
+          <SectionHeading kicker="02." title="TRANSMISSIONS" right={<Link href="/blog" className="hover:underline">READ_THE_LOGS -&gt;</Link>} />
 
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {posts.map((p) => (
@@ -154,9 +191,7 @@ export default function Home() {
                   {p.frontmatter.title.toUpperCase()}
                 </div>
                 <p className="mb-6 line-clamp-3 text-sm text-zinc-400">{p.frontmatter.excerpt}</p>
-                <span className="inline-flex border-b border-primary/30 pb-0.5 text-sm font-mono font-bold text-primary">
-                  &gt; EXECUTE_READ.exe
-                </span>
+                <span className="inline-flex border-b border-primary/30 pb-0.5 text-sm font-mono font-bold text-primary">&gt; EXECUTE_READ.exe</span>
               </Link>
             ))}
           </div>
@@ -165,7 +200,10 @@ export default function Home() {
 
       {/* Newsletter Section */}
       <section className="relative overflow-hidden bg-primary py-24 text-black">
-        <div className="pointer-events-none absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(#000 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-10"
+          style={{ backgroundImage: "radial-gradient(#000 1px, transparent 1px)", backgroundSize: "20px 20px" }}
+        />
         <div className="relative z-10 mx-auto max-w-2xl px-4 text-center">
           <MaterialIcon name="mail_lock" size={48} className="mb-4 text-black" />
           <h2 className="mb-4 text-3xl font-black uppercase tracking-tight text-black md:text-4xl">Join the Network</h2>

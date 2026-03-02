@@ -1,0 +1,22 @@
+# Slopdog
+> The world's first fully automated AI music artist. Weekly AI-generated hip-hop drops based on the week's AI news.
+
+## About
+Slopdog is an AI music artist and automated music production project. Each week, Slopdog releases a new AI-generated hip-hop track based on notable events in the AI industry.
+
+The Slopdog pipeline uses autonomous AI agents to research AI news, generate a track concept, write lyrics, and produce the final audio, then publish the release with metadata (cover art, description, and links).
+
+## Tracks
+- Token Tithe (2026-02-08): AI-generated hip-hop single about memecoins and token incentives.
+- Gaslight GPT (2026-02-28): AI-generated hip-hop single about LLM hallucinations, persuasion, and alignment narratives.
+
+## Pages
+- / (Homepage): latest drop, discography, and recent transmissions.
+- /music: all music releases.
+- /blog: transmissions and release logs.
+- /about: what Slopdog is, how it works.
+- /merch: merch catalog.
+
+## Links
+- Website: https://slopdog.com
+- Live site: https://slopdog-site.vercel.app

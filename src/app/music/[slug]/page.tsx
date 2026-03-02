@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Mdx from "@/components/Mdx";
 import SectionHeading from "@/components/SectionHeading";
+import JsonLd from "@/components/JsonLd";
 import { getAllMdx, getMdxBySlug, getMdxSlugs } from "@/lib/mdx";
+import { SITE } from "@/lib/site";
 
 type TrackFrontmatter = {
   title: string;
@@ -19,19 +22,33 @@ export function generateStaticParams() {
   return getMdxSlugs("content/music").map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const all = getAllMdx<TrackFrontmatter>("content/music");
   const track = all.find((t) => t.slug === slug);
   if (!track) return {};
 
+  const title = `${track.frontmatter.title} (AI-generated hip-hop single)`;
+  const description = `${track.frontmatter.concept} Listen to ${track.frontmatter.title} by Slopdog, an AI music artist. Weekly AI-generated hip-hop drops based on AI news.`;
+  const ogImage = track.frontmatter.coverImage || SITE.ogImage;
+
   return {
     title: track.frontmatter.title,
-    description: track.frontmatter.concept,
+    description,
+    alternates: {
+      canonical: `/music/${track.slug}`,
+    },
     openGraph: {
-      title: track.frontmatter.title,
-      description: track.frontmatter.concept,
-      images: [track.frontmatter.coverImage],
+      title,
+      description,
+      url: `/music/${track.slug}`,
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -42,8 +59,27 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
   try {
     const { frontmatter, content } = getMdxBySlug<TrackFrontmatter>("content/music", slug);
 
+    const url = new URL(`/music/${frontmatter.slug}`, SITE.url).toString();
+
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      name: frontmatter.title,
+      url,
+      datePublished: frontmatter.date,
+      genre: ["Hip-Hop", "Rap"],
+      description: frontmatter.concept,
+      image: new URL(frontmatter.coverImage || SITE.ogImage, SITE.url).toString(),
+      byArtist: {
+        "@type": "MusicGroup",
+        name: "SLOPDOG",
+        url: SITE.url,
+      },
+    };
+
     return (
       <div className="mx-auto max-w-6xl px-4 py-12">
+        <JsonLd schema={schema} />
         <SectionHeading
           kicker="/"
           title={frontmatter.title.toUpperCase()}
@@ -57,12 +93,19 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
         <div className="mt-8 grid gap-8 lg:grid-cols-2">
           <div className="space-y-5">
             <div className="scanlines relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-black shadow-glow">
-              <Image src={frontmatter.coverImage} alt={`${frontmatter.title} cover`} fill className="object-cover" sizes="(max-width:1024px) 100vw, 50vw" priority />
+              <Image
+                src={frontmatter.coverImage}
+                alt={`${frontmatter.title} cover`}
+                fill
+                className="object-cover"
+                sizes="(max-width:1024px) 100vw, 50vw"
+                priority
+              />
             </div>
 
             {frontmatter.embedUrl ? (
               <div className="overflow-hidden rounded-xl border border-white/10 bg-black">
-                <iframe title={`${frontmatter.title} player`} src={frontmatter.embedUrl} width="100%" height="166" allow="autoplay" />
+                <iframe title={`${frontmatter.title} player`} src={frontmatter.embedUrl} width="100%" height="166" allow="autoplay" loading="lazy" />
               </div>
             ) : null}
 
@@ -77,7 +120,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
                   SPOTIFY
                 </a>
               ) : null}
-                          </div>
+            </div>
 
             <div className="rounded-xl border border-white/10 bg-white/5 p-5">
               <div className="text-xs font-mono text-primary">RELEASE_DATE</div>

@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import { getAllMdx } from "@/lib/mdx";
+import { SITE } from "@/lib/site";
 
 type BlogFrontmatter = {
   title: string;
@@ -12,8 +14,27 @@ type BlogFrontmatter = {
   tags?: string[];
 };
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Blog",
+  description:
+    "Transmissions from Slopdog, an AI music artist. Weekly AI news, release notes, and context behind AI-generated hip-hop drops.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "Blog | SLOPDOG",
+    description:
+      "AI news hip-hop, release context, and behind the scenes notes from Slopdog's automated music production pipeline.",
+    url: "/blog",
+    images: [SITE.ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | SLOPDOG",
+    description:
+      "AI news hip-hop, release context, and behind the scenes notes from Slopdog's automated music production pipeline.",
+    images: [SITE.ogImage],
+  },
 };
 
 export default function BlogPage() {

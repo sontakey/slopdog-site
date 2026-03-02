@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Mdx from "@/components/Mdx";
 import SectionHeading from "@/components/SectionHeading";
+import JsonLd from "@/components/JsonLd";
 import { getMdxBySlug, getMdxSlugs } from "@/lib/mdx";
+import { SITE } from "@/lib/site";
 
 type BlogFrontmatter = {
   title: string;
@@ -18,17 +21,29 @@ export function generateStaticParams() {
   return getMdxSlugs("content/blog").map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   try {
     const { frontmatter } = getMdxBySlug<BlogFrontmatter>("content/blog", slug);
+    const ogImage = frontmatter.thumbnail || SITE.ogImage;
+
     return {
       title: frontmatter.title,
       description: frontmatter.excerpt,
+      alternates: {
+        canonical: `/blog/${frontmatter.slug}`,
+      },
       openGraph: {
         title: frontmatter.title,
         description: frontmatter.excerpt,
-        images: [frontmatter.thumbnail],
+        url: `/blog/${frontmatter.slug}`,
+        images: [ogImage],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: frontmatter.title,
+        description: frontmatter.excerpt,
+        images: [ogImage],
       },
     };
   } catch {
@@ -42,8 +57,32 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   try {
     const { frontmatter, content } = getMdxBySlug<BlogFrontmatter>("content/blog", slug);
 
+    const url = new URL(`/blog/${frontmatter.slug}`, SITE.url).toString();
+
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: frontmatter.title,
+      description: frontmatter.excerpt,
+      datePublished: frontmatter.date,
+      url,
+      image: [new URL(frontmatter.thumbnail || SITE.ogImage, SITE.url).toString()],
+      author: {
+        "@type": "Organization",
+        name: "SLOPDOG",
+        url: SITE.url,
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "SLOPDOG",
+        url: SITE.url,
+      },
+      about: ["AI-generated music", "AI music artist", "AI news", "AI-generated hip-hop"],
+    };
+
     return (
       <div className="mx-auto max-w-3xl px-4 py-12">
+        <JsonLd schema={schema} />
         <SectionHeading
           kicker="/"
           title={frontmatter.title.toUpperCase()}
