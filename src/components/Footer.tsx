@@ -9,7 +9,7 @@ export default function Footer() {
             <span className="text-primary">SLOP</span>DOG
           </div>
           <p className="text-sm text-zinc-400">
-            AI Meme Streetwear for the Extremely Online. Underground AI music, weekly drops.
+            The world's first fully automated AI music artist. Weekly drops based on AI news.
           </p>
           <p className="text-xs text-zinc-500 font-mono">© {new Date().getFullYear()} SLOPDOG</p>
         </div>

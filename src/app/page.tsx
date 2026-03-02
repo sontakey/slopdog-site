@@ -48,7 +48,7 @@ export default function Home() {
 
             <p className="max-w-xl text-zinc-300">
               SLOPDOG is an AI music artist dropping weekly tracks based on the week&apos;s AI news.
-              Underground, self-aware, and mildly hostile.
+              Every week, an autonomous agent fleet turns the biggest AI news into hip-hop. No human writes the lyrics. No human picks the beat. The pipeline runs itself.
             </p>
 
             {latest ? (
