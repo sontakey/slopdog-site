@@ -77,17 +77,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
                   SPOTIFY
                 </a>
               ) : null}
-              {frontmatter.streamingLinks?.apple ? (
-                <a
-                  className="rounded-md border border-white/15 bg-black/30 px-4 py-2 text-sm font-semibold text-zinc-200 hover:border-primary/30 hover:text-primary"
-                  href={frontmatter.streamingLinks.apple}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  APPLE MUSIC
-                </a>
-              ) : null}
-            </div>
+                          </div>
 
             <div className="rounded-xl border border-white/10 bg-white/5 p-5">
               <div className="text-xs font-mono text-primary">RELEASE_DATE</div>

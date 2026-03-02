@@ -11,7 +11,7 @@ export default {
     extend: {
       colors: {
         primary: "#00ff41",
-        bg: "#0a0a0a",
+        bg: "#050a06",
         cyber: {
           gray: "#111111",
           card: "#0f0f0f",
