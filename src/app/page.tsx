@@ -11,7 +11,7 @@ type TrackFrontmatter = {
   coverImage: string;
   concept: string;
   embedUrl: string;
-  streamingLinks?: { soundcloud?: string; spotify?: string; apple?: string };
+  streamingLinks?: { spotify?: string; apple?: string };
 };
 
 type BlogFrontmatter = {

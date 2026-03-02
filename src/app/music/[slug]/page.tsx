@@ -12,7 +12,7 @@ type TrackFrontmatter = {
   coverImage: string;
   concept: string;
   embedUrl: string;
-  streamingLinks?: { soundcloud?: string; spotify?: string; apple?: string };
+  streamingLinks?: { spotify?: string; apple?: string };
 };
 
 export function generateStaticParams() {
@@ -70,16 +70,6 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
               {frontmatter.streamingLinks?.spotify ? (
                 <a
                   className="rounded-md bg-primary px-4 py-2 text-sm font-bold text-black hover:opacity-90"
-                  href={frontmatter.streamingLinks.spotify}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  SPOTIFY
-                </a>
-              ) : null}
-              {frontmatter.streamingLinks?.spotify ? (
-                <a
-                  className="rounded-md border border-white/15 bg-black/30 px-4 py-2 text-sm font-semibold text-zinc-200 hover:border-primary/30 hover:text-primary"
                   href={frontmatter.streamingLinks.spotify}
                   target="_blank"
                   rel="noreferrer"
