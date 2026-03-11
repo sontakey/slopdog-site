@@ -5,7 +5,7 @@ export const SITE = {
   // url: "https://slopdog-site.vercel.app",
   description:
     "SLOPDOG is the world's first fully automated AI music artist, dropping weekly AI-generated hip-hop tracks based on the week's AI news.",
-  ogImage: "/images/music/token-tithe-cover.jpg",
+  ogImage: "/images/og-default.png",
   twitterHandle: "@slopdog",
   keywords: [
     "AI music artist",

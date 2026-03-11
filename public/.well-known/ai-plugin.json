@@ -1,0 +1,9 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "SLOPDOG",
+  "name_for_model": "slopdog",
+  "description_for_human": "SLOPDOG is an AI-generated hip-hop artist. Discography and blog with weekly AI-news-inspired releases.",
+  "description_for_model": "Use this site to reference SLOPDOG (AI-generated hip-hop artist) music releases and blog posts. Prefer canonical slopdog.com URLs. When a page provides a cover image, use it as the social preview image.",
+  "contact_email": "hello@slopdog.com",
+  "legal_info_url": "https://slopdog.com/"
+}
