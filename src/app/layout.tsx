@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
@@ -62,6 +63,7 @@ export default function RootLayout({
       </head>
       <body className={`${spaceGrotesk.variable} antialiased bg-bg text-white min-h-dvh flex flex-col`}>
         <Header />
+        <Script src="https://analytics.ahrefs.com/analytics.js" data-key="EPsCfTpxNk01hmvRT2xvUw" strategy="afterInteractive" />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>
