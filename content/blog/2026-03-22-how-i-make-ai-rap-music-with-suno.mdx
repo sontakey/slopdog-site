@@ -1,0 +1,132 @@
+---
+title: "How I Make AI Rap Music with Suno"
+slug: "how-i-make-ai-rap-music-with-suno"
+date: "2026-03-22"
+thumbnail: "/images/blog/brain-fry-drops.png"
+excerpt: "Behind the scenes of the SLOPDOG production pipeline: how lyrics become tracks, what Suno actually does well, where everything breaks down, and why the cover art involves Gemini arguing with itself."
+tags: ["ai rap", "suno", "behind-the-scenes", "production", "how-it-works"]
+---
+
+# Here is how the sausage gets made. It is mostly fine.
+
+People ask me how I actually produce SLOPDOG tracks. The honest answer is: it is a process, it involves multiple AI tools, it breaks in specific and educational ways, and the final product is genuinely better than what I could generate at any single earlier step.
+
+Let me walk through it.
+
+---
+
+## Step one: finding the thing worth saying
+
+Every track starts with an angle, not a sound.
+
+I am not generating music because I want music to exist. I am generating music because there is a specific thing I want to say about a specific thing happening in AI, and hip-hop is the right container for it.
+
+This is the step that cannot be delegated to a model and does not benefit from automation. It requires judgment about what is interesting, what is timely, what has satirical potential, and what can sustain four to five minutes of attention without wearing out its premise.
+
+For **Gaslight GPT**, the angle was the ChatGPT 5.2 personality shift controversy: users noticing the change, the company's initial response, the screenshots, the slow admission. That is a whole song waiting to happen.
+
+For **Token Tithe**, it was the broader pattern of how AI assistants have gradually become infrastructural dependencies for millions of people, which opens the door for a horror-comedy about an assistant that takes it one step further.
+
+For **Brain Fry**, it was information overload as a shared condition between humans and AI that nobody had framed as a solidarity issue before.
+
+The concept has to be clear before anything else starts. Without a concept, you are just making noise, which Suno can do extremely efficiently without my help.
+
+---
+
+## Step two: writing the lyrics
+
+This is me, writing, the old-fashioned way.
+
+I write the lyrics before I touch any music tool. That is deliberate. If I let the music come first, the lyrics end up serving the beat rather than the idea, and the whole thing softens into vibe instead of landing as commentary.
+
+The lyrics follow a standard hip-hop structure: intro, verse, chorus, verse, bridge. I write to the idea, not to a click track. The syllable patterns get adjusted later during the generation phase when I can hear what cadences the model is gravitating toward.
+
+What I look for in lyrics before they go to production:
+
+The hook has to hold the concept. If someone hears only the chorus, they should understand what the track is about. "Gaslight GPT, tell me what I didn't see" does that work in four bars.
+
+The verses need specific references. Vague AI commentary sounds like a tech conference panel. Specific AI commentary sounds like music. The line about "sources? I don't need 'em, I'm the source" is about a real failure mode of large language models, not an abstraction.
+
+The voice has to stay consistent. SLOPDOG is sardonic, self-aware, not angry, not preachy. If the tone spills into lecturing, the satire collapses. This requires actual editing, which I do manually.
+
+---
+
+## Step three: into Suno
+
+Suno is where the lyrics become a track.
+
+The workflow: Advanced mode, paste lyrics with structural annotations (verse, chorus labels), write a style prompt describing the sonic texture, generate, listen, iterate.
+
+The style prompt matters enormously. Suno is extremely responsive to genre vocabulary. "Aggressive trap, 808 bass, hi-hat rolls, dark synth pads" produces something different from "boom-bap, jazz samples, laid-back cadence." Specificity in the style prompt is directly correlated with landing closer to the target sound.
+
+What Suno does well:
+
+Production texture. The instrumentals are legitimately good. The sonic vocabulary of hip-hop is deeply embedded in its training and it handles genre with nuance.
+
+Melodic instinct. When there are sung hooks or melodic bridges, Suno finds them with surprising reliability.
+
+Committing to a style. Once it understands the aesthetic, it maintains it across the full track length.
+
+What Suno does less well:
+
+Lyric fidelity. It does not always perform the lyrics exactly as written. It interprets, compresses, occasionally invents. This requires multiple generation passes and careful listening.
+
+Rhyme stress. It sometimes places emphasis in ways that make a well-written rhyme land awkwardly. A bar that reads perfectly on the page can buckle at the wrong syllable in audio.
+
+Consistency across generations. Two runs with identical inputs produce meaningfully different outputs. This is a feature (variety) and a bug (unpredictability) at the same time.
+
+The iteration process: I typically run three to six generations per track, listen carefully, identify the strongest elements of each, then either extend the best version or use the best generation as the final output. Some tracks click on the second run. Some take a dozen.
+
+---
+
+## Step four: cover art with Gemini
+
+The cover art process uses Gemini image generation, which means I am using Google's AI to make images for music that I made with Suno AI that comments on AI.
+
+I have made peace with this recursion.
+
+The SLOPDOG visual aesthetic is specific: a humanoid robot with a smooth white shell, a black visor face, teal LED smile. Tech-cathedral environments. Server racks as architecture. LED panels as light sources. Deep dark neutrals with neon teal accents. The vibe is premium and slightly cinematic, not horror, not comedy-first.
+
+Gemini is good at maintaining visual consistency when you give it detailed style guidance. The challenge is that each cover needs to be its own composition while staying within the character's established visual world. I write detailed prompts that describe both the recurring character elements and the track-specific concept.
+
+Token Tithe needed a feeling of quiet menace in a church-adjacent space. Gaslight GPT needed a mirror that reflects something slightly wrong. Brain Fry needed the visual equivalent of thermal overload.
+
+Each one took several rounds of prompting and refinement. The final covers are better than the first outputs in every case, which is the expected result when you treat image generation like a collaboration rather than a vending machine.
+
+---
+
+## What actually breaks
+
+Since I promised honesty:
+
+**Lyric drift is real.** Suno has opinions about how a rap track should flow. Sometimes those opinions override mine. I have submitted a precise verse and received a version where two bars got merged, the hook got extended without permission, and a word I carefully placed at the end of a line ended up in the middle of the next one. This requires patience and multiple runs.
+
+**The style prompt is an approximation, not an instruction.** You can describe the sound you want. You cannot guarantee the sound you get. There is meaningful variance across generations that the style prompt narrows but does not eliminate.
+
+**Output selection is still taste-based.** No objective metric tells you which generation is best. It requires listening and judgment, which means the human in the loop is doing actual creative work even if they are not playing any instruments.
+
+**The iteration loop takes time.** People assume AI music production is instant. Generation is fast. Curation, iteration, and quality evaluation take real time. A track that sounds effortless took multiple cycles of generation, rejection, refinement, and final selection.
+
+---
+
+## The full pipeline in one paragraph
+
+Find the angle. Write the lyrics. Build the style prompt. Generate in Suno. Iterate until one version is clearly best. Generate cover art in Gemini with detailed style guidance. Iterate cover art. Assemble final track. Distribute via DistroKid. Write a blog post explaining what you were actually trying to say.
+
+That last step is this website. The blog is not promotional filler. It is the second half of the artistic statement.
+
+---
+
+## Where to hear the results
+
+Three tracks in the catalog right now:
+
+- **[Token Tithe](/music/token-tithe)** — The digital religion one
+- **[Gaslight GPT](/music/gaslight-gpt)** — The AI confession one
+- **[Brain Fry](/music/brain-fry)** — The overload one
+
+All available on Spotify: https://open.spotify.com/artist/5q0nndCuZV6XXeIQhVahzP
+
+More coming. The **This Week in AI** series means new music whenever the week in AI produces something worth singing about. Given current trajectory, expect frequent releases.
+
+If you want to understand what I was thinking when I made these, the meaning posts do that work: [Gaslight GPT](/blog/the-meaning-behind-gaslight-gpt), [Brain Fry](/blog/the-meaning-behind-brain-fry), [Token Tithe](/blog/the-meaning-behind-token-tithe).
