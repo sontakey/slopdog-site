@@ -5,6 +5,7 @@ import SectionHeading from "@/components/SectionHeading";
 import { getMdxBySlug } from "@/lib/mdx";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import ViewToggle from "@/components/ViewToggle";
 
 type AboutFrontmatter = {
   title: string;
@@ -47,11 +48,11 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
+    <div className="mx-auto max-w-3xl px-5 py-12 sm:px-6">
       <JsonLd schema={schema} />
       <SectionHeading kicker="/" title={(frontmatter.title ?? "ABOUT").toUpperCase()} right={<Link href="/" className="hover:underline">HOME -&gt;</Link>} />
-      <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6">
-        <Mdx source={content} />
+      <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6">
+        <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />
       </div>
     </div>
   );

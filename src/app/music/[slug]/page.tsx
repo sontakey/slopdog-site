@@ -79,7 +79,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
     };
 
     return (
-      <div className="mx-auto max-w-6xl px-4 py-12">
+      <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6">
         <JsonLd schema={schema} />
         <SectionHeading
           kicker="/"
@@ -131,7 +131,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6">
             <div className="text-xs font-mono text-primary">LYRICS</div>
             <div className="mt-4">
               <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />
