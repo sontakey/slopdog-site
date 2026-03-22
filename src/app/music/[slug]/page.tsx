@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Mdx from "@/components/Mdx";
 import SectionHeading from "@/components/SectionHeading";
 import JsonLd from "@/components/JsonLd";
+import ViewToggle from "@/components/ViewToggle";
 import { getAllMdx, getMdxBySlug, getMdxSlugs } from "@/lib/mdx";
 import { SITE } from "@/lib/site";
 
@@ -133,7 +134,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
             <div className="text-xs font-mono text-primary">LYRICS</div>
             <div className="mt-4">
-              <Mdx source={content} />
+              <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />
             </div>
           </div>
         </div>

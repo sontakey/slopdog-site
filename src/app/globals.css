@@ -112,3 +112,42 @@ body {
     rgba(0, 0, 0, 0) 4px
   );
 }
+
+
+/* Blog typography - Medium-style spacing */
+.prose p {
+  margin-bottom: 1.5em;
+  line-height: 1.8;
+}
+
+.prose h2,
+.prose h3 {
+  margin-top: 2.5em;
+  margin-bottom: 0.75em;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--primary);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0 8px 8px 0;
+  padding: 1em 1.25em;
+  margin: 2em 0;
+  font-style: normal;
+}
+
+.prose blockquote p {
+  margin-bottom: 0;
+  color: #d4d4d8;
+  font-size: 1.05em;
+}
+
+.prose hr {
+  border-color: rgba(255, 255, 255, 0.08);
+  margin: 2.5em 0;
+}
+
+/* Increase overall line height for readability */
+.prose {
+  font-size: 1.05rem;
+  line-height: 1.85;
+}

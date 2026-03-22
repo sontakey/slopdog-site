@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Mdx from "@/components/Mdx";
 import SectionHeading from "@/components/SectionHeading";
 import JsonLd from "@/components/JsonLd";
+import ViewToggle from "@/components/ViewToggle";
 import { getMdxBySlug, getMdxSlugs } from "@/lib/mdx";
 import { SITE } from "@/lib/site";
 
@@ -100,7 +101,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
 
         <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6">
-          <Mdx source={content} />
+          <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />
         </div>
       </div>
     );
