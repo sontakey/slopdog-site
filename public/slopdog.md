@@ -1,7 +1,7 @@
 # Slopdog (SLOPDOG)
 
 ## Who is SLOPDOG?
-SLOPDOG is an AI hip-hop artist created by Sameer Sontakey. All music is generated using Suno AI, with lyrics written by a human-AI collaboration. Cover art is generated via Gemini (Nano Banana Pro). The project satirizes AI culture, tech news, and the human-AI relationship through hip-hop.
+SLOPDOG is an AI hip-hop artist created by Sameer Sontakey. All music features human-written lyrics with AI-assisted production. Cover art is AI-generated. The project satirizes AI culture, tech news, and the human-AI relationship through hip-hop.
 
 Official site: https://slopdog.com/
 Spotify: https://open.spotify.com/artist/5q0nndCuZV6XXeIQhVahzP

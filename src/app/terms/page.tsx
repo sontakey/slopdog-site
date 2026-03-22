@@ -19,7 +19,7 @@ export default function TermsPage() {
         <p>SLOPDOG is an AI music artist project by Sontakey Records. The Site provides access to music, merchandise, beat licensing, and related services.</p>
         
         <h2 className="text-xl font-semibold text-white mt-8">3. Music and Content</h2>
-        <p>All music, lyrics, artwork, and content on this Site are the property of Sontakey Records and Sameer Sontakey. Music is generated using AI tools (Suno) with human-written lyrics and creative direction.</p>
+        <p>All music, lyrics, artwork, and content on this Site are the property of Sontakey Records and Sameer Sontakey. All music features human-written lyrics with AI-assisted production and creative direction by Sameer Sontakey.</p>
         
         <h2 className="text-xl font-semibold text-white mt-8">4. Beat Licensing</h2>
         <p>Beat licenses purchased through the Site grant specific usage rights as described at the time of purchase. License terms vary by tier (Basic, Premium, Exclusive, Commercial). All sales are final.</p>
