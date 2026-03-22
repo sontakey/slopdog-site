@@ -6,6 +6,7 @@ import Mdx from "@/components/Mdx";
 import SectionHeading from "@/components/SectionHeading";
 import JsonLd from "@/components/JsonLd";
 import ViewToggle from "@/components/ViewToggle";
+import BeatLicenseSection from "@/components/BeatLicenseSection";
 import { getAllMdx, getMdxBySlug, getMdxSlugs } from "@/lib/mdx";
 import { SITE } from "@/lib/site";
 
@@ -16,7 +17,7 @@ type TrackFrontmatter = {
   coverImage: string;
   concept: string;
   embedUrl: string;
-  streamingLinks?: { spotify?: string; apple?: string };
+  streamingLinks?: { spotify?: string; apple?: string; hyperfollow?: string };
 };
 
 export function generateStaticParams() {
@@ -121,6 +122,16 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
                   SPOTIFY
                 </a>
               ) : null}
+              {frontmatter.streamingLinks?.hyperfollow ? (
+                <a
+                  className="rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm font-bold text-white hover:border-primary/30 hover:text-primary transition"
+                  href={frontmatter.streamingLinks.hyperfollow}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  PRE-SAVE
+                </a>
+              ) : null}
             </div>
 
             <div className="rounded-xl border border-white/10 bg-white/5 p-5">
@@ -129,6 +140,9 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
               <div className="mt-4 text-xs font-mono text-primary">CONCEPT</div>
               <div className="mt-1 text-sm text-zinc-300">{frontmatter.concept}</div>
             </div>
+
+            {/* Beat License */}
+            <BeatLicenseSection trackSlug={frontmatter.slug} trackTitle={frontmatter.title} />
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6">

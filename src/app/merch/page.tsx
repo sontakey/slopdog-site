@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
+import MerchCard from "@/components/MerchCard";
 import { getAllMdx } from "@/lib/mdx";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
@@ -56,10 +57,12 @@ export default function MerchPage() {
       url,
       offers: {
         "@type": "Offer",
-        url: p.frontmatter.buyLink,
+        url: url,
         priceCurrency: p.frontmatter.currency,
         price: p.frontmatter.price,
-        availability: p.frontmatter.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+        availability: p.frontmatter.available
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
       },
     };
   });
@@ -68,7 +71,7 @@ export default function MerchPage() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "SLOPDOG Merch",
-    itemListElement: productSchemas.map((schema: any, idx: number) => ({
+    itemListElement: productSchemas.map((schema: Record<string, unknown>, idx: number) => ({
       "@type": "ListItem",
       position: idx + 1,
       url: schema.url,
@@ -79,39 +82,54 @@ export default function MerchPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <JsonLd schema={catalogSchema} />
-      <SectionHeading kicker="/" title="MERCH" right={<span className="text-zinc-500">EXTERNAL CHECKOUT</span>} />
+      <SectionHeading kicker="/" title="MERCH" right={<span className="text-zinc-500 text-sm font-mono">STRIPE_CHECKOUT</span>} />
 
+      {/* Digital product promo banner */}
+      <div className="mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-5 sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <div className="font-mono text-xs text-primary mb-1">DIGITAL_PRODUCT</div>
+          <div className="font-bold text-white">Slopdog Stem Pack Vol. 1</div>
+          <p className="mt-1 text-sm text-zinc-400">
+            All 3 tracks as stems — vocals, instrumentals, acapella. Remix, sample, go wild.
+          </p>
+        </div>
+        <div className="shrink-0 flex items-center gap-4">
+          <span className="font-mono text-xl font-bold text-white">$9.99</span>
+          <Link
+            href="/products/stem-pack"
+            className="rounded-lg bg-primary px-4 py-2 text-sm font-bold text-black hover:opacity-90 transition whitespace-nowrap"
+          >
+            GET STEMS
+          </Link>
+        </div>
+      </div>
+
+      {/* Product grid */}
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {products.map((p) => (
-          <a
-            key={p.slug}
-            href={p.frontmatter.buyLink}
-            target="_blank"
-            rel="noreferrer"
-            className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-primary/30 hover:shadow-glow"
-          >
-            <div className="scanlines relative aspect-square overflow-hidden rounded-lg border border-white/10 bg-black">
-              <Image src={p.frontmatter.image} alt={p.frontmatter.title} fill className="object-cover" sizes="(max-width:1024px) 100vw, 25vw" />
-            </div>
-            <div className="mt-3">
-              <div className="text-sm font-bold leading-tight group-hover:text-primary">{p.frontmatter.title}</div>
-              <div className="mt-1 flex items-center justify-between">
-                <div className="text-xs font-mono text-zinc-400">
-                  {p.frontmatter.currency} {p.frontmatter.price}
-                </div>
-                <span className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-[10px] font-mono text-zinc-400">BUY</span>
-              </div>
-              {p.frontmatter.trackTag ? <div className="mt-2 text-[10px] font-mono text-primary">TAG: {p.frontmatter.trackTag}</div> : null}
-            </div>
-          </a>
+          <div key={p.slug} id={p.slug}>
+            <MerchCard
+              slug={p.frontmatter.slug}
+              title={p.frontmatter.title}
+              price={p.frontmatter.price}
+              currency={p.frontmatter.currency}
+              image={p.frontmatter.image}
+              sizes={p.frontmatter.sizes}
+              trackTag={p.frontmatter.trackTag}
+              available={p.frontmatter.available}
+            />
+          </div>
         ))}
       </div>
 
       <div className="mt-10 rounded-2xl border border-white/10 bg-black/40 p-6 text-sm text-zinc-300">
-        <div className="font-mono text-primary text-xs">NOTE</div>
-        <p className="mt-2">Merch checkout is external right now. This page is a catalog, not a cart.</p>
+        <div className="font-mono text-primary text-xs mb-2">NOTE</div>
+        <p>All merch is print-on-demand. Orders ship within 5–7 business days.</p>
         <p className="mt-2">
-          Want track-specific merch collections? We can filter by <span className="text-primary">trackTag</span>.
+          Questions? Email{" "}
+          <a href="mailto:slopdog@sontakey.com" className="text-primary hover:underline">
+            slopdog@sontakey.com
+          </a>
         </p>
       </div>
     </div>
