@@ -16,6 +16,7 @@ type BlogFrontmatter = {
   thumbnail: string;
   excerpt: string;
   tags?: string[];
+  faq?: { q: string; a: string }[];
 };
 
 export function generateStaticParams() {
@@ -60,6 +61,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
     const url = new URL(`/blog/${frontmatter.slug}`, SITE.url).toString();
 
+    const faqSchema = frontmatter.faq?.length ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: frontmatter.faq.map(({ q, a }) => ({
+        "@type": "Question",
+        name: q,
+        acceptedAnswer: { "@type": "Answer", text: a },
+      })),
+    } : null;
+
     const schema = {
       "@context": "https://schema.org",
       "@type": "Article",
@@ -84,6 +95,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     return (
       <div className="mx-auto max-w-3xl px-5 py-12 sm:px-6">
         <JsonLd schema={schema} />
+        {faqSchema && <JsonLd schema={faqSchema} />}
         <SectionHeading
           kicker="/"
           title={frontmatter.title.toUpperCase()}
