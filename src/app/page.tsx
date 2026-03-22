@@ -115,7 +115,11 @@ export default function Home() {
                   </span>
                 </h1>
                 <p className="max-w-lg text-lg font-light text-zinc-400 md:text-xl">
-                  {latest ? latest.frontmatter.concept : "The world's first fully automated AI music artist."}
+                  {latest
+                    ? latest.slug === "brain-fry"
+                      ? "Information overload, neural meltdown, doom scrolling, and the exact second your internal processor taps out."
+                      : latest.frontmatter.concept
+                    : "The world's first fully automated AI music artist."}
                 </p>
               </div>
 
