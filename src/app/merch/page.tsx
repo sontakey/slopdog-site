@@ -97,7 +97,7 @@ export default function MerchPage() {
           <span className="font-display text-display-sm text-fg">$9.99</span>
           <Link
             href="/products/stem-pack"
-            className="rounded-lg bg-primary px-4 py-2 font-display text-body-sm font-bold text-neutral-950 hover:opacity-90 transition whitespace-nowrap"
+            className="rounded-lg bg-primary px-4 py-2 font-display text-body-sm font-bold text-neutral-950 hover:opacity-90 transition-opacity duration-normal ease-out-quart whitespace-nowrap"
           >
             GET STEMS
           </Link>

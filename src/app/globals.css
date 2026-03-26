@@ -4,6 +4,17 @@
   --bg: oklch(12% 0.01 60);
   --fg: oklch(93% 0.005 60);
   --primary: #00ff41;
+
+  /* Exponential easing — purposeful, smooth deceleration */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-quart: cubic-bezier(0.5, 0, 0.75, 0);
+
+  /* Motion duration tokens */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-entrance: 600ms;
 }
 
 html,
@@ -119,6 +130,71 @@ h1, h2, h3,
   );
 }
 
+
+/* ------------------------------------------------------------------
+   Motion utilities — purposeful entrance animations
+   ------------------------------------------------------------------ */
+
+/* Entrance: fade-up (default for most content) */
+.motion-fade-up {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fade-up var(--duration-entrance) var(--ease-out-quint) forwards;
+}
+
+@keyframes fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Entrance: fade-in (no translation, for images/overlays) */
+.motion-fade-in {
+  opacity: 0;
+  animation: fade-in var(--duration-slow) var(--ease-out-quart) forwards;
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Stagger delay utilities (apply alongside motion-fade-up) */
+.motion-delay-1 { animation-delay: 75ms; }
+.motion-delay-2 { animation-delay: 150ms; }
+.motion-delay-3 { animation-delay: 225ms; }
+.motion-delay-4 { animation-delay: 300ms; }
+.motion-delay-5 { animation-delay: 375ms; }
+
+/* Smooth hover transition preset */
+.motion-hover {
+  transition: all var(--duration-normal) var(--ease-out-quart);
+}
+
+/* Accessibility: disable all motion for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .motion-fade-up,
+  .motion-fade-in {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .motion-hover {
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 /* Blog typography - Medium-style spacing */
 .prose p {

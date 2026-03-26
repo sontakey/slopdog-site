@@ -55,7 +55,26 @@ export default {
         "body-sm": ["clamp(0.8rem, 0.9vw, 0.875rem)", { lineHeight: "1.6" }],
         "label": ["0.6875rem", { lineHeight: "1.4", letterSpacing: "0.08em", fontWeight: "600" }],
       },
+      transitionTimingFunction: {
+        "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)",
+        "out-quint": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "in-quart": "cubic-bezier(0.5, 0, 0.75, 0)",
+      },
+      transitionDuration: {
+        "fast": "150ms",
+        "normal": "300ms",
+        "slow": "500ms",
+        "entrance": "600ms",
+      },
       keyframes: {
+        "fade-up": {
+          "0%": { opacity: "0", transform: "translateY(12px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
         "glitch-skew": {
           "0%, 100%": { transform: "skew(0deg)" },
           "20%": { transform: "skew(-2deg)" },
@@ -77,6 +96,8 @@ export default {
         },
       },
       animation: {
+        "fade-up": "fade-up 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        "fade-in": "fade-in 500ms cubic-bezier(0.25, 1, 0.5, 1) forwards",
         glitch: "glitch-skew 320ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite",
         flicker: "flicker 3.5s linear infinite",
         scanlines: "scanlines 6s linear infinite",

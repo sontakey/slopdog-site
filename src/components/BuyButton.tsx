@@ -46,7 +46,7 @@ export default function BuyButton({
     }
   };
 
-  const baseClass = `inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 font-display text-body-sm font-bold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed ${fullWidth ? "w-full" : ""}`;
+  const baseClass = `inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 font-display text-body-sm font-bold transition-all duration-normal ease-out-quart focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed ${fullWidth ? "w-full" : ""}`;
 
   const variantClass =
     variant === "primary"

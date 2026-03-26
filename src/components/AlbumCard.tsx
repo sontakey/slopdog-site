@@ -18,13 +18,13 @@ export default function AlbumCard({
 }) {
   return (
     <Link href={href} className="group block h-full">
-      <div className="relative mb-4 aspect-square overflow-hidden rounded border border-fg/10 transition-colors group-hover:border-primary">
-        <div className="absolute inset-0 z-10 bg-primary/10 opacity-0 transition-opacity group-hover:opacity-100" />
+      <div className="relative mb-4 aspect-square overflow-hidden rounded border border-fg/10 transition-colors duration-normal ease-out-quart group-hover:border-primary">
+        <div className="absolute inset-0 z-10 bg-primary/10 opacity-0 transition-opacity duration-normal ease-out-quart group-hover:opacity-100" />
         <Image
           src={image}
           alt={title}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          className="object-cover transition-transform duration-slow ease-out-quint group-hover:scale-110"
           sizes={featured ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 50vw, 25vw"}
         />
         {badge ? (
@@ -33,7 +33,7 @@ export default function AlbumCard({
           </div>
         ) : null}
       </div>
-      <h3 className={`font-display font-bold text-fg transition-colors group-hover:text-primary ${featured ? "text-display-sm" : "text-body-lg"}`}>{title}</h3>
+      <h3 className={`font-display font-bold text-fg transition-colors duration-normal ease-out-quart group-hover:text-primary ${featured ? "text-display-sm" : "text-body-lg"}`}>{title}</h3>
       {sub ? <p className="text-body-sm text-fg-faint">{sub}</p> : null}
     </Link>
   );

@@ -19,7 +19,7 @@ function NavLink({ href, label }: { href: string; label: string }) {
     <Link
       href={href}
       className={
-        "group inline-flex items-center rounded-md px-3 py-2 text-label font-semibold uppercase transition " +
+        "group inline-flex items-center rounded-md px-3 py-2 text-label font-semibold uppercase transition-colors duration-normal ease-out-quart " +
         (active
           ? "text-primary bg-primary/10 border border-primary/25 shadow-glow"
           : "text-neutral-300 hover:text-primary hover:bg-primary/10 border border-transparent hover:border-primary/20")

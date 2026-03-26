@@ -63,7 +63,7 @@ export default function MusicPage() {
             <Link
               key={t.slug}
               href={`/music/${t.slug}`}
-              className={`group rounded-xl border border-fg/10 bg-fg/5 p-4 transition hover:border-primary/30 hover:shadow-glow ${spanClass}`}
+              className={`group rounded-xl border border-fg/10 bg-fg/5 p-4 transition-all duration-normal ease-out-quart hover:border-primary/30 hover:shadow-glow ${spanClass}`}
             >
               <div className={`scanlines relative overflow-hidden rounded-lg border border-fg/10 ${aspectClass}`}>
                 <Image src={t.frontmatter.coverImage} alt={t.frontmatter.title} fill className="object-cover" sizes={isFeatured || isWide ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />

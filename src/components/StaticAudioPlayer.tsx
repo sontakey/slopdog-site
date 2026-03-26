@@ -21,7 +21,7 @@ export default function StaticAudioPlayer({
         <button
           type="button"
           aria-label="Play"
-          className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-neutral-950 transition-transform hover:scale-105"
+          className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-neutral-950 transition-transform duration-normal ease-out-quart hover:scale-105"
         >
           <MaterialIcon name="play_arrow" size={28} />
         </button>
@@ -34,7 +34,7 @@ export default function StaticAudioPlayer({
         <span className="text-label tabular-nums text-fg-faint">{duration ?? "03:42"}</span>
       </div>
 
-      <div className="mb-1 flex h-8 items-end gap-1 opacity-60 transition-opacity group-hover:opacity-100">
+      <div className="mb-1 flex h-8 items-end gap-1 opacity-60 transition-opacity duration-normal ease-out-quart group-hover:opacity-100">
         {bars.map((h, i) => (
           <div
             // eslint-disable-next-line react/no-array-index-key

@@ -99,7 +99,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
               <a
                 key={d.url}
                 href={d.url}
-                className="flex items-center gap-3 border-b border-fg/10 px-4 py-3 text-sm text-neutral-200 transition last:border-0 hover:text-primary"
+                className="flex items-center gap-3 border-b border-fg/10 px-4 py-3 text-sm text-neutral-200 transition-colors duration-normal ease-out-quart last:border-0 hover:text-primary"
               >
                 <svg className="h-4 w-4 shrink-0 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -164,21 +164,21 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
         {trackSlug ? (
           <Link
             href={`/music/${trackSlug}`}
-            className="flex-1 rounded-lg border border-fg/10 bg-fg/5 px-5 py-3 text-center text-sm font-bold text-fg transition hover:border-primary/40 hover:text-primary"
+            className="flex-1 rounded-lg border border-fg/10 bg-fg/5 px-5 py-3 text-center text-sm font-bold text-fg transition-colors duration-normal ease-out-quart hover:border-primary/40 hover:text-primary"
           >
             ← BACK TO TRACK
           </Link>
         ) : (
           <Link
             href="/merch"
-            className="flex-1 rounded-lg border border-fg/10 bg-fg/5 px-5 py-3 text-center text-sm font-bold text-fg transition hover:border-primary/40 hover:text-primary"
+            className="flex-1 rounded-lg border border-fg/10 bg-fg/5 px-5 py-3 text-center text-sm font-bold text-fg transition-colors duration-normal ease-out-quart hover:border-primary/40 hover:text-primary"
           >
             ← BACK TO MERCH
           </Link>
         )}
         <Link
           href="/music"
-          className="flex-1 rounded-lg border border-primary/30 bg-primary/10 px-5 py-3 text-center text-sm font-bold text-primary transition hover:bg-primary/20"
+          className="flex-1 rounded-lg border border-primary/30 bg-primary/10 px-5 py-3 text-center text-sm font-bold text-primary transition-colors duration-normal ease-out-quart hover:bg-primary/20"
         >
           LISTEN TO THE MUSIC
         </Link>

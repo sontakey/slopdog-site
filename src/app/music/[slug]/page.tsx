@@ -124,7 +124,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
               ) : null}
               {frontmatter.streamingLinks?.hyperfollow ? (
                 <a
-                  className="rounded-md border border-fg/10 bg-fg/5 px-4 py-2 font-display text-body-sm font-bold text-fg hover:border-primary/30 hover:text-primary transition"
+                  className="rounded-md border border-fg/10 bg-fg/5 px-4 py-2 font-display text-body-sm font-bold text-fg hover:border-primary/30 hover:text-primary transition-colors duration-normal ease-out-quart"
                   href={frontmatter.streamingLinks.hyperfollow}
                   target="_blank"
                   rel="noreferrer"

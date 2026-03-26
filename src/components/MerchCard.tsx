@@ -33,14 +33,14 @@ export default function MerchCard({
   const canBuy = available && (!hasSizes || selectedSize !== "");
 
   return (
-    <div className="group rounded-xl border border-fg/10 bg-fg/5 p-4 transition hover:border-primary/20 hover:shadow-glow flex flex-col h-full">
+    <div className="group rounded-xl border border-fg/10 bg-fg/5 p-4 transition-all duration-normal ease-out-quart hover:border-primary/20 hover:shadow-glow flex flex-col h-full">
       {/* Image */}
       <div className={`scanlines relative overflow-hidden rounded-lg border border-fg/10 bg-neutral-950 ${featured ? "aspect-[4/3]" : "aspect-square"}`}>
         <Image
           src={image}
           alt={title}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          className="object-cover transition-transform duration-slow ease-out-quint group-hover:scale-105"
           sizes={featured ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 25vw"}
         />
         {!available && (
@@ -52,7 +52,7 @@ export default function MerchCard({
 
       {/* Info */}
       <div className="mt-3 flex-1 flex flex-col">
-        <div className={`font-display font-bold leading-tight text-fg group-hover:text-primary transition-colors ${featured ? "text-body-lg" : "text-body-sm"}`}>
+        <div className={`font-display font-bold leading-tight text-fg group-hover:text-primary transition-colors duration-normal ease-out-quart ${featured ? "text-body-lg" : "text-body-sm"}`}>
           {title}
         </div>
         <div className={`mt-1 text-fg-muted ${featured ? "text-body-sm" : "text-label"}`}>
@@ -71,7 +71,7 @@ export default function MerchCard({
                 <button
                   key={s}
                   onClick={() => setSelectedSize(s)}
-                  className={`rounded-md border px-2.5 py-1 text-label font-bold transition ${
+                  className={`rounded-md border px-2.5 py-1 text-label font-bold transition-colors duration-fast ease-out-quart ${
                     selectedSize === s
                       ? "border-primary bg-primary/10 text-primary"
                       : "border-fg/10 text-fg-muted hover:border-fg/30 hover:text-neutral-200"

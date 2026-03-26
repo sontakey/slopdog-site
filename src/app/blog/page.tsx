@@ -63,7 +63,7 @@ export default function BlogPage() {
             <Link
               key={p.slug}
               href={`/blog/${p.slug}`}
-              className={`group rounded-xl border border-fg/10 bg-fg/5 p-5 transition hover:border-primary/30 hover:shadow-glow ${spanClass}`}
+              className={`group rounded-xl border border-fg/10 bg-fg/5 p-5 transition-all duration-normal ease-out-quart hover:border-primary/30 hover:shadow-glow ${spanClass}`}
             >
               <div className={`scanlines relative mb-4 overflow-hidden rounded-lg border border-fg/10 ${aspectClass}`}>
                 <Image src={p.frontmatter.thumbnail} alt={p.frontmatter.title} fill className="object-cover" sizes={isFeatured || isWide ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />

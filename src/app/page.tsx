@@ -86,7 +86,7 @@ export default function Home() {
             <div className="w-full lg:w-7/12 flex justify-start">
               {latest ? (
                 <div className="relative group cursor-pointer w-full max-w-[500px] aspect-square">
-                  <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary to-accent-amber opacity-25 blur transition-all duration-1000 group-hover:opacity-75 group-hover:duration-200" />
+                  <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary to-accent-amber opacity-25 blur transition-all duration-slow ease-out-quint group-hover:opacity-75 group-hover:duration-fast" />
                   <div className="scanlines relative h-full w-full overflow-hidden rounded-lg border border-fg/10 bg-surface shadow-2xl ring-1 ring-fg/5">
                     <Image
                       src={latest.frontmatter.coverImage}
@@ -96,7 +96,7 @@ export default function Home() {
                       sizes="(max-width:1024px) 100vw, 50vw"
                       priority
                     />
-                    <div className="absolute inset-0 bg-primary/20 opacity-0 mix-blend-overlay transition-opacity group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-primary/20 opacity-0 mix-blend-overlay transition-opacity duration-normal ease-out-quart group-hover:opacity-100" />
                   </div>
                 </div>
               ) : null}
@@ -136,7 +136,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href={latest ? `/music/${latest.slug}` : "/music"}
-                  className="flex items-center gap-2 rounded bg-neutral-50 px-6 py-3 font-display font-bold text-neutral-950 transition-colors hover:bg-neutral-200"
+                  className="flex items-center gap-2 rounded bg-neutral-50 px-6 py-3 font-display font-bold text-neutral-950 transition-colors duration-normal ease-out-quart hover:bg-neutral-200"
                 >
                   <MaterialIcon name="play_circle" />
                   LISTEN NOW
@@ -146,7 +146,7 @@ export default function Home() {
                     href={latest.frontmatter.streamingLinks.spotify}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 rounded border border-fg/20 bg-transparent px-6 py-3 font-display font-bold text-fg transition-colors hover:border-primary hover:text-primary"
+                    className="flex items-center gap-2 rounded border border-fg/20 bg-transparent px-6 py-3 font-display font-bold text-fg transition-colors duration-normal ease-out-quart hover:border-primary hover:text-primary"
                   >
                     <MaterialIcon name="graphic_eq" />
                     SPOTIFY
@@ -205,10 +205,10 @@ export default function Home() {
                 <Link
                   key={p.slug}
                   href={`/blog/${p.slug}`}
-                  className={`group rounded-lg border border-fg/10 bg-surface p-6 transition-all hover:border-primary/50 ${spanClass}`}
+                  className={`group rounded-lg border border-fg/10 bg-surface p-6 transition-all duration-normal ease-out-quart hover:border-primary/50 ${spanClass}`}
                 >
                   <div className="mb-3 text-label uppercase text-primary">{p.frontmatter.date}</div>
-                  <div className={`mb-4 font-display font-bold leading-tight text-fg transition-colors group-hover:text-primary ${textSize}`}>
+                  <div className={`mb-4 font-display font-bold leading-tight text-fg transition-colors duration-normal ease-out-quart group-hover:text-primary ${textSize}`}>
                     {p.frontmatter.title.toUpperCase()}
                   </div>
                   <p className={`mb-6 text-body-sm text-fg-muted ${i === 0 ? "line-clamp-4" : "line-clamp-3"}`}>{p.frontmatter.excerpt}</p>
@@ -237,7 +237,7 @@ export default function Home() {
                 className="w-full border-2 border-neutral-950 bg-neutral-50/90 px-4 py-3 text-sm text-neutral-950 outline-none placeholder:text-fg-faint focus:bg-neutral-50"
                 placeholder="Your email address"
               />
-              <button type="button" className="bg-neutral-950 px-8 py-3 font-display font-bold uppercase text-label text-primary transition-colors hover:bg-neutral-800">
+              <button type="button" className="bg-neutral-950 px-8 py-3 font-display font-bold uppercase text-label text-primary transition-colors duration-normal ease-out-quart hover:bg-neutral-800">
                 SUBSCRIBE
               </button>
             </form>
