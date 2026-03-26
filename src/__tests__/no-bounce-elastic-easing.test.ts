@@ -206,4 +206,70 @@ describe("No bounce/elastic easing", () => {
     expect(content).not.toMatch(/elastic/i);
     expect(content).not.toMatch(/spring/i);
   });
+
+  it("no Tailwind arbitrary animation values with bounce/elastic", () => {
+    const files = collectSourceFiles(join(ROOT, "src"), [
+      ".ts",
+      ".tsx",
+      ".css",
+    ]);
+    const arbitraryBounce = /\[animation:[^\]]*(?:bounce|elastic|spring|wobble)\b[^\]]*\]/i;
+    const violations: string[] = [];
+
+    for (const file of files) {
+      if (file.includes(".test.")) continue;
+      const content = readFileSync(file, "utf-8");
+      const lines = content.split("\n");
+      for (let i = 0; i < lines.length; i++) {
+        if (arbitraryBounce.test(lines[i])) {
+          const relative = file.replace(ROOT + "/", "");
+          violations.push(`${relative}:${i + 1} → ${lines[i].trim()}`);
+        }
+      }
+    }
+
+    expect(violations).toEqual([]);
+  });
+
+  it("no inline style objects with bounce/elastic easing", () => {
+    const files = collectSourceFiles(join(ROOT, "src"), [".tsx", ".ts"]);
+    const inlineEasing =
+      /(?:transition|animation|easing)\s*[:=]\s*[`"'][^`"']*(?:bounce|elastic|spring|wobble)\b/i;
+    const violations: string[] = [];
+
+    for (const file of files) {
+      if (file.includes(".test.")) continue;
+      const content = readFileSync(file, "utf-8");
+      const lines = content.split("\n");
+      for (let i = 0; i < lines.length; i++) {
+        if (inlineEasing.test(lines[i])) {
+          const relative = file.replace(ROOT + "/", "");
+          violations.push(`${relative}:${i + 1} → ${lines[i].trim()}`);
+        }
+      }
+    }
+
+    expect(violations).toEqual([]);
+  });
+
+  it("no CSS animation shorthand with bounce/elastic easing", () => {
+    const files = collectSourceFiles(join(ROOT, "src"), [".css"]);
+    const animShorthand =
+      /animation\s*:\s*[^;]*\b(?:bounce|elastic|spring|wobble)\b/i;
+    const violations: string[] = [];
+
+    for (const file of files) {
+      if (file.includes(".test.")) continue;
+      const content = readFileSync(file, "utf-8");
+      const lines = content.split("\n");
+      for (let i = 0; i < lines.length; i++) {
+        if (animShorthand.test(lines[i])) {
+          const relative = file.replace(ROOT + "/", "");
+          violations.push(`${relative}:${i + 1} → ${lines[i].trim()}`);
+        }
+      }
+    }
+
+    expect(violations).toEqual([]);
+  });
 });
