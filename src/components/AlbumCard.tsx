@@ -28,7 +28,7 @@ export default function AlbumCard({
           sizes={featured ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 50vw, 25vw"}
         />
         {badge ? (
-          <div className="absolute right-2 top-2 z-20 border border-primary/30 bg-black/80 px-2 py-1 text-[10px] font-mono text-primary backdrop-blur-sm">
+          <div className="absolute right-2 top-2 z-20 border border-primary/30 bg-black/80 px-2 py-1 text-[10px] font-mono text-primary">
             {badge}
           </div>
         ) : null}
