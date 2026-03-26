@@ -105,9 +105,9 @@ export default function MerchPage() {
       </div>
 
       {/* Product grid */}
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {products.map((p) => (
-          <div key={p.slug} id={p.slug}>
+      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {products.map((p, i) => (
+          <div key={p.slug} id={p.slug} className={i === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""}>
             <MerchCard
               slug={p.frontmatter.slug}
               title={p.frontmatter.title}
@@ -117,6 +117,7 @@ export default function MerchPage() {
               sizes={p.frontmatter.sizes}
               trackTag={p.frontmatter.trackTag}
               available={p.frontmatter.available}
+              featured={i === 0}
             />
           </div>
         ))}

@@ -13,6 +13,7 @@ interface MerchCardProps {
   sizes?: string[];
   trackTag?: string;
   available: boolean;
+  featured?: boolean;
 }
 
 export default function MerchCard({
@@ -24,6 +25,7 @@ export default function MerchCard({
   sizes,
   trackTag,
   available,
+  featured,
 }: MerchCardProps) {
   const hasSizes = sizes && sizes.length > 0;
   const [selectedSize, setSelectedSize] = useState<string>(hasSizes ? "" : "ONE_SIZE");
@@ -31,15 +33,15 @@ export default function MerchCard({
   const canBuy = available && (!hasSizes || selectedSize !== "");
 
   return (
-    <div className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-primary/20 hover:shadow-glow flex flex-col">
+    <div className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-primary/20 hover:shadow-glow flex flex-col h-full">
       {/* Image */}
-      <div className="scanlines relative aspect-square overflow-hidden rounded-lg border border-white/10 bg-black">
+      <div className={`scanlines relative overflow-hidden rounded-lg border border-white/10 bg-black ${featured ? "aspect-[4/3]" : "aspect-square"}`}>
         <Image
           src={image}
           alt={title}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width:1024px) 100vw, 25vw"
+          sizes={featured ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 25vw"}
         />
         {!available && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/70">
@@ -50,10 +52,10 @@ export default function MerchCard({
 
       {/* Info */}
       <div className="mt-3 flex-1 flex flex-col">
-        <div className="text-sm font-bold leading-tight text-white group-hover:text-primary transition-colors">
+        <div className={`font-bold leading-tight text-white group-hover:text-primary transition-colors ${featured ? "text-lg" : "text-sm"}`}>
           {title}
         </div>
-        <div className="mt-1 font-mono text-xs text-zinc-400">
+        <div className={`mt-1 font-mono text-zinc-400 ${featured ? "text-sm" : "text-xs"}`}>
           {currency} {price.toFixed(2)}
         </div>
         {trackTag && (

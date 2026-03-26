@@ -45,18 +45,24 @@ export default function BlogPage() {
       <SectionHeading kicker="/" title="BLOG" right={<span className="text-zinc-500">TRANSMISSIONS</span>} />
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((p) => (
+        {posts.map((p, i) => (
           <Link
             key={p.slug}
             href={`/blog/${p.slug}`}
-            className="group rounded-xl border border-white/10 bg-white/5 p-5 transition hover:border-primary/30 hover:shadow-glow"
+            className={`group rounded-xl border border-white/10 bg-white/5 p-5 transition hover:border-primary/30 hover:shadow-glow ${
+              i === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""
+            }`}
           >
-            <div className="scanlines relative mb-4 aspect-[16/10] overflow-hidden rounded-lg border border-white/10">
-              <Image src={p.frontmatter.thumbnail} alt={p.frontmatter.title} fill className="object-cover" sizes="(max-width:1024px) 100vw, 33vw" />
+            <div className={`scanlines relative mb-4 overflow-hidden rounded-lg border border-white/10 ${
+              i === 0 ? "aspect-[2/1]" : "aspect-[16/10]"
+            }`}>
+              <Image src={p.frontmatter.thumbnail} alt={p.frontmatter.title} fill className="object-cover" sizes={i === 0 ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
             </div>
             <div className="text-xs font-mono text-primary">{p.frontmatter.date} // LOG_ENTRY</div>
-            <div className="mt-2 text-lg font-bold leading-tight group-hover:text-primary">{p.frontmatter.title}</div>
-            <p className="mt-2 line-clamp-3 text-sm text-zinc-400">{p.frontmatter.excerpt}</p>
+            <div className={`mt-2 font-bold leading-tight group-hover:text-primary ${
+              i === 0 ? "text-2xl" : "text-lg"
+            }`}>{p.frontmatter.title}</div>
+            <p className={`mt-2 text-sm text-zinc-400 ${i === 0 ? "line-clamp-5" : "line-clamp-3"}`}>{p.frontmatter.excerpt}</p>
             {p.frontmatter.tags?.length ? (
               <div className="mt-4 flex flex-wrap gap-2">
                 {p.frontmatter.tags.slice(0, 3).map((t) => (

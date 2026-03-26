@@ -163,16 +163,18 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading kicker="01." title="DISCOGRAPHY" right={<Link href="/music" className="hover:underline">VIEW_ALL_RELEASES -&gt;</Link>} />
 
-          <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {tracks.slice(0, 4).map((t, i) => (
-              <AlbumCard
-                key={t.slug}
-                href={`/music/${t.slug}`}
-                title={t.frontmatter.title}
-                sub={`${t.frontmatter.date} • Single`}
-                image={t.frontmatter.coverImage}
-                badge={i === 0 ? "NEW" : undefined}
-              />
+              <div key={t.slug} className={i === 0 ? "sm:col-span-2 sm:row-span-2" : ""}>
+                <AlbumCard
+                  href={`/music/${t.slug}`}
+                  title={t.frontmatter.title}
+                  sub={`${t.frontmatter.date} • Single`}
+                  image={t.frontmatter.coverImage}
+                  badge={i === 0 ? "NEW" : undefined}
+                  featured={i === 0}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -183,18 +185,22 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading kicker="02." title="TRANSMISSIONS" right={<Link href="/blog" className="hover:underline">READ_THE_LOGS -&gt;</Link>} />
 
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {posts.map((p) => (
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {posts.map((p, i) => (
               <Link
                 key={p.slug}
                 href={`/blog/${p.slug}`}
-                className="group rounded-lg border border-white/10 bg-cyber-gray p-6 transition-all hover:border-primary/50"
+                className={`group rounded-lg border border-white/10 bg-cyber-gray p-6 transition-all hover:border-primary/50 ${
+                  i === 0 ? "md:col-span-2" : ""
+                }`}
               >
                 <div className="mb-3 text-xs font-mono text-primary">{p.frontmatter.date} // LOG_ENTRY</div>
-                <div className="mb-4 text-xl font-bold leading-tight text-white transition-colors group-hover:text-primary">
+                <div className={`mb-4 font-bold leading-tight text-white transition-colors group-hover:text-primary ${
+                  i === 0 ? "text-2xl" : "text-xl"
+                }`}>
                   {p.frontmatter.title.toUpperCase()}
                 </div>
-                <p className="mb-6 line-clamp-3 text-sm text-zinc-400">{p.frontmatter.excerpt}</p>
+                <p className={`mb-6 text-sm text-zinc-400 ${i === 0 ? "line-clamp-4" : "line-clamp-3"}`}>{p.frontmatter.excerpt}</p>
                 <span className="inline-flex border-b border-primary/30 pb-0.5 text-sm font-mono font-bold text-primary">&gt; EXECUTE_READ.exe</span>
               </Link>
             ))}
