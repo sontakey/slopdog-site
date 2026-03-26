@@ -43,30 +43,42 @@ export default function MusicPage() {
     <div className="px-4 py-14 md:py-20 sm:px-6 lg:pl-16 lg:pr-8">
       <SectionHeading kicker="/" title="MUSIC" right={<span className="text-zinc-500">NEWEST FIRST</span>} />
 
-      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {tracks.map((t, i) => (
-          <Link
-            key={t.slug}
-            href={`/music/${t.slug}`}
-            className={`group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-primary/30 hover:shadow-glow ${
-              i === 0 ? "sm:col-span-2 sm:row-span-2" : ""
-            }`}
-          >
-            <div className={`scanlines relative overflow-hidden rounded-lg border border-white/10 ${
-              i === 0 ? "aspect-[4/3]" : "aspect-square"
-            }`}>
-              <Image src={t.frontmatter.coverImage} alt={t.frontmatter.title} fill className="object-cover" sizes={i === 0 ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
-            </div>
-            <div className="mt-3 flex items-start justify-between gap-3">
-              <div className="min-w-0">
-                <div className={`truncate font-bold group-hover:text-primary ${i === 0 ? "text-2xl" : "text-lg"}`}>{t.frontmatter.title}</div>
-                <div className="text-xs text-zinc-500">{t.frontmatter.date}</div>
+      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {tracks.map((t, i) => {
+          const pos = i % 6;
+          // Repeating pattern: hero (2x2), standard, standard, wide (2x1), standard, tall (1x2)
+          const spanClass =
+            pos === 0 ? "sm:col-span-2 sm:row-span-2" :
+            pos === 3 ? "sm:col-span-2" :
+            pos === 5 ? "lg:row-span-2" : "";
+          const isFeatured = pos === 0;
+          const isWide = pos === 3;
+          const aspectClass =
+            isFeatured ? "aspect-[4/3]" :
+            isWide ? "aspect-[2/1]" : "aspect-square";
+          const textSize = isFeatured ? "text-2xl" : isWide ? "text-xl" : "text-lg";
+          const clampClass = isFeatured ? "line-clamp-4" : isWide ? "line-clamp-3" : "line-clamp-2";
+
+          return (
+            <Link
+              key={t.slug}
+              href={`/music/${t.slug}`}
+              className={`group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-primary/30 hover:shadow-glow ${spanClass}`}
+            >
+              <div className={`scanlines relative overflow-hidden rounded-lg border border-white/10 ${aspectClass}`}>
+                <Image src={t.frontmatter.coverImage} alt={t.frontmatter.title} fill className="object-cover" sizes={isFeatured || isWide ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
               </div>
-              <span className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-[10px] font-semibold tracking-wide text-zinc-400">{i === 0 ? "LATEST" : "OPEN"}</span>
-            </div>
-            <p className={`mt-2 text-sm text-zinc-400 ${i === 0 ? "line-clamp-4" : "line-clamp-2"}`}>{t.frontmatter.concept}</p>
-          </Link>
-        ))}
+              <div className="mt-3 flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className={`truncate font-bold group-hover:text-primary ${textSize}`}>{t.frontmatter.title}</div>
+                  <div className="text-xs text-zinc-500">{t.frontmatter.date}</div>
+                </div>
+                <span className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-[10px] font-semibold tracking-wide text-zinc-400">{isFeatured ? "LATEST" : "OPEN"}</span>
+              </div>
+              <p className={`mt-2 text-sm text-zinc-400 ${clampClass}`}>{t.frontmatter.concept}</p>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

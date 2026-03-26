@@ -163,19 +163,25 @@ export default function Home() {
         <div className="px-4 sm:px-6 lg:pl-16 lg:pr-8">
           <SectionHeading kicker="01." title="DISCOGRAPHY" right={<Link href="/music" className="hover:underline">VIEW_ALL_RELEASES -&gt;</Link>} />
 
-          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {tracks.slice(0, 4).map((t, i) => (
-              <div key={t.slug} className={i === 0 ? "sm:col-span-2 sm:row-span-2" : ""}>
-                <AlbumCard
-                  href={`/music/${t.slug}`}
-                  title={t.frontmatter.title}
-                  sub={`${t.frontmatter.date} • Single`}
-                  image={t.frontmatter.coverImage}
-                  badge={i === 0 ? "NEW" : undefined}
-                  featured={i === 0}
-                />
-              </div>
-            ))}
+          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {tracks.slice(0, 4).map((t, i) => {
+              // 4-item layout: hero (2x2), standard, wide (2x1), standard
+              const spanClass =
+                i === 0 ? "sm:col-span-2 sm:row-span-2" :
+                i === 2 ? "sm:col-span-2" : "";
+              return (
+                <div key={t.slug} className={spanClass}>
+                  <AlbumCard
+                    href={`/music/${t.slug}`}
+                    title={t.frontmatter.title}
+                    sub={`${t.frontmatter.date} • Single`}
+                    image={t.frontmatter.coverImage}
+                    badge={i === 0 ? "NEW" : undefined}
+                    featured={i === 0}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -185,25 +191,31 @@ export default function Home() {
         <div className="px-4 sm:px-6 lg:pl-8 lg:pr-16">
           <SectionHeading kicker="02." title="TRANSMISSIONS" right={<Link href="/blog" className="hover:underline">READ_THE_LOGS -&gt;</Link>} />
 
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
-            {posts.map((p, i) => (
-              <Link
-                key={p.slug}
-                href={`/blog/${p.slug}`}
-                className={`group rounded-lg border border-white/10 bg-cyber-gray p-6 transition-all hover:border-primary/50 ${
-                  i === 0 ? "md:col-span-2" : ""
-                }`}
-              >
-                <div className="mb-3 text-xs font-semibold tracking-wide text-primary">{p.frontmatter.date}</div>
-                <div className={`mb-4 font-bold leading-tight text-white transition-colors group-hover:text-primary ${
-                  i === 0 ? "text-2xl" : "text-xl"
-                }`}>
-                  {p.frontmatter.title.toUpperCase()}
-                </div>
-                <p className={`mb-6 text-sm text-zinc-400 ${i === 0 ? "line-clamp-4" : "line-clamp-3"}`}>{p.frontmatter.excerpt}</p>
-                <span className="inline-flex border-b border-primary/30 pb-0.5 text-sm font-bold text-primary">Read more →</span>
-              </Link>
-            ))}
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            {posts.map((p, i) => {
+              // 3-item layout: wide (2col), tall (1col+2row), standard
+              const spanClass =
+                i === 0 ? "md:col-span-2" :
+                i === 1 ? "md:row-span-2" : "";
+              const textSize =
+                i === 0 ? "text-2xl" :
+                i === 1 ? "text-xl" : "text-lg";
+
+              return (
+                <Link
+                  key={p.slug}
+                  href={`/blog/${p.slug}`}
+                  className={`group rounded-lg border border-white/10 bg-cyber-gray p-6 transition-all hover:border-primary/50 ${spanClass}`}
+                >
+                  <div className="mb-3 text-xs font-semibold tracking-wide text-primary">{p.frontmatter.date}</div>
+                  <div className={`mb-4 font-bold leading-tight text-white transition-colors group-hover:text-primary ${textSize}`}>
+                    {p.frontmatter.title.toUpperCase()}
+                  </div>
+                  <p className={`mb-6 text-sm text-zinc-400 ${i === 0 ? "line-clamp-4" : "line-clamp-3"}`}>{p.frontmatter.excerpt}</p>
+                  <span className="inline-flex border-b border-primary/30 pb-0.5 text-sm font-bold text-primary">Read more →</span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

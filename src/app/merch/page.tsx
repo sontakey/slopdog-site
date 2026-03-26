@@ -106,21 +106,30 @@ export default function MerchPage() {
 
       {/* Product grid */}
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {products.map((p, i) => (
-          <div key={p.slug} id={p.slug} className={i === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""}>
-            <MerchCard
-              slug={p.frontmatter.slug}
-              title={p.frontmatter.title}
-              price={p.frontmatter.price}
-              currency={p.frontmatter.currency}
-              image={p.frontmatter.image}
-              sizes={p.frontmatter.sizes}
-              trackTag={p.frontmatter.trackTag}
-              available={p.frontmatter.available}
-              featured={i === 0}
-            />
-          </div>
-        ))}
+        {products.map((p, i) => {
+          const pos = i % 5;
+          // Repeating pattern: hero (2col+2row), standard, standard, wide (2col), standard
+          const spanClass =
+            pos === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" :
+            pos === 3 ? "sm:col-span-2 lg:col-span-2" : "";
+          const isFeatured = pos === 0;
+
+          return (
+            <div key={p.slug} id={p.slug} className={spanClass}>
+              <MerchCard
+                slug={p.frontmatter.slug}
+                title={p.frontmatter.title}
+                price={p.frontmatter.price}
+                currency={p.frontmatter.currency}
+                image={p.frontmatter.image}
+                sizes={p.frontmatter.sizes}
+                trackTag={p.frontmatter.trackTag}
+                available={p.frontmatter.available}
+                featured={isFeatured}
+              />
+            </div>
+          );
+        })}
       </div>
 
       <div className="mt-10 rounded-2xl border border-white/10 bg-black/40 p-6 text-sm text-zinc-300">
