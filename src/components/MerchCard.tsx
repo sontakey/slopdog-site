@@ -104,7 +104,7 @@ export default function MerchCard({
           ) : (
             <button
               disabled
-              className="w-full rounded-lg border border-fg/10 bg-neutral-950/40 px-5 py-3 font-display text-body-sm font-bold text-neutral-600 cursor-not-allowed"
+              className="w-full rounded-lg border border-fg/10 bg-neutral-900 px-5 py-3 font-display text-body-sm font-bold text-neutral-600 cursor-not-allowed"
             >
               SOLD OUT
             </button>

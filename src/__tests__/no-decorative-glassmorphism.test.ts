@@ -158,4 +158,32 @@ describe("No decorative glassmorphism", () => {
     expect(content).not.toMatch(/backdrop-blur/);
     expect(content).not.toMatch(/backdrop-filter/);
   });
+
+  it("AlbumCard badge uses a solid background, not translucent", () => {
+    const content = readFileSync(
+      join(ROOT, "src/components/AlbumCard.tsx"),
+      "utf-8"
+    );
+    // Badge positioned over an image should use a solid bg, not bg-color/opacity
+    const badgeLines = content
+      .split("\n")
+      .filter((l) => l.includes("badge") || l.includes("z-20"));
+    for (const line of badgeLines) {
+      expect(line).not.toMatch(/bg-[a-z-]+\/\d{1,2}\b/);
+    }
+  });
+
+  it("MerchCard sold-out button uses a solid background", () => {
+    const content = readFileSync(
+      join(ROOT, "src/components/MerchCard.tsx"),
+      "utf-8"
+    );
+    // The disabled SOLD OUT button should not use a translucent bg over content
+    const soldOutLines = content
+      .split("\n")
+      .filter((l) => /SOLD\s*OUT/.test(l) || /cursor-not-allowed/.test(l));
+    for (const line of soldOutLines) {
+      expect(line).not.toMatch(/bg-neutral-\d+\/\d+/);
+    }
+  });
 });
