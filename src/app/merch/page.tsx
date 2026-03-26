@@ -80,12 +80,12 @@ export default function MerchPage() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
+    <div className="mx-auto max-w-6xl px-4 py-10 md:py-14">
       <JsonLd schema={catalogSchema} />
       <SectionHeading kicker="/" title="MERCH" right={<span className="text-zinc-500 text-sm">STRIPE CHECKOUT</span>} />
 
       {/* Digital product promo banner */}
-      <div className="mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-5 sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-6 rounded-2xl border border-primary/30 bg-primary/5 p-5 sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="text-xs font-semibold tracking-wide text-primary mb-1">DIGITAL PRODUCT</div>
           <div className="font-bold text-white">Slopdog Stem Pack Vol. 1</div>
@@ -105,7 +105,7 @@ export default function MerchPage() {
       </div>
 
       {/* Product grid */}
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((p, i) => (
           <div key={p.slug} id={p.slug} className={i === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""}>
             <MerchCard

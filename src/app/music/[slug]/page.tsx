@@ -80,7 +80,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
     };
 
     return (
-      <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6">
+      <div className="mx-auto max-w-6xl px-5 py-10 md:py-16 sm:px-6">
         <JsonLd schema={schema} />
         <SectionHeading
           kicker="/"

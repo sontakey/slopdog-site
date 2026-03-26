@@ -159,11 +159,11 @@ export default function Home() {
       </section>
 
       {/* Discography Section */}
-      <section className="bg-bg py-20">
+      <section className="bg-bg py-16 md:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading kicker="01." title="DISCOGRAPHY" right={<Link href="/music" className="hover:underline">VIEW_ALL_RELEASES -&gt;</Link>} />
 
-          <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {tracks.slice(0, 4).map((t, i) => (
               <div key={t.slug} className={i === 0 ? "sm:col-span-2 sm:row-span-2" : ""}>
                 <AlbumCard
@@ -181,11 +181,11 @@ export default function Home() {
       </section>
 
       {/* Blog Preview Section */}
-      <section className="border-t border-white/5 bg-[#050a06] py-20">
+      <section className="border-t border-white/5 bg-[#050a06] py-14 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading kicker="02." title="TRANSMISSIONS" right={<Link href="/blog" className="hover:underline">READ_THE_LOGS -&gt;</Link>} />
 
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
             {posts.map((p, i) => (
               <Link
                 key={p.slug}
