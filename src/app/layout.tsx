@@ -60,6 +60,10 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
         />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-F9XN2CW6K9" strategy="afterInteractive" />
+        <Script id="ga4" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-F9XN2CW6K9');`}
+        </Script>
       </head>
       <body className={`${spaceGrotesk.variable} antialiased bg-bg text-white min-h-dvh flex flex-col`}>
         <Header />
