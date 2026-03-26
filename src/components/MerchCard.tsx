@@ -33,9 +33,9 @@ export default function MerchCard({
   const canBuy = available && (!hasSizes || selectedSize !== "");
 
   return (
-    <div className="group rounded-xl border border-fg/10 bg-fg/5 p-4 transition-all duration-normal ease-out-quart hover:border-primary/20 hover:shadow-glow flex flex-col h-full">
+    <div className="group rounded-xl border border-fg/10 bg-fg/5 p-4 transition-all duration-normal ease-out-quart hover:border-primary/20 flex flex-col h-full">
       {/* Image */}
-      <div className={`scanlines relative overflow-hidden rounded-lg border border-fg/10 bg-neutral-950 ${featured ? "aspect-[4/3]" : "aspect-square"}`}>
+      <div className={`relative overflow-hidden rounded-lg border border-fg/10 bg-neutral-950 ${featured ? "aspect-[4/3]" : "aspect-square"}`}>
         <Image
           src={image}
           alt={title}

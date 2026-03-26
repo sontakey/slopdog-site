@@ -19,15 +19,13 @@ function NavLink({ href, label }: { href: string; label: string }) {
     <Link
       href={href}
       className={
-        "group inline-flex items-center rounded-md px-3 py-2 text-label font-semibold uppercase transition-colors duration-normal ease-out-quart " +
+        "inline-flex items-center rounded-md px-3 py-2 text-label font-semibold uppercase transition-colors duration-normal ease-out-quart " +
         (active
-          ? "text-primary bg-primary/10 border border-primary/25 shadow-glow"
-          : "text-neutral-300 hover:text-primary hover:bg-primary/10 border border-transparent hover:border-primary/20")
+          ? "text-primary bg-primary/10 border border-primary/25"
+          : "text-neutral-300 hover:text-primary border border-transparent hover:border-primary/20")
       }
     >
-      <span className="glitch" data-text={`/${label}`}>
-        /{label}
-      </span>
+      {label}
     </Link>
   );
 }
@@ -38,14 +36,9 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-fg/10 bg-bg/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-        <Link href="/" className="group flex items-center gap-2">
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-primary/25 bg-primary/10 text-primary shadow-glow">
-            <span className="text-sm font-bold">&gt;_</span>
-          </span>
+        <Link href="/" className="flex items-center">
           <span className="font-display text-xl font-extrabold tracking-tight">
-            <span className="glitch" data-text="SLOPDOG">
-              SLOPDOG
-            </span>
+            <span className="text-primary">SLOP</span>DOG
           </span>
         </Link>
 
@@ -75,7 +68,7 @@ export default function Header() {
                 onClick={() => setOpen(false)}
                 className="rounded-md border border-fg/10 bg-fg/5 px-3 py-3 text-label uppercase text-neutral-200 hover:border-primary/20 hover:text-primary"
               >
-                /{n.label}
+                {n.label}
               </Link>
             ))}
           </div>

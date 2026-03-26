@@ -42,7 +42,9 @@ export default function BlogPage() {
 
   return (
     <div className="px-4 py-12 md:py-16 sm:px-6 lg:pl-8 lg:pr-16">
-      <SectionHeading kicker="/" title="BLOG" right={<span className="text-fg-faint">TRANSMISSIONS</span>} />
+      <div className="motion-fade-up">
+        <SectionHeading title="BLOG" />
+      </div>
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((p, i) => {
@@ -63,18 +65,19 @@ export default function BlogPage() {
             <Link
               key={p.slug}
               href={`/blog/${p.slug}`}
-              className={`group rounded-xl border border-fg/10 bg-fg/5 p-5 transition-all duration-normal ease-out-quart hover:border-primary/30 hover:shadow-glow ${spanClass}`}
+              className={`group motion-fade-up rounded-xl border border-fg/10 bg-fg/5 p-5 transition-all duration-normal ease-out-quart hover:border-primary/30 ${spanClass}`}
+              style={{ animationDelay: `${Math.min(i, 5) * 75}ms` }}
             >
-              <div className={`scanlines relative mb-4 overflow-hidden rounded-lg border border-fg/10 ${aspectClass}`}>
-                <Image src={p.frontmatter.thumbnail} alt={p.frontmatter.title} fill className="object-cover" sizes={isFeatured || isWide ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
+              <div className={`relative mb-4 overflow-hidden rounded-lg border border-fg/10 ${aspectClass}`}>
+                <Image src={p.frontmatter.thumbnail} alt={p.frontmatter.title} fill className="object-cover transition-transform duration-slow ease-out-quint group-hover:scale-105" sizes={isFeatured || isWide ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
               </div>
-              <div className="text-label uppercase text-primary">{p.frontmatter.date}</div>
-              <div className={`mt-2 font-display font-bold leading-tight group-hover:text-primary ${textSize}`}>{p.frontmatter.title}</div>
+              <div className="text-label uppercase text-fg-faint">{p.frontmatter.date}</div>
+              <div className={`mt-2 font-display font-bold leading-tight group-hover:text-primary transition-colors duration-normal ease-out-quart ${textSize}`}>{p.frontmatter.title}</div>
               <p className={`mt-2 text-body-sm text-fg-muted ${clampClass}`}>{p.frontmatter.excerpt}</p>
               {p.frontmatter.tags?.length ? (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {p.frontmatter.tags.slice(0, 3).map((t) => (
-                    <span key={t} className="rounded-md border border-fg/10 bg-neutral-950/40 px-2 py-1 text-label text-fg-muted">
+                    <span key={t} className="rounded-full border border-fg/10 bg-neutral-950/40 px-2.5 py-0.5 text-label text-fg-muted">
                       {t}
                     </span>
                   ))}

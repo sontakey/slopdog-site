@@ -50,8 +50,10 @@ export default function AboutPage() {
   return (
     <div className="max-w-3xl px-5 py-16 md:py-24 sm:px-6 lg:pl-16">
       <JsonLd schema={schema} />
-      <SectionHeading kicker="/" title={(frontmatter.title ?? "ABOUT").toUpperCase()} right={<Link href="/" className="hover:underline">HOME -&gt;</Link>} />
-      <div className="mt-10 rounded-2xl border border-fg/10 bg-fg/5 p-5 sm:p-6">
+      <div className="motion-fade-up">
+        <SectionHeading title={(frontmatter.title ?? "ABOUT").toUpperCase()} right={<Link href="/" className="hover:underline">Home</Link>} />
+      </div>
+      <div className="motion-fade-up motion-delay-1 mt-10 prose text-fg-muted">
         <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />
       </div>
     </div>

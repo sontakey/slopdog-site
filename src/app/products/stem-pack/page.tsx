@@ -86,7 +86,7 @@ export default function StemPackPage() {
 
         {/* Right: purchase card */}
         <div className="lg:col-span-2">
-          <div className="sticky top-6 rounded-2xl border border-primary/20 bg-neutral-950/60 p-6 shadow-glow">
+          <div className="sticky top-6 rounded-2xl border border-primary/20 bg-neutral-950/60 p-6">
             <div className="text-label uppercase text-primary">STEM PACK VOL. 1</div>
             <div className="mt-3 font-display text-display-lg text-fg">$9.99</div>
             <div className="mt-1 text-xs text-fg-faint">One-time payment · Instant download</div>

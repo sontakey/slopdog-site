@@ -82,10 +82,12 @@ export default function MerchPage() {
   return (
     <div className="px-4 py-10 md:py-14 sm:px-6 lg:pl-16 lg:pr-8">
       <JsonLd schema={catalogSchema} />
-      <SectionHeading kicker="/" title="MERCH" right={<span className="text-fg-faint text-body-sm">STRIPE CHECKOUT</span>} />
+      <div className="motion-fade-up">
+        <SectionHeading title="MERCH" />
+      </div>
 
       {/* Digital product promo banner */}
-      <div className="mt-6 rounded-2xl border border-primary/30 bg-primary/5 p-5 sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="motion-fade-up motion-delay-1 mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-5 sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="text-label uppercase text-primary mb-1">DIGITAL PRODUCT</div>
           <div className="font-display font-bold text-fg">Slopdog Stem Pack Vol. 1</div>

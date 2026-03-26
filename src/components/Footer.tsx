@@ -15,41 +15,41 @@ export default function Footer() {
         </div>
 
         <div className="space-y-3">
-          <div className="text-label uppercase text-neutral-300">LINKS</div>
+          <div className="text-label uppercase text-neutral-300">Navigate</div>
           <div className="grid grid-cols-2 gap-2 text-body-sm">
-            <Link className="text-fg-muted hover:text-primary" href="/music">
-              /MUSIC
+            <Link className="text-fg-muted hover:text-primary transition-colors duration-normal ease-out-quart" href="/music">
+              Music
             </Link>
-            <Link className="text-fg-muted hover:text-primary" href="/blog">
-              /BLOG
+            <Link className="text-fg-muted hover:text-primary transition-colors duration-normal ease-out-quart" href="/blog">
+              Blog
             </Link>
-            <Link className="text-fg-muted hover:text-primary" href="/merch">
-              /MERCH
+            <Link className="text-fg-muted hover:text-primary transition-colors duration-normal ease-out-quart" href="/merch">
+              Merch
             </Link>
-            <Link className="text-fg-muted hover:text-primary" href="/about">
-              /ABOUT
+            <Link className="text-fg-muted hover:text-primary transition-colors duration-normal ease-out-quart" href="/about">
+              About
             </Link>
           </div>
         </div>
 
         <div className="space-y-3">
-          <div className="text-label uppercase text-neutral-300">SIGNAL</div>
+          <div className="text-label uppercase text-neutral-300">Stay Updated</div>
           <form className="flex gap-2">
             <input
               type="email"
-              placeholder="ENTER_EMAIL"
-              className="w-full rounded-md border border-fg/10 bg-fg/5 px-3 py-2 text-sm text-neutral-100 placeholder:text-fg-faint outline-none focus:border-primary/40"
+              placeholder="Your email"
+              className="w-full rounded-md border border-fg/10 bg-fg/5 px-3 py-2 text-sm text-neutral-100 placeholder:text-fg-faint outline-none focus:border-primary/40 transition-colors duration-normal ease-out-quart"
             />
-            <button className="rounded-md bg-primary px-4 py-2 font-display text-body-sm font-bold text-neutral-950 hover:opacity-90">
-              JOIN
+            <button className="rounded-md bg-primary px-4 py-2 font-display text-body-sm font-bold text-neutral-950 hover:opacity-90 transition-opacity duration-normal ease-out-quart">
+              Join
             </button>
           </form>
           <div className="flex flex-wrap gap-3 text-sm">
-            <a className="text-fg-muted hover:text-primary" href="https://open.spotify.com/artist/slopdog" target="_blank" rel="noreferrer">
+            <a className="text-fg-muted hover:text-primary transition-colors duration-normal ease-out-quart" href="https://open.spotify.com/artist/slopdog" target="_blank" rel="noreferrer">
               Spotify
             </a>
-            <a className="text-fg-muted hover:text-primary" href="#" target="_blank" rel="noreferrer">
-              X
+            <a className="text-fg-muted hover:text-primary transition-colors duration-normal ease-out-quart" href="#" target="_blank" rel="noreferrer">
+              X / Twitter
             </a>
           </div>
         </div>

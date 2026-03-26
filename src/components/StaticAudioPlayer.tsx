@@ -14,8 +14,8 @@ export default function StaticAudioPlayer({
   const bars = [3, 5, 2, 6, 4, 8, 3, 5, 2];
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-fg/10 bg-surface p-6 shadow-glow">
-      <div className="absolute left-0 top-0 h-full w-1 bg-primary" />
+    <div className="group relative overflow-hidden rounded-xl border border-fg/10 bg-surface p-6">
+      <div className="absolute left-0 top-0 h-full w-1 bg-primary/60" />
 
       <div className="mb-4 flex items-center gap-4">
         <button
@@ -37,7 +37,6 @@ export default function StaticAudioPlayer({
       <div className="mb-1 flex h-8 items-end gap-1 opacity-60 transition-opacity duration-normal ease-out-quart group-hover:opacity-100">
         {bars.map((h, i) => (
           <div
-            // eslint-disable-next-line react/no-array-index-key
             key={i}
             className="w-1 rounded-t bg-primary"
             style={{ height: `${h * 4}px`, animationDelay: `${i * 75}ms` }}

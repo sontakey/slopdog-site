@@ -82,19 +82,20 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
     return (
       <div className="px-5 py-10 md:py-16 sm:px-6 lg:pl-16 lg:pr-12">
         <JsonLd schema={schema} />
-        <SectionHeading
-          kicker="/"
-          title={frontmatter.title.toUpperCase()}
-          right={
-            <Link href="/music" className="hover:underline">
-              &lt;- BACK
-            </Link>
-          }
-        />
+        <div className="motion-fade-up">
+          <SectionHeading
+            title={frontmatter.title.toUpperCase()}
+            right={
+              <Link href="/music" className="hover:underline">
+                Back to Music
+              </Link>
+            }
+          />
+        </div>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-2">
-          <div className="space-y-5">
-            <div className="scanlines relative aspect-square overflow-hidden rounded-2xl border border-fg/10 bg-neutral-950 shadow-glow">
+          <div className="space-y-5 motion-fade-up motion-delay-1">
+            <div className="relative aspect-square overflow-hidden rounded-2xl border border-fg/10 bg-neutral-950">
               <Image
                 src={frontmatter.coverImage}
                 alt={`${frontmatter.title} cover`}
@@ -114,30 +115,30 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             <div className="flex flex-wrap gap-2">
               {frontmatter.streamingLinks?.spotify ? (
                 <a
-                  className="rounded-md bg-primary px-4 py-2 font-display text-body-sm font-bold text-neutral-950 hover:opacity-90"
+                  className="rounded-lg bg-primary px-4 py-2 font-display text-body-sm font-bold text-neutral-950 hover:opacity-90 transition-opacity duration-normal ease-out-quart"
                   href={frontmatter.streamingLinks.spotify}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  SPOTIFY
+                  Spotify
                 </a>
               ) : null}
               {frontmatter.streamingLinks?.hyperfollow ? (
                 <a
-                  className="rounded-md border border-fg/10 bg-fg/5 px-4 py-2 font-display text-body-sm font-bold text-fg hover:border-primary/30 hover:text-primary transition-colors duration-normal ease-out-quart"
+                  className="rounded-lg border border-fg/10 bg-fg/5 px-4 py-2 font-display text-body-sm font-bold text-fg hover:border-primary/30 hover:text-primary transition-colors duration-normal ease-out-quart"
                   href={frontmatter.streamingLinks.hyperfollow}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  PRE-SAVE
+                  Pre-save
                 </a>
               ) : null}
             </div>
 
             <div className="rounded-xl border border-fg/10 bg-fg/5 p-5">
-              <div className="text-label uppercase text-primary">RELEASE DATE</div>
+              <div className="text-label uppercase text-fg-faint">Release Date</div>
               <div className="mt-1 text-body-sm text-neutral-300">{frontmatter.date}</div>
-              <div className="mt-4 text-label uppercase text-primary">CONCEPT</div>
+              <div className="mt-4 text-label uppercase text-fg-faint">Concept</div>
               <div className="mt-1 text-body-sm text-neutral-300">{frontmatter.concept}</div>
             </div>
 
@@ -145,8 +146,8 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             <BeatLicenseSection trackSlug={frontmatter.slug} trackTitle={frontmatter.title} />
           </div>
 
-          <div className="rounded-2xl border border-fg/10 bg-fg/5 p-5 sm:p-6">
-            <div className="text-label uppercase text-primary">LYRICS</div>
+          <div className="motion-fade-up motion-delay-2 rounded-2xl border border-fg/10 bg-fg/5 p-5 sm:p-6">
+            <div className="text-label uppercase text-fg-faint">Lyrics</div>
             <div className="mt-4">
               <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />
             </div>

@@ -96,23 +96,24 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <div className="max-w-3xl px-5 py-14 md:py-20 sm:px-6 lg:pl-16">
         <JsonLd schema={schema} />
         {faqSchema && <JsonLd schema={faqSchema} />}
-        <SectionHeading
-          kicker="/"
-          title={frontmatter.title.toUpperCase()}
-          right={
-            <Link href="/blog" className="hover:underline">
-              &lt;- BACK
-            </Link>
-          }
-        />
+        <div className="motion-fade-up">
+          <SectionHeading
+            title={frontmatter.title.toUpperCase()}
+            right={
+              <Link href="/blog" className="hover:underline">
+                Back to Blog
+              </Link>
+            }
+          />
+        </div>
 
-        <div className="mt-6 text-label uppercase text-primary">{frontmatter.date}</div>
+        <div className="motion-fade-up motion-delay-1 mt-6 text-label uppercase text-fg-faint">{frontmatter.date}</div>
 
-        <div className="scanlines relative mt-6 aspect-[16/9] overflow-hidden rounded-2xl border border-fg/10 bg-neutral-950 shadow-glow">
+        <div className="motion-fade-up motion-delay-1 relative mt-6 aspect-[16/9] overflow-hidden rounded-2xl border border-fg/10 bg-neutral-950">
           <Image src={frontmatter.thumbnail} alt={frontmatter.title} fill className="object-cover" sizes="(max-width:1024px) 100vw, 768px" priority />
         </div>
 
-        <div className="mt-8 rounded-2xl border border-fg/10 bg-fg/5 p-5 sm:p-6">
+        <div className="motion-fade-up motion-delay-2 mt-10 prose text-fg-muted">
           <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />
         </div>
       </div>
