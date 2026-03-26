@@ -135,9 +135,9 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             </div>
 
             <div className="rounded-xl border border-white/10 bg-white/5 p-5">
-              <div className="text-xs font-mono text-primary">RELEASE_DATE</div>
+              <div className="text-xs font-semibold tracking-wide text-primary">RELEASE DATE</div>
               <div className="mt-1 text-sm text-zinc-300">{frontmatter.date}</div>
-              <div className="mt-4 text-xs font-mono text-primary">CONCEPT</div>
+              <div className="mt-4 text-xs font-semibold tracking-wide text-primary">CONCEPT</div>
               <div className="mt-1 text-sm text-zinc-300">{frontmatter.concept}</div>
             </div>
 
@@ -146,7 +146,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6">
-            <div className="text-xs font-mono text-primary">LYRICS</div>
+            <div className="text-xs font-semibold tracking-wide text-primary">LYRICS</div>
             <div className="mt-4">
               <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />
             </div>

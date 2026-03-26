@@ -194,14 +194,14 @@ export default function Home() {
                   i === 0 ? "md:col-span-2" : ""
                 }`}
               >
-                <div className="mb-3 text-xs font-mono text-primary">{p.frontmatter.date} // LOG_ENTRY</div>
+                <div className="mb-3 text-xs font-semibold tracking-wide text-primary">{p.frontmatter.date}</div>
                 <div className={`mb-4 font-bold leading-tight text-white transition-colors group-hover:text-primary ${
                   i === 0 ? "text-2xl" : "text-xl"
                 }`}>
                   {p.frontmatter.title.toUpperCase()}
                 </div>
                 <p className={`mb-6 text-sm text-zinc-400 ${i === 0 ? "line-clamp-4" : "line-clamp-3"}`}>{p.frontmatter.excerpt}</p>
-                <span className="inline-flex border-b border-primary/30 pb-0.5 text-sm font-mono font-bold text-primary">&gt; EXECUTE_READ.exe</span>
+                <span className="inline-flex border-b border-primary/30 pb-0.5 text-sm font-bold text-primary">Read more →</span>
               </Link>
             ))}
           </div>
@@ -221,14 +221,14 @@ export default function Home() {
           <form className="mx-auto flex max-w-xl flex-col gap-3 sm:flex-row">
             <input
               type="email"
-              className="w-full border-2 border-black bg-white/90 px-4 py-3 font-mono text-sm text-black outline-none placeholder:text-zinc-500 focus:bg-white"
-              placeholder="ENTER_EMAIL_ADDRESS"
+              className="w-full border-2 border-black bg-white/90 px-4 py-3 text-sm text-black outline-none placeholder:text-zinc-500 focus:bg-white"
+              placeholder="Your email address"
             />
             <button type="button" className="bg-black px-8 py-3 font-bold uppercase tracking-widest text-primary transition-colors hover:bg-zinc-900">
               SUBSCRIBE
             </button>
           </form>
-          <p className="mt-4 text-xs font-mono text-black/60">* By subscribing you agree to join the botnet.</p>
+          <p className="mt-4 text-xs text-black/60">* No spam, unsubscribe anytime.</p>
         </div>
       </section>
     </div>

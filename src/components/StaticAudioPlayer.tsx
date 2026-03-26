@@ -31,7 +31,7 @@ export default function StaticAudioPlayer({
           <p className="truncate text-sm text-primary/70">{artist} • {album}</p>
         </div>
 
-        <span className="text-xs font-mono text-zinc-500">{duration ?? "03:42"}</span>
+        <span className="text-xs tabular-nums text-zinc-500">{duration ?? "03:42"}</span>
       </div>
 
       <div className="mb-1 flex h-8 items-end gap-1 opacity-60 transition-opacity group-hover:opacity-100">

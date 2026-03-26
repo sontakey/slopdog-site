@@ -82,19 +82,19 @@ export default function MerchPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <JsonLd schema={catalogSchema} />
-      <SectionHeading kicker="/" title="MERCH" right={<span className="text-zinc-500 text-sm font-mono">STRIPE_CHECKOUT</span>} />
+      <SectionHeading kicker="/" title="MERCH" right={<span className="text-zinc-500 text-sm">STRIPE CHECKOUT</span>} />
 
       {/* Digital product promo banner */}
       <div className="mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-5 sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="font-mono text-xs text-primary mb-1">DIGITAL_PRODUCT</div>
+          <div className="text-xs font-semibold tracking-wide text-primary mb-1">DIGITAL PRODUCT</div>
           <div className="font-bold text-white">Slopdog Stem Pack Vol. 1</div>
           <p className="mt-1 text-sm text-zinc-400">
             All 3 tracks as stems — vocals, instrumentals, acapella. Remix, sample, go wild.
           </p>
         </div>
         <div className="shrink-0 flex items-center gap-4">
-          <span className="font-mono text-xl font-bold text-white">$9.99</span>
+          <span className="text-xl font-bold text-white">$9.99</span>
           <Link
             href="/products/stem-pack"
             className="rounded-lg bg-primary px-4 py-2 text-sm font-bold text-black hover:opacity-90 transition whitespace-nowrap"
@@ -124,7 +124,7 @@ export default function MerchPage() {
       </div>
 
       <div className="mt-10 rounded-2xl border border-white/10 bg-black/40 p-6 text-sm text-zinc-300">
-        <div className="font-mono text-primary text-xs mb-2">NOTE</div>
+        <div className="text-xs font-semibold tracking-wide text-primary mb-2">NOTE</div>
         <p>All merch is print-on-demand. Orders ship within 5–7 business days.</p>
         <p className="mt-2">
           Questions? Email{" "}

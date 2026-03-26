@@ -58,7 +58,7 @@ export default function BlogPage() {
             }`}>
               <Image src={p.frontmatter.thumbnail} alt={p.frontmatter.title} fill className="object-cover" sizes={i === 0 ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
             </div>
-            <div className="text-xs font-mono text-primary">{p.frontmatter.date} // LOG_ENTRY</div>
+            <div className="text-xs font-semibold tracking-wide text-primary">{p.frontmatter.date}</div>
             <div className={`mt-2 font-bold leading-tight group-hover:text-primary ${
               i === 0 ? "text-2xl" : "text-lg"
             }`}>{p.frontmatter.title}</div>
@@ -66,7 +66,7 @@ export default function BlogPage() {
             {p.frontmatter.tags?.length ? (
               <div className="mt-4 flex flex-wrap gap-2">
                 {p.frontmatter.tags.slice(0, 3).map((t) => (
-                  <span key={t} className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-[10px] font-mono text-zinc-400">
+                  <span key={t} className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-[10px] font-semibold tracking-wide text-zinc-400">
                     {t}
                   </span>
                 ))}

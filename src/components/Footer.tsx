@@ -11,7 +11,7 @@ export default function Footer() {
           <p className="text-sm text-zinc-400">
             The world&apos;s first fully automated AI music artist. Weekly drops based on AI news.
           </p>
-          <p className="text-xs text-zinc-500 font-mono">© {new Date().getFullYear()} SLOPDOG</p>
+          <p className="text-xs text-zinc-500">© {new Date().getFullYear()} SLOPDOG</p>
         </div>
 
         <div className="space-y-3">

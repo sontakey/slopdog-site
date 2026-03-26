@@ -40,7 +40,7 @@ export default function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link href="/" className="group flex items-center gap-2">
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-primary/25 bg-primary/10 text-primary shadow-glow">
-            <span className="font-mono text-sm">&gt;_</span>
+            <span className="text-sm font-bold">&gt;_</span>
           </span>
           <span className="text-xl font-black tracking-tight">
             <span className="glitch" data-text="SLOPDOG">

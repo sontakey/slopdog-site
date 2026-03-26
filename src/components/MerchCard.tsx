@@ -45,7 +45,7 @@ export default function MerchCard({
         />
         {!available && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/70">
-            <span className="font-mono text-xs text-zinc-500">SOLD_OUT</span>
+            <span className="text-xs font-semibold tracking-wide text-zinc-500">SOLD OUT</span>
           </div>
         )}
       </div>
@@ -55,23 +55,23 @@ export default function MerchCard({
         <div className={`font-bold leading-tight text-white group-hover:text-primary transition-colors ${featured ? "text-lg" : "text-sm"}`}>
           {title}
         </div>
-        <div className={`mt-1 font-mono text-zinc-400 ${featured ? "text-sm" : "text-xs"}`}>
+        <div className={`mt-1 text-zinc-400 ${featured ? "text-sm" : "text-xs"}`}>
           {currency} {price.toFixed(2)}
         </div>
         {trackTag && (
-          <div className="mt-1.5 font-mono text-[10px] text-primary">TAG: {trackTag}</div>
+          <div className="mt-1.5 text-[10px] font-semibold tracking-wide text-primary">TAG: {trackTag}</div>
         )}
 
         {/* Size selector */}
         {hasSizes && available && (
           <div className="mt-3">
-            <div className="mb-1.5 font-mono text-[10px] text-zinc-500">SELECT SIZE</div>
+            <div className="mb-1.5 text-[10px] font-semibold tracking-wide text-zinc-500">SELECT SIZE</div>
             <div className="flex flex-wrap gap-1.5">
               {sizes!.map((s) => (
                 <button
                   key={s}
                   onClick={() => setSelectedSize(s)}
-                  className={`rounded-md border px-2.5 py-1 text-[10px] font-mono font-bold transition ${
+                  className={`rounded-md border px-2.5 py-1 text-[10px] font-bold tracking-wide transition ${
                     selectedSize === s
                       ? "border-primary bg-primary/10 text-primary"
                       : "border-white/10 text-zinc-400 hover:border-white/30 hover:text-zinc-200"

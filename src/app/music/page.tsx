@@ -60,9 +60,9 @@ export default function MusicPage() {
             <div className="mt-3 flex items-start justify-between gap-3">
               <div className="min-w-0">
                 <div className={`truncate font-bold group-hover:text-primary ${i === 0 ? "text-2xl" : "text-lg"}`}>{t.frontmatter.title}</div>
-                <div className="text-xs font-mono text-zinc-500">{t.frontmatter.date}</div>
+                <div className="text-xs text-zinc-500">{t.frontmatter.date}</div>
               </div>
-              <span className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-[10px] font-mono text-zinc-400">{i === 0 ? "LATEST" : "OPEN"}</span>
+              <span className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-[10px] font-semibold tracking-wide text-zinc-400">{i === 0 ? "LATEST" : "OPEN"}</span>
             </div>
             <p className={`mt-2 text-sm text-zinc-400 ${i === 0 ? "line-clamp-4" : "line-clamp-2"}`}>{t.frontmatter.concept}</p>
           </Link>
