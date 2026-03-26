@@ -80,10 +80,10 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative overflow-hidden border-b border-white/10 py-12 md:py-24">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,255,65,0.10),transparent_55%)] opacity-50" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row gap-12 items-center">
+        <div className="relative z-10 px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row gap-12 items-start lg:gap-16">
             {/* Album Art */}
-            <div className="w-full lg:w-1/2 flex justify-center lg:justify-start">
+            <div className="w-full lg:w-7/12 flex justify-start">
               {latest ? (
                 <div className="relative group cursor-pointer w-full max-w-[500px] aspect-square">
                   <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary to-accent-amber opacity-25 blur transition-all duration-1000 group-hover:opacity-75 group-hover:duration-200" />
@@ -103,7 +103,7 @@ export default function Home() {
             </div>
 
             {/* Content */}
-            <div className="w-full lg:w-1/2 space-y-8">
+            <div className="w-full lg:w-5/12 space-y-8">
               <div>
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary">
                   <span className="h-2 w-2 animate-pulse rounded-full bg-primary" /> Live Now
@@ -160,7 +160,7 @@ export default function Home() {
 
       {/* Discography Section */}
       <section className="bg-bg py-16 md:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="px-4 sm:px-6 lg:pl-16 lg:pr-8">
           <SectionHeading kicker="01." title="DISCOGRAPHY" right={<Link href="/music" className="hover:underline">VIEW_ALL_RELEASES -&gt;</Link>} />
 
           <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -182,7 +182,7 @@ export default function Home() {
 
       {/* Blog Preview Section */}
       <section className="border-t border-white/5 bg-[#050a06] py-14 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="px-4 sm:px-6 lg:pl-8 lg:pr-16">
           <SectionHeading kicker="02." title="TRANSMISSIONS" right={<Link href="/blog" className="hover:underline">READ_THE_LOGS -&gt;</Link>} />
 
           <div className="mt-6 grid gap-6 md:grid-cols-2">
@@ -214,21 +214,23 @@ export default function Home() {
           className="pointer-events-none absolute inset-0 opacity-10"
           style={{ backgroundImage: "radial-gradient(#000 1px, transparent 1px)", backgroundSize: "20px 20px" }}
         />
-        <div className="relative z-10 mx-auto max-w-2xl px-4 text-center">
-          <MaterialIcon name="mail_lock" size={48} className="mb-4 text-black" />
-          <h2 className="mb-4 text-3xl font-black uppercase tracking-tight text-black md:text-4xl">Join the Network</h2>
-          <p className="mb-8 font-medium text-black/80">Get early access to drops, merch, and hidden tracks. No spam, only signals.</p>
-          <form className="mx-auto flex max-w-xl flex-col gap-3 sm:flex-row">
-            <input
-              type="email"
-              className="w-full border-2 border-black bg-white/90 px-4 py-3 text-sm text-black outline-none placeholder:text-zinc-500 focus:bg-white"
-              placeholder="Your email address"
-            />
-            <button type="button" className="bg-black px-8 py-3 font-bold uppercase tracking-widest text-primary transition-colors hover:bg-zinc-900">
-              SUBSCRIBE
-            </button>
-          </form>
-          <p className="mt-4 text-xs text-black/60">* No spam, unsubscribe anytime.</p>
+        <div className="relative z-10 px-4 sm:px-6 lg:px-16">
+          <div className="max-w-2xl">
+            <MaterialIcon name="mail_lock" size={48} className="mb-4 text-black" />
+            <h2 className="mb-4 text-3xl font-black uppercase tracking-tight text-black md:text-4xl">Join the Network</h2>
+            <p className="mb-8 font-medium text-black/80">Get early access to drops, merch, and hidden tracks. No spam, only signals.</p>
+            <form className="flex max-w-xl flex-col gap-3 sm:flex-row">
+              <input
+                type="email"
+                className="w-full border-2 border-black bg-white/90 px-4 py-3 text-sm text-black outline-none placeholder:text-zinc-500 focus:bg-white"
+                placeholder="Your email address"
+              />
+              <button type="button" className="bg-black px-8 py-3 font-bold uppercase tracking-widest text-primary transition-colors hover:bg-zinc-900">
+                SUBSCRIBE
+              </button>
+            </form>
+            <p className="mt-4 text-xs text-black/60">* No spam, unsubscribe anytime.</p>
+          </div>
         </div>
       </section>
     </div>

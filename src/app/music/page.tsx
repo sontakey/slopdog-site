@@ -40,7 +40,7 @@ export default function MusicPage() {
   const tracks = getAllMdx<TrackFrontmatter>("content/music");
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
+    <div className="px-4 py-14 md:py-20 sm:px-6 lg:pl-16 lg:pr-8">
       <SectionHeading kicker="/" title="MUSIC" right={<span className="text-zinc-500">NEWEST FIRST</span>} />
 
       <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

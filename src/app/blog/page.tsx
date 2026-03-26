@@ -41,7 +41,7 @@ export default function BlogPage() {
   const posts = getAllMdx<BlogFrontmatter>("content/blog");
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
+    <div className="px-4 py-12 md:py-16 sm:px-6 lg:pl-8 lg:pr-16">
       <SectionHeading kicker="/" title="BLOG" right={<span className="text-zinc-500">TRANSMISSIONS</span>} />
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -93,7 +93,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     };
 
     return (
-      <div className="mx-auto max-w-3xl px-5 py-14 md:py-20 sm:px-6">
+      <div className="max-w-3xl px-5 py-14 md:py-20 sm:px-6 lg:pl-16">
         <JsonLd schema={schema} />
         {faqSchema && <JsonLd schema={faqSchema} />}
         <SectionHeading

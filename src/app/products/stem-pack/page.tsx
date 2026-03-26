@@ -26,7 +26,7 @@ const STEM_TYPES = ["Vocals (clean)", "Vocals (ad-libs)", "Instrumental (full)",
 
 export default function StemPackPage() {
   return (
-    <div className="mx-auto max-w-4xl px-5 py-12 sm:px-6">
+    <div className="max-w-5xl px-5 py-12 sm:px-6 lg:pl-16">
       {/* Header */}
       <div className="mb-2 text-xs font-semibold tracking-wide text-primary">DIGITAL PRODUCT</div>
       <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">

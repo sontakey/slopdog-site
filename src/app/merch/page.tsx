@@ -80,7 +80,7 @@ export default function MerchPage() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 md:py-14">
+    <div className="px-4 py-10 md:py-14 sm:px-6 lg:pl-16 lg:pr-8">
       <JsonLd schema={catalogSchema} />
       <SectionHeading kicker="/" title="MERCH" right={<span className="text-zinc-500 text-sm">STRIPE CHECKOUT</span>} />
 
