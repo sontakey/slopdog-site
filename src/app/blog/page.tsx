@@ -56,7 +56,7 @@ export default function BlogPage() {
           const aspectClass =
             isFeatured ? "aspect-[2/1]" :
             isWide ? "aspect-[3/1]" : "aspect-[16/10]";
-          const textSize = isFeatured ? "text-2xl" : isWide ? "text-xl" : "text-lg";
+          const textSize = isFeatured ? "text-display-sm" : isWide ? "text-display-sm" : "text-body-lg";
           const clampClass = isFeatured ? "line-clamp-5" : isWide ? "line-clamp-3" : "line-clamp-3";
 
           return (
@@ -68,13 +68,13 @@ export default function BlogPage() {
               <div className={`scanlines relative mb-4 overflow-hidden rounded-lg border border-white/10 ${aspectClass}`}>
                 <Image src={p.frontmatter.thumbnail} alt={p.frontmatter.title} fill className="object-cover" sizes={isFeatured || isWide ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
               </div>
-              <div className="text-xs font-semibold tracking-wide text-primary">{p.frontmatter.date}</div>
-              <div className={`mt-2 font-bold leading-tight group-hover:text-primary ${textSize}`}>{p.frontmatter.title}</div>
-              <p className={`mt-2 text-sm text-zinc-400 ${clampClass}`}>{p.frontmatter.excerpt}</p>
+              <div className="text-label uppercase text-primary">{p.frontmatter.date}</div>
+              <div className={`mt-2 font-display font-bold leading-tight group-hover:text-primary ${textSize}`}>{p.frontmatter.title}</div>
+              <p className={`mt-2 text-body-sm text-zinc-400 ${clampClass}`}>{p.frontmatter.excerpt}</p>
               {p.frontmatter.tags?.length ? (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {p.frontmatter.tags.slice(0, 3).map((t) => (
-                    <span key={t} className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-[10px] font-semibold tracking-wide text-zinc-400">
+                    <span key={t} className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-label text-zinc-400">
                       {t}
                     </span>
                   ))}

@@ -28,8 +28,8 @@ export default function StemPackPage() {
   return (
     <div className="max-w-5xl px-5 py-12 sm:px-6 lg:pl-16">
       {/* Header */}
-      <div className="mb-2 text-xs font-semibold tracking-wide text-primary">DIGITAL PRODUCT</div>
-      <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+      <div className="mb-2 text-label uppercase text-primary">DIGITAL PRODUCT</div>
+      <h1 className="font-display text-display-lg text-white">
         SLOPDOG STEM PACK VOL. 1
       </h1>
       <p className="mt-4 max-w-xl text-zinc-400">
@@ -41,7 +41,7 @@ export default function StemPackPage() {
         <div className="lg:col-span-3 space-y-6">
           {/* Track list */}
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <div className="mb-4 text-xs font-semibold tracking-wide text-primary">INCLUDED TRACKS</div>
+            <div className="mb-4 text-label uppercase text-primary">INCLUDED TRACKS</div>
             <div className="space-y-3">
               {TRACKS.map((t) => (
                 <div key={t.slug} className="flex items-center gap-4">
@@ -62,7 +62,7 @@ export default function StemPackPage() {
 
           {/* Stem types */}
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <div className="mb-4 text-xs font-semibold tracking-wide text-primary">STEM TYPES PER TRACK</div>
+            <div className="mb-4 text-label uppercase text-primary">STEM TYPES PER TRACK</div>
             <ul className="space-y-2">
               {STEM_TYPES.map((s) => (
                 <li key={s} className="flex items-center gap-2 text-sm text-zinc-300">
@@ -74,7 +74,7 @@ export default function StemPackPage() {
 
           {/* License */}
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <div className="mb-4 text-xs font-semibold tracking-wide text-primary">LICENSE</div>
+            <div className="mb-4 text-label uppercase text-primary">LICENSE</div>
             <ul className="space-y-2 text-sm text-zinc-300">
               <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">›</span>Personal and commercial use permitted</li>
               <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">›</span>Credit preferred: "Stems by SLOPDOG (slopdog.com)"</li>
@@ -87,8 +87,8 @@ export default function StemPackPage() {
         {/* Right: purchase card */}
         <div className="lg:col-span-2">
           <div className="sticky top-6 rounded-2xl border border-primary/20 bg-black/60 p-6 shadow-glow">
-            <div className="text-xs font-semibold tracking-wide text-primary">STEM PACK VOL. 1</div>
-            <div className="mt-3 text-4xl font-bold text-white">$9.99</div>
+            <div className="text-label uppercase text-primary">STEM PACK VOL. 1</div>
+            <div className="mt-3 font-display text-display-lg text-white">$9.99</div>
             <div className="mt-1 text-xs text-zinc-500">One-time payment · Instant download</div>
 
             <div className="mt-5 space-y-2 text-xs text-zinc-400">

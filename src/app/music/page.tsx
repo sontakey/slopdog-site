@@ -56,7 +56,7 @@ export default function MusicPage() {
           const aspectClass =
             isFeatured ? "aspect-[4/3]" :
             isWide ? "aspect-[2/1]" : "aspect-square";
-          const textSize = isFeatured ? "text-2xl" : isWide ? "text-xl" : "text-lg";
+          const textSize = isFeatured ? "text-display-sm" : isWide ? "text-display-sm" : "text-body-lg";
           const clampClass = isFeatured ? "line-clamp-4" : isWide ? "line-clamp-3" : "line-clamp-2";
 
           return (
@@ -70,12 +70,12 @@ export default function MusicPage() {
               </div>
               <div className="mt-3 flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <div className={`truncate font-bold group-hover:text-primary ${textSize}`}>{t.frontmatter.title}</div>
-                  <div className="text-xs text-zinc-500">{t.frontmatter.date}</div>
+                  <div className={`truncate font-display font-bold group-hover:text-primary ${textSize}`}>{t.frontmatter.title}</div>
+                  <div className="text-label text-zinc-500">{t.frontmatter.date}</div>
                 </div>
-                <span className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-[10px] font-semibold tracking-wide text-zinc-400">{isFeatured ? "LATEST" : "OPEN"}</span>
+                <span className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-label uppercase text-zinc-400">{isFeatured ? "LATEST" : "OPEN"}</span>
               </div>
-              <p className={`mt-2 text-sm text-zinc-400 ${clampClass}`}>{t.frontmatter.concept}</p>
+              <p className={`mt-2 text-body-sm text-zinc-400 ${clampClass}`}>{t.frontmatter.concept}</p>
             </Link>
           );
         })}

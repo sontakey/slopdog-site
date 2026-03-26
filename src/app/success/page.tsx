@@ -78,7 +78,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h1 className="mt-4 text-3xl font-bold tracking-tight text-white">
+        <h1 className="mt-4 font-display text-display-md text-white">
           ORDER CONFIRMED
         </h1>
         <p className="mt-3 text-zinc-400">
@@ -91,7 +91,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
       {/* Digital download section */}
       {isDigital && digitalProduct && (
         <div className="mb-8 rounded-2xl border border-primary/20 bg-primary/5 p-6">
-          <div className="mb-1 text-xs font-semibold tracking-wide text-primary">DIGITAL DOWNLOAD</div>
+          <div className="mb-1 text-label uppercase text-primary">DIGITAL DOWNLOAD</div>
           <h2 className="text-lg font-bold text-white">{digitalProduct.title}</h2>
           <p className="mt-2 text-sm text-zinc-400">{digitalProduct.description}</p>
           <div className="mt-5 space-y-2">
@@ -118,7 +118,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
       {/* License terms */}
       {licenseTerms && (
         <div className="mb-8 rounded-2xl border border-white/10 bg-white/5 p-6">
-          <div className="mb-1 text-xs font-semibold tracking-wide text-primary">LICENSE TERMS</div>
+          <div className="mb-1 text-label uppercase text-primary">LICENSE TERMS</div>
           <ul className="mt-3 space-y-2">
             {(licenseTerms.basic ?? licenseTerms.commercial ?? []).map((term) => (
               <li key={term} className="flex items-start gap-2 text-sm text-zinc-300">
@@ -137,7 +137,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
       {/* Merch order message */}
       {!isDigital && (
         <div className="mb-8 rounded-2xl border border-white/10 bg-white/5 p-6">
-          <div className="mb-1 text-xs font-semibold tracking-wide text-primary">WHAT HAPPENS NEXT</div>
+          <div className="mb-1 text-label uppercase text-primary">WHAT HAPPENS NEXT</div>
           <ul className="mt-3 space-y-2 text-sm text-zinc-300">
             <li className="flex items-start gap-2">
               <span className="mt-0.5 text-primary">›</span>

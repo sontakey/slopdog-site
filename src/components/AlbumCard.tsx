@@ -28,13 +28,13 @@ export default function AlbumCard({
           sizes={featured ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 50vw, 25vw"}
         />
         {badge ? (
-          <div className="absolute right-2 top-2 z-20 border border-primary/30 bg-black/80 px-2 py-1 text-[10px] font-semibold tracking-wide text-primary">
+          <div className="absolute right-2 top-2 z-20 border border-primary/30 bg-black/80 px-2 py-1 text-label uppercase text-primary">
             {badge}
           </div>
         ) : null}
       </div>
-      <h3 className={`font-bold text-white transition-colors group-hover:text-primary ${featured ? "text-2xl" : "text-lg"}`}>{title}</h3>
-      {sub ? <p className="text-sm text-zinc-500">{sub}</p> : null}
+      <h3 className={`font-display font-bold text-white transition-colors group-hover:text-primary ${featured ? "text-display-sm" : "text-body-lg"}`}>{title}</h3>
+      {sub ? <p className="text-body-sm text-zinc-500">{sub}</p> : null}
     </Link>
   );
 }

@@ -27,11 +27,11 @@ export default function StaticAudioPlayer({
         </button>
 
         <div className="min-w-0 flex-1">
-          <h3 className="truncate font-bold text-white">{title}</h3>
-          <p className="truncate text-sm text-primary/70">{artist} • {album}</p>
+          <h3 className="truncate font-display font-bold text-white">{title}</h3>
+          <p className="truncate text-body-sm text-primary/70">{artist} • {album}</p>
         </div>
 
-        <span className="text-xs tabular-nums text-zinc-500">{duration ?? "03:42"}</span>
+        <span className="text-label tabular-nums text-zinc-500">{duration ?? "03:42"}</span>
       </div>
 
       <div className="mb-1 flex h-8 items-end gap-1 opacity-60 transition-opacity group-hover:opacity-100">

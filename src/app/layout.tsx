@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Space_Grotesk } from "next/font/google";
+import { Syne, Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { SITE } from "@/lib/site";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
@@ -65,7 +71,7 @@ export default function RootLayout({
           {`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-F9XN2CW6K9');`}
         </Script>
       </head>
-      <body className={`${spaceGrotesk.variable} antialiased bg-bg text-white min-h-dvh flex flex-col`}>
+      <body className={`${syne.variable} ${inter.variable} antialiased bg-bg text-white min-h-dvh flex flex-col`}>
         <Header />
         <Script src="https://analytics.ahrefs.com/analytics.js" data-key="EPsCfTpxNk01hmvRT2xvUw" strategy="afterInteractive" />
         <main className="flex-1">{children}</main>

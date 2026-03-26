@@ -45,33 +45,33 @@ export default function MerchCard({
         />
         {!available && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/70">
-            <span className="text-xs font-semibold tracking-wide text-zinc-500">SOLD OUT</span>
+            <span className="text-label uppercase text-zinc-500">SOLD OUT</span>
           </div>
         )}
       </div>
 
       {/* Info */}
       <div className="mt-3 flex-1 flex flex-col">
-        <div className={`font-bold leading-tight text-white group-hover:text-primary transition-colors ${featured ? "text-lg" : "text-sm"}`}>
+        <div className={`font-display font-bold leading-tight text-white group-hover:text-primary transition-colors ${featured ? "text-body-lg" : "text-body-sm"}`}>
           {title}
         </div>
-        <div className={`mt-1 text-zinc-400 ${featured ? "text-sm" : "text-xs"}`}>
+        <div className={`mt-1 text-zinc-400 ${featured ? "text-body-sm" : "text-label"}`}>
           {currency} {price.toFixed(2)}
         </div>
         {trackTag && (
-          <div className="mt-1.5 text-[10px] font-semibold tracking-wide text-primary">TAG: {trackTag}</div>
+          <div className="mt-1.5 text-label uppercase text-primary">TAG: {trackTag}</div>
         )}
 
         {/* Size selector */}
         {hasSizes && available && (
           <div className="mt-3">
-            <div className="mb-1.5 text-[10px] font-semibold tracking-wide text-zinc-500">SELECT SIZE</div>
+            <div className="mb-1.5 text-label uppercase text-zinc-500">SELECT SIZE</div>
             <div className="flex flex-wrap gap-1.5">
               {sizes!.map((s) => (
                 <button
                   key={s}
                   onClick={() => setSelectedSize(s)}
-                  className={`rounded-md border px-2.5 py-1 text-[10px] font-bold tracking-wide transition ${
+                  className={`rounded-md border px-2.5 py-1 text-label font-bold transition ${
                     selectedSize === s
                       ? "border-primary bg-primary/10 text-primary"
                       : "border-white/10 text-zinc-400 hover:border-white/30 hover:text-zinc-200"
@@ -102,7 +102,7 @@ export default function MerchCard({
           ) : (
             <button
               disabled
-              className="w-full rounded-lg border border-white/10 bg-black/40 px-5 py-3 text-sm font-bold text-zinc-600 cursor-not-allowed"
+              className="w-full rounded-lg border border-white/10 bg-black/40 px-5 py-3 font-display text-body-sm font-bold text-zinc-600 cursor-not-allowed"
             >
               SOLD OUT
             </button>

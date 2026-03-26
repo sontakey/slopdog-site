@@ -23,9 +23,19 @@ export default {
         },
       },
       fontFamily: {
-        display: ["var(--font-space-grotesk)", "ui-sans-serif", "system-ui"],
-        sans: ["var(--font-space-grotesk)", "ui-sans-serif", "system-ui"],
+        display: ["var(--font-syne)", "ui-sans-serif", "system-ui"],
+        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui"],
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "monospace"],
+      },
+      fontSize: {
+        "display-xl": ["clamp(3.5rem, 8vw, 7rem)", { lineHeight: "0.95", letterSpacing: "-0.03em", fontWeight: "800" }],
+        "display-lg": ["clamp(2.5rem, 5vw, 4.5rem)", { lineHeight: "1.0", letterSpacing: "-0.025em", fontWeight: "700" }],
+        "display-md": ["clamp(1.75rem, 3.5vw, 2.75rem)", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+        "display-sm": ["clamp(1.25rem, 2.5vw, 1.75rem)", { lineHeight: "1.2", letterSpacing: "-0.015em", fontWeight: "600" }],
+        "body-lg": ["clamp(1.05rem, 1.2vw, 1.2rem)", { lineHeight: "1.7" }],
+        "body-base": ["clamp(0.925rem, 1vw, 1rem)", { lineHeight: "1.7" }],
+        "body-sm": ["clamp(0.8rem, 0.9vw, 0.875rem)", { lineHeight: "1.6" }],
+        "label": ["0.6875rem", { lineHeight: "1.4", letterSpacing: "0.08em", fontWeight: "600" }],
       },
       keyframes: {
         "glitch-skew": {

@@ -105,16 +105,16 @@ export default function Home() {
             {/* Content */}
             <div className="w-full lg:w-5/12 space-y-8">
               <div>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-label uppercase text-primary">
                   <span className="h-2 w-2 animate-pulse rounded-full bg-primary" /> Live Now
                 </div>
-                <h1 className="text-4xl font-black tracking-tighter leading-none text-white md:text-6xl mb-2">
+                <h1 className="font-display text-display-xl text-white mb-2">
                   LATEST_DROP:<br />
                   <span className="text-primary">
                     {latest ? latest.frontmatter.title.toUpperCase().replace(/ /g, "_") : "LOADING"}
                   </span>
                 </h1>
-                <p className="max-w-lg text-lg font-light text-zinc-400 md:text-xl">
+                <p className="max-w-lg text-body-lg font-light text-zinc-400">
                   {latest
                     ? latest.slug === "brain-fry"
                       ? "Information overload, neural meltdown, doom scrolling, and the exact second your internal processor taps out."
@@ -136,7 +136,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href={latest ? `/music/${latest.slug}` : "/music"}
-                  className="flex items-center gap-2 rounded bg-white px-6 py-3 font-bold text-black transition-colors hover:bg-zinc-200"
+                  className="flex items-center gap-2 rounded bg-white px-6 py-3 font-display font-bold text-black transition-colors hover:bg-zinc-200"
                 >
                   <MaterialIcon name="play_circle" />
                   LISTEN NOW
@@ -146,7 +146,7 @@ export default function Home() {
                     href={latest.frontmatter.streamingLinks.spotify}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 rounded border border-white/20 bg-transparent px-6 py-3 font-bold text-white transition-colors hover:border-primary hover:text-primary"
+                    className="flex items-center gap-2 rounded border border-white/20 bg-transparent px-6 py-3 font-display font-bold text-white transition-colors hover:border-primary hover:text-primary"
                   >
                     <MaterialIcon name="graphic_eq" />
                     SPOTIFY
@@ -198,8 +198,8 @@ export default function Home() {
                 i === 0 ? "md:col-span-2" :
                 i === 1 ? "md:row-span-2" : "";
               const textSize =
-                i === 0 ? "text-2xl" :
-                i === 1 ? "text-xl" : "text-lg";
+                i === 0 ? "text-display-sm" :
+                i === 1 ? "text-display-sm" : "text-body-lg";
 
               return (
                 <Link
@@ -207,12 +207,12 @@ export default function Home() {
                   href={`/blog/${p.slug}`}
                   className={`group rounded-lg border border-white/10 bg-cyber-gray p-6 transition-all hover:border-primary/50 ${spanClass}`}
                 >
-                  <div className="mb-3 text-xs font-semibold tracking-wide text-primary">{p.frontmatter.date}</div>
-                  <div className={`mb-4 font-bold leading-tight text-white transition-colors group-hover:text-primary ${textSize}`}>
+                  <div className="mb-3 text-label uppercase text-primary">{p.frontmatter.date}</div>
+                  <div className={`mb-4 font-display font-bold leading-tight text-white transition-colors group-hover:text-primary ${textSize}`}>
                     {p.frontmatter.title.toUpperCase()}
                   </div>
-                  <p className={`mb-6 text-sm text-zinc-400 ${i === 0 ? "line-clamp-4" : "line-clamp-3"}`}>{p.frontmatter.excerpt}</p>
-                  <span className="inline-flex border-b border-primary/30 pb-0.5 text-sm font-bold text-primary">Read more →</span>
+                  <p className={`mb-6 text-body-sm text-zinc-400 ${i === 0 ? "line-clamp-4" : "line-clamp-3"}`}>{p.frontmatter.excerpt}</p>
+                  <span className="inline-flex border-b border-primary/30 pb-0.5 text-body-sm font-bold text-primary">Read more →</span>
                 </Link>
               );
             })}
@@ -229,15 +229,15 @@ export default function Home() {
         <div className="relative z-10 px-4 sm:px-6 lg:px-16">
           <div className="max-w-2xl">
             <MaterialIcon name="mail_lock" size={48} className="mb-4 text-black" />
-            <h2 className="mb-4 text-3xl font-black uppercase tracking-tight text-black md:text-4xl">Join the Network</h2>
-            <p className="mb-8 font-medium text-black/80">Get early access to drops, merch, and hidden tracks. No spam, only signals.</p>
+            <h2 className="font-display mb-4 text-display-lg uppercase text-black">Join the Network</h2>
+            <p className="mb-8 text-body-lg font-medium text-black/80">Get early access to drops, merch, and hidden tracks. No spam, only signals.</p>
             <form className="flex max-w-xl flex-col gap-3 sm:flex-row">
               <input
                 type="email"
                 className="w-full border-2 border-black bg-white/90 px-4 py-3 text-sm text-black outline-none placeholder:text-zinc-500 focus:bg-white"
                 placeholder="Your email address"
               />
-              <button type="button" className="bg-black px-8 py-3 font-bold uppercase tracking-widest text-primary transition-colors hover:bg-zinc-900">
+              <button type="button" className="bg-black px-8 py-3 font-display font-bold uppercase text-label text-primary transition-colors hover:bg-zinc-900">
                 SUBSCRIBE
               </button>
             </form>
