@@ -86,7 +86,7 @@ export default function Home() {
             <div className="w-full lg:w-1/2 flex justify-center lg:justify-start">
               {latest ? (
                 <div className="relative group cursor-pointer w-full max-w-[500px] aspect-square">
-                  <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary to-blue-600 opacity-25 blur transition-all duration-1000 group-hover:opacity-75 group-hover:duration-200" />
+                  <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary to-accent-amber opacity-25 blur transition-all duration-1000 group-hover:opacity-75 group-hover:duration-200" />
                   <div className="scanlines relative h-full w-full overflow-hidden rounded-lg border border-white/10 bg-cyber-gray shadow-2xl ring-1 ring-white/5">
                     <Image
                       src={latest.frontmatter.coverImage}
