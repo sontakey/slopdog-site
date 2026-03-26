@@ -24,8 +24,22 @@ const CYAN_PATTERNS = [
   /#00ffff/i, // pure cyan hex
   /#0ff\b/i, // shorthand cyan
   /#00f5d4/i, // teal accent that was removed
+  /#00e5ff/i, // Material Design cyan A400
+  /#00bcd4/i, // Material Design cyan 500
+  /#00acc1/i, // Material Design cyan 700
+  /#26c6da/i, // Material Design cyan 400
+  /#4dd0e1/i, // Material Design cyan 300
+  /#80deea/i, // Material Design cyan 200
+  /#00897b/i, // Material Design teal 600
+  /#009688/i, // Material Design teal 500
   /\bcyan\b/i, // css named color or tailwind cyan
   /\bteal\b/i, // css named color or tailwind teal
+  /\btext-cyan-/i, // tailwind cyan text classes
+  /\bbg-cyan-/i, // tailwind cyan bg classes
+  /\bborder-cyan-/i, // tailwind cyan border classes
+  /\btext-teal-/i, // tailwind teal text classes
+  /\bbg-teal-/i, // tailwind teal bg classes
+  /\bborder-teal-/i, // tailwind teal border classes
 ];
 
 const ROOT = join(__dirname, "../..");
