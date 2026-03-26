@@ -35,7 +35,7 @@ const LICENSES = [
 
 export default function BeatLicenseSection({ trackSlug, trackTitle }: BeatLicenseSectionProps) {
   return (
-    <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6">
+    <div className="mt-8">
       <div className="mb-1 text-xs font-semibold tracking-wide text-primary">LICENSE THIS BEAT</div>
       <p className="mt-1 text-sm text-zinc-400">
         Use{" "}
@@ -49,7 +49,7 @@ export default function BeatLicenseSection({ trackSlug, trackTitle }: BeatLicens
             className={`rounded-xl border p-5 ${
               lic.featured
                 ? "border-primary/40 bg-primary/5"
-                : "border-white/10 bg-black/40"
+                : "border-white/10 bg-white/5"
             }`}
           >
             <div

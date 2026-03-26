@@ -13,7 +13,7 @@ export default function ViewToggle({ humanContent, markdownSource }: ViewToggleP
 
   return (
     <div>
-      <div className="mb-6 flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5">
+      <div className="mb-6 flex items-center gap-3 border-b border-white/10 pb-3">
         <span className="mr-auto text-xs font-semibold tracking-wide text-zinc-500">VIEW MODE:</span>
         <button
           onClick={() => setMode("human")}
@@ -36,7 +36,7 @@ export default function ViewToggle({ humanContent, markdownSource }: ViewToggleP
       {mode === "human" ? (
         humanContent
       ) : (
-        <div className="rounded-xl border border-white/10 bg-black/50 p-6">
+        <div>
           <div className="mb-3 flex items-center justify-between">
             <span className="text-xs font-semibold tracking-wide text-primary">MARKDOWN SOURCE</span>
             <button
