@@ -19,8 +19,8 @@ function collectSourceFiles(dir: string, exts: string[]): string[] {
   return results;
 }
 
-// Patterns that indicate a purple-to-blue gradient
-const PURPLE_BLUE_GRADIENT_PATTERNS = [
+// Tailwind class patterns that indicate a purple-to-blue gradient
+const TAILWIND_PURPLE_BLUE_PATTERNS = [
   /from-purple-\d+\s.*?to-blue-\d+/,
   /from-violet-\d+\s.*?to-blue-\d+/,
   /from-indigo-\d+\s.*?to-blue-\d+/,
@@ -28,6 +28,19 @@ const PURPLE_BLUE_GRADIENT_PATTERNS = [
   /from-primary\s.*?to-blue-\d+/,
   /from-purple\s.*?to-blue/,
   /from-violet\s.*?to-blue/,
+];
+
+// CSS linear-gradient patterns with purple-to-blue hex/named colors
+const CSS_PURPLE_BLUE_GRADIENT_PATTERNS = [
+  /linear-gradient\([^)]*#(8b5cf6|7c3aed|6d28d9|a855f7|9333ea|a78bfa|c084fc)[^)]*#(3b82f6|2563eb|1d4ed8|60a5fa|93c5fd)[^)]*\)/i,
+  /linear-gradient\([^)]*purple[^)]*blue[^)]*\)/i,
+  /linear-gradient\([^)]*violet[^)]*blue[^)]*\)/i,
+  /linear-gradient\([^)]*indigo[^)]*blue[^)]*\)/i,
+];
+
+const PURPLE_BLUE_GRADIENT_PATTERNS = [
+  ...TAILWIND_PURPLE_BLUE_PATTERNS,
+  ...CSS_PURPLE_BLUE_GRADIENT_PATTERNS,
 ];
 
 const ROOT = join(__dirname, "../..");
@@ -38,6 +51,21 @@ describe("No purple-to-blue gradients", () => {
     for (const pattern of PURPLE_BLUE_GRADIENT_PATTERNS) {
       expect(content).not.toMatch(pattern);
     }
+  });
+
+  it("globals.css contains no purple-to-blue gradients", () => {
+    const content = readFileSync(
+      join(ROOT, "src/app/globals.css"),
+      "utf-8"
+    );
+    for (const pattern of PURPLE_BLUE_GRADIENT_PATTERNS) {
+      expect(content).not.toMatch(pattern);
+    }
+  });
+
+  it("tailwind.config.ts defines no purple/violet gradient colors", () => {
+    const content = readFileSync(join(ROOT, "tailwind.config.ts"), "utf-8");
+    expect(content).not.toMatch(/#(8b5cf6|7c3aed|6d28d9|a855f7|9333ea)/i);
   });
 
   it("no source file uses purple-to-blue gradient classes", () => {
