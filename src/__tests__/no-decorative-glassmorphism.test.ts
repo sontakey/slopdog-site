@@ -42,9 +42,7 @@ describe("No decorative glassmorphism", () => {
     const violations: string[] = [];
 
     for (const file of files) {
-      // Skip test files
       if (file.includes(".test.")) continue;
-      // Skip allowlisted files
       if (FUNCTIONAL_BLUR_ALLOWLIST.some((name) => file.endsWith(name)))
         continue;
 
@@ -56,5 +54,108 @@ describe("No decorative glassmorphism", () => {
     }
 
     expect(violations).toEqual([]);
+  });
+
+  it("no raw CSS backdrop-filter blur outside allowlisted files", () => {
+    const files = collectSourceFiles(join(ROOT, "src"), [
+      ".ts",
+      ".tsx",
+      ".css",
+    ]);
+    const violations: string[] = [];
+
+    for (const file of files) {
+      if (file.includes(".test.")) continue;
+      if (FUNCTIONAL_BLUR_ALLOWLIST.some((name) => file.endsWith(name)))
+        continue;
+
+      const content = readFileSync(file, "utf-8");
+      // Catch raw CSS: backdrop-filter: blur(...) or @apply backdrop-blur
+      if (
+        /backdrop-filter\s*:\s*blur\(/.test(content) ||
+        /@apply[^;]*backdrop-blur/.test(content)
+      ) {
+        const relative = file.replace(ROOT + "/", "");
+        violations.push(relative);
+      }
+    }
+
+    expect(violations).toEqual([]);
+  });
+
+  it("no backdrop-saturate used for glass effects outside allowlisted files", () => {
+    const files = collectSourceFiles(join(ROOT, "src"), [
+      ".ts",
+      ".tsx",
+      ".css",
+    ]);
+    const violations: string[] = [];
+
+    for (const file of files) {
+      if (file.includes(".test.")) continue;
+      if (FUNCTIONAL_BLUR_ALLOWLIST.some((name) => file.endsWith(name)))
+        continue;
+
+      const content = readFileSync(file, "utf-8");
+      if (/backdrop-saturate/.test(content)) {
+        const relative = file.replace(ROOT + "/", "");
+        violations.push(relative);
+      }
+    }
+
+    expect(violations).toEqual([]);
+  });
+
+  it("no glass or frosted class names indicating decorative glass effects", () => {
+    const files = collectSourceFiles(join(ROOT, "src"), [
+      ".ts",
+      ".tsx",
+      ".css",
+    ]);
+    const violations: string[] = [];
+
+    for (const file of files) {
+      if (file.includes(".test.")) continue;
+
+      const content = readFileSync(file, "utf-8");
+      // Catch class names or CSS selectors referencing glass/frosted styling
+      if (
+        /\bglass(?:morphism)?\b/i.test(content) ||
+        /\bfrosted\b/i.test(content)
+      ) {
+        const relative = file.replace(ROOT + "/", "");
+        violations.push(relative);
+      }
+    }
+
+    expect(violations).toEqual([]);
+  });
+
+  it("tailwind config does not define glass-related utilities", () => {
+    const content = readFileSync(
+      join(ROOT, "tailwind.config.ts"),
+      "utf-8"
+    );
+    expect(content).not.toMatch(/glass/i);
+    expect(content).not.toMatch(/frosted/i);
+    expect(content).not.toMatch(/backdrop/i);
+  });
+
+  it("MerchCard does not use backdrop-blur or backdrop-filter", () => {
+    const content = readFileSync(
+      join(ROOT, "src/components/MerchCard.tsx"),
+      "utf-8"
+    );
+    expect(content).not.toMatch(/backdrop-blur/);
+    expect(content).not.toMatch(/backdrop-filter/);
+  });
+
+  it("BeatLicenseSection does not use backdrop-blur or backdrop-filter", () => {
+    const content = readFileSync(
+      join(ROOT, "src/components/BeatLicenseSection.tsx"),
+      "utf-8"
+    );
+    expect(content).not.toMatch(/backdrop-blur/);
+    expect(content).not.toMatch(/backdrop-filter/);
   });
 });
