@@ -110,7 +110,7 @@ export default function Home() {
                 </div>
                 <h1 className="text-4xl font-black tracking-tighter leading-none text-white md:text-6xl mb-2">
                   LATEST_DROP:<br />
-                  <span className="bg-gradient-to-r from-primary to-green-300 bg-clip-text text-transparent">
+                  <span className="text-primary">
                     {latest ? latest.frontmatter.title.toUpperCase().replace(/ /g, "_") : "LOADING"}
                   </span>
                 </h1>
