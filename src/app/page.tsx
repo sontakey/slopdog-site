@@ -78,7 +78,7 @@ export default function Home() {
       <JsonLd schema={musicGroupSchema} />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-white/10 py-12 md:py-24">
+      <section className="relative overflow-hidden border-b border-fg/10 py-12 md:py-24">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,255,65,0.10),transparent_55%)] opacity-50" />
         <div className="relative z-10 px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-12 items-start lg:gap-16">
@@ -87,7 +87,7 @@ export default function Home() {
               {latest ? (
                 <div className="relative group cursor-pointer w-full max-w-[500px] aspect-square">
                   <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary to-accent-amber opacity-25 blur transition-all duration-1000 group-hover:opacity-75 group-hover:duration-200" />
-                  <div className="scanlines relative h-full w-full overflow-hidden rounded-lg border border-white/10 bg-cyber-gray shadow-2xl ring-1 ring-white/5">
+                  <div className="scanlines relative h-full w-full overflow-hidden rounded-lg border border-fg/10 bg-surface shadow-2xl ring-1 ring-fg/5">
                     <Image
                       src={latest.frontmatter.coverImage}
                       alt={`${latest.frontmatter.title} cover`}
@@ -108,13 +108,13 @@ export default function Home() {
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-label uppercase text-primary">
                   <span className="h-2 w-2 animate-pulse rounded-full bg-primary" /> Live Now
                 </div>
-                <h1 className="font-display text-display-xl text-white mb-2">
+                <h1 className="font-display text-display-xl text-fg mb-2">
                   LATEST_DROP:<br />
                   <span className="text-primary">
                     {latest ? latest.frontmatter.title.toUpperCase().replace(/ /g, "_") : "LOADING"}
                   </span>
                 </h1>
-                <p className="max-w-lg text-body-lg font-light text-zinc-400">
+                <p className="max-w-lg text-body-lg font-light text-fg-muted">
                   {latest
                     ? latest.slug === "brain-fry"
                       ? "Information overload, neural meltdown, doom scrolling, and the exact second your internal processor taps out."
@@ -136,7 +136,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href={latest ? `/music/${latest.slug}` : "/music"}
-                  className="flex items-center gap-2 rounded bg-white px-6 py-3 font-display font-bold text-black transition-colors hover:bg-zinc-200"
+                  className="flex items-center gap-2 rounded bg-neutral-50 px-6 py-3 font-display font-bold text-neutral-950 transition-colors hover:bg-neutral-200"
                 >
                   <MaterialIcon name="play_circle" />
                   LISTEN NOW
@@ -146,7 +146,7 @@ export default function Home() {
                     href={latest.frontmatter.streamingLinks.spotify}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 rounded border border-white/20 bg-transparent px-6 py-3 font-display font-bold text-white transition-colors hover:border-primary hover:text-primary"
+                    className="flex items-center gap-2 rounded border border-fg/20 bg-transparent px-6 py-3 font-display font-bold text-fg transition-colors hover:border-primary hover:text-primary"
                   >
                     <MaterialIcon name="graphic_eq" />
                     SPOTIFY
@@ -187,7 +187,7 @@ export default function Home() {
       </section>
 
       {/* Blog Preview Section */}
-      <section className="border-t border-white/5 bg-[#050a06] py-14 md:py-24">
+      <section className="border-t border-fg/5 bg-neutral-950 py-14 md:py-24">
         <div className="px-4 sm:px-6 lg:pl-8 lg:pr-16">
           <SectionHeading kicker="02." title="TRANSMISSIONS" right={<Link href="/blog" className="hover:underline">READ_THE_LOGS -&gt;</Link>} />
 
@@ -205,13 +205,13 @@ export default function Home() {
                 <Link
                   key={p.slug}
                   href={`/blog/${p.slug}`}
-                  className={`group rounded-lg border border-white/10 bg-cyber-gray p-6 transition-all hover:border-primary/50 ${spanClass}`}
+                  className={`group rounded-lg border border-fg/10 bg-surface p-6 transition-all hover:border-primary/50 ${spanClass}`}
                 >
                   <div className="mb-3 text-label uppercase text-primary">{p.frontmatter.date}</div>
-                  <div className={`mb-4 font-display font-bold leading-tight text-white transition-colors group-hover:text-primary ${textSize}`}>
+                  <div className={`mb-4 font-display font-bold leading-tight text-fg transition-colors group-hover:text-primary ${textSize}`}>
                     {p.frontmatter.title.toUpperCase()}
                   </div>
-                  <p className={`mb-6 text-body-sm text-zinc-400 ${i === 0 ? "line-clamp-4" : "line-clamp-3"}`}>{p.frontmatter.excerpt}</p>
+                  <p className={`mb-6 text-body-sm text-fg-muted ${i === 0 ? "line-clamp-4" : "line-clamp-3"}`}>{p.frontmatter.excerpt}</p>
                   <span className="inline-flex border-b border-primary/30 pb-0.5 text-body-sm font-bold text-primary">Read more →</span>
                 </Link>
               );
@@ -221,27 +221,27 @@ export default function Home() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="relative overflow-hidden bg-primary py-24 text-black">
+      <section className="relative overflow-hidden bg-primary py-24 text-neutral-950">
         <div
           className="pointer-events-none absolute inset-0 opacity-10"
-          style={{ backgroundImage: "radial-gradient(#000 1px, transparent 1px)", backgroundSize: "20px 20px" }}
+          style={{ backgroundImage: "radial-gradient(oklch(12% 0.01 60) 1px, transparent 1px)", backgroundSize: "20px 20px" }}
         />
         <div className="relative z-10 px-4 sm:px-6 lg:px-16">
           <div className="max-w-2xl">
-            <MaterialIcon name="mail_lock" size={48} className="mb-4 text-black" />
-            <h2 className="font-display mb-4 text-display-lg uppercase text-black">Join the Network</h2>
-            <p className="mb-8 text-body-lg font-medium text-black/80">Get early access to drops, merch, and hidden tracks. No spam, only signals.</p>
+            <MaterialIcon name="mail_lock" size={48} className="mb-4 text-neutral-950" />
+            <h2 className="font-display mb-4 text-display-lg uppercase text-neutral-950">Join the Network</h2>
+            <p className="mb-8 text-body-lg font-medium text-neutral-950/80">Get early access to drops, merch, and hidden tracks. No spam, only signals.</p>
             <form className="flex max-w-xl flex-col gap-3 sm:flex-row">
               <input
                 type="email"
-                className="w-full border-2 border-black bg-white/90 px-4 py-3 text-sm text-black outline-none placeholder:text-zinc-500 focus:bg-white"
+                className="w-full border-2 border-neutral-950 bg-neutral-50/90 px-4 py-3 text-sm text-neutral-950 outline-none placeholder:text-fg-faint focus:bg-neutral-50"
                 placeholder="Your email address"
               />
-              <button type="button" className="bg-black px-8 py-3 font-display font-bold uppercase text-label text-primary transition-colors hover:bg-zinc-900">
+              <button type="button" className="bg-neutral-950 px-8 py-3 font-display font-bold uppercase text-label text-primary transition-colors hover:bg-neutral-800">
                 SUBSCRIBE
               </button>
             </form>
-            <p className="mt-4 text-xs text-black/60">* No spam, unsubscribe anytime.</p>
+            <p className="mt-4 text-xs text-neutral-950/60">* No spam, unsubscribe anytime.</p>
           </div>
         </div>
       </section>

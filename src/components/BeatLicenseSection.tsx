@@ -37,9 +37,9 @@ export default function BeatLicenseSection({ trackSlug, trackTitle }: BeatLicens
   return (
     <div className="mt-8">
       <div className="mb-1 text-xs font-semibold tracking-wide text-primary">LICENSE THIS BEAT</div>
-      <p className="mt-1 text-sm text-zinc-400">
+      <p className="mt-1 text-sm text-fg-muted">
         Use{" "}
-        <span className="font-bold text-white">{trackTitle}</span> in your own projects. Choose a license:
+        <span className="font-bold text-fg">{trackTitle}</span> in your own projects. Choose a license:
       </p>
 
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -49,19 +49,19 @@ export default function BeatLicenseSection({ trackSlug, trackTitle }: BeatLicens
             className={`rounded-xl border p-5 ${
               lic.featured
                 ? "border-primary/40 bg-primary/5"
-                : "border-white/10 bg-white/5"
+                : "border-fg/10 bg-fg/5"
             }`}
           >
             <div
-              className={`text-xs font-bold tracking-wide ${lic.featured ? "text-primary" : "text-zinc-400"}`}
+              className={`text-xs font-bold tracking-wide ${lic.featured ? "text-primary" : "text-fg-muted"}`}
             >
               {lic.tier}
             </div>
-            <div className="mt-2 text-2xl font-bold text-white">{lic.price}</div>
+            <div className="mt-2 text-2xl font-bold text-fg">{lic.price}</div>
             <ul className="mt-3 space-y-1.5">
               {lic.features.map((f) => (
-                <li key={f} className="flex items-start gap-2 text-xs text-zinc-400">
-                  <span className={`mt-0.5 ${lic.featured ? "text-primary" : "text-zinc-500"}`}>›</span>
+                <li key={f} className="flex items-start gap-2 text-xs text-fg-muted">
+                  <span className={`mt-0.5 ${lic.featured ? "text-primary" : "text-fg-faint"}`}>›</span>
                   {f}
                 </li>
               ))}

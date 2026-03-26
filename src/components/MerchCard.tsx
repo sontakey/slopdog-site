@@ -33,9 +33,9 @@ export default function MerchCard({
   const canBuy = available && (!hasSizes || selectedSize !== "");
 
   return (
-    <div className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-primary/20 hover:shadow-glow flex flex-col h-full">
+    <div className="group rounded-xl border border-fg/10 bg-fg/5 p-4 transition hover:border-primary/20 hover:shadow-glow flex flex-col h-full">
       {/* Image */}
-      <div className={`scanlines relative overflow-hidden rounded-lg border border-white/10 bg-black ${featured ? "aspect-[4/3]" : "aspect-square"}`}>
+      <div className={`scanlines relative overflow-hidden rounded-lg border border-fg/10 bg-neutral-950 ${featured ? "aspect-[4/3]" : "aspect-square"}`}>
         <Image
           src={image}
           alt={title}
@@ -44,18 +44,18 @@ export default function MerchCard({
           sizes={featured ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 25vw"}
         />
         {!available && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/70">
-            <span className="text-label uppercase text-zinc-500">SOLD OUT</span>
+          <div className="absolute inset-0 flex items-center justify-center bg-neutral-950/70">
+            <span className="text-label uppercase text-fg-faint">SOLD OUT</span>
           </div>
         )}
       </div>
 
       {/* Info */}
       <div className="mt-3 flex-1 flex flex-col">
-        <div className={`font-display font-bold leading-tight text-white group-hover:text-primary transition-colors ${featured ? "text-body-lg" : "text-body-sm"}`}>
+        <div className={`font-display font-bold leading-tight text-fg group-hover:text-primary transition-colors ${featured ? "text-body-lg" : "text-body-sm"}`}>
           {title}
         </div>
-        <div className={`mt-1 text-zinc-400 ${featured ? "text-body-sm" : "text-label"}`}>
+        <div className={`mt-1 text-fg-muted ${featured ? "text-body-sm" : "text-label"}`}>
           {currency} {price.toFixed(2)}
         </div>
         {trackTag && (
@@ -65,7 +65,7 @@ export default function MerchCard({
         {/* Size selector */}
         {hasSizes && available && (
           <div className="mt-3">
-            <div className="mb-1.5 text-label uppercase text-zinc-500">SELECT SIZE</div>
+            <div className="mb-1.5 text-label uppercase text-fg-faint">SELECT SIZE</div>
             <div className="flex flex-wrap gap-1.5">
               {sizes!.map((s) => (
                 <button
@@ -74,7 +74,7 @@ export default function MerchCard({
                   className={`rounded-md border px-2.5 py-1 text-label font-bold transition ${
                     selectedSize === s
                       ? "border-primary bg-primary/10 text-primary"
-                      : "border-white/10 text-zinc-400 hover:border-white/30 hover:text-zinc-200"
+                      : "border-fg/10 text-fg-muted hover:border-fg/30 hover:text-neutral-200"
                   }`}
                 >
                   {s}
@@ -102,7 +102,7 @@ export default function MerchCard({
           ) : (
             <button
               disabled
-              className="w-full rounded-lg border border-white/10 bg-black/40 px-5 py-3 font-display text-body-sm font-bold text-zinc-600 cursor-not-allowed"
+              className="w-full rounded-lg border border-fg/10 bg-neutral-950/40 px-5 py-3 font-display text-body-sm font-bold text-neutral-600 cursor-not-allowed"
             >
               SOLD OUT
             </button>

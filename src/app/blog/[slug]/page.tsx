@@ -108,11 +108,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         <div className="mt-6 text-label uppercase text-primary">{frontmatter.date}</div>
 
-        <div className="scanlines relative mt-6 aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-black shadow-glow">
+        <div className="scanlines relative mt-6 aspect-[16/9] overflow-hidden rounded-2xl border border-fg/10 bg-neutral-950 shadow-glow">
           <Image src={frontmatter.thumbnail} alt={frontmatter.title} fill className="object-cover" sizes="(max-width:1024px) 100vw, 768px" priority />
         </div>
 
-        <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6">
+        <div className="mt-8 rounded-2xl border border-fg/10 bg-fg/5 p-5 sm:p-6">
           <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />
         </div>
       </div>

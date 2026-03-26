@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #050a06;
-  --fg: #eaeaea;
+  --bg: oklch(12% 0.01 60);
+  --fg: oklch(93% 0.005 60);
   --primary: #00ff41;
 }
 
@@ -29,7 +29,7 @@ h1, h2, h3,
 }
 
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: oklch(10% 0.01 60);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -112,10 +112,10 @@ h1, h2, h3,
   mix-blend-mode: overlay;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.06) 0px,
-    rgba(255, 255, 255, 0.06) 1px,
-    rgba(0, 0, 0, 0) 2px,
-    rgba(0, 0, 0, 0) 4px
+    oklch(93% 0.005 60 / 0.06) 0px,
+    oklch(93% 0.005 60 / 0.06) 1px,
+    transparent 2px,
+    transparent 4px
   );
 }
 
@@ -134,7 +134,7 @@ h1, h2, h3,
 
 .prose blockquote {
   border-left: 3px solid var(--primary);
-  background: rgba(255, 255, 255, 0.03);
+  background: oklch(20% 0.008 60 / 0.5);
   border-radius: 0 8px 8px 0;
   padding: 1em 1.25em;
   margin: 2em 0;
@@ -143,12 +143,12 @@ h1, h2, h3,
 
 .prose blockquote p {
   margin-bottom: 0;
-  color: #d4d4d8;
+  color: oklch(85% 0.005 60);
   font-size: 1.05em;
 }
 
 .prose hr {
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: oklch(93% 0.005 60 / 0.08);
   margin: 2.5em 0;
 }
 

@@ -94,7 +94,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
 
         <div className="mt-8 grid gap-8 lg:grid-cols-2">
           <div className="space-y-5">
-            <div className="scanlines relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-black shadow-glow">
+            <div className="scanlines relative aspect-square overflow-hidden rounded-2xl border border-fg/10 bg-neutral-950 shadow-glow">
               <Image
                 src={frontmatter.coverImage}
                 alt={`${frontmatter.title} cover`}
@@ -106,7 +106,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             </div>
 
             {frontmatter.embedUrl ? (
-              <div className="overflow-hidden rounded-xl border border-white/10 bg-black">
+              <div className="overflow-hidden rounded-xl border border-fg/10 bg-neutral-950">
                 <iframe title={`${frontmatter.title} player`} src={frontmatter.embedUrl} width="100%" height="166" allow="autoplay" loading="lazy" />
               </div>
             ) : null}
@@ -114,7 +114,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             <div className="flex flex-wrap gap-2">
               {frontmatter.streamingLinks?.spotify ? (
                 <a
-                  className="rounded-md bg-primary px-4 py-2 font-display text-body-sm font-bold text-black hover:opacity-90"
+                  className="rounded-md bg-primary px-4 py-2 font-display text-body-sm font-bold text-neutral-950 hover:opacity-90"
                   href={frontmatter.streamingLinks.spotify}
                   target="_blank"
                   rel="noreferrer"
@@ -124,7 +124,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
               ) : null}
               {frontmatter.streamingLinks?.hyperfollow ? (
                 <a
-                  className="rounded-md border border-white/10 bg-white/5 px-4 py-2 font-display text-body-sm font-bold text-white hover:border-primary/30 hover:text-primary transition"
+                  className="rounded-md border border-fg/10 bg-fg/5 px-4 py-2 font-display text-body-sm font-bold text-fg hover:border-primary/30 hover:text-primary transition"
                   href={frontmatter.streamingLinks.hyperfollow}
                   target="_blank"
                   rel="noreferrer"
@@ -134,18 +134,18 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
               ) : null}
             </div>
 
-            <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+            <div className="rounded-xl border border-fg/10 bg-fg/5 p-5">
               <div className="text-label uppercase text-primary">RELEASE DATE</div>
-              <div className="mt-1 text-body-sm text-zinc-300">{frontmatter.date}</div>
+              <div className="mt-1 text-body-sm text-neutral-300">{frontmatter.date}</div>
               <div className="mt-4 text-label uppercase text-primary">CONCEPT</div>
-              <div className="mt-1 text-body-sm text-zinc-300">{frontmatter.concept}</div>
+              <div className="mt-1 text-body-sm text-neutral-300">{frontmatter.concept}</div>
             </div>
 
             {/* Beat License */}
             <BeatLicenseSection trackSlug={frontmatter.slug} trackTitle={frontmatter.title} />
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6">
+          <div className="rounded-2xl border border-fg/10 bg-fg/5 p-5 sm:p-6">
             <div className="text-label uppercase text-primary">LYRICS</div>
             <div className="mt-4">
               <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />

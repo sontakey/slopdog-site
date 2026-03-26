@@ -14,24 +14,24 @@ export default function StaticAudioPlayer({
   const bars = [3, 5, 2, 6, 4, 8, 3, 5, 2];
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-white/10 bg-cyber-gray p-6 shadow-glow">
+    <div className="group relative overflow-hidden rounded-xl border border-fg/10 bg-surface p-6 shadow-glow">
       <div className="absolute left-0 top-0 h-full w-1 bg-primary" />
 
       <div className="mb-4 flex items-center gap-4">
         <button
           type="button"
           aria-label="Play"
-          className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-black transition-transform hover:scale-105"
+          className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-neutral-950 transition-transform hover:scale-105"
         >
           <MaterialIcon name="play_arrow" size={28} />
         </button>
 
         <div className="min-w-0 flex-1">
-          <h3 className="truncate font-display font-bold text-white">{title}</h3>
+          <h3 className="truncate font-display font-bold text-fg">{title}</h3>
           <p className="truncate text-body-sm text-primary/70">{artist} • {album}</p>
         </div>
 
-        <span className="text-label tabular-nums text-zinc-500">{duration ?? "03:42"}</span>
+        <span className="text-label tabular-nums text-fg-faint">{duration ?? "03:42"}</span>
       </div>
 
       <div className="mb-1 flex h-8 items-end gap-1 opacity-60 transition-opacity group-hover:opacity-100">
@@ -45,7 +45,7 @@ export default function StaticAudioPlayer({
         ))}
         <div className="ml-2 h-1 flex-1 self-center rounded-full bg-primary/30" />
       </div>
-      
+
     </div>
   );
 }

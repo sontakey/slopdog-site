@@ -50,10 +50,10 @@ export default function BuyButton({
 
   const variantClass =
     variant === "primary"
-      ? "bg-primary text-black hover:opacity-90 active:scale-[0.98]"
+      ? "bg-primary text-neutral-950 hover:opacity-90 active:scale-[0.98]"
       : variant === "outline"
         ? "border border-primary/40 text-primary hover:bg-primary/10"
-        : "border border-white/10 text-zinc-300 hover:border-primary/30 hover:text-primary";
+        : "border border-fg/10 text-neutral-300 hover:border-primary/30 hover:text-primary";
 
   return (
     <div className={fullWidth ? "w-full" : "inline-block"}>

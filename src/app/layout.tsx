@@ -71,7 +71,7 @@ export default function RootLayout({
           {`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-F9XN2CW6K9');`}
         </Script>
       </head>
-      <body className={`${syne.variable} ${inter.variable} antialiased bg-bg text-white min-h-dvh flex flex-col`}>
+      <body className={`${syne.variable} ${inter.variable} antialiased bg-bg text-fg min-h-dvh flex flex-col`}>
         <Header />
         <Script src="https://analytics.ahrefs.com/analytics.js" data-key="EPsCfTpxNk01hmvRT2xvUw" strategy="afterInteractive" />
         <main className="flex-1">{children}</main>

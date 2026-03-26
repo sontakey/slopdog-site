@@ -41,7 +41,7 @@ export default function MusicPage() {
 
   return (
     <div className="px-4 py-14 md:py-20 sm:px-6 lg:pl-16 lg:pr-8">
-      <SectionHeading kicker="/" title="MUSIC" right={<span className="text-zinc-500">NEWEST FIRST</span>} />
+      <SectionHeading kicker="/" title="MUSIC" right={<span className="text-fg-faint">NEWEST FIRST</span>} />
 
       <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {tracks.map((t, i) => {
@@ -63,19 +63,19 @@ export default function MusicPage() {
             <Link
               key={t.slug}
               href={`/music/${t.slug}`}
-              className={`group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-primary/30 hover:shadow-glow ${spanClass}`}
+              className={`group rounded-xl border border-fg/10 bg-fg/5 p-4 transition hover:border-primary/30 hover:shadow-glow ${spanClass}`}
             >
-              <div className={`scanlines relative overflow-hidden rounded-lg border border-white/10 ${aspectClass}`}>
+              <div className={`scanlines relative overflow-hidden rounded-lg border border-fg/10 ${aspectClass}`}>
                 <Image src={t.frontmatter.coverImage} alt={t.frontmatter.title} fill className="object-cover" sizes={isFeatured || isWide ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
               </div>
               <div className="mt-3 flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className={`truncate font-display font-bold group-hover:text-primary ${textSize}`}>{t.frontmatter.title}</div>
-                  <div className="text-label text-zinc-500">{t.frontmatter.date}</div>
+                  <div className="text-label text-fg-faint">{t.frontmatter.date}</div>
                 </div>
-                <span className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-label uppercase text-zinc-400">{isFeatured ? "LATEST" : "OPEN"}</span>
+                <span className="rounded-md border border-fg/10 bg-neutral-950/40 px-2 py-1 text-label uppercase text-fg-muted">{isFeatured ? "LATEST" : "OPEN"}</span>
               </div>
-              <p className={`mt-2 text-body-sm text-zinc-400 ${clampClass}`}>{t.frontmatter.concept}</p>
+              <p className={`mt-2 text-body-sm text-fg-muted ${clampClass}`}>{t.frontmatter.concept}</p>
             </Link>
           );
         })}

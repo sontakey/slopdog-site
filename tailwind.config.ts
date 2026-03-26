@@ -11,10 +11,28 @@ export default {
     extend: {
       colors: {
         primary: "#00ff41",
-        bg: "#050a06",
-        cyber: {
-          gray: "#111111",
-          card: "#0f0f0f",
+        bg: "oklch(12% 0.01 60)",
+        surface: {
+          DEFAULT: "oklch(15% 0.008 60)",
+          raised: "oklch(18% 0.008 60)",
+        },
+        neutral: {
+          950: "oklch(12% 0.01 60)",
+          900: "oklch(15% 0.008 60)",
+          800: "oklch(20% 0.008 60)",
+          700: "oklch(30% 0.006 60)",
+          600: "oklch(40% 0.006 60)",
+          500: "oklch(50% 0.005 60)",
+          400: "oklch(60% 0.005 60)",
+          300: "oklch(70% 0.005 60)",
+          200: "oklch(80% 0.004 60)",
+          100: "oklch(90% 0.005 60)",
+          50: "oklch(96% 0.005 60)",
+        },
+        fg: {
+          DEFAULT: "oklch(93% 0.005 60)",
+          muted: "oklch(70% 0.005 60)",
+          faint: "oklch(50% 0.005 60)",
         },
         accent: {
           amber: "#f5a623",
