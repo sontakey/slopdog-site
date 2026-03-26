@@ -49,28 +49,43 @@ export default function BlogPage() {
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((p, i) => {
           const pos = i % 5;
-          // Repeating pattern: hero (2col+2row), standard, wide (2col), standard, standard
+          // 5-item rhythm: hero (2×2), sidebar, wide banner (2×1), compact, text-forward
           const spanClass =
             pos === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" :
             pos === 2 ? "sm:col-span-2 lg:col-span-2" : "";
           const isFeatured = pos === 0;
           const isWide = pos === 2;
+          const isSidebar = pos === 1;
+          const isCompact = pos === 3;
+          const isTextForward = pos === 4;
           const aspectClass =
             isFeatured ? "aspect-[2/1]" :
-            isWide ? "aspect-[3/1]" : "aspect-[16/10]";
-          const textSize = isFeatured ? "text-display-sm" : isWide ? "text-display-sm" : "text-body-lg";
+            isWide ? "aspect-[3/1]" :
+            isSidebar ? "aspect-[4/3]" :
+            isCompact ? "aspect-[16/9]" : "aspect-[16/10]";
+          const textSize =
+            isFeatured ? "text-display-sm" :
+            isWide ? "text-display-sm" :
+            isSidebar ? "text-body-lg" :
+            isCompact ? "text-body-sm" : "text-body-lg";
+          const padClass =
+            isFeatured ? "p-6" :
+            isCompact ? "p-4" :
+            isTextForward ? "p-6" : "p-5";
           const clampClass = isFeatured ? "line-clamp-5" : isWide ? "line-clamp-3" : "line-clamp-3";
 
           return (
             <Link
               key={p.slug}
               href={`/blog/${p.slug}`}
-              className={`group motion-fade-up rounded-xl border border-fg/10 bg-fg/5 p-5 transition-all duration-normal ease-out-quart hover:border-primary/30 ${spanClass}`}
+              className={`group motion-fade-up rounded-xl border border-fg/10 bg-fg/5 transition-all duration-normal ease-out-quart hover:border-primary/30 ${padClass} ${spanClass}`}
               style={{ animationDelay: `${Math.min(i, 5) * 75}ms` }}
             >
-              <div className={`relative mb-4 overflow-hidden rounded-lg border border-fg/10 ${aspectClass}`}>
-                <Image src={p.frontmatter.thumbnail} alt={p.frontmatter.title} fill className="object-cover transition-transform duration-slow ease-out-quint group-hover:scale-105" sizes={isFeatured || isWide ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
-              </div>
+              {isTextForward ? null : (
+                <div className={`relative mb-4 overflow-hidden rounded-lg border border-fg/10 ${aspectClass}`}>
+                  <Image src={p.frontmatter.thumbnail} alt={p.frontmatter.title} fill className="object-cover transition-transform duration-slow ease-out-quint group-hover:scale-105" sizes={isFeatured || isWide ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
+                </div>
+              )}
               <div className="text-label uppercase text-fg-faint">{p.frontmatter.date}</div>
               <div className={`mt-2 font-display font-bold leading-tight group-hover:text-primary transition-colors duration-normal ease-out-quart ${textSize}`}>{p.frontmatter.title}</div>
               <p className={`mt-2 text-body-sm text-fg-muted ${clampClass}`}>{p.frontmatter.excerpt}</p>

@@ -110,11 +110,13 @@ export default function MerchPage() {
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((p, i) => {
           const pos = i % 5;
-          // Repeating pattern: hero (2col+2row), standard, standard, wide (2col), standard
+          // 5-item rhythm: hero (2×2), standard, compact, wide (2×1), tall
           const spanClass =
             pos === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" :
-            pos === 3 ? "sm:col-span-2 lg:col-span-2" : "";
+            pos === 3 ? "sm:col-span-2 lg:col-span-2" :
+            pos === 4 ? "lg:row-span-2" : "";
           const isFeatured = pos === 0;
+          const isCompact = pos === 2;
 
           return (
             <div key={p.slug} id={p.slug} className={spanClass}>
@@ -128,6 +130,7 @@ export default function MerchPage() {
                 trackTag={p.frontmatter.trackTag}
                 available={p.frontmatter.available}
                 featured={isFeatured}
+                compact={isCompact}
               />
             </div>
           );

@@ -8,6 +8,7 @@ export default function AlbumCard({
   image,
   badge,
   featured,
+  compact,
 }: {
   href: string;
   title: string;
@@ -15,10 +16,12 @@ export default function AlbumCard({
   image: string;
   badge?: string;
   featured?: boolean;
+  compact?: boolean;
 }) {
+  const aspectClass = featured ? "aspect-square" : compact ? "aspect-[5/4]" : "aspect-square";
   return (
     <Link href={href} className="group block h-full">
-      <div className="relative mb-4 aspect-square overflow-hidden rounded border border-fg/10 transition-colors duration-normal ease-out-quart group-hover:border-primary">
+      <div className={`relative ${compact ? "mb-3" : "mb-4"} ${aspectClass} overflow-hidden rounded border border-fg/10 transition-colors duration-normal ease-out-quart group-hover:border-primary`}>
         <div className="absolute inset-0 z-10 bg-primary/10 opacity-0 transition-opacity duration-normal ease-out-quart group-hover:opacity-100" />
         <Image
           src={image}
@@ -33,8 +36,8 @@ export default function AlbumCard({
           </div>
         ) : null}
       </div>
-      <h3 className={`font-display font-bold text-fg transition-colors duration-normal ease-out-quart group-hover:text-primary ${featured ? "text-display-sm" : "text-body-lg"}`}>{title}</h3>
-      {sub ? <p className="text-body-sm text-fg-faint">{sub}</p> : null}
+      <h3 className={`font-display font-bold text-fg transition-colors duration-normal ease-out-quart group-hover:text-primary ${featured ? "text-display-sm" : compact ? "text-body-sm" : "text-body-lg"}`}>{title}</h3>
+      {sub ? <p className={`${compact ? "text-label" : "text-body-sm"} text-fg-faint`}>{sub}</p> : null}
     </Link>
   );
 }

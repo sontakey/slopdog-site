@@ -14,6 +14,7 @@ interface MerchCardProps {
   trackTag?: string;
   available: boolean;
   featured?: boolean;
+  compact?: boolean;
 }
 
 export default function MerchCard({
@@ -26,6 +27,7 @@ export default function MerchCard({
   trackTag,
   available,
   featured,
+  compact,
 }: MerchCardProps) {
   const hasSizes = sizes && sizes.length > 0;
   const [selectedSize, setSelectedSize] = useState<string>(hasSizes ? "" : "ONE_SIZE");
@@ -33,9 +35,9 @@ export default function MerchCard({
   const canBuy = available && (!hasSizes || selectedSize !== "");
 
   return (
-    <div className="group rounded-xl border border-fg/10 bg-fg/5 p-4 transition-all duration-normal ease-out-quart hover:border-primary/20 flex flex-col h-full">
+    <div className={`group rounded-xl border border-fg/10 bg-fg/5 transition-all duration-normal ease-out-quart hover:border-primary/20 flex flex-col h-full ${compact ? "p-3" : "p-4"}`}>
       {/* Image */}
-      <div className={`relative overflow-hidden rounded-lg border border-fg/10 bg-neutral-950 ${featured ? "aspect-[4/3]" : "aspect-square"}`}>
+      <div className={`relative overflow-hidden rounded-lg border border-fg/10 bg-neutral-950 ${featured ? "aspect-[4/3]" : compact ? "aspect-[5/4]" : "aspect-square"}`}>
         <Image
           src={image}
           alt={title}
@@ -52,7 +54,7 @@ export default function MerchCard({
 
       {/* Info */}
       <div className="mt-3 flex-1 flex flex-col">
-        <div className={`font-display font-bold leading-tight text-fg group-hover:text-primary transition-colors duration-normal ease-out-quart ${featured ? "text-body-lg" : "text-body-sm"}`}>
+        <div className={`font-display font-bold leading-tight text-fg group-hover:text-primary transition-colors duration-normal ease-out-quart ${featured ? "text-body-lg" : compact ? "text-label" : "text-body-sm"}`}>
           {title}
         </div>
         <div className={`mt-1 text-fg-muted ${featured ? "text-body-sm" : "text-label"}`}>

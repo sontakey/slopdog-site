@@ -159,19 +159,21 @@ export default function Home() {
 
           <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {tracks.slice(0, 4).map((t, i) => {
-              // 4-item layout: hero (2x2), standard, wide (2x1), standard
+              // 4-item rhythm: hero (2×2), compact sidebar, wide banner (2×1), tall accent
               const spanClass =
                 i === 0 ? "sm:col-span-2 sm:row-span-2" :
-                i === 2 ? "sm:col-span-2" : "";
+                i === 2 ? "sm:col-span-2" :
+                i === 3 ? "lg:row-span-2" : "";
               return (
                 <div key={t.slug} className={`motion-fade-up motion-delay-${i + 1} ${spanClass}`}>
                   <AlbumCard
                     href={`/music/${t.slug}`}
                     title={t.frontmatter.title}
-                    sub={`${t.frontmatter.date} • Single`}
+                    sub={i === 1 ? t.frontmatter.date : `${t.frontmatter.date} • Single`}
                     image={t.frontmatter.coverImage}
                     badge={i === 0 ? "NEW" : undefined}
                     featured={i === 0}
+                    compact={i === 1}
                   />
                 </div>
               );
@@ -189,25 +191,28 @@ export default function Home() {
 
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {posts.map((p, i) => {
-              // 3-item layout: wide (2col), tall (1col+2row), standard
+              // 3-item rhythm: wide headline (2col), tall sidebar (1col+2row), compact teaser
               const spanClass =
                 i === 0 ? "md:col-span-2" :
                 i === 1 ? "md:row-span-2" : "";
               const textSize =
                 i === 0 ? "text-display-sm" :
-                i === 1 ? "text-display-sm" : "text-body-lg";
+                i === 1 ? "text-display-sm" : "text-body-sm";
+              const padClass =
+                i === 0 ? "p-6" :
+                i === 1 ? "p-5" : "p-4";
 
               return (
                 <Link
                   key={p.slug}
                   href={`/blog/${p.slug}`}
-                  className={`group motion-fade-up motion-delay-${i + 1} rounded-xl border border-fg/10 bg-surface p-6 transition-all duration-normal ease-out-quart hover:border-primary/30 ${spanClass}`}
+                  className={`group motion-fade-up motion-delay-${i + 1} rounded-xl border border-fg/10 bg-surface transition-all duration-normal ease-out-quart hover:border-primary/30 ${padClass} ${spanClass}`}
                 >
                   <div className="mb-3 text-label uppercase text-fg-faint">{p.frontmatter.date}</div>
                   <div className={`mb-4 font-display font-bold leading-tight text-fg transition-colors duration-normal ease-out-quart group-hover:text-primary ${textSize}`}>
                     {p.frontmatter.title}
                   </div>
-                  <p className={`mb-6 text-body-sm text-fg-muted ${i === 0 ? "line-clamp-4" : "line-clamp-3"}`}>{p.frontmatter.excerpt}</p>
+                  <p className={`mb-6 text-body-sm text-fg-muted ${i === 0 ? "line-clamp-4" : i === 1 ? "line-clamp-5" : "line-clamp-2"}`}>{p.frontmatter.excerpt}</p>
                   <span className="inline-flex text-body-sm font-semibold text-primary">Read more &rarr;</span>
                 </Link>
               );
