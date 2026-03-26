@@ -6,7 +6,7 @@ export default function SlopdogCharacter(props: ComponentPropsWithoutRef<"svg">)
       <defs>
         <linearGradient id="slop_glow" x1="0" y1="0" x2="220" y2="220" gradientUnits="userSpaceOnUse">
           <stop stopColor="#00ff41" stopOpacity="0.9" />
-          <stop offset="1" stopColor="#00f5d4" stopOpacity="0.35" />
+          <stop offset="1" stopColor="#f5a623" stopOpacity="0.35" />
         </linearGradient>
         <filter id="slop_shadow" x="-50%" y="-50%" width="200%" height="200%">
           <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#00ff41" floodOpacity="0.25" />

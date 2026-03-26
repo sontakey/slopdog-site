@@ -19,7 +19,7 @@ export default function PrivacyPage() {
         <p>We use your information to process transactions, deliver digital products, fulfill merchandise orders, and improve our services. We do not sell your personal information.</p>
         
         <h2 className="text-xl font-semibold text-white mt-8">3. Payment Processing</h2>
-        <p>Payments are processed by Stripe. We do not store credit card information on our servers. Please review <a href="https://stripe.com/privacy" className="text-teal-400 hover:underline">Stripe's Privacy Policy</a> for details on how they handle your payment data.</p>
+        <p>Payments are processed by Stripe. We do not store credit card information on our servers. Please review <a href="https://stripe.com/privacy" className="text-amber-400 hover:underline">Stripe's Privacy Policy</a> for details on how they handle your payment data.</p>
         
         <h2 className="text-xl font-semibold text-white mt-8">4. Analytics</h2>
         <p>We use Ahrefs Analytics to understand how visitors use our Site. This service collects anonymized usage data including pages visited and referral sources.</p>

@@ -17,7 +17,7 @@ export default {
           card: "#0f0f0f",
         },
         accent: {
-          teal: "#00f5d4",
+          amber: "#f5a623",
           magenta: "#ff2bd6",
           blue: "#4ea1ff",
         },
