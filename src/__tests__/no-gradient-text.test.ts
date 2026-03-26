@@ -48,6 +48,7 @@ function hasGradientText(block: string): boolean {
 describe("No gradient text on headings/metrics", () => {
   const srcFiles = collectSourceFiles(join(ROOT, "src"), [".tsx", ".ts"]);
   const cssFiles = collectSourceFiles(join(ROOT, "src"), [".css"]);
+  const stitchFiles = collectSourceFiles(join(ROOT, "stitch-designs"), [".html"]);
 
   it("no heading elements use gradient text classes", () => {
     const violations: string[] = [];
@@ -106,6 +107,23 @@ describe("No gradient text on headings/metrics", () => {
       expect(block).not.toContain("text-transparent");
       expect(block).not.toMatch(/bg-gradient-to-\w/);
     }
+  });
+
+  it("stitch-design HTML headings do not use gradient text", () => {
+    const violations: string[] = [];
+
+    for (const file of stitchFiles) {
+      const content = readFileSync(file, "utf-8");
+
+      const headingBlocks = content.match(/<h[1-6][\s\S]*?<\/h[1-6]>/g) ?? [];
+      for (const block of headingBlocks) {
+        if (hasGradientText(block)) {
+          violations.push(`${file}: heading uses gradient text: ${block.slice(0, 120)}...`);
+        }
+      }
+    }
+
+    expect(violations).toEqual([]);
   });
 
   it("CSS files do not apply gradient text to headings or metric selectors", () => {
