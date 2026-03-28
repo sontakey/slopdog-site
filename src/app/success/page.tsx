@@ -78,10 +78,10 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h1 className="mt-4 font-mono text-3xl font-bold tracking-tight text-white">
-          ORDER_CONFIRMED
+        <h1 className="mt-4 font-display text-display-md text-fg">
+          ORDER CONFIRMED
         </h1>
-        <p className="mt-3 text-zinc-400">
+        <p className="mt-3 text-fg-muted">
           {isDigital
             ? "Payment received. Your digital goods are below."
             : "Thanks for your order! We'll email you shipping details once it ships."}
@@ -91,15 +91,15 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
       {/* Digital download section */}
       {isDigital && digitalProduct && (
         <div className="mb-8 rounded-2xl border border-primary/20 bg-primary/5 p-6">
-          <div className="mb-1 font-mono text-xs text-primary">DIGITAL_DOWNLOAD</div>
-          <h2 className="text-lg font-bold text-white">{digitalProduct.title}</h2>
-          <p className="mt-2 text-sm text-zinc-400">{digitalProduct.description}</p>
+          <div className="mb-1 text-label uppercase text-primary">DIGITAL DOWNLOAD</div>
+          <h2 className="text-lg font-bold text-fg">{digitalProduct.title}</h2>
+          <p className="mt-2 text-sm text-fg-muted">{digitalProduct.description}</p>
           <div className="mt-5 space-y-2">
             {digitalProduct.downloads.map((d) => (
               <a
                 key={d.url}
                 href={d.url}
-                className="flex items-center gap-3 rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-sm text-zinc-200 transition hover:border-primary/40 hover:text-primary"
+                className="flex items-center gap-3 border-b border-fg/10 px-4 py-3 text-sm text-neutral-200 transition-colors duration-normal ease-out-quart last:border-0 hover:text-primary"
               >
                 <svg className="h-4 w-4 shrink-0 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -108,7 +108,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
               </a>
             ))}
           </div>
-          <p className="mt-4 text-xs text-zinc-500">
+          <p className="mt-4 text-xs text-fg-faint">
             Download links expire in 48 hours. Having trouble?{" "}
             <a href="mailto:slopdog@sontakey.com" className="text-primary hover:underline">Email us</a>.
           </p>
@@ -117,17 +117,17 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
 
       {/* License terms */}
       {licenseTerms && (
-        <div className="mb-8 rounded-2xl border border-white/10 bg-white/5 p-6">
-          <div className="mb-1 font-mono text-xs text-primary">LICENSE_TERMS</div>
+        <div className="mb-8 rounded-2xl border border-fg/10 bg-fg/5 p-6">
+          <div className="mb-1 text-label uppercase text-primary">LICENSE TERMS</div>
           <ul className="mt-3 space-y-2">
             {(licenseTerms.basic ?? licenseTerms.commercial ?? []).map((term) => (
-              <li key={term} className="flex items-start gap-2 text-sm text-zinc-300">
+              <li key={term} className="flex items-start gap-2 text-sm text-neutral-300">
                 <span className="mt-0.5 text-primary">›</span>
                 {term}
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-xs text-zinc-500">
+          <p className="mt-4 text-xs text-fg-faint">
             Questions about licensing?{" "}
             <a href="mailto:slopdog@sontakey.com" className="text-primary hover:underline">Contact us</a>.
           </p>
@@ -136,12 +136,12 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
 
       {/* Merch order message */}
       {!isDigital && (
-        <div className="mb-8 rounded-2xl border border-white/10 bg-white/5 p-6">
-          <div className="mb-1 font-mono text-xs text-primary">WHAT_HAPPENS_NEXT</div>
-          <ul className="mt-3 space-y-2 text-sm text-zinc-300">
+        <div className="mb-8 rounded-2xl border border-fg/10 bg-fg/5 p-6">
+          <div className="mb-1 text-label uppercase text-primary">WHAT HAPPENS NEXT</div>
+          <ul className="mt-3 space-y-2 text-sm text-neutral-300">
             <li className="flex items-start gap-2">
               <span className="mt-0.5 text-primary">›</span>
-              We'll email you a confirmation with your order details.
+              We&apos;ll email you a confirmation with your order details.
             </li>
             <li className="flex items-start gap-2">
               <span className="mt-0.5 text-primary">›</span>
@@ -152,7 +152,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
               Tracking will be sent once your order ships.
             </li>
           </ul>
-          <p className="mt-4 text-xs text-zinc-500">
+          <p className="mt-4 text-xs text-fg-faint">
             Issues with your order?{" "}
             <a href="mailto:slopdog@sontakey.com" className="text-primary hover:underline">Email us</a>.
           </p>
@@ -164,21 +164,21 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
         {trackSlug ? (
           <Link
             href={`/music/${trackSlug}`}
-            className="flex-1 rounded-lg border border-white/10 bg-white/5 px-5 py-3 text-center text-sm font-bold text-white transition hover:border-primary/40 hover:text-primary"
+            className="flex-1 rounded-lg border border-fg/10 bg-fg/5 px-5 py-3 text-center text-sm font-bold text-fg transition-colors duration-normal ease-out-quart hover:border-primary/40 hover:text-primary"
           >
             ← BACK TO TRACK
           </Link>
         ) : (
           <Link
             href="/merch"
-            className="flex-1 rounded-lg border border-white/10 bg-white/5 px-5 py-3 text-center text-sm font-bold text-white transition hover:border-primary/40 hover:text-primary"
+            className="flex-1 rounded-lg border border-fg/10 bg-fg/5 px-5 py-3 text-center text-sm font-bold text-fg transition-colors duration-normal ease-out-quart hover:border-primary/40 hover:text-primary"
           >
             ← BACK TO MERCH
           </Link>
         )}
         <Link
           href="/music"
-          className="flex-1 rounded-lg border border-primary/30 bg-primary/10 px-5 py-3 text-center text-sm font-bold text-primary transition hover:bg-primary/20"
+          className="flex-1 rounded-lg border border-primary/30 bg-primary/10 px-5 py-3 text-center text-sm font-bold text-primary transition-colors duration-normal ease-out-quart hover:bg-primary/20"
         >
           LISTEN TO THE MUSIC
         </Link>

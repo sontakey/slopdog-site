@@ -46,14 +46,14 @@ export default function BuyButton({
     }
   };
 
-  const baseClass = `inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-bold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed ${fullWidth ? "w-full" : ""}`;
+  const baseClass = `inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 font-display text-body-sm font-bold transition-all duration-normal ease-out-quart focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed ${fullWidth ? "w-full" : ""}`;
 
   const variantClass =
     variant === "primary"
-      ? "bg-primary text-black hover:opacity-90 active:scale-[0.98]"
+      ? "bg-primary text-neutral-950 hover:opacity-90 active:scale-[0.98]"
       : variant === "outline"
         ? "border border-primary/40 text-primary hover:bg-primary/10"
-        : "border border-white/10 text-zinc-300 hover:border-primary/30 hover:text-primary";
+        : "border border-fg/10 text-neutral-300 hover:border-primary/30 hover:text-primary";
 
   return (
     <div className={fullWidth ? "w-full" : "inline-block"}>
@@ -75,7 +75,7 @@ export default function BuyButton({
         )}
       </button>
       {error && (
-        <p className="mt-2 text-xs text-red-400">{error}</p>
+        <p className="mt-2 text-label text-red-400">{error}</p>
       )}
     </div>
   );

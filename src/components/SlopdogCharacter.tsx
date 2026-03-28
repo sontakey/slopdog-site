@@ -6,7 +6,7 @@ export default function SlopdogCharacter(props: ComponentPropsWithoutRef<"svg">)
       <defs>
         <linearGradient id="slop_glow" x1="0" y1="0" x2="220" y2="220" gradientUnits="userSpaceOnUse">
           <stop stopColor="#00ff41" stopOpacity="0.9" />
-          <stop offset="1" stopColor="#00f5d4" stopOpacity="0.35" />
+          <stop offset="1" stopColor="#f5a623" stopOpacity="0.35" />
         </linearGradient>
         <filter id="slop_shadow" x="-50%" y="-50%" width="200%" height="200%">
           <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#00ff41" floodOpacity="0.25" />
@@ -14,12 +14,12 @@ export default function SlopdogCharacter(props: ComponentPropsWithoutRef<"svg">)
       </defs>
 
       <rect x="18" y="18" width="184" height="184" rx="22" stroke="url(#slop_glow)" strokeWidth="2" opacity="0.9" />
-      <rect x="34" y="34" width="152" height="152" rx="18" stroke="#ffffff" strokeOpacity="0.08" strokeWidth="2" />
+      <rect x="34" y="34" width="152" height="152" rx="18" stroke="#f5ede4" strokeOpacity="0.08" strokeWidth="2" />
 
       {/* head */}
       <path
         d="M70 96c0-24 18-44 40-44s40 20 40 44v22c0 24-18 44-40 44s-40-20-40-44V96Z"
-        fill="#0f0f0f"
+        fill="#1a1714"
         stroke="url(#slop_glow)"
         strokeWidth="2"
         filter="url(#slop_shadow)"
@@ -28,7 +28,7 @@ export default function SlopdogCharacter(props: ComponentPropsWithoutRef<"svg">)
       {/* visor */}
       <path
         d="M78 102c10-10 24-16 32-16s22 6 32 16v12c-10 10-24 16-32 16s-22-6-32-16v-12Z"
-        fill="#000"
+        fill="#110f0d"
         stroke="#00ff41"
         strokeOpacity="0.65"
         strokeWidth="2"
@@ -39,7 +39,7 @@ export default function SlopdogCharacter(props: ComponentPropsWithoutRef<"svg">)
       <circle cx="123" cy="112" r="4" fill="#00ff41" />
 
       {/* mouth */}
-      <path d="M97 140h26" stroke="#ffffff" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" />
+      <path d="M97 140h26" stroke="#f5ede4" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" />
 
       {/* ears/antennas */}
       <path d="M64 92l-10-8" stroke="#00ff41" strokeOpacity="0.65" strokeWidth="2" strokeLinecap="round" />

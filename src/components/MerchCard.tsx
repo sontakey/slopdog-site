@@ -13,6 +13,8 @@ interface MerchCardProps {
   sizes?: string[];
   trackTag?: string;
   available: boolean;
+  featured?: boolean;
+  compact?: boolean;
 }
 
 export default function MerchCard({
@@ -24,6 +26,8 @@ export default function MerchCard({
   sizes,
   trackTag,
   available,
+  featured,
+  compact,
 }: MerchCardProps) {
   const hasSizes = sizes && sizes.length > 0;
   const [selectedSize, setSelectedSize] = useState<string>(hasSizes ? "" : "ONE_SIZE");
@@ -31,48 +35,48 @@ export default function MerchCard({
   const canBuy = available && (!hasSizes || selectedSize !== "");
 
   return (
-    <div className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-primary/20 hover:shadow-glow flex flex-col">
+    <div className={`group rounded-xl border border-fg/10 bg-fg/5 transition-all duration-normal ease-out-quart hover:border-primary/20 flex flex-col h-full ${compact ? "p-3" : "p-4"}`}>
       {/* Image */}
-      <div className="scanlines relative aspect-square overflow-hidden rounded-lg border border-white/10 bg-black">
+      <div className={`relative overflow-hidden rounded-lg border border-fg/10 bg-neutral-950 ${featured ? "aspect-[4/3]" : compact ? "aspect-[5/4]" : "aspect-square"}`}>
         <Image
           src={image}
           alt={title}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width:1024px) 100vw, 25vw"
+          className="object-cover transition-transform duration-slow ease-out-quint group-hover:scale-105"
+          sizes={featured ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 25vw"}
         />
         {!available && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/70">
-            <span className="font-mono text-xs text-zinc-500">SOLD_OUT</span>
+          <div className="absolute inset-0 flex items-center justify-center bg-neutral-950/70">
+            <span className="text-label uppercase text-fg-faint">SOLD OUT</span>
           </div>
         )}
       </div>
 
       {/* Info */}
       <div className="mt-3 flex-1 flex flex-col">
-        <div className="text-sm font-bold leading-tight text-white group-hover:text-primary transition-colors">
+        <div className={`font-display font-bold leading-tight text-fg group-hover:text-primary transition-colors duration-normal ease-out-quart ${featured ? "text-body-lg" : compact ? "text-label" : "text-body-sm"}`}>
           {title}
         </div>
-        <div className="mt-1 font-mono text-xs text-zinc-400">
+        <div className={`mt-1 text-fg-muted ${featured ? "text-body-sm" : "text-label"}`}>
           {currency} {price.toFixed(2)}
         </div>
         {trackTag && (
-          <div className="mt-1.5 font-mono text-[10px] text-primary">TAG: {trackTag}</div>
+          <div className="mt-1.5 text-label uppercase text-primary">TAG: {trackTag}</div>
         )}
 
         {/* Size selector */}
         {hasSizes && available && (
           <div className="mt-3">
-            <div className="mb-1.5 font-mono text-[10px] text-zinc-500">SELECT SIZE</div>
+            <div className="mb-1.5 text-label uppercase text-fg-faint">SELECT SIZE</div>
             <div className="flex flex-wrap gap-1.5">
               {sizes!.map((s) => (
                 <button
                   key={s}
                   onClick={() => setSelectedSize(s)}
-                  className={`rounded-md border px-2.5 py-1 text-[10px] font-mono font-bold transition ${
+                  className={`rounded-md border px-2.5 py-1 text-label font-bold transition-colors duration-fast ease-out-quart ${
                     selectedSize === s
                       ? "border-primary bg-primary/10 text-primary"
-                      : "border-white/10 text-zinc-400 hover:border-white/30 hover:text-zinc-200"
+                      : "border-fg/10 text-fg-muted hover:border-fg/30 hover:text-neutral-200"
                   }`}
                 >
                   {s}
@@ -100,7 +104,7 @@ export default function MerchCard({
           ) : (
             <button
               disabled
-              className="w-full rounded-lg border border-white/10 bg-black/40 px-5 py-3 text-sm font-bold text-zinc-600 cursor-not-allowed"
+              className="w-full rounded-lg border border-fg/10 bg-neutral-900 px-5 py-3 font-display text-body-sm font-bold text-neutral-600 cursor-not-allowed"
             >
               SOLD OUT
             </button>

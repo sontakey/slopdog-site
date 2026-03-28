@@ -1,9 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #050a06;
-  --fg: #eaeaea;
+  --bg: oklch(12% 0.01 60);
+  --fg: oklch(93% 0.005 60);
   --primary: #00ff41;
+
+  /* Exponential easing — purposeful, smooth deceleration */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-quart: cubic-bezier(0.5, 0, 0.75, 0);
+
+  /* Motion duration tokens */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-entrance: 600ms;
 }
 
 html,
@@ -14,105 +25,99 @@ body {
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui;
+  font-family: var(--font-inter), ui-sans-serif, system-ui;
 }
 
-/* Cyber scrollbar */
+/* Display typography — Syne for headlines */
+h1, h2, h3,
+.font-display {
+  font-family: var(--font-syne), ui-sans-serif, system-ui;
+}
+
+/* Scrollbar — subtle, warm-tinted */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: oklch(10% 0.01 60);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 2px;
+  background: oklch(30% 0.006 60);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 65, 0.8);
+  background: oklch(40% 0.006 60);
 }
 
-/* Subtle glitch text treatment */
-.glitch {
-  position: relative;
-  text-shadow:
-    0.02em 0 0 rgba(0, 255, 65, 0.6),
-    -0.02em -0.01em 0 rgba(255, 43, 214, 0.35),
-    0.02em 0.01em 0 rgba(78, 161, 255, 0.35);
-}
 
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
+
+/* ------------------------------------------------------------------
+   Motion utilities — purposeful entrance animations
+   ------------------------------------------------------------------ */
+
+/* Entrance: fade-up (default for most content) */
+.motion-fade-up {
   opacity: 0;
-  pointer-events: none;
+  transform: translateY(12px);
+  animation: fade-up var(--duration-entrance) var(--ease-out-quint) forwards;
 }
 
-.glitch::before {
-  transform: translate(1px, 0);
-  color: rgba(255, 43, 214, 0.75);
-}
-
-.glitch::after {
-  transform: translate(-1px, 0);
-  color: rgba(78, 161, 255, 0.75);
-}
-
-.group:hover .glitch::before,
-.group:hover .glitch::after {
-  opacity: 0.35;
-  animation: glitch-flicker 650ms steps(2) infinite;
-}
-
-@keyframes glitch-flicker {
-  0% {
-    clip-path: inset(0 0 85% 0);
-  }
-  20% {
-    clip-path: inset(15% 0 60% 0);
-  }
-  40% {
-    clip-path: inset(55% 0 25% 0);
-  }
-  60% {
-    clip-path: inset(30% 0 50% 0);
-  }
-  80% {
-    clip-path: inset(75% 0 5% 0);
-  }
-  100% {
-    clip-path: inset(0 0 85% 0);
+@keyframes fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Scan-line overlay utility (apply to a wrapper with class scanlines) */
-.scanlines {
-  position: relative;
+/* Entrance: fade-in (no translation, for images/overlays) */
+.motion-fade-in {
+  opacity: 0;
+  animation: fade-in var(--duration-slow) var(--ease-out-quart) forwards;
 }
 
-.scanlines::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.14;
-  mix-blend-mode: overlay;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.06) 0px,
-    rgba(255, 255, 255, 0.06) 1px,
-    rgba(0, 0, 0, 0) 2px,
-    rgba(0, 0, 0, 0) 4px
-  );
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
 }
 
+/* Stagger delay utilities (apply alongside motion-fade-up) */
+.motion-delay-1 { animation-delay: 75ms; }
+.motion-delay-2 { animation-delay: 150ms; }
+.motion-delay-3 { animation-delay: 225ms; }
+.motion-delay-4 { animation-delay: 300ms; }
+.motion-delay-5 { animation-delay: 375ms; }
+
+/* Smooth hover transition preset */
+.motion-hover {
+  transition: all var(--duration-normal) var(--ease-out-quart);
+}
+
+/* Accessibility: disable all motion for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .motion-fade-up,
+  .motion-fade-in {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .motion-hover {
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 /* Blog typography - Medium-style spacing */
 .prose p {
@@ -128,7 +133,7 @@ body {
 
 .prose blockquote {
   border-left: 3px solid var(--primary);
-  background: rgba(255, 255, 255, 0.03);
+  background: oklch(20% 0.008 60 / 0.5);
   border-radius: 0 8px 8px 0;
   padding: 1em 1.25em;
   margin: 2em 0;
@@ -137,12 +142,12 @@ body {
 
 .prose blockquote p {
   margin-bottom: 0;
-  color: #d4d4d8;
+  color: oklch(85% 0.005 60);
   font-size: 1.05em;
 }
 
 .prose hr {
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: oklch(93% 0.005 60 / 0.08);
   margin: 2.5em 0;
 }
 

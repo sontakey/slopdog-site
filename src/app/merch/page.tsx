@@ -80,24 +80,26 @@ export default function MerchPage() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
+    <div className="px-4 py-10 md:py-14 sm:px-6 lg:pl-16 lg:pr-8">
       <JsonLd schema={catalogSchema} />
-      <SectionHeading kicker="/" title="MERCH" right={<span className="text-zinc-500 text-sm font-mono">STRIPE_CHECKOUT</span>} />
+      <div className="motion-fade-up">
+        <SectionHeading title="MERCH" />
+      </div>
 
       {/* Digital product promo banner */}
-      <div className="mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-5 sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="motion-fade-up motion-delay-1 mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-5 sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="font-mono text-xs text-primary mb-1">DIGITAL_PRODUCT</div>
-          <div className="font-bold text-white">Slopdog Stem Pack Vol. 1</div>
-          <p className="mt-1 text-sm text-zinc-400">
+          <div className="text-label uppercase text-primary mb-1">DIGITAL PRODUCT</div>
+          <div className="font-display font-bold text-fg">Slopdog Stem Pack Vol. 1</div>
+          <p className="mt-1 text-body-sm text-fg-muted">
             All 3 tracks as stems — vocals, instrumentals, acapella. Remix, sample, go wild.
           </p>
         </div>
         <div className="shrink-0 flex items-center gap-4">
-          <span className="font-mono text-xl font-bold text-white">$9.99</span>
+          <span className="font-display text-display-sm text-fg">$9.99</span>
           <Link
             href="/products/stem-pack"
-            className="rounded-lg bg-primary px-4 py-2 text-sm font-bold text-black hover:opacity-90 transition whitespace-nowrap"
+            className="rounded-lg bg-primary px-4 py-2 font-display text-body-sm font-bold text-neutral-950 hover:opacity-90 transition-opacity duration-normal ease-out-quart whitespace-nowrap"
           >
             GET STEMS
           </Link>
@@ -105,25 +107,38 @@ export default function MerchPage() {
       </div>
 
       {/* Product grid */}
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {products.map((p) => (
-          <div key={p.slug} id={p.slug}>
-            <MerchCard
-              slug={p.frontmatter.slug}
-              title={p.frontmatter.title}
-              price={p.frontmatter.price}
-              currency={p.frontmatter.currency}
-              image={p.frontmatter.image}
-              sizes={p.frontmatter.sizes}
-              trackTag={p.frontmatter.trackTag}
-              available={p.frontmatter.available}
-            />
-          </div>
-        ))}
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {products.map((p, i) => {
+          const pos = i % 5;
+          // 5-item rhythm: hero (2×2), standard, compact, wide (2×1), tall
+          const spanClass =
+            pos === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" :
+            pos === 3 ? "sm:col-span-2 lg:col-span-2" :
+            pos === 4 ? "lg:row-span-2" : "";
+          const isFeatured = pos === 0;
+          const isCompact = pos === 2;
+
+          return (
+            <div key={p.slug} id={p.slug} className={spanClass}>
+              <MerchCard
+                slug={p.frontmatter.slug}
+                title={p.frontmatter.title}
+                price={p.frontmatter.price}
+                currency={p.frontmatter.currency}
+                image={p.frontmatter.image}
+                sizes={p.frontmatter.sizes}
+                trackTag={p.frontmatter.trackTag}
+                available={p.frontmatter.available}
+                featured={isFeatured}
+                compact={isCompact}
+              />
+            </div>
+          );
+        })}
       </div>
 
-      <div className="mt-10 rounded-2xl border border-white/10 bg-black/40 p-6 text-sm text-zinc-300">
-        <div className="font-mono text-primary text-xs mb-2">NOTE</div>
+      <div className="mt-10 rounded-2xl border border-fg/10 bg-neutral-950/40 p-6 text-body-sm text-neutral-300">
+        <div className="text-label uppercase text-primary mb-2">NOTE</div>
         <p>All merch is print-on-demand. Orders ship within 5–7 business days.</p>
         <p className="mt-2">
           Questions? Email{" "}

@@ -41,33 +41,66 @@ export default function BlogPage() {
   const posts = getAllMdx<BlogFrontmatter>("content/blog");
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
-      <SectionHeading kicker="/" title="BLOG" right={<span className="text-zinc-500">TRANSMISSIONS</span>} />
+    <div className="px-4 py-12 md:py-16 sm:px-6 lg:pl-8 lg:pr-16">
+      <div className="motion-fade-up">
+        <SectionHeading title="BLOG" />
+      </div>
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((p) => (
-          <Link
-            key={p.slug}
-            href={`/blog/${p.slug}`}
-            className="group rounded-xl border border-white/10 bg-white/5 p-5 transition hover:border-primary/30 hover:shadow-glow"
-          >
-            <div className="scanlines relative mb-4 aspect-[16/10] overflow-hidden rounded-lg border border-white/10">
-              <Image src={p.frontmatter.thumbnail} alt={p.frontmatter.title} fill className="object-cover" sizes="(max-width:1024px) 100vw, 33vw" />
-            </div>
-            <div className="text-xs font-mono text-primary">{p.frontmatter.date} // LOG_ENTRY</div>
-            <div className="mt-2 text-lg font-bold leading-tight group-hover:text-primary">{p.frontmatter.title}</div>
-            <p className="mt-2 line-clamp-3 text-sm text-zinc-400">{p.frontmatter.excerpt}</p>
-            {p.frontmatter.tags?.length ? (
-              <div className="mt-4 flex flex-wrap gap-2">
-                {p.frontmatter.tags.slice(0, 3).map((t) => (
-                  <span key={t} className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-[10px] font-mono text-zinc-400">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            ) : null}
-          </Link>
-        ))}
+        {posts.map((p, i) => {
+          const pos = i % 5;
+          // 5-item rhythm: hero (2×2), sidebar, wide banner (2×1), compact, text-forward
+          const spanClass =
+            pos === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" :
+            pos === 2 ? "sm:col-span-2 lg:col-span-2" : "";
+          const isFeatured = pos === 0;
+          const isWide = pos === 2;
+          const isSidebar = pos === 1;
+          const isCompact = pos === 3;
+          const isTextForward = pos === 4;
+          const aspectClass =
+            isFeatured ? "aspect-[2/1]" :
+            isWide ? "aspect-[3/1]" :
+            isSidebar ? "aspect-[4/3]" :
+            isCompact ? "aspect-[16/9]" : "aspect-[16/10]";
+          const textSize =
+            isFeatured ? "text-display-sm" :
+            isWide ? "text-display-sm" :
+            isSidebar ? "text-body-lg" :
+            isCompact ? "text-body-sm" : "text-body-lg";
+          const padClass =
+            isFeatured ? "p-6" :
+            isCompact ? "p-4" :
+            isTextForward ? "p-6" : "p-5";
+          const clampClass = isFeatured ? "line-clamp-5" : isWide ? "line-clamp-3" : "line-clamp-3";
+
+          return (
+            <Link
+              key={p.slug}
+              href={`/blog/${p.slug}`}
+              className={`group motion-fade-up rounded-xl border border-fg/10 bg-fg/5 transition-all duration-normal ease-out-quart hover:border-primary/30 ${padClass} ${spanClass}`}
+              style={{ animationDelay: `${Math.min(i, 5) * 75}ms` }}
+            >
+              {isTextForward ? null : (
+                <div className={`relative mb-4 overflow-hidden rounded-lg border border-fg/10 ${aspectClass}`}>
+                  <Image src={p.frontmatter.thumbnail} alt={p.frontmatter.title} fill className="object-cover transition-transform duration-slow ease-out-quint group-hover:scale-105" sizes={isFeatured || isWide ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
+                </div>
+              )}
+              <div className="text-label uppercase text-fg-faint">{p.frontmatter.date}</div>
+              <div className={`mt-2 font-display font-bold leading-tight group-hover:text-primary transition-colors duration-normal ease-out-quart ${textSize}`}>{p.frontmatter.title}</div>
+              <p className={`mt-2 text-body-sm text-fg-muted ${clampClass}`}>{p.frontmatter.excerpt}</p>
+              {p.frontmatter.tags?.length ? (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {p.frontmatter.tags.slice(0, 3).map((t) => (
+                    <span key={t} className="rounded-full border border-fg/10 bg-neutral-950/40 px-2.5 py-0.5 text-label text-fg-muted">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

@@ -26,13 +26,13 @@ const STEM_TYPES = ["Vocals (clean)", "Vocals (ad-libs)", "Instrumental (full)",
 
 export default function StemPackPage() {
   return (
-    <div className="mx-auto max-w-4xl px-5 py-12 sm:px-6">
+    <div className="max-w-5xl px-5 py-12 sm:px-6 lg:pl-16">
       {/* Header */}
-      <div className="mb-2 font-mono text-xs text-primary">DIGITAL_PRODUCT</div>
-      <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+      <div className="mb-2 text-label uppercase text-primary">DIGITAL PRODUCT</div>
+      <h1 className="font-display text-display-lg text-fg">
         SLOPDOG STEM PACK VOL. 1
       </h1>
-      <p className="mt-4 max-w-xl text-zinc-400">
+      <p className="mt-4 max-w-xl text-fg-muted">
         All 3 Slopdog tracks as stems — vocals, instrumentals, acapella. Remix, sample, go wild. License included.
       </p>
 
@@ -40,18 +40,18 @@ export default function StemPackPage() {
         {/* Left: product details */}
         <div className="lg:col-span-3 space-y-6">
           {/* Track list */}
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <div className="mb-4 font-mono text-xs text-primary">INCLUDED_TRACKS</div>
+          <div className="rounded-2xl border border-fg/10 bg-fg/5 p-6">
+            <div className="mb-4 text-label uppercase text-primary">INCLUDED TRACKS</div>
             <div className="space-y-3">
               {TRACKS.map((t) => (
                 <div key={t.slug} className="flex items-center gap-4">
-                  <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-black">
+                  <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-fg/10 bg-neutral-950">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={t.cover} alt={t.title} className="h-full w-full object-cover" />
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-white">{t.title}</div>
-                    <Link href={`/music/${t.slug}`} className="text-xs text-zinc-500 hover:text-primary">
+                    <div className="text-sm font-bold text-fg">{t.title}</div>
+                    <Link href={`/music/${t.slug}`} className="text-xs text-fg-faint hover:text-primary">
                       Listen →
                     </Link>
                   </div>
@@ -61,11 +61,11 @@ export default function StemPackPage() {
           </div>
 
           {/* Stem types */}
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <div className="mb-4 font-mono text-xs text-primary">STEM_TYPES_PER_TRACK</div>
+          <div className="rounded-2xl border border-fg/10 bg-fg/5 p-6">
+            <div className="mb-4 text-label uppercase text-primary">STEM TYPES PER TRACK</div>
             <ul className="space-y-2">
               {STEM_TYPES.map((s) => (
-                <li key={s} className="flex items-center gap-2 text-sm text-zinc-300">
+                <li key={s} className="flex items-center gap-2 text-sm text-neutral-300">
                   <span className="text-primary">›</span> {s}
                 </li>
               ))}
@@ -73,11 +73,11 @@ export default function StemPackPage() {
           </div>
 
           {/* License */}
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <div className="mb-4 font-mono text-xs text-primary">LICENSE</div>
-            <ul className="space-y-2 text-sm text-zinc-300">
+          <div className="rounded-2xl border border-fg/10 bg-fg/5 p-6">
+            <div className="mb-4 text-label uppercase text-primary">LICENSE</div>
+            <ul className="space-y-2 text-sm text-neutral-300">
               <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">›</span>Personal and commercial use permitted</li>
-              <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">›</span>Credit preferred: "Stems by SLOPDOG (slopdog.com)"</li>
+              <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">›</span>Credit preferred: &quot;Stems by SLOPDOG (slopdog.com)&quot;</li>
               <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">›</span>No resale of the stems themselves</li>
               <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">›</span>Full license PDF included in download</li>
             </ul>
@@ -86,12 +86,12 @@ export default function StemPackPage() {
 
         {/* Right: purchase card */}
         <div className="lg:col-span-2">
-          <div className="sticky top-6 rounded-2xl border border-primary/20 bg-black/60 p-6 shadow-glow">
-            <div className="font-mono text-xs text-primary">STEM_PACK_VOL_1</div>
-            <div className="mt-3 text-4xl font-bold text-white">$9.99</div>
-            <div className="mt-1 text-xs text-zinc-500">One-time payment · Instant download</div>
+          <div className="sticky top-6 rounded-2xl border border-primary/20 bg-neutral-950/60 p-6">
+            <div className="text-label uppercase text-primary">STEM PACK VOL. 1</div>
+            <div className="mt-3 font-display text-display-lg text-fg">$9.99</div>
+            <div className="mt-1 text-xs text-fg-faint">One-time payment · Instant download</div>
 
-            <div className="mt-5 space-y-2 text-xs text-zinc-400">
+            <div className="mt-5 space-y-2 text-xs text-fg-muted">
               <div className="flex items-center gap-2">
                 <span className="text-primary">✓</span> 3 tracks × 6 stem types = 18 files
               </div>
@@ -110,7 +110,7 @@ export default function StemPackPage() {
               <BuyButton product="stem-pack-vol-1" label="BUY STEM PACK — $9.99" fullWidth />
             </div>
 
-            <p className="mt-4 text-center text-xs text-zinc-600">
+            <p className="mt-4 text-center text-xs text-neutral-600">
               Secure checkout via Stripe. No account needed.
             </p>
           </div>

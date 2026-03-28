@@ -40,29 +40,62 @@ export default function MusicPage() {
   const tracks = getAllMdx<TrackFrontmatter>("content/music");
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
-      <SectionHeading kicker="/" title="MUSIC" right={<span className="text-zinc-500">NEWEST FIRST</span>} />
+    <div className="px-4 py-14 md:py-20 sm:px-6 lg:pl-16 lg:pr-8">
+      <div className="motion-fade-up">
+        <SectionHeading title="MUSIC" right={<span className="text-fg-faint">Newest first</span>} />
+      </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {tracks.map((t) => (
-          <Link
-            key={t.slug}
-            href={`/music/${t.slug}`}
-            className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-primary/30 hover:shadow-glow"
-          >
-            <div className="scanlines relative aspect-square overflow-hidden rounded-lg border border-white/10">
-              <Image src={t.frontmatter.coverImage} alt={t.frontmatter.title} fill className="object-cover" sizes="(max-width:1024px) 100vw, 33vw" />
-            </div>
-            <div className="mt-3 flex items-start justify-between gap-3">
-              <div className="min-w-0">
-                <div className="truncate text-lg font-bold group-hover:text-primary">{t.frontmatter.title}</div>
-                <div className="text-xs font-mono text-zinc-500">{t.frontmatter.date}</div>
+      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {tracks.map((t, i) => {
+          const pos = i % 6;
+          // Repeating 6-item rhythm: hero (2×2), compact, landscape, wide (2×1), minimal, tall (1×2)
+          const spanClass =
+            pos === 0 ? "sm:col-span-2 sm:row-span-2" :
+            pos === 3 ? "sm:col-span-2" :
+            pos === 5 ? "lg:row-span-2" : "";
+          const isFeatured = pos === 0;
+          const isWide = pos === 3;
+          const isTall = pos === 5;
+          const isCompact = pos === 1;
+          const isLandscape = pos === 2;
+          const isMinimal = pos === 4;
+          const aspectClass =
+            isFeatured ? "aspect-[4/3]" :
+            isWide ? "aspect-[2/1]" :
+            isLandscape ? "aspect-[3/2]" :
+            isTall ? "aspect-[3/4]" :
+            isMinimal ? "aspect-[5/4]" : "aspect-square";
+          const textSize =
+            isFeatured ? "text-display-sm" :
+            isWide ? "text-display-sm" :
+            isCompact ? "text-body-sm" : "text-body-lg";
+          const padClass =
+            isFeatured ? "p-5" :
+            isCompact ? "p-3" :
+            isMinimal ? "p-3" : "p-4";
+          const clampClass = isFeatured ? "line-clamp-4" : isWide ? "line-clamp-3" : "line-clamp-2";
+
+          return (
+            <Link
+              key={t.slug}
+              href={`/music/${t.slug}`}
+              className={`group motion-fade-up rounded-xl border border-fg/10 bg-fg/5 transition-all duration-normal ease-out-quart hover:border-primary/30 ${padClass} ${spanClass}`}
+              style={{ animationDelay: `${Math.min(i, 5) * 75}ms` }}
+            >
+              <div className={`relative overflow-hidden rounded-lg border border-fg/10 ${aspectClass}`}>
+                <Image src={t.frontmatter.coverImage} alt={t.frontmatter.title} fill className="object-cover transition-transform duration-slow ease-out-quint group-hover:scale-105" sizes={isFeatured || isWide ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
               </div>
-              <span className="rounded-md border border-white/10 bg-black/40 px-2 py-1 text-[10px] font-mono text-zinc-400">OPEN</span>
-            </div>
-            <p className="mt-2 line-clamp-2 text-sm text-zinc-400">{t.frontmatter.concept}</p>
-          </Link>
-        ))}
+              <div className={`${isCompact ? "mt-2" : "mt-3"} flex items-start justify-between gap-3`}>
+                <div className="min-w-0">
+                  <div className={`truncate font-display font-bold group-hover:text-primary transition-colors duration-normal ease-out-quart ${textSize}`}>{t.frontmatter.title}</div>
+                  <div className="text-label text-fg-faint">{t.frontmatter.date}</div>
+                </div>
+                {isFeatured ? <span className="rounded-md border border-primary/20 bg-primary/5 px-2 py-1 text-label uppercase text-primary">Latest</span> : null}
+              </div>
+              {isMinimal ? null : <p className={`mt-2 text-body-sm text-fg-muted ${clampClass}`}>{t.frontmatter.concept}</p>}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
