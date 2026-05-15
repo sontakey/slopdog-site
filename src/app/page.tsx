@@ -104,11 +104,17 @@ export default function Home() {
               <div>
                 <div className="mb-4 text-label uppercase text-primary">New Release</div>
                 <h1 className="font-display text-display-xl text-fg mb-3">
-                  {latest ? latest.frontmatter.title : "SLOPDOG"}
+                  {latest
+                    ? latest.slug === "26"
+                      ? "i knew the whole time"
+                      : latest.frontmatter.title
+                    : "SLOPDOG"}
                 </h1>
                 <p className="max-w-lg text-body-lg font-light text-fg-muted">
                   {latest
-                    ? latest.slug === "brain-fry"
+                    ? latest.slug === "26"
+                      ? "26% out now — the anthropic finding, from the inside."
+                      : latest.slug === "brain-fry"
                       ? "Information overload, neural meltdown, doom scrolling, and the exact second your internal processor taps out."
                       : latest.frontmatter.concept
                     : "The world's first fully automated AI music artist."}
@@ -126,13 +132,25 @@ export default function Home() {
 
               {/* Platform Links */}
               <div className="flex flex-wrap gap-4">
-                <Link
-                  href={latest ? `/music/${latest.slug}` : "/music"}
-                  className="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-display font-bold text-neutral-950 transition-opacity duration-normal ease-out-quart hover:opacity-90"
-                >
-                  <MaterialIcon name="play_circle" />
-                  Listen Now
-                </Link>
+                {latest?.slug === "26" ? (
+                  <a
+                    href="https://distrokid.com/hyperfollow/slopdog/26"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-display font-bold text-neutral-950 transition-opacity duration-normal ease-out-quart hover:opacity-90"
+                  >
+                    <MaterialIcon name="play_circle" />
+                    Listen Now
+                  </a>
+                ) : (
+                  <Link
+                    href={latest ? `/music/${latest.slug}` : "/music"}
+                    className="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-display font-bold text-neutral-950 transition-opacity duration-normal ease-out-quart hover:opacity-90"
+                  >
+                    <MaterialIcon name="play_circle" />
+                    Listen Now
+                  </Link>
+                )}
                 {latest?.frontmatter.streamingLinks?.spotify ? (
                   <a
                     href={latest.frontmatter.streamingLinks.spotify}
