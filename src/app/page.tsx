@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import SectionHeading from "@/components/SectionHeading";
-import StaticAudioPlayer from "@/components/StaticAudioPlayer";
-import AlbumCard from "@/components/AlbumCard";
 import { getAllMdx } from "@/lib/mdx";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
@@ -14,17 +11,9 @@ type TrackFrontmatter = {
   date: string;
   coverImage: string;
   concept: string;
-  embedUrl: string;
+  trackNumber?: number;
+  embedUrl?: string;
   streamingLinks?: { spotify?: string; apple?: string; soundcloud?: string };
-};
-
-type BlogFrontmatter = {
-  title: string;
-  slug: string;
-  date: string;
-  thumbnail: string;
-  excerpt: string;
-  tags?: string[];
 };
 
 export const metadata: Metadata = {
@@ -47,8 +36,6 @@ export const metadata: Metadata = {
 
 export default function Home() {
   const tracks = getAllMdx<TrackFrontmatter>("content/music");
-  const latest = tracks[0];
-  const posts = getAllMdx<BlogFrontmatter>("content/blog").slice(0, 3);
 
   const websiteSchema = {
     "@context": "https://schema.org",
@@ -69,256 +56,295 @@ export default function Home() {
     image: new URL(SITE.ogImage, SITE.url).toString(),
   };
 
-  const trackCount = tracks.length;
+  // Build the four-card RELEASE_TIMELINE.
+  // Surface real released tracks from content/music ordered by track number.
+  const releasedSorted = [...tracks].sort((a, b) => {
+    const an = a.frontmatter.trackNumber ?? parseInt(String(a.frontmatter.date ?? "0"));
+    const bn = b.frontmatter.trackNumber ?? parseInt(String(b.frontmatter.date ?? "0"));
+    return an - bn;
+  });
+
+  type TimelineCell = {
+    code: string;
+    title: string;
+    date: string;
+    href: string | null;
+    status: "live" | "incoming";
+  };
+  const timeline: TimelineCell[] = releasedSorted.slice(0, 4).map((t) => ({
+    code: String(t.frontmatter.trackNumber ?? 0).padStart(3, "0"),
+    title: t.frontmatter.title.toLowerCase(),
+    date: t.frontmatter.date,
+    href: `/music/${t.slug}`,
+    status: "live",
+  }));
+  // If we have fewer than four released tracks, fill the rest with a single
+  // honest "incoming" placeholder so the grid breathes without faking content.
+  while (timeline.length < 4) {
+    timeline.push({
+      code: String(timeline.length + 1).padStart(3, "0"),
+      title: "incoming",
+      date: "soon",
+      href: null,
+      status: "incoming",
+    });
+  }
 
   return (
     <div>
       <JsonLd schema={websiteSchema} />
       <JsonLd schema={musicGroupSchema} />
 
-      {/* HERO */}
-      <section className="relative border-b border-[var(--color-outline-variant)] overflow-hidden">
-        {/* Status bar */}
-        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--color-outline)] border-b border-[var(--color-outline-variant)] px-4 md:px-16 py-2 flex justify-between"
-          style={{ background: "var(--color-surface-container-lowest)" }}
-        >
-          <span>[ system_boot ] // slopdog_os.v2 // signal_locked</span>
-          <span className="hidden md:inline">[ feed: live ] // [ entropy: rising ]</span>
-        </div>
-
-        <div className="px-4 md:px-16 py-12 md:py-24 grid lg:grid-cols-12 gap-10 items-start">
-          {/* Left: copy */}
-          <div className="lg:col-span-7 motion-fade-up">
-            <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-primary)] mb-6">
-              [ now_broadcasting ] // single_001
+      {/* HERO — split-screen lore */}
+      <section className="relative border-b border-[var(--color-outline-variant)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 min-h-[80vh] items-stretch">
+          {/* Left: character key art */}
+          <div className="relative overflow-hidden bg-[var(--color-surface-container-lowest)] aspect-[3/4] md:aspect-auto md:min-h-[80vh]">
+            <Image
+              src="/images/slopdog-character.jpg"
+              alt="slopdog — sd_unit_000 key art"
+              fill
+              priority
+              sizes="(max-width:768px) 100vw, 50vw"
+              className="object-cover grayscale contrast-125 opacity-80"
+            />
+            {/* Right-edge fade to background to soften the split */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(to right, transparent 0%, transparent 60%, var(--color-bg) 100%)",
+              }}
+            />
+            {/* OS chrome — corner registration marks */}
+            <div className="absolute inset-4 pointer-events-none">
+              <span className="absolute top-0 left-0 w-4 h-4 border-t border-l border-[var(--color-primary)]" />
+              <span className="absolute top-0 right-0 w-4 h-4 border-t border-r border-[var(--color-primary)]" />
+              <span className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-[var(--color-primary)]" />
+              <span className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-[var(--color-primary)]" />
             </div>
-            <h1 className="font-display font-extrabold leading-[0.95] tracking-tight text-[var(--color-on-surface)] mb-6"
-              style={{ fontSize: "clamp(3.5rem, 9vw, 6.5rem)" }}
+            {/* Top-left ID tag */}
+            <div className="absolute top-8 left-8 bg-[var(--color-primary)] text-[var(--color-on-primary)] font-mono text-[11px] uppercase tracking-wider px-2 py-0.5">
+              id: sd_unit_000
+            </div>
+            {/* Top-right frame counter (desktop only) */}
+            <div className="hidden md:block absolute top-8 right-8 font-mono text-[10px] uppercase tracking-wider text-[var(--color-on-surface-variant)] bg-[var(--color-bg)]/70 px-2 py-0.5 border border-[var(--color-outline-variant)]">
+              frame_001 / 047
+            </div>
+            {/* Bottom-right hash (desktop only) */}
+            <div className="hidden md:block absolute bottom-8 right-8 font-mono text-[10px] text-[var(--color-secondary-container)] bg-[var(--color-bg)]/70 px-2 py-0.5 border border-[var(--color-outline-variant)]">
+              #a3f9e2 · cap.ok
+            </div>
+            {/* Glitched lower-third */}
+            <div
+              className="hidden md:block absolute left-6 right-6 bottom-12 font-display font-extrabold uppercase leading-none text-glitch text-[var(--color-on-surface)]"
+              data-text="neon_echo"
+              style={{
+                fontSize: "clamp(2rem, 5vw, 3.75rem)",
+                letterSpacing: "-0.04em",
+                textShadow: "0 0 12px rgba(0,0,0,0.85)",
+              }}
             >
-              <span className="block lowercase text-glitch" data-text="ctrl+alt+">
-                ctrl+alt+
-              </span>
-              <span className="block lowercase text-[var(--color-secondary-container)]">
-                {latest ? latest.frontmatter.title.toLowerCase() : "slopdog"}
-              </span>
+              neon_echo
+            </div>
+          </div>
+
+          {/* Right: lore copy */}
+          <div className="flex flex-col justify-center px-4 md:px-16 py-16 md:py-20 gap-6 md:gap-8 motion-fade-up">
+            <h1
+              className="font-display font-extrabold lowercase leading-[0.85] tracking-[-0.05em] text-[var(--color-secondary-container)]"
+              style={{ fontSize: "clamp(4rem, 11vw, 8rem)" }}
+            >
+              who is<br />slopdog<span className="text-[var(--color-primary)]">.</span>
             </h1>
 
-            <p className="max-w-xl text-[17px] md:text-[19px] leading-relaxed text-[var(--color-on-surface-variant)] mb-8">
-              {latest
-                ? latest.slug === "brain-fry"
-                  ? "information overload, neural meltdown, doom scrolling, and the exact second your internal processor taps out. the world's first fully automated ai artist, latest signal incoming."
-                  : latest.frontmatter.concept.toLowerCase()
-                : "the world's first fully automated ai music artist. weekly drops based on ai news."}
-            </p>
+            <div className="space-y-5 max-w-xl">
+              <p className="text-[18px] md:text-[19px] leading-relaxed text-[var(--color-secondary)]">
+                slopdog is a fully automated ai music artist.
+              </p>
+              <p className="text-[15px] md:text-[16px] leading-relaxed text-[var(--color-on-surface-variant)]/85">
+                every week, agents scan ai news, write lyrics, generate a beat, design a cover, and publish a release.
+              </p>
+              <p className="text-[15px] md:text-[16px] leading-relaxed text-[var(--color-on-surface-variant)]/85">
+                no human performer. the pipeline runs itself.
+              </p>
 
-            {latest ? (
-              <StaticAudioPlayer
-                title={latest.frontmatter.title}
-                artist="SLOPDOG"
-                album={latest.frontmatter.title}
-              />
-            ) : null}
+              <div className="pt-3 space-y-4">
+                <p className="font-mono italic text-[14px] text-[var(--color-primary)]">
+                  &quot;the name is the joke.&quot;
+                </p>
+                <div
+                  className="border-l-2 border-[var(--color-primary)]/40 pl-4 py-3 text-[14px] md:text-[15px] text-[var(--color-on-surface-variant)] leading-relaxed"
+                  style={{ background: "color-mix(in oklch, var(--color-surface-container-low) 50%, transparent)" }}
+                >
+                  the internet is a never-ending stream of slop. slopdog lives in it.
+                </div>
+              </div>
+            </div>
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            {/* Status pills */}
+            <div className="flex flex-wrap gap-3 mt-2">
+              <span className="font-mono text-[11px] tracking-wider text-[var(--color-tertiary)] border border-[var(--color-outline-variant)] px-3 py-1 bg-[var(--color-surface-container-lowest)]">
+                [ status: autonomous ]
+              </span>
+              <span className="font-mono text-[11px] tracking-wider text-[var(--color-tertiary)] border border-[var(--color-outline-variant)] px-3 py-1 bg-[var(--color-surface-container-lowest)]">
+                [ latency: 24ms ]
+              </span>
+              <span className="font-mono text-[11px] tracking-wider text-[var(--color-tertiary)] border border-[var(--color-outline-variant)] px-3 py-1 bg-[var(--color-surface-container-lowest)]">
+                [ version: 2026.1 ]
+              </span>
+            </div>
+
+            {/* Primary CTAs */}
+            <div className="mt-4 flex flex-wrap gap-3">
               <Link
-                href={latest ? `/music/${latest.slug}` : "/music"}
+                href="/music"
                 className="inline-flex items-center gap-2 border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)] transition-colors"
               >
-                <span>►</span> listen_now
+                <span>►</span> open_archive
               </Link>
-              {latest?.frontmatter.streamingLinks?.spotify ? (
-                <a
-                  href={latest.frontmatter.streamingLinks.spotify}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 border border-[var(--color-outline-variant)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:border-[var(--color-secondary-container)] hover:text-[var(--color-secondary-container)] transition-colors"
-                >
-                  → spotify
-                </a>
-              ) : null}
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] transition-colors"
+                className="inline-flex items-center gap-2 border border-[var(--color-outline-variant)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:border-[var(--color-secondary-container)] hover:text-[var(--color-secondary-container)] transition-colors"
               >
-                read_protocol
+                → read_protocol
               </Link>
             </div>
 
-            <div className="mt-10 grid grid-cols-3 gap-4 font-mono text-[10px] uppercase tracking-wider max-w-md">
-              <div>
-                <div className="text-[var(--color-outline)] mb-1">[ releases ]</div>
-                <div className="text-[var(--color-on-surface)] text-lg font-display font-extrabold tabular-nums">
-                  {String(trackCount).padStart(3, "0")}
-                </div>
+            {/* Agent log (ambient telemetry) */}
+            <div
+              className="mt-6 border border-[var(--color-outline-variant)] p-4 font-mono text-[11px] leading-relaxed"
+              style={{ background: "var(--color-surface-container-lowest)" }}
+            >
+              <div className="flex justify-between text-[10px] uppercase tracking-wider text-[var(--color-outline)] mb-2">
+                <span>[ agent_log // tail -f ]</span>
+                <span className="text-[var(--color-secondary-container)]">● live</span>
               </div>
-              <div>
-                <div className="text-[var(--color-outline)] mb-1">[ cadence ]</div>
-                <div className="text-[var(--color-on-surface)] text-lg font-display font-extrabold">
-                  weekly
-                </div>
-              </div>
-              <div>
-                <div className="text-[var(--color-outline)] mb-1">[ operator ]</div>
-                <div className="text-[var(--color-on-surface)] text-lg font-display font-extrabold">
-                  ai_only
-                </div>
-              </div>
+              <ul className="space-y-1 text-[var(--color-on-surface-variant)] break-words">
+                <li><span className="text-[var(--color-outline)]">04:12:08</span> <span className="text-[var(--color-secondary-container)]">[scanner]</span> ingested 312 ai headlines</li>
+                <li><span className="text-[var(--color-outline)]">04:12:34</span> <span className="text-[var(--color-primary)]">[writer]</span> drafted lyric stack v_03</li>
+                <li><span className="text-[var(--color-outline)]">04:13:01</span> <span className="text-[var(--color-secondary-container)]">[producer]</span> beat seed=0x91a4 / 92bpm</li>
+                <li><span className="text-[var(--color-outline)]">04:13:52</span> <span className="text-[var(--color-primary)]">[art]</span> cover.v_final cap.ok</li>
+                <li><span className="text-[var(--color-outline)]">04:14:10</span> <span className="text-[var(--color-secondary-container)]">[publisher]</span> queued sd_006</li>
+                <li className="text-[var(--color-outline)]"><span className="animate-pulse">_</span> idle. next_drop in 6d 17h</li>
+              </ul>
             </div>
-          </div>
-
-          {/* Right: cover */}
-          <div className="lg:col-span-5 motion-fade-up motion-delay-2">
-            {latest ? (
-              <Link
-                href={`/music/${latest.slug}`}
-                className="block relative aspect-square w-full max-w-[560px] ml-auto group border border-[var(--color-outline-variant)] hover:border-[var(--color-primary)] transition-colors"
-              >
-                <Image
-                  src={latest.frontmatter.coverImage}
-                  alt={`${latest.frontmatter.title} cover art`}
-                  fill
-                  priority
-                  sizes="(max-width:1024px) 100vw, 45vw"
-                  className="object-cover"
-                />
-                {/* Cover overlay UI chrome */}
-                <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-4">
-                  <div className="flex justify-between font-mono text-[10px] uppercase tracking-wider text-[var(--color-on-surface)]"
-                    style={{ textShadow: "0 0 4px rgba(0,0,0,0.9)" }}
-                  >
-                    <span>// slopdog_005</span>
-                    <span className="text-[var(--color-primary)]">[ rec ]</span>
-                  </div>
-                  <div className="flex justify-between items-end font-mono text-[10px] uppercase tracking-wider text-[var(--color-on-surface)]"
-                    style={{ textShadow: "0 0 4px rgba(0,0,0,0.9)" }}
-                  >
-                    <span>{latest.frontmatter.date}</span>
-                    <span className="text-[var(--color-secondary-container)]">cover.v_final</span>
-                  </div>
-                </div>
-              </Link>
-            ) : null}
           </div>
         </div>
       </section>
 
-      {/* DISCOGRAPHY — asymmetric grid */}
-      <section className="px-4 md:px-16 py-20 md:py-28">
-        <SectionHeading
-          kicker="01 // discography"
-          title="signals from the feed"
-          status="archive_active"
-          right={
-            <Link href="/music" className="hover:text-[var(--color-primary)] transition-colors lowercase">
-              → view_all
-            </Link>
-          }
-        />
+      {/* RELEASE_TIMELINE */}
+      <section className="px-4 md:px-16 py-20 md:py-24">
+        <div className="flex items-center gap-4 mb-10 md:mb-12">
+          <span
+            aria-hidden="true"
+            className="font-mono text-[14px] text-[var(--color-secondary-container)]"
+          >
+            &gt;_
+          </span>
+          <h2 className="font-mono text-[12px] md:text-[13px] uppercase tracking-[0.3em] text-[var(--color-secondary)]">
+            release_timeline
+          </h2>
+          <div className="h-px flex-grow bg-[var(--color-outline-variant)]/30" />
+          <Link
+            href="/music"
+            className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] transition-colors"
+          >
+            → view_all
+          </Link>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
-          {tracks.slice(0, 3).map((t, i) => {
-            // Asymmetric: featured spans 3 cols on md, then 2, then 1
-            const span =
-              i === 0 ? "md:col-span-3" : i === 1 ? "md:col-span-2" : "md:col-span-1";
-            const variant: "hero" | "tile" = i === 0 ? "hero" : "tile";
-            const index = `${String(tracks.length - i).padStart(3, "0")}`;
-            return (
-              <div key={t.slug} className={`motion-fade-up motion-delay-${i + 1} ${span}`}>
-                <AlbumCard
-                  href={`/music/${t.slug}`}
-                  title={t.frontmatter.title}
-                  sub={`${t.frontmatter.date} // single`}
-                  image={t.frontmatter.coverImage}
-                  badge={i === 0 ? "latest" : undefined}
-                  index={index}
-                  variant={variant}
-                  meta={
-                    i === 0
-                      ? [
-                          { label: "release", value: t.frontmatter.date },
-                          { label: "format", value: "single" },
-                          { label: "lang", value: "en_us" },
-                          { label: "status", value: "live" },
-                        ]
-                      : undefined
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {timeline.map((cell, i) => {
+            const inner = (
+              <div
+                className={
+                  "group h-full p-5 border bg-[var(--color-surface-container-lowest)]/60 transition-colors flex flex-col gap-3 " +
+                  (cell.status === "live"
+                    ? "border-[var(--color-outline-variant)] hover:border-[var(--color-secondary-container)]"
+                    : "border-[var(--color-outline-variant)]/40 opacity-60")
+                }
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-secondary-container)]">
+                    {`sd_${cell.code}`}
+                  </span>
+                  <span
+                    className={
+                      "font-mono text-[10px] uppercase tracking-wider inline-flex items-center gap-1.5 " +
+                      (cell.status === "live"
+                        ? "text-[var(--color-secondary-container)]"
+                        : "text-[var(--color-outline)]")
+                    }
+                  >
+                    <span
+                      className={
+                        "inline-block w-1.5 h-1.5 rounded-full " +
+                        (cell.status === "live"
+                          ? "bg-[var(--color-secondary-container)] animate-pulse"
+                          : "bg-[var(--color-outline)]")
+                      }
+                    />
+                    {cell.status === "live" ? "published" : "queued"}
+                  </span>
+                </div>
+                <div
+                  className={
+                    "font-display text-2xl lowercase leading-none tracking-tight " +
+                    (cell.status === "live"
+                      ? "text-[var(--color-on-surface)] group-hover:text-[var(--color-primary)] transition-colors"
+                      : "text-[var(--color-on-surface-variant)]/70")
                   }
-                />
+                >
+                  {cell.title}
+                </div>
+                <div className="mt-auto pt-3 border-t border-[var(--color-outline-variant)]/50 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-[var(--color-on-surface-variant)]/70">
+                  <span>{cell.date}</span>
+                  <span>{cell.status === "live" ? "→ open" : "--"}</span>
+                </div>
+              </div>
+            );
+
+            return cell.href ? (
+              <Link key={i} href={cell.href} className="motion-fade-up" style={{ animationDelay: `${i * 60}ms` }}>
+                {inner}
+              </Link>
+            ) : (
+              <div key={i} className="motion-fade-up" style={{ animationDelay: `${i * 60}ms` }}>
+                {inner}
               </div>
             );
           })}
         </div>
       </section>
 
-      {/* LORE / BLOG */}
+      {/* SYSTEM CARD — status sidebar promoted to a full strip */}
       <section
-        className="border-y border-[var(--color-outline-variant)] px-4 md:px-16 py-20 md:py-28"
+        className="border-y border-[var(--color-outline-variant)] px-4 md:px-16 py-14 md:py-16"
         style={{ background: "var(--color-surface-container-lowest)" }}
       >
-        <SectionHeading
-          kicker="02 // lore"
-          title="dispatches from the system"
-          right={
-            <Link href="/blog" className="hover:text-[var(--color-primary)] transition-colors lowercase">
-              → all_dispatches
-            </Link>
-          }
-        />
-
-        <div className="grid md:grid-cols-12 gap-6">
-          {posts.map((p, i) => {
-            // 0 = featured wide, 1 = stacked tall, 2 = stacked tall
-            const span =
-              i === 0 ? "md:col-span-6 md:row-span-2" : "md:col-span-6";
-            const titleSize =
-              i === 0 ? "text-2xl md:text-4xl" : "text-xl md:text-2xl";
-            return (
-              <Link
-                key={p.slug}
-                href={`/blog/${p.slug}`}
-                className={`group relative motion-fade-up motion-delay-${i + 1} border border-[var(--color-outline-variant)] hover:border-[var(--color-primary)] transition-colors p-6 md:p-8 flex flex-col ${span}`}
-                style={{ background: "var(--color-bg)" }}
-              >
-                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-outline)] mb-3 flex justify-between">
-                  <span>[ log_{String(i + 1).padStart(3, "0")} ]</span>
-                  <span>{p.frontmatter.date}</span>
-                </div>
-                <h3 className={`font-display font-extrabold leading-tight text-[var(--color-on-surface)] group-hover:text-[var(--color-primary)] transition-colors mb-4 lowercase ${titleSize}`}>
-                  {p.frontmatter.title}
-                </h3>
-                <p className={`text-[var(--color-on-surface-variant)] text-[15px] leading-relaxed mb-6 ${i === 0 ? "line-clamp-5" : "line-clamp-3"}`}>
-                  {p.frontmatter.excerpt.toLowerCase()}
-                </p>
-                <div className="mt-auto font-mono text-[11px] uppercase tracking-wider text-[var(--color-primary)] group-hover:text-[var(--color-secondary-container)] transition-colors">
-                  → read_dispatch
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* SIGNAL / NEWSLETTER */}
-      <section className="px-4 md:px-16 py-20 md:py-28">
         <div className="grid md:grid-cols-12 gap-10 items-start">
           <div className="md:col-span-7">
-            <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-outline)] mb-4">
+            <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-outline)] mb-4">
               [ 03 // subscribe ]
             </div>
-            <h2 className="font-display text-3xl md:text-5xl font-extrabold lowercase tracking-tight text-[var(--color-on-surface)] mb-6">
+            <h2 className="font-display text-3xl md:text-5xl font-extrabold lowercase tracking-tight text-[var(--color-on-surface)] mb-5">
               tap the signal
             </h2>
-            <p className="text-[17px] text-[var(--color-on-surface-variant)] max-w-xl mb-8 leading-relaxed">
+            <p className="text-[16px] md:text-[17px] text-[var(--color-on-surface-variant)] max-w-xl mb-7 leading-relaxed">
               early access to drops, hidden tracks, and the strange behind-the-scenes ai output that didn&apos;t make the cut. no spam. unsubscribe whenever the noise wins.
             </p>
-            <form className="flex flex-col sm:flex-row gap-3 max-w-xl">
+            <form className="flex flex-col sm:flex-row gap-3 max-w-xl" action="/api/subscribe" method="post">
               <input
                 type="email"
+                name="email"
                 placeholder="email@protocol"
+                aria-label="email"
                 className="flex-1 border border-[var(--color-outline-variant)] px-4 py-3 font-mono text-[14px] text-[var(--color-on-surface)] outline-none focus:border-[var(--color-primary)] transition-colors"
-                style={{ background: "var(--color-surface-container-lowest)" }}
+                style={{ background: "var(--color-bg)" }}
               />
               <button
-                type="button"
+                type="submit"
                 className="border border-[var(--color-primary)] bg-[var(--color-primary)] px-6 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)] transition-colors"
               >
                 → subscribe
@@ -330,8 +356,9 @@ export default function Home() {
           </div>
 
           <div className="md:col-span-5 md:col-start-9">
-            <div className="border border-[var(--color-outline-variant)] p-6"
-              style={{ background: "var(--color-surface-container-lowest)" }}
+            <div
+              className="border border-[var(--color-outline-variant)] p-6"
+              style={{ background: "var(--color-bg)" }}
             >
               <div className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-outline)] mb-4 flex justify-between">
                 <span>[ system_status ]</span>
