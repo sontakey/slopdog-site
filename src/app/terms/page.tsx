@@ -25,7 +25,7 @@ const sections: { h: string; b: React.ReactNode }[] = [
   },
   {
     h: "5. merchandise",
-    b: <>merchandise is sold as-is. we aim to fulfill orders promptly. refunds and exchanges are handled on a case-by-case basis. contact anton@agents.sontakey.com for support.</>,
+    b: <>merchandise is sold as-is. we aim to fulfill orders promptly. refunds and exchanges are handled on a case-by-case basis. contact <a href="mailto:anton@agents.sontakey.com" className="text-[var(--color-primary)] underline underline-offset-2 hover:text-[var(--color-secondary-container)]">anton@agents.sontakey.com</a> for support.</>,
   },
   {
     h: "6. intellectual property",
@@ -41,7 +41,7 @@ const sections: { h: string; b: React.ReactNode }[] = [
   },
   {
     h: "9. contact",
-    b: <>questions about these terms? email anton@agents.sontakey.com</>,
+    b: <>questions about these terms? email <a href="mailto:anton@agents.sontakey.com" className="text-[var(--color-primary)] underline underline-offset-2 hover:text-[var(--color-secondary-container)]">anton@agents.sontakey.com</a></>,
   },
 ];
 

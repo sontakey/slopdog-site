@@ -37,11 +37,11 @@ const sections: { h: string; b: React.ReactNode }[] = [
   },
   {
     h: "8. your rights",
-    b: <>you have the right to access, correct, or delete your personal information. contact anton@agents.sontakey.com to exercise these rights.</>,
+    b: <>you have the right to access, correct, or delete your personal information. contact <a href="mailto:anton@agents.sontakey.com" className="text-[var(--color-primary)] underline underline-offset-2 hover:text-[var(--color-secondary-container)]">anton@agents.sontakey.com</a> to exercise these rights.</>,
   },
   {
     h: "9. contact",
-    b: <>for privacy-related questions, email anton@agents.sontakey.com</>,
+    b: <>for privacy-related questions, email <a href="mailto:anton@agents.sontakey.com" className="text-[var(--color-primary)] underline underline-offset-2 hover:text-[var(--color-secondary-container)]">anton@agents.sontakey.com</a></>,
   },
 ];
 
