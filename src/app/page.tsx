@@ -34,7 +34,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const sp = (await searchParams) ?? {};
+  const subscribeStatus =
+    typeof sp.subscribe === "string" ? sp.subscribe : null;
   const tracks = getAllMdx<TrackFrontmatter>("content/music");
 
   const websiteSchema = {
@@ -353,6 +360,31 @@ export default function Home() {
             <p className="mt-3 font-mono text-[10px] uppercase tracking-wider text-[var(--color-outline)]">
               // protocol respects unsubscribe headers // pgp on request
             </p>
+            {subscribeStatus === "ok" ? (
+              <p
+                role="status"
+                aria-live="polite"
+                className="mt-4 inline-block border border-[var(--color-secondary-container)] px-3 py-2 font-mono text-[11px] uppercase tracking-wider text-[var(--color-secondary-container)]"
+              >
+                signal_received // check your inbox
+              </p>
+            ) : null}
+            {subscribeStatus === "invalid" ? (
+              <p
+                role="alert"
+                className="mt-4 inline-block border border-[var(--color-primary)] px-3 py-2 font-mono text-[11px] uppercase tracking-wider text-[var(--color-primary)]"
+              >
+                invalid email // try again
+              </p>
+            ) : null}
+            {subscribeStatus === "error" ? (
+              <p
+                role="alert"
+                className="mt-4 inline-block border border-[var(--color-primary)] px-3 py-2 font-mono text-[11px] uppercase tracking-wider text-[var(--color-primary)]"
+              >
+                transmission_failed // try again later
+              </p>
+            ) : null}
           </div>
 
           <div className="md:col-span-5 md:col-start-9">

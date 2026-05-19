@@ -129,8 +129,8 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             >
               {frontmatter.title.toLowerCase()}
             </h1>
-            <p className="text-[17px] leading-relaxed text-[var(--color-on-surface-variant)] mb-8">
-              {frontmatter.concept.toLowerCase()}
+            <p className="text-[14px] md:text-[15px] leading-relaxed text-[var(--color-on-surface-variant)] mb-8 font-mono tracking-wide uppercase">
+              {frontmatter.concept}
             </p>
 
             <div className="flex flex-wrap gap-3 mb-8">

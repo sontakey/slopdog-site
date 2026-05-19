@@ -77,8 +77,8 @@ export default function MusicPage() {
             <h3 className="font-display text-3xl md:text-5xl font-extrabold lowercase text-[var(--color-on-surface)] mb-4">
               {featured.frontmatter.title.toLowerCase()}
             </h3>
-            <p className="text-[16px] leading-relaxed text-[var(--color-on-surface-variant)] mb-6">
-              {featured.frontmatter.concept.toLowerCase()}
+            <p className="text-[14px] md:text-[15px] leading-relaxed text-[var(--color-on-surface-variant)] mb-6 font-mono tracking-wide uppercase">
+              {featured.frontmatter.concept}
             </p>
             <Link
               href={`/music/${featured.slug}`}
@@ -130,8 +130,8 @@ export default function MusicPage() {
                         {t.frontmatter.date}
                       </div>
                     </div>
-                    <div className="col-span-3 md:col-span-3 hidden md:block text-[13px] text-[var(--color-on-surface-variant)] line-clamp-2 leading-snug">
-                      {t.frontmatter.concept.toLowerCase()}
+                    <div className="col-span-3 md:col-span-3 hidden md:block text-[11px] text-[var(--color-on-surface-variant)] line-clamp-2 leading-snug font-mono tracking-wide uppercase">
+                      {t.frontmatter.concept}
                     </div>
                     <div className="col-span-4 md:col-span-2 text-right font-mono text-[11px] uppercase tracking-wider text-[var(--color-on-surface-variant)]">
                       {t.frontmatter.date}

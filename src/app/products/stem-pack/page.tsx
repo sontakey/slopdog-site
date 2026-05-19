@@ -17,9 +17,9 @@ export const metadata: Metadata = {
 };
 
 const TRACKS = [
-  { slug: "gaslight-gpt", title: "Gaslight GPT", cover: "/images/music/gaslight-gpt-cover.png" },
-  { slug: "brain-fry", title: "Brain Fry", cover: "/images/music/brain-fry-cover.png" },
-  { slug: "token-tithe", title: "Token Tithe", cover: "/images/music/token-tithe-cover.png" },
+  { slug: "gaslight-gpt", title: "Gaslight GPT", cover: "/images/music/gaslight-gpt-cover.jpg" },
+  { slug: "brain-fry", title: "Brain Fry", cover: "/images/music/brain-fry-cover.jpg" },
+  { slug: "token-tithe", title: "Token Tithe", cover: "/images/music/token-tithe-cover.jpg" },
 ];
 
 const STEM_TYPES = [
