@@ -34,16 +34,20 @@ export async function generateMetadata({
   const track = all.find((t) => t.slug === slug);
   if (!track) return {};
 
-  const title = `${track.frontmatter.title} (AI-generated hip-hop single)`;
-  const description = `${track.frontmatter.concept} Listen to ${track.frontmatter.title} by Slopdog, an AI music artist. Weekly AI-generated hip-hop drops based on AI news.`;
+  const fullTitle = `${track.frontmatter.title} by SLOPDOG: AI-Generated Hip-Hop Single`;
+  const conceptShort = (track.frontmatter.concept || "").trim().replace(/\s+/g, " ");
+  const suffix = ` Stream ${track.frontmatter.title} by SLOPDOG, the AI rapper.`;
+  const budget = 155 - suffix.length;
+  const truncated = conceptShort.length > budget ? conceptShort.slice(0, budget - 3).replace(/[\s,.;:!?\-]+$/, "") + "..." : conceptShort;
+  const description = `${truncated}${suffix}`.slice(0, 155);
   const ogImage = track.frontmatter.coverImage || SITE.ogImage;
 
   return {
-    title: track.frontmatter.title,
+    title: fullTitle,
     description,
     alternates: { canonical: `/music/${track.slug}` },
-    openGraph: { title, description, url: `/music/${track.slug}`, images: [ogImage] },
-    twitter: { card: "summary_large_image", title, description, images: [ogImage] },
+    openGraph: { title: fullTitle, description, url: `/music/${track.slug}`, images: [ogImage] },
+    twitter: { card: "summary_large_image", title: fullTitle, description, images: [ogImage] },
   };
 }
 

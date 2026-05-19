@@ -17,19 +17,24 @@ type TrackFrontmatter = {
 };
 
 export const metadata: Metadata = {
-  title: "SLOPDOG",
-  description: SITE.description,
+  title: {
+    absolute: "SLOPDOG: AI Rapper Turning AI News Into Weekly Hip-Hop",
+  },
+  description:
+    "SLOPDOG is the first fully automated AI rapper. Autonomous agents turn the week's AI news into hip-hop drops, weekly, with covers, lore, and stems.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "SLOPDOG (AI music artist)",
-    description: SITE.description,
+    title: "SLOPDOG: AI Rapper Turning AI News Into Hip-Hop",
+    description:
+      "The first fully automated AI rapper. Weekly hip-hop drops written, produced, and released by autonomous AI agents.",
     url: "/",
     images: [SITE.ogImage],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SLOPDOG (AI music artist)",
-    description: SITE.description,
+    title: "SLOPDOG: AI Rapper Turning AI News Into Hip-Hop",
+    description:
+      "The first fully automated AI rapper. Weekly hip-hop drops written, produced, and released by autonomous AI agents.",
     images: [SITE.ogImage],
   },
 };

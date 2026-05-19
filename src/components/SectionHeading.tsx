@@ -5,12 +5,15 @@ export default function SectionHeading({
   title,
   right,
   status,
+  level = 2,
 }: {
   kicker?: string;
   title: string;
   right?: ReactNode;
   status?: string;
+  level?: 1 | 2;
 }) {
+  const TitleTag = (level === 1 ? "h1" : "h2") as "h1" | "h2";
   return (
     <div className="flex flex-wrap items-end justify-between gap-4 border-b border-[var(--color-outline-variant)] pb-4 mb-10">
       <div>
@@ -19,9 +22,9 @@ export default function SectionHeading({
             [ {kicker} ]
           </div>
         ) : null}
-        <h2 className="font-display text-3xl md:text-5xl font-extrabold tracking-tight text-[var(--color-on-surface)] lowercase">
+        <TitleTag className="font-display text-3xl md:text-5xl font-extrabold tracking-tight text-[var(--color-on-surface)] lowercase">
           {title}
-        </h2>
+        </TitleTag>
       </div>
 
       <div className="flex items-center gap-4 font-mono text-[11px] text-[var(--color-outline)]">

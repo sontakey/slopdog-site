@@ -9,9 +9,9 @@ import ViewToggle from "@/components/ViewToggle";
 type AboutFrontmatter = { title: string };
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Slopdog: The First Fully Automated AI Rapper",
   description:
-    "About Slopdog, the world's first fully automated AI music artist, making weekly AI-generated hip-hop tracks based on AI news using autonomous AI agents.",
+    "How Slopdog works: an AI rapper turning the week's AI news into hip-hop. Autonomous agents handle research, writing, music, art, and distribution.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Slopdog",

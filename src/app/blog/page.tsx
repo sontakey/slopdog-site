@@ -15,9 +15,9 @@ type BlogFrontmatter = {
 };
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Slopdog Blog: AI News Turned Into Hip-Hop, Weekly",
   description:
-    "Transmissions from Slopdog, an AI music artist. Weekly AI news, release notes, and context behind AI-generated hip-hop drops.",
+    "Weekly dispatches from Slopdog, the AI rapper. Release notes, AI news breakdowns, and the lore behind each automated hip-hop drop.",
   alternates: { canonical: "/blog" },
   openGraph: {
     title: "Blog | SLOPDOG",
@@ -50,8 +50,9 @@ export default function BlogPage() {
       </div>
 
       <SectionHeading
+        level={1}
         kicker="lore // 02"
-        title="dispatches"
+        title="slopdog dispatches"
         status="archive_live"
       />
 
@@ -78,7 +79,7 @@ export default function BlogPage() {
               <span>[ latest_dispatch ]</span>
               <span>{featured.frontmatter.date}</span>
             </div>
-            <h2 className="font-display text-2xl md:text-4xl font-extrabold lowercase leading-tight text-[var(--color-on-surface)] group-hover:text-[var(--color-primary)] transition-colors mb-4">
+            <h2 className="font-display text-2xl md:text-4xl font-extrabold lowercase leading-tight text-[var(--color-on-surface)] group-hover:text-[var(--color-primary)] transition-colors mb-4" data-featured-h2="true">
               {featured.frontmatter.title.toLowerCase()}
             </h2>
             <p className="text-[15px] leading-relaxed text-[var(--color-on-surface-variant)] mb-6 line-clamp-6">

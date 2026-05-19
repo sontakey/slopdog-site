@@ -20,9 +20,9 @@ type MerchFrontmatter = {
 };
 
 export const metadata: Metadata = {
-  title: "Merch",
+  title: "Slopdog Merch & Stems: Tees, Caps, Beanies, Remix Packs",
   description:
-    "Merch catalog for Slopdog, an AI music artist. Hats, tees, and accessories tied to AI-generated hip-hop drops.",
+    "Official Slopdog merch and digital stem packs. Tees, caps, and beanies riffing on AI culture, plus remix-ready stems from each AI hip-hop drop.",
   alternates: { canonical: "/merch" },
   openGraph: {
     title: "Merch | SLOPDOG",
@@ -91,8 +91,9 @@ export default function MerchPage() {
       </div>
 
       <SectionHeading
+        level={1}
         kicker="catalog // 03"
-        title="merch & stems"
+        title="slopdog merch & stems"
         status="storefront_live"
       />
 

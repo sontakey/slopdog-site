@@ -15,9 +15,9 @@ type TrackFrontmatter = {
 };
 
 export const metadata: Metadata = {
-  title: "Music",
+  title: "Slopdog Music: AI-Generated Hip-Hop Drops, Weekly",
   description:
-    "Listen to Slopdog's AI-generated hip-hop releases. Weekly drops powered by autonomous AI agents and the latest AI news.",
+    "Stream Slopdog's full discography of AI-generated hip-hop. Weekly tracks made by autonomous AI agents, ripped from real AI news headlines.",
   alternates: { canonical: "/music" },
   openGraph: {
     title: "Music | SLOPDOG",
@@ -51,8 +51,9 @@ export default function MusicPage() {
       </div>
 
       <SectionHeading
+        level={1}
         kicker="catalog // 01"
-        title="discography"
+        title="slopdog discography"
         status="archive_live"
       />
 
@@ -74,9 +75,9 @@ export default function MusicPage() {
             <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-primary)] mb-3">
               [ latest_release ]
             </div>
-            <h3 className="font-display text-3xl md:text-5xl font-extrabold lowercase text-[var(--color-on-surface)] mb-4">
+            <h2 className="font-display text-3xl md:text-5xl font-extrabold lowercase text-[var(--color-on-surface)] mb-4">
               {featured.frontmatter.title.toLowerCase()}
-            </h3>
+            </h2>
             <p className="text-[14px] md:text-[15px] leading-relaxed text-[var(--color-on-surface-variant)] mb-6 font-mono tracking-wide uppercase">
               {featured.frontmatter.concept}
             </p>

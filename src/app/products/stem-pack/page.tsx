@@ -4,9 +4,9 @@ import { SITE } from "@/lib/site";
 import BuyButton from "@/components/BuyButton";
 
 export const metadata: Metadata = {
-  title: "Slopdog Stem Pack Vol. 1",
+  title: "Slopdog Stem Pack Vol. 1: Remix-Ready AI Hip-Hop Stems",
   description:
-    "All 3 Slopdog tracks as stems — vocals, instrumentals, acapella. Remix, sample, go wild. License included. $9.99.",
+    "Three Slopdog tracks as remix-ready stems: vocals, instrumentals, acapella. Sample-cleared license included. Instant download for $9.99.",
   alternates: { canonical: "/products/stem-pack" },
   openGraph: {
     title: "Slopdog Stem Pack Vol. 1 | SLOPDOG",
