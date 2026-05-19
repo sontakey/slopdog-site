@@ -13,10 +13,10 @@ const LICENSES = [
     tier: "BASIC",
     price: "$19.99",
     features: [
-      "Personal & non-commercial use",
-      "Unlimited streaming on personal channels",
-      "Credit required",
-      "No sync licensing",
+      "personal & non-commercial use",
+      "unlimited streaming on personal channels",
+      "credit required",
+      "no sync licensing",
     ],
   },
   {
@@ -24,10 +24,10 @@ const LICENSES = [
     tier: "COMMERCIAL",
     price: "$49.99",
     features: [
-      "Full commercial use",
-      "Unlimited sales & streams",
-      "Sync for film, TV, ads",
-      "Credit optional",
+      "full commercial use",
+      "unlimited sales & streams",
+      "sync for film, tv, ads",
+      "credit optional",
     ],
     featured: true,
   },
@@ -35,33 +35,48 @@ const LICENSES = [
 
 export default function BeatLicenseSection({ trackSlug, trackTitle }: BeatLicenseSectionProps) {
   return (
-    <div className="mt-8">
-      <div className="mb-1 text-xs font-semibold tracking-wide text-primary">LICENSE THIS BEAT</div>
-      <p className="mt-1 text-sm text-fg-muted">
-        Use{" "}
-        <span className="font-bold text-fg">{trackTitle}</span> in your own projects. Choose a license:
+    <div className="mt-10 border border-[var(--color-outline-variant)] p-5"
+      style={{ background: "var(--color-surface-container-lowest)" }}
+    >
+      <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-primary)] mb-2">
+        [ license_protocol ] // beat_for_sale
+      </div>
+      <p className="text-[13px] text-[var(--color-on-surface-variant)] mb-5">
+        use <span className="text-[var(--color-on-surface)] font-semibold">{trackTitle.toLowerCase()}</span> in your own projects. pick a tier:
       </p>
 
-      <div className="mt-5 grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2">
         {LICENSES.map((lic) => (
           <div
             key={lic.id}
-            className={`rounded-xl border p-5 ${
+            className={`border p-4 ${
               lic.featured
-                ? "border-primary/40 bg-primary/5"
-                : "border-fg/10 bg-fg/5"
+                ? "border-[var(--color-primary)]"
+                : "border-[var(--color-outline-variant)]"
             }`}
+            style={{
+              background: lic.featured
+                ? "color-mix(in oklch, var(--color-primary) 8%, transparent)"
+                : "var(--color-bg)",
+            }}
           >
-            <div
-              className={`text-xs font-bold tracking-wide ${lic.featured ? "text-primary" : "text-fg-muted"}`}
-            >
-              {lic.tier}
+            <div className={`font-mono text-[11px] uppercase tracking-[0.2em] ${lic.featured ? "text-[var(--color-primary)]" : "text-[var(--color-outline)]"}`}>
+              [ tier_{lic.tier.toLowerCase()} ]
             </div>
-            <div className="mt-2 text-2xl font-bold text-fg">{lic.price}</div>
+            <div className="mt-2 font-display text-2xl font-extrabold text-[var(--color-on-surface)] tabular-nums">
+              {lic.price}
+            </div>
             <ul className="mt-3 space-y-1.5">
               {lic.features.map((f) => (
-                <li key={f} className="flex items-start gap-2 text-xs text-fg-muted">
-                  <span className={`mt-0.5 ${lic.featured ? "text-primary" : "text-fg-faint"}`}>›</span>
+                <li
+                  key={f}
+                  className="flex items-start gap-2 text-[12px] text-[var(--color-on-surface-variant)]"
+                >
+                  <span
+                    className={`mt-0.5 font-mono ${lic.featured ? "text-[var(--color-primary)]" : "text-[var(--color-outline)]"}`}
+                  >
+                    →
+                  </span>
                   {f}
                 </li>
               ))}
@@ -70,7 +85,7 @@ export default function BeatLicenseSection({ trackSlug, trackTitle }: BeatLicens
               <BuyButton
                 product={lic.id}
                 trackSlug={trackSlug}
-                label={`BUY ${lic.tier} — ${lic.price}`}
+                label={`buy_${lic.tier.toLowerCase()} → ${lic.price}`}
                 fullWidth
                 variant={lic.featured ? "primary" : "outline"}
               />

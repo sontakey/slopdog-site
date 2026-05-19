@@ -30,53 +30,81 @@ export default function MerchCard({
   compact,
 }: MerchCardProps) {
   const hasSizes = sizes && sizes.length > 0;
-  const [selectedSize, setSelectedSize] = useState<string>(hasSizes ? "" : "ONE_SIZE");
+  const [selectedSize, setSelectedSize] = useState<string>(
+    hasSizes ? "" : "ONE_SIZE",
+  );
 
   const canBuy = available && (!hasSizes || selectedSize !== "");
 
   return (
-    <div className={`group rounded-xl border border-fg/10 bg-fg/5 transition-all duration-normal ease-out-quart hover:border-primary/20 flex flex-col h-full ${compact ? "p-3" : "p-4"}`}>
+    <div
+      className={`group border border-[var(--color-outline-variant)] hover:border-[var(--color-primary)] transition-colors flex flex-col h-full ${compact ? "p-3" : "p-4"}`}
+      style={{ background: "var(--color-surface-container-lowest)" }}
+    >
       {/* Image */}
-      <div className={`relative overflow-hidden rounded-lg border border-fg/10 bg-neutral-950 ${featured ? "aspect-[4/3]" : compact ? "aspect-[5/4]" : "aspect-square"}`}>
+      <div
+        className={`relative overflow-hidden border border-[var(--color-outline-variant)] ${featured ? "aspect-[4/3]" : compact ? "aspect-[5/4]" : "aspect-square"}`}
+      >
         <Image
           src={image}
           alt={title}
           fill
-          className="object-cover transition-transform duration-slow ease-out-quint group-hover:scale-105"
-          sizes={featured ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 25vw"}
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes={
+            featured
+              ? "(max-width:1024px) 100vw, 66vw"
+              : "(max-width:1024px) 100vw, 25vw"
+          }
         />
+        <div
+          className="absolute inset-x-0 top-0 flex justify-between px-2 py-1.5 font-mono text-[9px] uppercase tracking-wider text-[var(--color-on-surface)]"
+          style={{ textShadow: "0 0 4px rgba(0,0,0,0.85)" }}
+        >
+          <span>// {slug}</span>
+          <span className={available ? "text-[var(--color-secondary-container)]" : "text-[var(--color-error)]"}>
+            [ {available ? "stock" : "sold_out"} ]
+          </span>
+        </div>
         {!available && (
-          <div className="absolute inset-0 flex items-center justify-center bg-neutral-950/70">
-            <span className="text-label uppercase text-fg-faint">SOLD OUT</span>
+          <div className="absolute inset-0 flex items-center justify-center bg-black/65">
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-on-surface-variant)]">
+              [ sold_out ]
+            </span>
           </div>
         )}
       </div>
 
       {/* Info */}
       <div className="mt-3 flex-1 flex flex-col">
-        <div className={`font-display font-bold leading-tight text-fg group-hover:text-primary transition-colors duration-normal ease-out-quart ${featured ? "text-body-lg" : compact ? "text-label" : "text-body-sm"}`}>
-          {title}
+        <div
+          className={`font-display font-extrabold lowercase leading-tight text-[var(--color-on-surface)] group-hover:text-[var(--color-primary)] transition-colors ${featured ? "text-xl" : compact ? "text-base" : "text-lg"}`}
+        >
+          {title.toLowerCase()}
         </div>
-        <div className={`mt-1 text-fg-muted ${featured ? "text-body-sm" : "text-label"}`}>
-          {currency} {price.toFixed(2)}
+        <div className="mt-1 font-mono text-[12px] tabular-nums text-[var(--color-on-surface-variant)]">
+          {currency.toLowerCase()} {price.toFixed(2)}
         </div>
         {trackTag && (
-          <div className="mt-1.5 text-label uppercase text-primary">TAG: {trackTag}</div>
+          <div className="mt-1 font-mono text-[10px] uppercase tracking-wider text-[var(--color-primary)]">
+            [ tag: {trackTag.toLowerCase()} ]
+          </div>
         )}
 
         {/* Size selector */}
         {hasSizes && available && (
           <div className="mt-3">
-            <div className="mb-1.5 text-label uppercase text-fg-faint">SELECT SIZE</div>
+            <div className="mb-1.5 font-mono text-[10px] uppercase tracking-wider text-[var(--color-outline)]">
+              [ select_size ]
+            </div>
             <div className="flex flex-wrap gap-1.5">
               {sizes!.map((s) => (
                 <button
                   key={s}
                   onClick={() => setSelectedSize(s)}
-                  className={`rounded-md border px-2.5 py-1 text-label font-bold transition-colors duration-fast ease-out-quart ${
+                  className={`border px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider transition-colors ${
                     selectedSize === s
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "border-fg/10 text-fg-muted hover:border-fg/30 hover:text-neutral-200"
+                      ? "border-[var(--color-primary)] text-[var(--color-primary)] bg-[var(--color-bg)]"
+                      : "border-[var(--color-outline-variant)] text-[var(--color-on-surface-variant)] hover:border-[var(--color-on-surface-variant)]"
                   }`}
                 >
                   {s}
@@ -94,8 +122,8 @@ export default function MerchCard({
               size={selectedSize}
               label={
                 hasSizes && !selectedSize
-                  ? "SELECT SIZE"
-                  : `BUY — $${price.toFixed(2)}`
+                  ? "select_size"
+                  : `buy → $${price.toFixed(2)}`
               }
               fullWidth
               variant={canBuy ? "primary" : "outline"}
@@ -104,9 +132,9 @@ export default function MerchCard({
           ) : (
             <button
               disabled
-              className="w-full rounded-lg border border-fg/10 bg-neutral-900 px-5 py-3 font-display text-body-sm font-bold text-neutral-600 cursor-not-allowed"
+              className="w-full border border-[var(--color-outline-variant)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-outline)] cursor-not-allowed"
             >
-              SOLD OUT
+              sold_out
             </button>
           )}
         </div>

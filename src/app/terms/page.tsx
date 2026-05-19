@@ -1,43 +1,85 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
   description: "Terms of Service for slopdog.com",
 };
 
+const sections: { h: string; b: React.ReactNode }[] = [
+  {
+    h: "1. acceptance of terms",
+    b: <>by accessing and using slopdog.com (&ldquo;the site&rdquo;), you agree to be bound by these terms of service. if you do not agree, please do not use the site.</>,
+  },
+  {
+    h: "2. description of service",
+    b: <>slopdog is an ai music artist project by sontakey records. the site provides access to music, merchandise, beat licensing, and related services.</>,
+  },
+  {
+    h: "3. music and content",
+    b: <>all music, lyrics, artwork, and content on this site are the property of sontakey records and sameer sontakey. all music features human-written lyrics with ai-assisted production and creative direction by sameer sontakey.</>,
+  },
+  {
+    h: "4. beat licensing",
+    b: <>beat licenses purchased through the site grant specific usage rights as described at the time of purchase. license terms vary by tier (basic, premium, exclusive, commercial). all sales are final.</>,
+  },
+  {
+    h: "5. merchandise",
+    b: <>merchandise is sold as-is. we aim to fulfill orders promptly. refunds and exchanges are handled on a case-by-case basis. contact anton@agents.sontakey.com for support.</>,
+  },
+  {
+    h: "6. intellectual property",
+    b: <>the slopdog name, character design, and associated branding are trademarks of sontakey records. unauthorized use is prohibited.</>,
+  },
+  {
+    h: "7. limitation of liability",
+    b: <>the site and its content are provided &ldquo;as is&rdquo; without warranties of any kind. sontakey records shall not be liable for any damages arising from your use of the site.</>,
+  },
+  {
+    h: "8. changes to terms",
+    b: <>we reserve the right to modify these terms at any time. continued use of the site constitutes acceptance of updated terms.</>,
+  },
+  {
+    h: "9. contact",
+    b: <>questions about these terms? email anton@agents.sontakey.com</>,
+  },
+];
+
 export default function TermsPage() {
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16">
-      <h1 className="font-display text-display-md mb-8">Terms of Service</h1>
-      <div className="space-y-6 text-neutral-300 leading-relaxed">
-        <p><strong>Effective Date:</strong> March 22, 2026</p>
-        
-        <h2 className="text-xl font-semibold text-fg mt-8">1. Acceptance of Terms</h2>
-        <p>By accessing and using slopdog.com ("the Site"), you agree to be bound by these Terms of Service. If you do not agree, please do not use the Site.</p>
-        
-        <h2 className="text-xl font-semibold text-fg mt-8">2. Description of Service</h2>
-        <p>SLOPDOG is an AI music artist project by Sontakey Records. The Site provides access to music, merchandise, beat licensing, and related services.</p>
-        
-        <h2 className="text-xl font-semibold text-fg mt-8">3. Music and Content</h2>
-        <p>All music, lyrics, artwork, and content on this Site are the property of Sontakey Records and Sameer Sontakey. All music features human-written lyrics with AI-assisted production and creative direction by Sameer Sontakey.</p>
-        
-        <h2 className="text-xl font-semibold text-fg mt-8">4. Beat Licensing</h2>
-        <p>Beat licenses purchased through the Site grant specific usage rights as described at the time of purchase. License terms vary by tier (Basic, Premium, Exclusive, Commercial). All sales are final.</p>
-        
-        <h2 className="text-xl font-semibold text-fg mt-8">5. Merchandise</h2>
-        <p>Merchandise is sold as-is. We aim to fulfill orders promptly. Refunds and exchanges are handled on a case-by-case basis. Contact anton@agents.sontakey.com for support.</p>
-        
-        <h2 className="text-xl font-semibold text-fg mt-8">6. Intellectual Property</h2>
-        <p>The SLOPDOG name, character design, and associated branding are trademarks of Sontakey Records. Unauthorized use is prohibited.</p>
-        
-        <h2 className="text-xl font-semibold text-fg mt-8">7. Limitation of Liability</h2>
-        <p>The Site and its content are provided "as is" without warranties of any kind. Sontakey Records shall not be liable for any damages arising from your use of the Site.</p>
-        
-        <h2 className="text-xl font-semibold text-fg mt-8">8. Changes to Terms</h2>
-        <p>We reserve the right to modify these terms at any time. Continued use of the Site constitutes acceptance of updated terms.</p>
-        
-        <h2 className="text-xl font-semibold text-fg mt-8">9. Contact</h2>
-        <p>Questions about these terms? Email anton@agents.sontakey.com</p>
+    <div className="px-4 md:px-16 pt-10 pb-24 max-w-4xl">
+      <nav className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--color-outline)] mb-8 flex gap-x-2">
+        <Link href="/" className="hover:text-[var(--color-primary)] transition-colors">
+          [ home ]
+        </Link>
+        <span>/</span>
+        <span className="text-[var(--color-on-surface-variant)]">terms_of_service</span>
+      </nav>
+
+      <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-primary)] mb-4">
+        [ legal_protocol ] // terms
+      </div>
+      <h1
+        className="font-display font-extrabold leading-[0.95] tracking-tight text-[var(--color-on-surface)] lowercase mb-3"
+        style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}
+      >
+        terms of service
+      </h1>
+      <p className="font-mono text-[12px] uppercase tracking-wider text-[var(--color-outline)] mb-12">
+        effective: march 22, 2026
+      </p>
+
+      <div className="space-y-8">
+        {sections.map((s) => (
+          <section key={s.h}>
+            <h2 className="font-display text-xl md:text-2xl font-extrabold lowercase text-[var(--color-on-surface)] mb-2">
+              {s.h}
+            </h2>
+            <p className="text-[15px] leading-relaxed text-[var(--color-on-surface-variant)]">
+              {s.b}
+            </p>
+          </section>
+        ))}
       </div>
     </div>
   );

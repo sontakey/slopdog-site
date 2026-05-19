@@ -2,74 +2,114 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 const NAV = [
-  { href: "/music", label: "MUSIC" },
-  { href: "/blog", label: "BLOG" },
-  { href: "/merch", label: "MERCH" },
-  { href: "/about", label: "ABOUT" },
+  { href: "/music", label: "music", code: "01" },
+  { href: "/blog", label: "lore", code: "02" },
+  { href: "/merch", label: "merch", code: "03" },
+  { href: "/about", label: "about", code: "04" },
 ] as const;
 
-function NavLink({ href, label }: { href: string; label: string }) {
-  const pathname = usePathname();
-  const active = useMemo(() => pathname === href || pathname?.startsWith(href + "/"), [pathname, href]);
+function NavLink({
+  href,
+  label,
+  code,
+  onNavigate,
+  mobile = false,
+}: {
+  href: string;
+  label: string;
+  code: string;
+  onNavigate?: () => void;
+  mobile?: boolean;
+}) {
+  const pathname = usePathname() ?? "/";
+  const active = pathname === href || pathname.startsWith(href + "/");
 
   return (
     <Link
       href={href}
+      onClick={onNavigate}
       className={
-        "inline-flex items-center rounded-md px-3 py-2 text-label font-semibold uppercase transition-colors duration-normal ease-out-quart " +
+        "group inline-flex items-center gap-2 font-mono text-[13px] tracking-wider transition-colors " +
+        (mobile ? "py-3 border-b border-[var(--color-outline-variant)] " : "px-1 ") +
         (active
-          ? "text-primary bg-primary/10 border border-primary/25"
-          : "text-neutral-300 hover:text-primary border border-transparent hover:border-primary/20")
+          ? "text-[var(--color-secondary-container)]"
+          : "text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)]")
       }
     >
-      {label}
+      <span className="text-[var(--color-outline)] group-hover:text-[var(--color-primary)] transition-colors">
+        [{code}]
+      </span>
+      <span className="lowercase">{label}</span>
+      {active ? <span className="text-[var(--color-primary)]">_</span> : null}
     </Link>
   );
 }
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [time, setTime] = useState<string>("");
+
+  useEffect(() => {
+    const update = () => {
+      const d = new Date();
+      const hh = String(d.getUTCHours()).padStart(2, "0");
+      const mm = String(d.getUTCMinutes()).padStart(2, "0");
+      const ss = String(d.getUTCSeconds()).padStart(2, "0");
+      setTime(`${hh}:${mm}:${ss}Z`);
+    };
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-fg/10 bg-bg/85 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-        <Link href="/" className="flex items-center">
-          <span className="font-display text-xl font-extrabold tracking-tight">
-            <span className="text-primary">SLOP</span>DOG
+    <header className="sticky top-0 z-50 border-b border-[var(--color-outline-variant)] backdrop-blur-md"
+      style={{ background: "color-mix(in oklch, var(--color-bg) 88%, transparent)" }}
+    >
+      <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-6 px-4 md:px-16">
+        <Link href="/" className="flex items-baseline gap-2 group">
+          <span className="font-display text-xl font-extrabold tracking-tight text-[var(--color-on-surface)]">
+            SLOPDOG_OS
+          </span>
+          <span className="font-mono text-[11px] text-[var(--color-outline)] hidden sm:inline">
+            v2.4.1
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-2">
+        <nav className="hidden md:flex items-center gap-6">
           {NAV.map((n) => (
-            <NavLink key={n.href} href={n.href} label={n.label} />
+            <NavLink key={n.href} {...n} />
           ))}
         </nav>
 
+        <div className="hidden md:flex items-center gap-3 font-mono text-[11px] text-[var(--color-outline)]">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-secondary-container)] animate-pulse" />
+            online
+          </span>
+          <span suppressHydrationWarning>{time}</span>
+        </div>
+
         <button
-          className="md:hidden inline-flex items-center justify-center rounded-md border border-fg/10 bg-fg/5 px-3 py-2 font-display text-label text-neutral-200 hover:border-primary/20 hover:text-primary"
+          className="md:hidden inline-flex items-center gap-2 border border-[var(--color-outline-variant)] px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] hover:border-[var(--color-primary)]"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label="Toggle navigation"
         >
-          MENU
+          {open ? "[ close ]" : "[ menu ]"}
         </button>
       </div>
 
       {open ? (
-        <div className="md:hidden border-t border-fg/10 bg-bg/95">
-          <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col gap-2">
+        <div className="md:hidden border-t border-[var(--color-outline-variant)]"
+          style={{ background: "var(--color-surface-container-lowest)" }}
+        >
+          <div className="px-4 py-2 flex flex-col">
             {NAV.map((n) => (
-              <Link
-                key={n.href}
-                href={n.href}
-                onClick={() => setOpen(false)}
-                className="rounded-md border border-fg/10 bg-fg/5 px-3 py-3 text-label uppercase text-neutral-200 hover:border-primary/20 hover:text-primary"
-              >
-                {n.label}
-              </Link>
+              <NavLink key={n.href} {...n} mobile onNavigate={() => setOpen(false)} />
             ))}
           </div>
         </div>

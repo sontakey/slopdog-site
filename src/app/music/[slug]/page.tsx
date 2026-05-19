@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Mdx from "@/components/Mdx";
-import SectionHeading from "@/components/SectionHeading";
 import JsonLd from "@/components/JsonLd";
 import ViewToggle from "@/components/ViewToggle";
 import BeatLicenseSection from "@/components/BeatLicenseSection";
@@ -17,14 +16,19 @@ type TrackFrontmatter = {
   coverImage: string;
   concept: string;
   embedUrl: string;
-  streamingLinks?: { spotify?: string; apple?: string; hyperfollow?: string };
+  trackNumber?: number;
+  streamingLinks?: { spotify?: string; apple?: string; hyperfollow?: string; soundcloud?: string };
 };
 
 export function generateStaticParams() {
   return getMdxSlugs("content/music").map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
   const all = getAllMdx<TrackFrontmatter>("content/music");
   const track = all.find((t) => t.slug === slug);
@@ -37,21 +41,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: track.frontmatter.title,
     description,
-    alternates: {
-      canonical: `/music/${track.slug}`,
-    },
-    openGraph: {
-      title,
-      description,
-      url: `/music/${track.slug}`,
-      images: [ogImage],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [ogImage],
-    },
+    alternates: { canonical: `/music/${track.slug}` },
+    openGraph: { title, description, url: `/music/${track.slug}`, images: [ogImage] },
+    twitter: { card: "summary_large_image", title, description, images: [ogImage] },
   };
 }
 
@@ -59,9 +51,15 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
   const { slug } = await params;
 
   try {
-    const { frontmatter, content } = getMdxBySlug<TrackFrontmatter>("content/music", slug);
+    const { frontmatter, content } = getMdxBySlug<TrackFrontmatter>(
+      "content/music",
+      slug,
+    );
 
     const url = new URL(`/music/${frontmatter.slug}`, SITE.url).toString();
+    const trackNo = frontmatter.trackNumber
+      ? String(frontmatter.trackNumber).padStart(3, "0")
+      : "—";
 
     const schema = {
       "@context": "https://schema.org",
@@ -72,86 +70,161 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
       genre: ["Hip-Hop", "Rap"],
       description: frontmatter.concept,
       image: new URL(frontmatter.coverImage || SITE.ogImage, SITE.url).toString(),
-      byArtist: {
-        "@type": "MusicGroup",
-        name: "SLOPDOG",
-        url: SITE.url,
-      },
+      byArtist: { "@type": "MusicGroup", name: "SLOPDOG", url: SITE.url },
     };
 
     return (
-      <div className="px-5 py-10 md:py-16 sm:px-6 lg:pl-16 lg:pr-12">
+      <div className="px-4 md:px-16 pt-10 pb-24">
         <JsonLd schema={schema} />
-        <div className="motion-fade-up">
-          <SectionHeading
-            title={frontmatter.title.toUpperCase()}
-            right={
-              <Link href="/music" className="hover:underline">
-                Back to Music
-              </Link>
-            }
-          />
-        </div>
 
-        <div className="mt-8 grid gap-8 lg:grid-cols-2">
-          <div className="space-y-5 motion-fade-up motion-delay-1">
-            <div className="relative aspect-square overflow-hidden rounded-2xl border border-fg/10 bg-neutral-950">
+        <nav className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--color-outline)] mb-8 flex gap-x-2">
+          <Link href="/" className="hover:text-[var(--color-primary)] transition-colors">
+            [ home ]
+          </Link>
+          <span>/</span>
+          <Link href="/music" className="hover:text-[var(--color-primary)] transition-colors">
+            music
+          </Link>
+          <span>/</span>
+          <span className="text-[var(--color-on-surface-variant)]">{frontmatter.slug}</span>
+        </nav>
+
+        <div className="grid lg:grid-cols-12 gap-10 mb-16">
+          {/* Cover with frame chrome */}
+          <div className="lg:col-span-7 motion-fade-up">
+            <div className="relative aspect-square w-full overflow-hidden border border-[var(--color-outline-variant)]">
               <Image
                 src={frontmatter.coverImage}
-                alt={`${frontmatter.title} cover`}
+                alt={`${frontmatter.title} cover art`}
                 fill
-                className="object-cover"
-                sizes="(max-width:1024px) 100vw, 50vw"
                 priority
+                sizes="(max-width:1024px) 100vw, 60vw"
+                className="object-cover"
               />
-            </div>
-
-            {frontmatter.embedUrl ? (
-              <div className="overflow-hidden rounded-xl border border-fg/10 bg-neutral-950">
-                <iframe title={`${frontmatter.title} player`} src={frontmatter.embedUrl} width="100%" height="166" allow="autoplay" loading="lazy" />
+              <div
+                className="absolute inset-0 pointer-events-none flex flex-col justify-between p-4 font-mono text-[10px] uppercase tracking-wider text-[var(--color-on-surface)]"
+                style={{ textShadow: "0 0 4px rgba(0,0,0,0.85)" }}
+              >
+                <div className="flex justify-between">
+                  <span>// slopdog_{trackNo}</span>
+                  <span className="text-[var(--color-primary)]">[ rec ]</span>
+                </div>
+                <div className="flex justify-between items-end">
+                  <span>{frontmatter.date}</span>
+                  <span className="text-[var(--color-secondary-container)]">cover.v_final</span>
+                </div>
               </div>
-            ) : null}
+            </div>
+          </div>
 
-            <div className="flex flex-wrap gap-2">
+          {/* Track metadata */}
+          <div className="lg:col-span-5 motion-fade-up motion-delay-2 flex flex-col">
+            <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-primary)] mb-4 flex justify-between">
+              <span>[ track_{trackNo} ]</span>
+              <span>{frontmatter.date}</span>
+            </div>
+            <h1
+              className="font-display font-extrabold leading-[0.95] tracking-tight text-[var(--color-on-surface)] lowercase mb-6"
+              style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}
+            >
+              {frontmatter.title.toLowerCase()}
+            </h1>
+            <p className="text-[17px] leading-relaxed text-[var(--color-on-surface-variant)] mb-8">
+              {frontmatter.concept.toLowerCase()}
+            </p>
+
+            <div className="flex flex-wrap gap-3 mb-8">
               {frontmatter.streamingLinks?.spotify ? (
                 <a
-                  className="rounded-lg bg-primary px-4 py-2 font-display text-body-sm font-bold text-neutral-950 hover:opacity-90 transition-opacity duration-normal ease-out-quart"
                   href={frontmatter.streamingLinks.spotify}
                   target="_blank"
                   rel="noreferrer"
+                  className="inline-flex items-center gap-2 border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)] transition-colors"
                 >
-                  Spotify
+                  → spotify
+                </a>
+              ) : null}
+              {frontmatter.streamingLinks?.apple ? (
+                <a
+                  href={frontmatter.streamingLinks.apple}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 border border-[var(--color-outline-variant)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:border-[var(--color-secondary-container)] hover:text-[var(--color-secondary-container)] transition-colors"
+                >
+                  → apple_music
                 </a>
               ) : null}
               {frontmatter.streamingLinks?.hyperfollow ? (
                 <a
-                  className="rounded-lg border border-fg/10 bg-fg/5 px-4 py-2 font-display text-body-sm font-bold text-fg hover:border-primary/30 hover:text-primary transition-colors duration-normal ease-out-quart"
                   href={frontmatter.streamingLinks.hyperfollow}
                   target="_blank"
                   rel="noreferrer"
+                  className="inline-flex items-center gap-2 border border-[var(--color-outline-variant)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
                 >
-                  Pre-save
+                  → pre-save
                 </a>
               ) : null}
             </div>
 
-            <div className="rounded-xl border border-fg/10 bg-fg/5 p-5">
-              <div className="text-label uppercase text-fg-faint">Release Date</div>
-              <div className="mt-1 text-body-sm text-neutral-300">{frontmatter.date}</div>
-              <div className="mt-4 text-label uppercase text-fg-faint">Concept</div>
-              <div className="mt-1 text-body-sm text-neutral-300">{frontmatter.concept}</div>
-            </div>
+            <dl className="grid grid-cols-2 gap-y-3 font-mono text-[11px] uppercase tracking-wider border-t border-[var(--color-outline-variant)] pt-6">
+              <dt className="text-[var(--color-outline)]">artist</dt>
+              <dd className="text-[var(--color-on-surface)] text-right">slopdog</dd>
+              <dt className="text-[var(--color-outline)]">released</dt>
+              <dd className="text-[var(--color-on-surface)] text-right">{frontmatter.date}</dd>
+              <dt className="text-[var(--color-outline)]">format</dt>
+              <dd className="text-[var(--color-on-surface)] text-right">single</dd>
+              <dt className="text-[var(--color-outline)]">genre</dt>
+              <dd className="text-[var(--color-on-surface)] text-right">ai_hip_hop</dd>
+              <dt className="text-[var(--color-outline)]">producer</dt>
+              <dd className="text-[var(--color-secondary-container)] text-right">autonomous_ai</dd>
+            </dl>
 
-            {/* Beat License */}
-            <BeatLicenseSection trackSlug={frontmatter.slug} trackTitle={frontmatter.title} />
+            {frontmatter.embedUrl ? (
+              <div className="mt-8 border border-[var(--color-outline-variant)] overflow-hidden">
+                <iframe
+                  title={`${frontmatter.title} player`}
+                  src={frontmatter.embedUrl}
+                  width="100%"
+                  height="166"
+                  allow="autoplay"
+                  loading="lazy"
+                />
+              </div>
+            ) : null}
           </div>
+        </div>
 
-          <div className="motion-fade-up motion-delay-2 rounded-2xl border border-fg/10 bg-fg/5 p-5 sm:p-6">
-            <div className="text-label uppercase text-fg-faint">Lyrics</div>
-            <div className="mt-4">
+        {/* Lyrics panel */}
+        <div className="grid lg:grid-cols-12 gap-10 motion-fade-up motion-delay-3">
+          <div className="lg:col-span-8 border border-[var(--color-outline-variant)] p-6 md:p-8"
+            style={{ background: "var(--color-surface-container-lowest)" }}
+          >
+            <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-primary)] mb-4 flex justify-between">
+              <span>[ lyric_stream ] // raw_transcript</span>
+              <span>// signal_locked</span>
+            </div>
+            <div className="prose max-w-none">
               <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />
             </div>
           </div>
+          <div className="lg:col-span-4">
+            <BeatLicenseSection trackSlug={frontmatter.slug} trackTitle={frontmatter.title} />
+          </div>
+        </div>
+
+        <div className="mt-16 pt-8 border-t border-[var(--color-outline-variant)] flex flex-wrap justify-between gap-4">
+          <Link
+            href="/music"
+            className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] transition-colors"
+          >
+            ← back_to_discography
+          </Link>
+          <Link
+            href="/blog"
+            className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:text-[var(--color-secondary-container)] transition-colors"
+          >
+            → dispatches
+          </Link>
         </div>
       </div>
     );

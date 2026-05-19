@@ -23,9 +23,7 @@ export const metadata: Metadata = {
   title: "Merch",
   description:
     "Merch catalog for Slopdog, an AI music artist. Hats, tees, and accessories tied to AI-generated hip-hop drops.",
-  alternates: {
-    canonical: "/merch",
-  },
+  alternates: { canonical: "/merch" },
   openGraph: {
     title: "Merch | SLOPDOG",
     description:
@@ -71,50 +69,74 @@ export default function MerchPage() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "SLOPDOG Merch",
-    itemListElement: productSchemas.map((schema: Record<string, unknown>, idx: number) => ({
-      "@type": "ListItem",
-      position: idx + 1,
-      url: schema.url,
-      item: schema,
-    })),
+    itemListElement: productSchemas.map(
+      (schema: Record<string, unknown>, idx: number) => ({
+        "@type": "ListItem",
+        position: idx + 1,
+        url: schema.url,
+        item: schema,
+      }),
+    ),
   };
 
   return (
-    <div className="px-4 py-10 md:py-14 sm:px-6 lg:pl-16 lg:pr-8">
+    <div className="px-4 md:px-16 pt-10 pb-24">
       <JsonLd schema={catalogSchema} />
-      <div className="motion-fade-up">
-        <SectionHeading title="MERCH" />
+
+      <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--color-outline)] mb-8 flex flex-wrap justify-between gap-2">
+        <span>[ /merch ] // physical_goods + digital_drops</span>
+        <span>
+          inventory: <span className="text-[var(--color-secondary-container)]">{String(products.length).padStart(3, "0")}</span>
+        </span>
       </div>
 
+      <SectionHeading
+        kicker="catalog // 03"
+        title="merch & stems"
+        status="storefront_live"
+      />
+
       {/* Digital product promo banner */}
-      <div className="motion-fade-up motion-delay-1 mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-5 sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div
+        className="motion-fade-up motion-delay-1 border border-[var(--color-primary)] p-5 sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-10"
+        style={{ background: "color-mix(in oklch, var(--color-primary) 6%, transparent)" }}
+      >
         <div>
-          <div className="text-label uppercase text-primary mb-1">DIGITAL PRODUCT</div>
-          <div className="font-display font-bold text-fg">Slopdog Stem Pack Vol. 1</div>
-          <p className="mt-1 text-body-sm text-fg-muted">
-            All 3 tracks as stems — vocals, instrumentals, acapella. Remix, sample, go wild.
+          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-primary)] mb-2">
+            [ digital_drop ] // stem_pack_v1
+          </div>
+          <div className="font-display text-xl md:text-2xl font-extrabold lowercase text-[var(--color-on-surface)]">
+            slopdog stem pack vol. 1
+          </div>
+          <p className="mt-1 text-[14px] text-[var(--color-on-surface-variant)] max-w-2xl">
+            all 3 released tracks as stems. vocals, instrumentals, acapella. remix, sample, go wild.
           </p>
         </div>
         <div className="shrink-0 flex items-center gap-4">
-          <span className="font-display text-display-sm text-fg">$9.99</span>
+          <span className="font-display text-3xl md:text-4xl font-extrabold text-[var(--color-on-surface)] tabular-nums">
+            $9.99
+          </span>
           <Link
             href="/products/stem-pack"
-            className="rounded-lg bg-primary px-4 py-2 font-display text-body-sm font-bold text-neutral-950 hover:opacity-90 transition-opacity duration-normal ease-out-quart whitespace-nowrap"
+            className="border border-[var(--color-primary)] bg-[var(--color-primary)] px-4 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)] transition-colors whitespace-nowrap"
           >
-            GET STEMS
+            → get_stems
           </Link>
         </div>
       </div>
 
       {/* Product grid */}
-      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((p, i) => {
           const pos = i % 5;
-          // 5-item rhythm: hero (2×2), standard, compact, wide (2×1), tall
           const spanClass =
-            pos === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" :
-            pos === 3 ? "sm:col-span-2 lg:col-span-2" :
-            pos === 4 ? "lg:row-span-2" : "";
+            pos === 0
+              ? "sm:col-span-2 lg:col-span-2 lg:row-span-2"
+              : pos === 3
+                ? "sm:col-span-2 lg:col-span-2"
+                : pos === 4
+                  ? "lg:row-span-2"
+                  : "";
           const isFeatured = pos === 0;
           const isCompact = pos === 2;
 
@@ -137,12 +159,22 @@ export default function MerchPage() {
         })}
       </div>
 
-      <div className="mt-10 rounded-2xl border border-fg/10 bg-neutral-950/40 p-6 text-body-sm text-neutral-300">
-        <div className="text-label uppercase text-primary mb-2">NOTE</div>
-        <p>All merch is print-on-demand. Orders ship within 5–7 business days.</p>
-        <p className="mt-2">
-          Questions? Email{" "}
-          <a href="mailto:slopdog@sontakey.com" className="text-primary hover:underline">
+      <div
+        className="mt-12 border border-[var(--color-outline-variant)] p-6"
+        style={{ background: "var(--color-surface-container-lowest)" }}
+      >
+        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-primary)] mb-2">
+          [ fulfillment_protocol ]
+        </div>
+        <p className="text-[14px] leading-relaxed text-[var(--color-on-surface-variant)]">
+          all merch is print-on-demand. orders ship within 5-7 business days.
+        </p>
+        <p className="mt-2 text-[14px] leading-relaxed text-[var(--color-on-surface-variant)]">
+          questions? email{" "}
+          <a
+            href="mailto:slopdog@sontakey.com"
+            className="text-[var(--color-primary)] hover:text-[var(--color-secondary-container)] underline underline-offset-2"
+          >
             slopdog@sontakey.com
           </a>
         </p>

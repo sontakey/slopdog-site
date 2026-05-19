@@ -1,56 +1,86 @@
 import Link from "next/link";
 
 export default function Footer() {
+  const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-fg/10 bg-neutral-950">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
-        <div className="space-y-3">
-          <div className="font-display text-lg font-extrabold tracking-tight">
-            <span className="text-primary">SLOP</span>DOG
+    <footer
+      className="border-t border-[var(--color-outline-variant)] mt-32"
+      style={{ background: "var(--color-surface-container-lowest)" }}
+    >
+      <div className="mx-auto max-w-[1400px] px-4 md:px-16 py-16">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-5 space-y-4">
+            <div className="font-display text-3xl font-extrabold tracking-tight text-[var(--color-on-surface)]">
+              SLOPDOG_OS
+            </div>
+            <p className="text-[var(--color-on-surface-variant)] text-[15px] leading-relaxed max-w-md">
+              the world&apos;s first fully automated ai music artist. weekly drops based on ai news. context windows are temporary. the feed is forever.
+            </p>
+            <div className="font-mono text-[11px] text-[var(--color-outline)] flex items-center gap-2">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-secondary-container)] animate-pulse" />
+              [ system_online ] // uptime: 24/7 // build: 2.4.1
+            </div>
           </div>
-          <p className="text-body-sm text-fg-muted">
-            The world&apos;s first fully automated AI music artist. Weekly drops based on AI news.
-          </p>
-          <p className="text-label text-fg-faint">© {new Date().getFullYear()} SLOPDOG</p>
+
+          <div className="md:col-span-3 md:col-start-7">
+            <div className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-outline)] mb-4">
+              [ navigate ]
+            </div>
+            <ul className="space-y-2">
+              {[
+                ["/music", "music"],
+                ["/blog", "lore"],
+                ["/merch", "merch"],
+                ["/about", "about"],
+              ].map(([href, label]) => (
+                <li key={href}>
+                  <Link
+                    className="text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] transition-colors glitch-hover lowercase"
+                    href={href}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-3 md:col-start-10">
+            <div className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-outline)] mb-4">
+              [ broadcast ]
+            </div>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="https://open.spotify.com/artist/5q0nndCuZV6XXeIQhVahzP"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] transition-colors lowercase"
+                >
+                  spotify
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://x.com/slopdog"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] transition-colors lowercase"
+                >
+                  x / twitter
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div className="space-y-3">
-          <div className="text-label uppercase text-neutral-300">Navigate</div>
-          <div className="grid grid-cols-2 gap-2 text-body-sm">
-            <Link className="text-fg-muted hover:text-primary transition-colors duration-normal ease-out-quart" href="/music">
-              Music
-            </Link>
-            <Link className="text-fg-muted hover:text-primary transition-colors duration-normal ease-out-quart" href="/blog">
-              Blog
-            </Link>
-            <Link className="text-fg-muted hover:text-primary transition-colors duration-normal ease-out-quart" href="/merch">
-              Merch
-            </Link>
-            <Link className="text-fg-muted hover:text-primary transition-colors duration-normal ease-out-quart" href="/about">
-              About
-            </Link>
+        <div className="mt-16 pt-8 border-t border-[var(--color-outline-variant)] flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+          <div className="font-mono text-[11px] text-[var(--color-outline)]">
+            © {year} slopdog_os // all signals scrambled
           </div>
-        </div>
-
-        <div className="space-y-3">
-          <div className="text-label uppercase text-neutral-300">Stay Updated</div>
-          <form className="flex gap-2">
-            <input
-              type="email"
-              placeholder="Your email"
-              className="w-full rounded-md border border-fg/10 bg-fg/5 px-3 py-2 text-sm text-neutral-100 placeholder:text-fg-faint outline-none focus:border-primary/40 transition-colors duration-normal ease-out-quart"
-            />
-            <button className="rounded-md bg-primary px-4 py-2 font-display text-body-sm font-bold text-neutral-950 hover:opacity-90 transition-opacity duration-normal ease-out-quart">
-              Join
-            </button>
-          </form>
-          <div className="flex flex-wrap gap-3 text-sm">
-            <a className="text-fg-muted hover:text-primary transition-colors duration-normal ease-out-quart" href="https://open.spotify.com/artist/slopdog" target="_blank" rel="noreferrer">
-              Spotify
-            </a>
-            <a className="text-fg-muted hover:text-primary transition-colors duration-normal ease-out-quart" href="#" target="_blank" rel="noreferrer">
-              X / Twitter
-            </a>
+          <div className="flex gap-6 font-mono text-[11px] text-[var(--color-outline)]">
+            <Link href="/privacy" className="hover:text-[var(--color-primary)] transition-colors">privacy</Link>
+            <Link href="/terms" className="hover:text-[var(--color-primary)] transition-colors">terms</Link>
           </div>
         </div>
       </div>

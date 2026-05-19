@@ -1,5 +1,3 @@
-import MaterialIcon from "@/components/MaterialIcon";
-
 export default function StaticAudioPlayer({
   title,
   artist,
@@ -11,40 +9,64 @@ export default function StaticAudioPlayer({
   album: string;
   duration?: string;
 }) {
-  const bars = [3, 5, 2, 6, 4, 8, 3, 5, 2];
+  const bars = [4, 7, 3, 9, 5, 11, 4, 8, 3, 6, 9, 4, 7, 2, 5, 10, 3];
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-fg/10 bg-surface p-6">
-      <div className="absolute left-0 top-0 h-full w-1 bg-primary/60" />
+    <div
+      className="relative border border-[var(--color-outline-variant)] p-5 group"
+      style={{ background: "var(--color-surface-container-lowest)" }}
+    >
+      <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-[var(--color-primary)]" />
 
-      <div className="mb-4 flex items-center gap-4">
+      <div className="flex items-center justify-between mb-4">
+        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-outline)]">
+          [ now_playing ] // signal_locked
+        </div>
+        <div className="font-mono text-[10px] tabular-nums text-[var(--color-on-surface-variant)]">
+          {duration ?? "03:42"}
+        </div>
+      </div>
+
+      <div className="flex items-center gap-4 mb-4">
         <button
           type="button"
           aria-label="Play"
-          className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-neutral-950 transition-transform duration-normal ease-out-quart hover:scale-105"
+          className="h-11 w-11 flex items-center justify-center border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-[var(--color-on-primary)] transition-colors"
         >
-          <MaterialIcon name="play_arrow" size={28} />
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden>
+            <path d="M8 5v14l11-7z" />
+          </svg>
         </button>
-
         <div className="min-w-0 flex-1">
-          <h3 className="truncate font-display font-bold text-fg">{title}</h3>
-          <p className="truncate text-body-sm text-primary/70">{artist} • {album}</p>
+          <div className="truncate font-display text-base font-extrabold text-[var(--color-on-surface)] lowercase">
+            {title}
+          </div>
+          <div className="truncate font-mono text-[11px] text-[var(--color-on-surface-variant)] uppercase tracking-wider">
+            {artist.toLowerCase()} // {album.toLowerCase()}
+          </div>
         </div>
-
-        <span className="text-label tabular-nums text-fg-faint">{duration ?? "03:42"}</span>
       </div>
 
-      <div className="mb-1 flex h-8 items-end gap-1 opacity-60 transition-opacity duration-normal ease-out-quart group-hover:opacity-100">
+      <div className="flex h-10 items-end gap-[3px] mb-2">
         {bars.map((h, i) => (
           <div
             key={i}
-            className="w-1 rounded-t bg-primary"
-            style={{ height: `${h * 4}px`, animationDelay: `${i * 75}ms` }}
+            className="w-[3px] flex-1 transition-all duration-300 group-hover:bg-[var(--color-primary)]"
+            style={{
+              height: `${h * 9}%`,
+              background:
+                i < 8
+                  ? "var(--color-secondary-container)"
+                  : "var(--color-outline-variant)",
+            }}
           />
         ))}
-        <div className="ml-2 h-1 flex-1 self-center rounded-full bg-primary/30" />
       </div>
 
+      <div className="flex justify-between font-mono text-[9px] text-[var(--color-outline)] uppercase tracking-wider">
+        <span>00:00</span>
+        <span>{duration ?? "03:42"}</span>
+      </div>
     </div>
   );
 }

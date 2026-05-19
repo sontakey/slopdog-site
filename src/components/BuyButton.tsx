@@ -46,14 +46,14 @@ export default function BuyButton({
     }
   };
 
-  const baseClass = `inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 font-display text-body-sm font-bold transition-all duration-normal ease-out-quart focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed ${fullWidth ? "w-full" : ""}`;
+  const baseClass = `inline-flex items-center justify-center gap-2 px-5 py-3 font-mono text-[12px] uppercase tracking-wider transition-colors focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed ${fullWidth ? "w-full" : ""}`;
 
   const variantClass =
     variant === "primary"
-      ? "bg-primary text-neutral-950 hover:opacity-90 active:scale-[0.98]"
+      ? "border border-[var(--color-primary)] bg-[var(--color-primary)] text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)]"
       : variant === "outline"
-        ? "border border-primary/40 text-primary hover:bg-primary/10"
-        : "border border-fg/10 text-neutral-300 hover:border-primary/30 hover:text-primary";
+        ? "border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-[var(--color-on-primary)]"
+        : "border border-[var(--color-outline-variant)] text-[var(--color-on-surface-variant)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]";
 
   return (
     <div className={fullWidth ? "w-full" : "inline-block"}>
@@ -68,14 +68,14 @@ export default function BuyButton({
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
             </svg>
-            REDIRECTING...
+            redirecting...
           </>
         ) : (
           label
         )}
       </button>
       {error && (
-        <p className="mt-2 text-label text-red-400">{error}</p>
+        <p className="mt-2 font-mono text-[11px] text-[var(--color-error)]">// {error.toLowerCase()}</p>
       )}
     </div>
   );

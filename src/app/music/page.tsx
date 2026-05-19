@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
+import AlbumCard from "@/components/AlbumCard";
 import { getAllMdx } from "@/lib/mdx";
 import { SITE } from "@/lib/site";
 
@@ -11,15 +11,14 @@ type TrackFrontmatter = {
   date: string;
   coverImage: string;
   concept: string;
+  trackNumber?: number;
 };
 
 export const metadata: Metadata = {
   title: "Music",
   description:
     "Listen to Slopdog's AI-generated hip-hop releases. Weekly drops powered by autonomous AI agents and the latest AI news.",
-  alternates: {
-    canonical: "/music",
-  },
+  alternates: { canonical: "/music" },
   openGraph: {
     title: "Music | SLOPDOG",
     description:
@@ -38,65 +37,112 @@ export const metadata: Metadata = {
 
 export default function MusicPage() {
   const tracks = getAllMdx<TrackFrontmatter>("content/music");
+  const featured = tracks[0];
+  const rest = tracks.slice(1);
 
   return (
-    <div className="px-4 py-14 md:py-20 sm:px-6 lg:pl-16 lg:pr-8">
-      <div className="motion-fade-up">
-        <SectionHeading title="MUSIC" right={<span className="text-fg-faint">Newest first</span>} />
+    <div className="px-4 md:px-16 pt-10 pb-24">
+      {/* Status header */}
+      <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--color-outline)] mb-8 flex flex-wrap justify-between gap-2">
+        <span>[ /music ] // discography_full // sort=newest_first</span>
+        <span>
+          archive_count: <span className="text-[var(--color-secondary-container)]">{String(tracks.length).padStart(3, "0")}</span>
+        </span>
       </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {tracks.map((t, i) => {
-          const pos = i % 6;
-          // Repeating 6-item rhythm: hero (2×2), compact, landscape, wide (2×1), minimal, tall (1×2)
-          const spanClass =
-            pos === 0 ? "sm:col-span-2 sm:row-span-2" :
-            pos === 3 ? "sm:col-span-2" :
-            pos === 5 ? "lg:row-span-2" : "";
-          const isFeatured = pos === 0;
-          const isWide = pos === 3;
-          const isTall = pos === 5;
-          const isCompact = pos === 1;
-          const isLandscape = pos === 2;
-          const isMinimal = pos === 4;
-          const aspectClass =
-            isFeatured ? "aspect-[4/3]" :
-            isWide ? "aspect-[2/1]" :
-            isLandscape ? "aspect-[3/2]" :
-            isTall ? "aspect-[3/4]" :
-            isMinimal ? "aspect-[5/4]" : "aspect-square";
-          const textSize =
-            isFeatured ? "text-display-sm" :
-            isWide ? "text-display-sm" :
-            isCompact ? "text-body-sm" : "text-body-lg";
-          const padClass =
-            isFeatured ? "p-5" :
-            isCompact ? "p-3" :
-            isMinimal ? "p-3" : "p-4";
-          const clampClass = isFeatured ? "line-clamp-4" : isWide ? "line-clamp-3" : "line-clamp-2";
+      <SectionHeading
+        kicker="catalog // 01"
+        title="discography"
+        status="archive_live"
+      />
 
-          return (
+      {/* Featured row + table-style list */}
+      {featured ? (
+        <div className="grid lg:grid-cols-12 gap-8 mb-20 motion-fade-up">
+          <div className="lg:col-span-7">
+            <AlbumCard
+              href={`/music/${featured.slug}`}
+              title={featured.frontmatter.title}
+              sub={`${featured.frontmatter.date} // single`}
+              image={featured.frontmatter.coverImage}
+              badge="latest"
+              index={String(tracks.length).padStart(3, "0")}
+              variant="hero"
+            />
+          </div>
+          <div className="lg:col-span-5 flex flex-col justify-end pb-4">
+            <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-primary)] mb-3">
+              [ latest_release ]
+            </div>
+            <h3 className="font-display text-3xl md:text-5xl font-extrabold lowercase text-[var(--color-on-surface)] mb-4">
+              {featured.frontmatter.title.toLowerCase()}
+            </h3>
+            <p className="text-[16px] leading-relaxed text-[var(--color-on-surface-variant)] mb-6">
+              {featured.frontmatter.concept.toLowerCase()}
+            </p>
             <Link
-              key={t.slug}
-              href={`/music/${t.slug}`}
-              className={`group motion-fade-up rounded-xl border border-fg/10 bg-fg/5 transition-all duration-normal ease-out-quart hover:border-primary/30 ${padClass} ${spanClass}`}
-              style={{ animationDelay: `${Math.min(i, 5) * 75}ms` }}
+              href={`/music/${featured.slug}`}
+              className="self-start border border-[var(--color-primary)] px-4 py-2 font-mono text-[11px] uppercase tracking-wider text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-[var(--color-on-primary)] transition-colors"
             >
-              <div className={`relative overflow-hidden rounded-lg border border-fg/10 ${aspectClass}`}>
-                <Image src={t.frontmatter.coverImage} alt={t.frontmatter.title} fill className="object-cover transition-transform duration-slow ease-out-quint group-hover:scale-105" sizes={isFeatured || isWide ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
-              </div>
-              <div className={`${isCompact ? "mt-2" : "mt-3"} flex items-start justify-between gap-3`}>
-                <div className="min-w-0">
-                  <div className={`truncate font-display font-bold group-hover:text-primary transition-colors duration-normal ease-out-quart ${textSize}`}>{t.frontmatter.title}</div>
-                  <div className="text-label text-fg-faint">{t.frontmatter.date}</div>
-                </div>
-                {isFeatured ? <span className="rounded-md border border-primary/20 bg-primary/5 px-2 py-1 text-label uppercase text-primary">Latest</span> : null}
-              </div>
-              {isMinimal ? null : <p className={`mt-2 text-body-sm text-fg-muted ${clampClass}`}>{t.frontmatter.concept}</p>}
+              → open_release
             </Link>
-          );
-        })}
-      </div>
+          </div>
+        </div>
+      ) : null}
+
+      {rest.length ? (
+        <>
+          <div className="border-b border-[var(--color-outline-variant)] pb-3 mb-4 grid grid-cols-12 gap-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-outline)]">
+            <div className="col-span-1">#</div>
+            <div className="col-span-2 md:col-span-2">cover</div>
+            <div className="col-span-5 md:col-span-4">title</div>
+            <div className="col-span-3 md:col-span-3 hidden md:block">concept</div>
+            <div className="col-span-4 md:col-span-2 text-right">released</div>
+          </div>
+
+          <ul className="divide-y divide-[var(--color-outline-variant)]">
+            {rest.map((t, i) => {
+              const num = String(rest.length - i).padStart(3, "0");
+              return (
+                <li key={t.slug}>
+                  <Link
+                    href={`/music/${t.slug}`}
+                    className="group grid grid-cols-12 gap-4 items-center py-4 hover:bg-[var(--color-surface-container-lowest)] transition-colors px-2 -mx-2"
+                  >
+                    <div className="col-span-1 font-mono text-[12px] text-[var(--color-outline)] group-hover:text-[var(--color-primary)]">
+                      {num}
+                    </div>
+                    <div className="col-span-2 md:col-span-2">
+                      <div className="relative aspect-square w-14 md:w-16 border border-[var(--color-outline-variant)] group-hover:border-[var(--color-primary)] transition-colors overflow-hidden">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={t.frontmatter.coverImage}
+                          alt={t.frontmatter.title}
+                          className="absolute inset-0 h-full w-full object-cover"
+                        />
+                      </div>
+                    </div>
+                    <div className="col-span-5 md:col-span-4">
+                      <div className="font-display text-lg md:text-xl font-extrabold lowercase text-[var(--color-on-surface)] group-hover:text-[var(--color-primary)] transition-colors leading-tight">
+                        {t.frontmatter.title.toLowerCase()}
+                      </div>
+                      <div className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-outline)] md:hidden mt-1">
+                        {t.frontmatter.date}
+                      </div>
+                    </div>
+                    <div className="col-span-3 md:col-span-3 hidden md:block text-[13px] text-[var(--color-on-surface-variant)] line-clamp-2 leading-snug">
+                      {t.frontmatter.concept.toLowerCase()}
+                    </div>
+                    <div className="col-span-4 md:col-span-2 text-right font-mono text-[11px] uppercase tracking-wider text-[var(--color-on-surface-variant)]">
+                      {t.frontmatter.date}
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      ) : null}
     </div>
   );
 }

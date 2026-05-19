@@ -1,117 +1,193 @@
 @import "tailwindcss";
 
-:root {
-  --bg: oklch(12% 0.01 60);
-  --fg: oklch(93% 0.005 60);
-  --primary: #00ff41;
+/* ------------------------------------------------------------------
+   SLOPDOG_OS // V2 — Stitch design tokens
+   Brutalist-cyberpunk artist OS. Pure black canvas.
+   Dual lavender (primary) + teal (secondary) accents on near-black.
+   ------------------------------------------------------------------ */
 
-  /* Exponential easing — purposeful, smooth deceleration */
+@theme {
+  /* Surfaces */
+  --color-bg: #020202;
+  --color-background: #141313;
+  --color-surface: #141313;
+  --color-surface-dim: #141313;
+  --color-surface-bright: #3a3939;
+  --color-surface-variant: #353434;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-container-low: #1c1b1b;
+  --color-surface-container: #201f1f;
+  --color-surface-container-high: #2a2a2a;
+  --color-surface-container-highest: #353434;
+
+  /* Foreground */
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: #d7c0d4;
+  --color-on-background: #e5e2e1;
+  --color-fg: #e5e2e1;
+  --color-fg-muted: #d7c0d4;
+  --color-fg-faint: #9f8a9e;
+
+  /* Primary — lavender */
+  --color-primary: #faabff;
+  --color-primary-container: #e446ff;
+  --color-primary-fixed: #ffd6fe;
+  --color-primary-fixed-dim: #faabff;
+  --color-on-primary: #570066;
+  --color-on-primary-container: #4c0059;
+
+  /* Secondary — teal */
+  --color-secondary: #e6feff;
+  --color-secondary-container: #00f4fe;
+  --color-secondary-fixed: #63f7ff;
+  --color-secondary-fixed-dim: #00dce5;
+  --color-on-secondary: #003739;
+  --color-on-secondary-container: #006c71;
+
+  /* Tertiary */
+  --color-tertiary: #c7c6c5;
+  --color-tertiary-container: #909190;
+  --color-on-tertiary: #2f3130;
+
+  /* Outline */
+  --color-outline: #9f8a9e;
+  --color-outline-variant: #524152;
+
+  /* Status */
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+
+  /* Fonts */
+  --font-display: var(--font-syne), ui-sans-serif, system-ui;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui;
+  --font-mono: var(--font-space-mono), ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+
+  /* Spacing */
+  --spacing-margin-mobile: 16px;
+  --spacing-margin-desktop: 64px;
+  --spacing-gutter: 24px;
+
+  /* Type scale */
+  --text-display-lg: clamp(3.5rem, 8vw, 5.25rem);
+  --text-display-lg--line-height: 1.0;
+  --text-display-lg--letter-spacing: -0.04em;
+  --text-display-lg--font-weight: 800;
+
+  --text-headline-lg: clamp(2rem, 4vw, 3rem);
+  --text-headline-lg--line-height: 1.1;
+  --text-headline-lg--letter-spacing: -0.02em;
+  --text-headline-lg--font-weight: 800;
+
+  --text-headline-md: clamp(1.5rem, 3vw, 2rem);
+  --text-headline-md--line-height: 1.15;
+  --text-headline-md--letter-spacing: -0.015em;
+  --text-headline-md--font-weight: 800;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.6;
+  --text-body-lg--font-weight: 300;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 1.6;
+  --text-body-md--font-weight: 300;
+
+  --text-label-mono: 14px;
+  --text-label-mono--line-height: 1.4;
+  --text-label-mono--letter-spacing: 0.05em;
+  --text-label-mono--font-weight: 400;
+
+  --text-label-mono-sm: 11px;
+  --text-label-mono-sm--line-height: 1.2;
+  --text-label-mono-sm--font-weight: 400;
+
+  /* Motion */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-in-quart: cubic-bezier(0.5, 0, 0.75, 0);
 
-  /* Motion duration tokens */
   --duration-fast: 150ms;
   --duration-normal: 300ms;
   --duration-slow: 500ms;
   --duration-entrance: 600ms;
 }
 
-html,
-body {
-  height: 100%;
-}
+html, body { height: 100%; }
 
 body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-inter), ui-sans-serif, system-ui;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Display typography — Syne for headlines */
-h1, h2, h3,
-.font-display {
-  font-family: var(--font-syne), ui-sans-serif, system-ui;
+/* Scanline + noise overlays — global SLOPDOG_OS chrome */
+.scanlines::before {
+  content: "";
+  display: block;
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.18) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.015), rgba(0, 0, 255, 0.04));
+  background-size: 100% 2px, 3px 100%;
+  z-index: 999;
+  pointer-events: none;
 }
 
-/* Scrollbar — subtle, warm-tinted */
-::-webkit-scrollbar {
-  width: 8px;
+@media (prefers-reduced-motion: reduce) {
+  .scanlines::before { display: none; }
 }
 
-::-webkit-scrollbar-track {
-  background: oklch(10% 0.01 60);
+/* Glitch hover for inline text links */
+.glitch-hover { transition: text-shadow var(--duration-normal) var(--ease-out-quart), transform var(--duration-normal) var(--ease-out-quart); }
+.glitch-hover:hover {
+  text-shadow: 2px 0 #faabff, -2px 0 #00f4fe;
+  transform: translate(1px, -1px);
 }
 
-::-webkit-scrollbar-thumb {
-  background: oklch(30% 0.006 60);
-  border-radius: 4px;
+/* Display headline = glitched */
+.text-glitch {
+  position: relative;
+  display: inline-block;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: oklch(40% 0.006 60);
+.text-glitch::before,
+.text-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
+.text-glitch::before { color: #faabff; transform: translate(-2px, 0); mix-blend-mode: screen; opacity: 0.55; }
+.text-glitch::after  { color: #00f4fe; transform: translate(2px, 0); mix-blend-mode: screen; opacity: 0.55; }
 
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0e0e0e; }
+::-webkit-scrollbar-thumb { background: #353434; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #524152; }
 
-
-/* ------------------------------------------------------------------
-   Motion utilities — purposeful entrance animations
-   ------------------------------------------------------------------ */
-
-/* Entrance: fade-up (default for most content) */
+/* Motion utilities */
 .motion-fade-up {
   opacity: 0;
   transform: translateY(12px);
   animation: fade-up var(--duration-entrance) var(--ease-out-quint) forwards;
 }
+@keyframes fade-up { to { opacity: 1; transform: translateY(0); } }
 
-@keyframes fade-up {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+.motion-fade-in { opacity: 0; animation: fade-in var(--duration-slow) var(--ease-out-quart) forwards; }
+@keyframes fade-in { to { opacity: 1; } }
 
-/* Entrance: fade-in (no translation, for images/overlays) */
-.motion-fade-in {
-  opacity: 0;
-  animation: fade-in var(--duration-slow) var(--ease-out-quart) forwards;
-}
-
-@keyframes fade-in {
-  to {
-    opacity: 1;
-  }
-}
-
-/* Stagger delay utilities (apply alongside motion-fade-up) */
 .motion-delay-1 { animation-delay: 75ms; }
 .motion-delay-2 { animation-delay: 150ms; }
 .motion-delay-3 { animation-delay: 225ms; }
 .motion-delay-4 { animation-delay: 300ms; }
 .motion-delay-5 { animation-delay: 375ms; }
 
-/* Smooth hover transition preset */
-.motion-hover {
-  transition: all var(--duration-normal) var(--ease-out-quart);
-}
-
-/* Accessibility: disable all motion for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .motion-fade-up,
-  .motion-fade-in {
-    opacity: 1;
-    transform: none;
-    animation: none;
+  .motion-fade-up, .motion-fade-in {
+    opacity: 1; transform: none; animation: none;
   }
-
-  .motion-hover {
-    transition: none;
-  }
-
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -119,40 +195,54 @@ h1, h2, h3,
   }
 }
 
-/* Blog typography - Medium-style spacing */
-.prose p {
-  margin-bottom: 1.5em;
+/* Blog typography — terminal-readable, NOT centered-blog generic */
+.prose {
+  color: var(--color-on-surface-variant);
+  font-size: 17px;
   line-height: 1.8;
 }
-
-.prose h2,
-.prose h3 {
+.prose p { margin-bottom: 1.5em; }
+.prose h2, .prose h3 {
+  font-family: var(--font-display);
+  color: var(--color-secondary-container);
   margin-top: 2.5em;
   margin-bottom: 0.75em;
+  letter-spacing: -0.01em;
 }
-
+.prose h2 { font-size: 1.65rem; font-weight: 800; }
+.prose h3 { font-size: 1.25rem; font-weight: 800; }
+.prose a {
+  color: var(--color-primary);
+  border-bottom: 1px solid color-mix(in oklch, var(--color-primary) 30%, transparent);
+}
+.prose a:hover { color: var(--color-secondary-container); }
 .prose blockquote {
-  border-left: 3px solid var(--primary);
-  background: oklch(20% 0.008 60 / 0.5);
-  border-radius: 0 8px 8px 0;
+  border-left: 2px solid var(--color-primary);
+  background: color-mix(in oklch, var(--color-surface-container-low) 80%, transparent);
   padding: 1em 1.25em;
   margin: 2em 0;
   font-style: normal;
+  color: var(--color-on-surface);
 }
-
-.prose blockquote p {
-  margin-bottom: 0;
-  color: oklch(85% 0.005 60);
-  font-size: 1.05em;
+.prose blockquote p { margin-bottom: 0; }
+.prose hr { border-color: var(--color-outline-variant); margin: 2.5em 0; }
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-outline-variant);
+  padding: 0.1em 0.4em;
 }
-
-.prose hr {
-  border-color: oklch(93% 0.005 60 / 0.08);
-  margin: 2.5em 0;
+.prose ul, .prose ol { margin-bottom: 1.5em; padding-left: 1.5em; }
+.prose ul { list-style: none; }
+.prose ul li { position: relative; padding-left: 1.25em; }
+.prose ul li::before {
+  content: ">";
+  position: absolute; left: 0;
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
 }
-
-/* Increase overall line height for readability */
-.prose {
-  font-size: 1.05rem;
-  line-height: 1.85;
-}
+.prose ol { list-style: decimal; }
+.prose strong { color: var(--color-on-surface); font-weight: 600; }
+.prose em { color: var(--color-secondary); font-style: italic; }

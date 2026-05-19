@@ -73,18 +73,16 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
     <div className="mx-auto max-w-2xl px-5 py-16 sm:px-6">
       {/* Header */}
       <div className="mb-10 text-center">
-        <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full border border-primary/40 bg-primary/10">
-          <svg className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
+        <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-[var(--color-secondary-container)] mb-4">
+          [ tx_status: confirmed ] // payment_received
         </div>
-        <h1 className="mt-4 font-display text-display-md text-fg">
-          ORDER CONFIRMED
+        <h1 className="font-display font-extrabold lowercase text-[var(--color-on-surface)] text-4xl md:text-5xl">
+          order confirmed
         </h1>
-        <p className="mt-3 text-fg-muted">
+        <p className="mt-4 text-[var(--color-on-surface-variant)] text-[15px]">
           {isDigital
-            ? "Payment received. Your digital goods are below."
-            : "Thanks for your order! We'll email you shipping details once it ships."}
+            ? "payment received. your digital goods are below."
+            : "thanks for your order. we'll email you shipping details once it ships."}
         </p>
       </div>
 
@@ -164,23 +162,23 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
         {trackSlug ? (
           <Link
             href={`/music/${trackSlug}`}
-            className="flex-1 rounded-lg border border-fg/10 bg-fg/5 px-5 py-3 text-center text-sm font-bold text-fg transition-colors duration-normal ease-out-quart hover:border-primary/40 hover:text-primary"
+            className="flex-1 border border-[var(--color-outline-variant)] px-5 py-3 text-center font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
           >
-            ← BACK TO TRACK
+            ← back_to_track
           </Link>
         ) : (
           <Link
             href="/merch"
-            className="flex-1 rounded-lg border border-fg/10 bg-fg/5 px-5 py-3 text-center text-sm font-bold text-fg transition-colors duration-normal ease-out-quart hover:border-primary/40 hover:text-primary"
+            className="flex-1 border border-[var(--color-outline-variant)] px-5 py-3 text-center font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
           >
-            ← BACK TO MERCH
+            ← back_to_merch
           </Link>
         )}
         <Link
           href="/music"
-          className="flex-1 rounded-lg border border-primary/30 bg-primary/10 px-5 py-3 text-center text-sm font-bold text-primary transition-colors duration-normal ease-out-quart hover:bg-primary/20"
+          className="flex-1 border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-3 text-center font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)] transition-colors"
         >
-          LISTEN TO THE MUSIC
+          → listen_to_the_music
         </Link>
       </div>
     </div>

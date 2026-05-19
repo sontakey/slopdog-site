@@ -18,9 +18,7 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Transmissions from Slopdog, an AI music artist. Weekly AI news, release notes, and context behind AI-generated hip-hop drops.",
-  alternates: {
-    canonical: "/blog",
-  },
+  alternates: { canonical: "/blog" },
   openGraph: {
     title: "Blog | SLOPDOG",
     description:
@@ -39,69 +37,110 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   const posts = getAllMdx<BlogFrontmatter>("content/blog");
+  const featured = posts[0];
+  const rest = posts.slice(1);
 
   return (
-    <div className="px-4 py-12 md:py-16 sm:px-6 lg:pl-8 lg:pr-16">
-      <div className="motion-fade-up">
-        <SectionHeading title="BLOG" />
+    <div className="px-4 md:px-16 pt-10 pb-24">
+      <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--color-outline)] mb-8 flex flex-wrap justify-between gap-2">
+        <span>[ /lore ] // dispatch_archive // sort=newest_first</span>
+        <span>
+          entries: <span className="text-[var(--color-secondary-container)]">{String(posts.length).padStart(3, "0")}</span>
+        </span>
       </div>
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((p, i) => {
-          const pos = i % 5;
-          // 5-item rhythm: hero (2×2), sidebar, wide banner (2×1), compact, text-forward
-          const spanClass =
-            pos === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" :
-            pos === 2 ? "sm:col-span-2 lg:col-span-2" : "";
-          const isFeatured = pos === 0;
-          const isWide = pos === 2;
-          const isSidebar = pos === 1;
-          const isCompact = pos === 3;
-          const isTextForward = pos === 4;
-          const aspectClass =
-            isFeatured ? "aspect-[2/1]" :
-            isWide ? "aspect-[3/1]" :
-            isSidebar ? "aspect-[4/3]" :
-            isCompact ? "aspect-[16/9]" : "aspect-[16/10]";
-          const textSize =
-            isFeatured ? "text-display-sm" :
-            isWide ? "text-display-sm" :
-            isSidebar ? "text-body-lg" :
-            isCompact ? "text-body-sm" : "text-body-lg";
-          const padClass =
-            isFeatured ? "p-6" :
-            isCompact ? "p-4" :
-            isTextForward ? "p-6" : "p-5";
-          const clampClass = isFeatured ? "line-clamp-5" : isWide ? "line-clamp-3" : "line-clamp-3";
+      <SectionHeading
+        kicker="lore // 02"
+        title="dispatches"
+        status="archive_live"
+      />
 
+      {featured ? (
+        <Link
+          href={`/blog/${featured.slug}`}
+          className="group grid lg:grid-cols-12 gap-6 mb-16 border border-[var(--color-outline-variant)] hover:border-[var(--color-primary)] transition-colors p-4 md:p-6 motion-fade-up"
+          style={{ background: "var(--color-surface-container-lowest)" }}
+        >
+          <div className="lg:col-span-7">
+            <div className="relative aspect-[16/9] overflow-hidden border border-[var(--color-outline-variant)]">
+              <Image
+                src={featured.frontmatter.thumbnail}
+                alt={featured.frontmatter.title}
+                fill
+                priority
+                sizes="(max-width:1024px) 100vw, 60vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              />
+            </div>
+          </div>
+          <div className="lg:col-span-5 flex flex-col">
+            <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-primary)] mb-3 flex justify-between">
+              <span>[ latest_dispatch ]</span>
+              <span>{featured.frontmatter.date}</span>
+            </div>
+            <h2 className="font-display text-2xl md:text-4xl font-extrabold lowercase leading-tight text-[var(--color-on-surface)] group-hover:text-[var(--color-primary)] transition-colors mb-4">
+              {featured.frontmatter.title.toLowerCase()}
+            </h2>
+            <p className="text-[15px] leading-relaxed text-[var(--color-on-surface-variant)] mb-6 line-clamp-6">
+              {featured.frontmatter.excerpt.toLowerCase()}
+            </p>
+            <div className="mt-auto font-mono text-[11px] uppercase tracking-wider text-[var(--color-secondary-container)]">
+              → read_full_dispatch
+            </div>
+          </div>
+        </Link>
+      ) : null}
+
+      <ul className="divide-y divide-[var(--color-outline-variant)] border-y border-[var(--color-outline-variant)]">
+        {rest.map((p, i) => {
+          const num = String(rest.length - i).padStart(3, "0");
           return (
-            <Link
-              key={p.slug}
-              href={`/blog/${p.slug}`}
-              className={`group motion-fade-up rounded-xl border border-fg/10 bg-fg/5 transition-all duration-normal ease-out-quart hover:border-primary/30 ${padClass} ${spanClass}`}
-              style={{ animationDelay: `${Math.min(i, 5) * 75}ms` }}
-            >
-              {isTextForward ? null : (
-                <div className={`relative mb-4 overflow-hidden rounded-lg border border-fg/10 ${aspectClass}`}>
-                  <Image src={p.frontmatter.thumbnail} alt={p.frontmatter.title} fill className="object-cover transition-transform duration-slow ease-out-quint group-hover:scale-105" sizes={isFeatured || isWide ? "(max-width:1024px) 100vw, 66vw" : "(max-width:1024px) 100vw, 33vw"} />
+            <li key={p.slug}>
+              <Link
+                href={`/blog/${p.slug}`}
+                className="group grid grid-cols-12 gap-3 md:gap-6 items-start py-6 px-2 -mx-2 hover:bg-[var(--color-surface-container-lowest)] transition-colors"
+              >
+                <div className="col-span-2 md:col-span-1 font-mono text-[11px] text-[var(--color-outline)] group-hover:text-[var(--color-primary)] pt-2">
+                  {num}
                 </div>
-              )}
-              <div className="text-label uppercase text-fg-faint">{p.frontmatter.date}</div>
-              <div className={`mt-2 font-display font-bold leading-tight group-hover:text-primary transition-colors duration-normal ease-out-quart ${textSize}`}>{p.frontmatter.title}</div>
-              <p className={`mt-2 text-body-sm text-fg-muted ${clampClass}`}>{p.frontmatter.excerpt}</p>
-              {p.frontmatter.tags?.length ? (
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {p.frontmatter.tags.slice(0, 3).map((t) => (
-                    <span key={t} className="rounded-full border border-fg/10 bg-neutral-950/40 px-2.5 py-0.5 text-label text-fg-muted">
-                      {t}
-                    </span>
-                  ))}
+                <div className="col-span-10 md:col-span-3">
+                  <div className="relative aspect-[4/3] overflow-hidden border border-[var(--color-outline-variant)] group-hover:border-[var(--color-primary)] transition-colors">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={p.frontmatter.thumbnail}
+                      alt={p.frontmatter.title}
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                  </div>
                 </div>
-              ) : null}
-            </Link>
+                <div className="col-span-12 md:col-span-8">
+                  <div className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-outline)] mb-2">
+                    {p.frontmatter.date}
+                  </div>
+                  <h3 className="font-display text-xl md:text-2xl font-extrabold lowercase leading-tight text-[var(--color-on-surface)] group-hover:text-[var(--color-primary)] transition-colors mb-2">
+                    {p.frontmatter.title.toLowerCase()}
+                  </h3>
+                  <p className="text-[14px] leading-relaxed text-[var(--color-on-surface-variant)] line-clamp-2 mb-3">
+                    {p.frontmatter.excerpt.toLowerCase()}
+                  </p>
+                  {p.frontmatter.tags?.length ? (
+                    <div className="flex flex-wrap gap-2">
+                      {p.frontmatter.tags.slice(0, 4).map((t) => (
+                        <span
+                          key={t}
+                          className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-on-surface-variant)] border border-[var(--color-outline-variant)] px-2 py-0.5"
+                        >
+                          {t.toLowerCase()}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              </Link>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 }
