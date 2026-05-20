@@ -142,7 +142,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
                 <a
                   href={frontmatter.streamingLinks.spotify}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)] transition-colors"
                 >
                   → spotify
@@ -152,7 +152,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
                 <a
                   href={frontmatter.streamingLinks.apple}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 border border-[var(--color-outline-variant)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:border-[var(--color-secondary-container)] hover:text-[var(--color-secondary-container)] transition-colors"
                 >
                   → apple_music
@@ -162,7 +162,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
                 <a
                   href={frontmatter.streamingLinks.hyperfollow}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 border border-[var(--color-outline-variant)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
                 >
                   → pre-save

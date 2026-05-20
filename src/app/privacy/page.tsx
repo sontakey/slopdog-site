@@ -17,7 +17,7 @@ const sections: { h: string; b: React.ReactNode }[] = [
   },
   {
     h: "3. payment processing",
-    b: <>payments are processed by stripe. we do not store credit card information on our servers. please review <a href="https://stripe.com/privacy" className="text-[var(--color-primary)] hover:text-[var(--color-secondary-container)] underline underline-offset-2">stripe&apos;s privacy policy</a> for details on how they handle your payment data.</>,
+    b: <>payments are processed by stripe. we do not store credit card information on our servers. please review <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[var(--color-primary)] hover:text-[var(--color-secondary-container)] underline underline-offset-2">stripe&apos;s privacy policy</a> for details on how they handle your payment data.</>,
   },
   {
     h: "4. analytics",
