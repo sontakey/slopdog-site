@@ -6,7 +6,7 @@ import Mdx from "@/components/Mdx";
 import SectionHeading from "@/components/SectionHeading";
 import JsonLd from "@/components/JsonLd";
 import ViewToggle from "@/components/ViewToggle";
-import { getMdxBySlug, getMdxSlugs } from "@/lib/mdx";
+import { getMdxBySlug, getPublishedSlugs } from "@/lib/mdx";
 import { SITE } from "@/lib/site";
 
 type BlogFrontmatter = {
@@ -20,13 +20,20 @@ type BlogFrontmatter = {
 };
 
 export function generateStaticParams() {
-  return getMdxSlugs("content/blog").map((slug) => ({ slug }));
+  return getPublishedSlugs("content/blog").map((slug) => ({ slug }));
+}
+
+function isFuture(date?: string) {
+  if (!date) return false;
+  const t = new Date(date).getTime();
+  return !Number.isNaN(t) && t > Date.now();
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   try {
     const { frontmatter } = getMdxBySlug<BlogFrontmatter>("content/blog", slug);
+    if (isFuture(frontmatter.date)) return {};
     const ogImage = frontmatter.thumbnail || SITE.ogImage;
 
     return {
@@ -58,6 +65,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   try {
     const { frontmatter, content } = getMdxBySlug<BlogFrontmatter>("content/blog", slug);
+    if (isFuture(frontmatter.date)) notFound();
 
     const url = new URL(`/blog/${frontmatter.slug}`, SITE.url).toString();
 
@@ -98,6 +106,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {faqSchema && <JsonLd schema={faqSchema} />}
         <div className="motion-fade-up">
           <SectionHeading
+            as="h1"
             title={frontmatter.title.toUpperCase()}
             right={
               <Link href="/blog" className="hover:underline">

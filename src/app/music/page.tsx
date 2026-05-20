@@ -13,6 +13,19 @@ type TrackFrontmatter = {
   concept: string;
 };
 
+function badgeForTrack(date?: string): { label: string; tone: "upcoming" | "latest" } {
+  if (!date) return { label: "Latest", tone: "latest" };
+  const t = new Date(date).getTime();
+  if (Number.isNaN(t)) return { label: "Latest", tone: "latest" };
+  if (t > Date.now()) {
+    const d = new Date(date);
+    const mm = d.getUTCMonth() + 1;
+    const dd = d.getUTCDate();
+    return { label: `Live ${mm}/${dd}`, tone: "upcoming" };
+  }
+  return { label: "Latest", tone: "latest" };
+}
+
 export const metadata: Metadata = {
   title: "Music",
   description:
@@ -90,7 +103,14 @@ export default function MusicPage() {
                   <div className={`truncate font-display font-bold group-hover:text-primary transition-colors duration-normal ease-out-quart ${textSize}`}>{t.frontmatter.title}</div>
                   <div className="text-label text-fg-faint">{t.frontmatter.date}</div>
                 </div>
-                {isFeatured ? <span className="rounded-md border border-primary/20 bg-primary/5 px-2 py-1 text-label uppercase text-primary">Latest</span> : null}
+                {isFeatured ? (() => {
+                  const b = badgeForTrack(t.frontmatter.date);
+                  return (
+                    <span className="rounded-md border border-primary/20 bg-primary/5 px-2 py-1 text-label uppercase text-primary">
+                      {b.label}
+                    </span>
+                  );
+                })() : null}
               </div>
               {isMinimal ? null : <p className={`mt-2 text-body-sm text-fg-muted ${clampClass}`}>{t.frontmatter.concept}</p>}
             </Link>

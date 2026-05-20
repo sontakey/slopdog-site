@@ -17,6 +17,7 @@ type TrackFrontmatter = {
   coverImage: string;
   concept: string;
   embedUrl: string;
+  description?: string;
   streamingLinks?: { spotify?: string; apple?: string; hyperfollow?: string };
 };
 
@@ -31,7 +32,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!track) return {};
 
   const title = `${track.frontmatter.title} (AI-generated hip-hop single)`;
-  const description = `${track.frontmatter.concept} Listen to ${track.frontmatter.title} by Slopdog, an AI music artist. Weekly AI-generated hip-hop drops based on AI news.`;
+  const description =
+    track.frontmatter.description ??
+    `${track.frontmatter.concept} Listen to ${track.frontmatter.title} by Slopdog, an AI music artist. Weekly AI-generated hip-hop drops based on AI news.`;
   const ogImage = track.frontmatter.coverImage || SITE.ogImage;
 
   return {
@@ -84,6 +87,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
         <JsonLd schema={schema} />
         <div className="motion-fade-up">
           <SectionHeading
+            as="h1"
             title={frontmatter.title.toUpperCase()}
             right={
               <Link href="/music" className="hover:underline">

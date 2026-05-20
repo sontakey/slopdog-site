@@ -13,6 +13,21 @@ export function getMdxSlugs(dir: string) {
     .map((f) => f.replace(/\.(mdx|md)$/i, ""));
 }
 
+// Date-gated publishing: hide blog posts whose date is in the future.
+// Music tracks are always shown (the detail page can advertise an upcoming drop).
+function shouldGateByDate(dir: string) {
+  return dir.includes("blog");
+}
+
+function isPublished(dir: string, frontmatter: Record<string, unknown>): boolean {
+  if (!shouldGateByDate(dir)) return true;
+  const d = frontmatter?.date;
+  if (!d || typeof d !== "string") return true;
+  const postDate = new Date(d).getTime();
+  if (Number.isNaN(postDate)) return true;
+  return postDate <= Date.now();
+}
+
 export function getMdxBySlug<TFrontmatter extends Record<string, unknown>>(
   dir: string,
   slug: string,
@@ -36,9 +51,14 @@ export function getAllMdx<TFrontmatter extends Record<string, any>>(
       const { frontmatter } = getMdxBySlug<TFrontmatter>(dir, slug);
       return { slug, frontmatter };
     })
+    .filter(({ frontmatter }) => isPublished(dir, frontmatter as Record<string, unknown>))
     .sort((a, b) => {
       const da = new Date(a.frontmatter.date ?? 0).getTime();
       const db = new Date(b.frontmatter.date ?? 0).getTime();
       return db - da;
     });
+}
+
+export function getPublishedSlugs(dir: string): string[] {
+  return getAllMdx<Record<string, any>>(dir).map((e) => e.slug);
 }
