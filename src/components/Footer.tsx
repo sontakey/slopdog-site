@@ -62,7 +62,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://x.com/slopdog"
+                  href="https://x.com/slopdog_"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] transition-colors lowercase"
