@@ -54,7 +54,7 @@ export default function Footer() {
                 <a
                   href="https://open.spotify.com/artist/5q0nndCuZV6XXeIQhVahzP"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] transition-colors lowercase"
                 >
                   spotify
@@ -62,9 +62,9 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://x.com/slopdog"
+                  href="https://x.com/slopdog_"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="text-[var(--color-on-surface-variant)] hover:text-[var(--color-primary)] transition-colors lowercase"
                 >
                   x / twitter
