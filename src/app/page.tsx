@@ -218,7 +218,7 @@ export default async function Home({
                 <span>►</span> stream_26%
               </a>
               <Link
-                href="/blog/2026-05-21-26-percent-is-live"
+                href="/blog/26-percent-live"
                 className="inline-flex items-center gap-2 border border-[var(--color-outline-variant)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:border-[var(--color-secondary-container)] hover:text-[var(--color-secondary-container)] transition-colors"
               >
                 → read_the_story
