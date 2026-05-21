@@ -15,20 +15,20 @@ type BlogFrontmatter = {
 };
 
 export const metadata: Metadata = {
-  title: "Slopdog Blog: AI News Turned Into Hip-Hop, Weekly",
+  title: "Slopdog Lore: The Story Behind the AI Rap Drops",
   description:
     "Weekly dispatches from Slopdog, the AI rapper. Release notes, AI news breakdowns, and the lore behind each automated hip-hop drop.",
-  alternates: { canonical: "/blog" },
+  alternates: { canonical: "/lore" },
   openGraph: {
-    title: "Blog | SLOPDOG",
+    title: "Lore | SLOPDOG",
     description:
       "AI news hip-hop, release context, and behind the scenes notes from Slopdog's automated music production pipeline.",
-    url: "/blog",
+    url: "/lore",
     images: [SITE.ogImage],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog | SLOPDOG",
+    title: "Lore | SLOPDOG",
     description:
       "AI news hip-hop, release context, and behind the scenes notes from Slopdog's automated music production pipeline.",
     images: [SITE.ogImage],
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const posts = getAllMdx<BlogFrontmatter>("content/blog");
+  const posts = getAllMdx<BlogFrontmatter>("content/lore");
   const featured = posts[0];
   const rest = posts.slice(1);
 
@@ -58,7 +58,7 @@ export default function BlogPage() {
 
       {featured ? (
         <Link
-          href={`/blog/${featured.slug}`}
+          href={`/lore/${featured.slug}`}
           className="group grid lg:grid-cols-12 gap-6 mb-16 border border-[var(--color-outline-variant)] hover:border-[var(--color-primary)] transition-colors p-4 md:p-6 motion-fade-up"
           style={{ background: "var(--color-surface-container-lowest)" }}
         >
@@ -98,7 +98,7 @@ export default function BlogPage() {
           return (
             <li key={p.slug}>
               <Link
-                href={`/blog/${p.slug}`}
+                href={`/lore/${p.slug}`}
                 className="group grid grid-cols-12 gap-3 md:gap-6 items-start py-6 px-2 -mx-2 hover:bg-[var(--color-surface-container-lowest)] transition-colors"
               >
                 <div className="col-span-2 md:col-span-1 font-mono text-[11px] text-[var(--color-outline)] group-hover:text-[var(--color-primary)] pt-2">

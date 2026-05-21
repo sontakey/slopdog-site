@@ -29,7 +29,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 ["/music", "music"],
-                ["/blog", "lore"],
+                ["/lore", "lore"],
                 ["/merch", "merch"],
                 ["/about", "about"],
               ].map(([href, label]) => (

@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
   const tracks = getAllMdx<{ slug: string }>("content/music");
-  const posts = getAllMdx<{ slug: string }>("content/blog");
+  const posts = getAllMdx<{ slug: string }>("content/lore");
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SITE.url}/blog`,
+      url: `${SITE.url}/lore`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.7,
@@ -49,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const postRoutes: MetadataRoute.Sitemap = posts.map((p) => ({
-    url: `${SITE.url}/blog/${p.slug}`,
+    url: `${SITE.url}/lore/${p.slug}`,
     lastModified: now,
     changeFrequency: "monthly",
     priority: 0.5,

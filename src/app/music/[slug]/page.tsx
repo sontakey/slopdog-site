@@ -224,7 +224,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             ← back_to_discography
           </Link>
           <Link
-            href="/blog"
+            href="/lore"
             className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:text-[var(--color-secondary-container)] transition-colors"
           >
             → dispatches

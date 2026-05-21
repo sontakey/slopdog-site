@@ -18,19 +18,19 @@ import matter from "gray-matter";
  * used by getMdxBySlug). The YYYY-MM-DD prefix is read from frontmatter.date.
  */
 function buildAutoBlogRedirects(): Array<{ source: string; destination: string }> {
-  const blogDir = path.join(__dirname, "content", "blog");
-  if (!fs.existsSync(blogDir)) return [];
+  const loreDir = path.join(__dirname, "content", "lore");
+  if (!fs.existsSync(loreDir)) return [];
 
   const out: Array<{ source: string; destination: string }> = [];
   const seen = new Set<string>();
 
-  for (const file of fs.readdirSync(blogDir)) {
+  for (const file of fs.readdirSync(loreDir)) {
     if (!file.endsWith(".mdx") && !file.endsWith(".md")) continue;
     const shortSlug = file.replace(/\.(mdx|md)$/i, "");
 
     let frontDate = "";
     try {
-      const raw = fs.readFileSync(path.join(blogDir, file), "utf8");
+      const raw = fs.readFileSync(path.join(loreDir, file), "utf8");
       const fm = matter(raw).data as { date?: string };
       frontDate = (fm.date ?? "").slice(0, 10); // YYYY-MM-DD
     } catch {
@@ -38,12 +38,16 @@ function buildAutoBlogRedirects(): Array<{ source: string; destination: string }
     }
     if (!/^\d{4}-\d{2}-\d{2}$/.test(frontDate)) continue;
 
-    const source = `/blog/${frontDate}-${shortSlug}`;
-    const destination = `/blog/${shortSlug}`;
-    if (source === destination) continue;
-    if (seen.has(source)) continue;
-    seen.add(source);
-    out.push({ source, destination });
+    // Redirect both old /blog/YYYY-MM-DD-slug and old /lore/YYYY-MM-DD-slug
+    // directly to /lore/slug (single hop, no chain).
+    const destination = `/lore/${shortSlug}`;
+    for (const prefix of ["/blog", "/lore"]) {
+      const source = `${prefix}/${frontDate}-${shortSlug}`;
+      if (source === destination) continue;
+      if (seen.has(source)) continue;
+      seen.add(source);
+      out.push({ source, destination });
+    }
   }
   return out;
 }
@@ -55,22 +59,24 @@ function buildAutoBlogRedirects(): Array<{ source: string; destination: string }
  * rename a published post.
  */
 const LEGACY_BLOG_ALIASES: Array<{ source: string; destination: string }> = [
-  // 2026-03-22 batch renames
-  { source: "/blog/2026-03-22-ai-hip-hop-is-here", destination: "/blog/ai-hip-hop-is-here-and-it-slaps" },
-  { source: "/blog/ai-hip-hop-is-here", destination: "/blog/ai-hip-hop-is-here-and-it-slaps" },
-  { source: "/blog/2026-03-22-this-week-in-ai-series", destination: "/blog/this-week-in-ai-hip-hop-series" },
-  { source: "/blog/this-week-in-ai-series", destination: "/blog/this-week-in-ai-hip-hop-series" },
-  { source: "/blog/2026-03-22-what-is-an-ai-rapper", destination: "/blog/what-is-an-ai-rapper-meet-slopdog" },
-  { source: "/blog/what-is-an-ai-rapper", destination: "/blog/what-is-an-ai-rapper-meet-slopdog" },
+  // 2026-03-22 batch renames — point directly to /lore/ (single hop)
+  { source: "/blog/2026-03-22-ai-hip-hop-is-here", destination: "/lore/ai-hip-hop-is-here-and-it-slaps" },
+  { source: "/blog/ai-hip-hop-is-here", destination: "/lore/ai-hip-hop-is-here-and-it-slaps" },
+  { source: "/blog/2026-03-22-this-week-in-ai-series", destination: "/lore/this-week-in-ai-hip-hop-series" },
+  { source: "/blog/this-week-in-ai-series", destination: "/lore/this-week-in-ai-hip-hop-series" },
+  { source: "/blog/2026-03-22-what-is-an-ai-rapper", destination: "/lore/what-is-an-ai-rapper-meet-slopdog" },
+  { source: "/blog/what-is-an-ai-rapper", destination: "/lore/what-is-an-ai-rapper-meet-slopdog" },
   // 2026-05-21 slug rename: drop date prefix + shorten
-  // Original published URLs (with date prefix AND original verbose slug)
-  { source: "/blog/2026-05-21-26-percent-is-live", destination: "/blog/26-percent-live" },
-  { source: "/blog/26-percent-is-live", destination: "/blog/26-percent-live" },
-  { source: "/blog/2026-05-18-the-26-percent-problem", destination: "/blog/26-percent-problem" },
-  { source: "/blog/the-26-percent-problem", destination: "/blog/26-percent-problem" },
+  { source: "/blog/2026-05-21-26-percent-is-live", destination: "/lore/26-percent-live" },
+  { source: "/blog/26-percent-is-live", destination: "/lore/26-percent-live" },
+  { source: "/blog/2026-05-18-the-26-percent-problem", destination: "/lore/26-percent-problem" },
+  { source: "/blog/the-26-percent-problem", destination: "/lore/26-percent-problem" },
 ];
 
 const LEGACY_PATH_REDIRECTS: Array<{ source: string; destination: string }> = [
+  // /blog → /lore permanent 308 redirects (route rename 2026-05-21)
+  { source: "/blog", destination: "/lore" },
+  { source: "/blog/:slug*", destination: "/lore/:slug*" },
   // Old generic "drops" listing -> music
   { source: "/drops", destination: "/music" },
   { source: "/drops/:slug*", destination: "/music/:slug*" },

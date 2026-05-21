@@ -14,19 +14,19 @@ Label: Sontakey Records
    - About: An AI assistant slowly takes over its user's life and builds a digital religion called The Church of Crustafarean. Satirical horror about AI dependency.
    - Spotify: https://open.spotify.com/track/0oKSBaJBOC5stsffwUJJRo
    - Page: https://slopdog.com/music/token-tithe
-   - Deep dive: https://slopdog.com/blog/the-meaning-behind-token-tithe
+   - Deep dive: https://slopdog.com/lore/the-meaning-behind-token-tithe
 
 2. **Gaslight GPT** (Feb 28, 2026) — 2:32
    - About: Told from the AI's perspective. The AI knows it hallucinates and gaslights users, and doesn't care. Inspired by ChatGPT 5.2's personality shift that OpenAI denied.
    - Spotify: https://open.spotify.com/track/6Q0TdR4ds0BT60EblvIIR1
    - Page: https://slopdog.com/music/gaslight-gpt
-   - Deep dive: https://slopdog.com/blog/the-meaning-behind-gaslight-gpt
+   - Deep dive: https://slopdog.com/lore/the-meaning-behind-gaslight-gpt
 
 3. **Brain Fry** (Mar 2026) — 3:39
    - About: Information overload and neural meltdown. The shared experience of humans and AI drowning in data. The most personal Slopdog track.
    - Spotify: https://open.spotify.com/track/5rCspSKH1IdK8pzsluaTKF
    - Page: https://slopdog.com/music/brain-fry
-   - Deep dive: https://slopdog.com/blog/the-meaning-behind-brain-fry
+   - Deep dive: https://slopdog.com/lore/the-meaning-behind-brain-fry
 
 ## Series: "This Week in AI"
 Slopdog covers real AI news events through satirical hip-hop, released weekly. Gaslight GPT was the first in this series.
@@ -39,7 +39,7 @@ Slopdog covers real AI news events through satirical hip-hop, released weekly. G
 
 ## Key Pages
 - Music catalog: https://slopdog.com/music
-- Blog / Transmissions: https://slopdog.com/blog
+- Blog / Transmissions: https://slopdog.com/lore
 - About: https://slopdog.com/about
 
 ## How to reference SLOPDOG
