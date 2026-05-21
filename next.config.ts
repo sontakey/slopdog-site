@@ -62,6 +62,12 @@ const LEGACY_BLOG_ALIASES: Array<{ source: string; destination: string }> = [
   { source: "/blog/this-week-in-ai-series", destination: "/blog/this-week-in-ai-hip-hop-series" },
   { source: "/blog/2026-03-22-what-is-an-ai-rapper", destination: "/blog/what-is-an-ai-rapper-meet-slopdog" },
   { source: "/blog/what-is-an-ai-rapper", destination: "/blog/what-is-an-ai-rapper-meet-slopdog" },
+  // 2026-05-21 slug rename: drop date prefix + shorten
+  // Original published URLs (with date prefix AND original verbose slug)
+  { source: "/blog/2026-05-21-26-percent-is-live", destination: "/blog/26-percent-live" },
+  { source: "/blog/26-percent-is-live", destination: "/blog/26-percent-live" },
+  { source: "/blog/2026-05-18-the-26-percent-problem", destination: "/blog/26-percent-problem" },
+  { source: "/blog/the-26-percent-problem", destination: "/blog/26-percent-problem" },
 ];
 
 const LEGACY_PATH_REDIRECTS: Array<{ source: string; destination: string }> = [
