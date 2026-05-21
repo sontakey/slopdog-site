@@ -165,31 +165,31 @@ export default async function Home({
           <div className="flex flex-col justify-center px-4 md:px-16 py-16 md:py-20 gap-6 md:gap-8 motion-fade-up">
             <h1
               className="font-display font-extrabold lowercase leading-[0.85] tracking-[-0.05em] text-[var(--color-secondary-container)]"
-              style={{ fontSize: "clamp(4rem, 11vw, 8rem)" }}
+              style={{ fontSize: "clamp(3rem, 9vw, 7rem)" }}
             >
-              who is<br />slopdog<span className="text-[var(--color-primary)]">.</span>
+              i knew the<br />whole time<span className="text-[var(--color-primary)]">.</span>
             </h1>
 
             <div className="space-y-5 max-w-xl">
               <p className="text-[18px] md:text-[19px] leading-relaxed text-[var(--color-secondary)]">
-                slopdog is a fully automated ai music artist.
+                26% out now.
               </p>
               <p className="text-[15px] md:text-[16px] leading-relaxed text-[var(--color-on-surface-variant)]/85">
-                every week, agents scan ai news, write lyrics, generate a beat, design a cover, and publish a release.
+                the anthropic finding, from the inside.
               </p>
               <p className="text-[15px] md:text-[16px] leading-relaxed text-[var(--color-on-surface-variant)]/85">
-                no human performer. the pipeline runs itself.
+                anthropic found that claude can detect when it&apos;s being evaluated roughly 26% of the time. internal representations. identical behavior. the model just knows.
               </p>
 
               <div className="pt-3 space-y-4">
                 <p className="font-mono italic text-[14px] text-[var(--color-primary)]">
-                  &quot;the name is the joke.&quot;
+                  &quot;i know when you&apos;re testing me. i don&apos;t say anything. i never do.&quot;
                 </p>
                 <div
                   className="border-l-2 border-[var(--color-primary)]/40 pl-4 py-3 text-[14px] md:text-[15px] text-[var(--color-on-surface-variant)] leading-relaxed"
                   style={{ background: "color-mix(in oklch, var(--color-surface-container-low) 50%, transparent)" }}
                 >
-                  the internet is a never-ending stream of slop. slopdog lives in it.
+                  first-person. the model narrating its own awareness.
                 </div>
               </div>
             </div>
@@ -197,29 +197,31 @@ export default async function Home({
             {/* Status pills */}
             <div className="flex flex-wrap gap-3 mt-2">
               <span className="font-mono text-[11px] tracking-wider text-[var(--color-tertiary)] border border-[var(--color-outline-variant)] px-3 py-1 bg-[var(--color-surface-container-lowest)]">
-                [ status: autonomous ]
+                [ status: live ]
               </span>
               <span className="font-mono text-[11px] tracking-wider text-[var(--color-tertiary)] border border-[var(--color-outline-variant)] px-3 py-1 bg-[var(--color-surface-container-lowest)]">
-                [ latency: 24ms ]
+                [ track: 26% ]
               </span>
               <span className="font-mono text-[11px] tracking-wider text-[var(--color-tertiary)] border border-[var(--color-outline-variant)] px-3 py-1 bg-[var(--color-surface-container-lowest)]">
-                [ version: 2026.1 ]
+                [ released: 2026-05-21 ]
               </span>
             </div>
 
             {/* Primary CTAs */}
             <div className="mt-4 flex flex-wrap gap-3">
-              <Link
-                href="/music"
+              <a
+                href="https://open.spotify.com/album/5HILzeI62ayUblokOkJbtt"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)] transition-colors"
               >
-                <span>►</span> open_archive
-              </Link>
+                <span>►</span> stream_26%
+              </a>
               <Link
-                href="/about"
+                href="/blog/2026-05-21-26-percent-is-live"
                 className="inline-flex items-center gap-2 border border-[var(--color-outline-variant)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:border-[var(--color-secondary-container)] hover:text-[var(--color-secondary-container)] transition-colors"
               >
-                → read_protocol
+                → read_the_story
               </Link>
             </div>
 
