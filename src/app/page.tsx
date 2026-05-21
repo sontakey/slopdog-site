@@ -109,15 +109,15 @@ export default async function Home({
 
       {/* HERO — split-screen lore */}
       <section className="relative border-b border-[var(--color-outline-variant)]">
-        <div className="grid grid-cols-1 md:grid-cols-2 min-h-[80vh] items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:min-h-[80vh] items-stretch">
           {/* Left: character key art */}
-          <div className="relative overflow-hidden bg-[var(--color-surface-container-lowest)] aspect-[3/4] md:aspect-auto md:min-h-[80vh]">
+          <div className="relative overflow-hidden w-full bg-[var(--color-surface-container-lowest)] aspect-[3/4] md:w-auto md:aspect-auto md:min-h-[80vh]">
             <Image
               src="/images/slopdog-character.jpg"
               alt="slopdog — sd_unit_000 key art"
               fill
               priority
-              sizes="(max-width:768px) 100vw, 50vw"
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover grayscale contrast-125 opacity-80"
             />
             {/* Right-edge fade to background to soften the split */}
