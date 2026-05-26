@@ -3,8 +3,9 @@ import { NextResponse } from "next/server";
 export const runtime = "nodejs";
 
 const RESEND_API = "https://api.resend.com";
-const FROM = "Slopdog <anton@agents.sontakey.com>";
-const NOTIFY_TO = "anton@agents.sontakey.com";
+const FROM = "Slopdog <anton@slopdog.com>";
+const NOTIFY_TO = ["sameer@sensorbio.com", "anton@slopdog.com"];
+const DEFAULT_AUDIENCE_ID = "3565c412-540b-442d-afdb-a50ee1b626ff";
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
@@ -33,6 +34,7 @@ export async function POST(req: Request) {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
+  const audienceId = process.env.RESEND_AUDIENCE_ID || DEFAULT_AUDIENCE_ID;
 
   if (!apiKey) {
     console.error("[subscribe] RESEND_API_KEY missing");
@@ -44,7 +46,26 @@ export async function POST(req: Request) {
   const ref = req.headers.get("referer") || "direct";
 
   try {
-    // 1) Notify Sameer/Anton with the new signup
+    // 1) Persist the signup in the Resend audience before notifying operators.
+    const contact = await fetch(`${RESEND_API}/audiences/${audienceId}/contacts`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        unsubscribed: false,
+      }),
+    });
+
+    if (!contact.ok && contact.status !== 409) {
+      const errText = await contact.text();
+      console.error("[subscribe] contact capture failed", contact.status, errText);
+      return NextResponse.redirect(new URL("/?subscribe=error", req.url), 303);
+    }
+
+    // 2) Notify Sameer/Anton with the new signup.
     const notify = await fetch(`${RESEND_API}/emails`, {
       method: "POST",
       headers: {
@@ -53,7 +74,7 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         from: FROM,
-        to: [NOTIFY_TO],
+        to: NOTIFY_TO,
         subject: `New SLOPDOG subscriber: ${email}`,
         text: [
           `New subscriber to slopdog.com`,
@@ -62,6 +83,7 @@ export async function POST(req: Request) {
           `time:  ${now}`,
           `ref:   ${ref}`,
           `ua:    ${ua}`,
+          `stored: resend audience ${audienceId}`,
         ].join("\n"),
       }),
     });
@@ -72,7 +94,7 @@ export async function POST(req: Request) {
       return NextResponse.redirect(new URL("/?subscribe=error", req.url), 303);
     }
 
-    // 2) Welcome the subscriber (best-effort, non-blocking on failure)
+    // 3) Welcome the subscriber (best-effort, non-blocking on failure).
     try {
       await fetch(`${RESEND_API}/emails`, {
         method: "POST",
