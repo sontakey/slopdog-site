@@ -4,7 +4,7 @@ export const runtime = "nodejs";
 
 const RESEND_API = "https://api.resend.com";
 const FROM = "Slopdog <anton@slopdog.com>";
-const NOTIFY_TO = ["sameer@sensorbio.com", "anton@slopdog.com"];
+const NOTIFY_TO = ["sontakey@gmail.com"];
 const DEFAULT_AUDIENCE_ID = "3565c412-540b-442d-afdb-a50ee1b626ff";
 
 function isValidEmail(email: string): boolean {
