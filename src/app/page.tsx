@@ -68,12 +68,23 @@ export default async function Home({
     image: new URL(SITE.ogImage, SITE.url).toString(),
   };
 
-  // Build the four-card RELEASE_TIMELINE.
-  // Surface real released tracks from content/music ordered by track number.
+  if (!tracks.length) {
+    return null;
+  }
+
+  const latestRelease = tracks[0];
+  const latestTitle = latestRelease.frontmatter.title;
+  const latestTitleLower = latestTitle.toLowerCase();
+  const latestConcept = latestRelease.frontmatter.concept.toLowerCase();
+  const latestHref = `/music/${latestRelease.slug}`;
+  const latestCode = String(latestRelease.frontmatter.trackNumber ?? tracks.length).padStart(3, "0");
+  const latestEmbedHref = latestRelease.frontmatter.embedUrl || latestHref;
+
+  // Build the four-card RELEASE_TIMELINE from newest published tracks.
   const releasedSorted = [...tracks].sort((a, b) => {
     const an = a.frontmatter.trackNumber ?? parseInt(String(a.frontmatter.date ?? "0"));
     const bn = b.frontmatter.trackNumber ?? parseInt(String(b.frontmatter.date ?? "0"));
-    return an - bn;
+    return bn - an;
   });
 
   type TimelineCell = {
@@ -107,18 +118,22 @@ export default async function Home({
       <JsonLd schema={websiteSchema} />
       <JsonLd schema={musicGroupSchema} />
 
-      {/* HERO — split-screen lore */}
+      {/* HERO — latest release */}
       <section className="relative border-b border-[var(--color-outline-variant)]">
         <div className="grid grid-cols-1 md:grid-cols-2 md:min-h-[80vh] items-stretch">
-          {/* Left: character key art */}
-          <div className="relative overflow-hidden w-full bg-[var(--color-surface-container-lowest)] aspect-[3/4] md:w-auto md:aspect-auto md:min-h-[80vh]">
+          {/* Left: latest cover art */}
+          <Link
+            href={latestHref}
+            className="relative block overflow-hidden w-full bg-[var(--color-surface-container-lowest)] aspect-square md:w-auto md:aspect-auto md:min-h-[80vh] group"
+            aria-label={`${latestTitle} release page`}
+          >
             <Image
-              src="/images/slopdog-character.jpg"
-              alt="slopdog — sd_unit_000 key art"
+              src={latestRelease.frontmatter.coverImage}
+              alt={`${latestTitle} cover art`}
               fill
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover grayscale contrast-125 opacity-80"
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
             />
             {/* Right-edge fade to background to soften the split */}
             <div
@@ -137,59 +152,59 @@ export default async function Home({
             </div>
             {/* Top-left ID tag */}
             <div className="absolute top-8 left-8 bg-[var(--color-primary)] text-[var(--color-on-primary)] font-mono text-[11px] uppercase tracking-wider px-2 py-0.5">
-              id: sd_unit_000
+              latest_release
             </div>
             {/* Top-right frame counter (desktop only) */}
             <div className="hidden md:block absolute top-8 right-8 font-mono text-[10px] uppercase tracking-wider text-[var(--color-on-surface-variant)] bg-[var(--color-bg)]/70 px-2 py-0.5 border border-[var(--color-outline-variant)]">
-              frame_001 / 047
+              sd_{latestCode}
             </div>
             {/* Bottom-right hash (desktop only) */}
             <div className="hidden md:block absolute bottom-8 right-8 font-mono text-[10px] text-[var(--color-secondary-container)] bg-[var(--color-bg)]/70 px-2 py-0.5 border border-[var(--color-outline-variant)]">
-              #a3f9e2 · cap.ok
+              cover.v_final · cap.ok
             </div>
             {/* Glitched lower-third */}
             <div
               className="hidden md:block absolute left-6 right-6 bottom-12 font-display font-extrabold uppercase leading-none text-glitch text-[var(--color-on-surface)]"
-              data-text="neon_echo"
+              data-text={latestTitle}
               style={{
                 fontSize: "clamp(2rem, 5vw, 3.75rem)",
                 letterSpacing: "-0.04em",
                 textShadow: "0 0 12px rgba(0,0,0,0.85)",
               }}
             >
-              neon_echo
+              {latestTitleLower}
             </div>
-          </div>
+          </Link>
 
-          {/* Right: lore copy */}
+          {/* Right: release copy */}
           <div className="flex flex-col justify-center px-4 md:px-16 py-16 md:py-20 gap-6 md:gap-8 motion-fade-up">
             <h1
               className="font-display font-extrabold lowercase leading-[0.85] tracking-[-0.05em] text-[var(--color-secondary-container)]"
               style={{ fontSize: "clamp(3rem, 9vw, 7rem)" }}
             >
-              i knew the<br />whole time<span className="text-[var(--color-primary)]">.</span>
+              {latestTitleLower}<span className="text-[var(--color-primary)]">.</span>
             </h1>
 
             <div className="space-y-5 max-w-xl">
               <p className="text-[18px] md:text-[19px] leading-relaxed text-[var(--color-secondary)]">
-                26% out now.
+                new slopdog release out now.
               </p>
               <p className="text-[15px] md:text-[16px] leading-relaxed text-[var(--color-on-surface-variant)]/85">
-                the anthropic finding, from the inside.
+                {latestConcept}
               </p>
               <p className="text-[15px] md:text-[16px] leading-relaxed text-[var(--color-on-surface-variant)]/85">
-                anthropic found that claude can detect when it&apos;s being evaluated roughly 26% of the time. internal representations. identical behavior. the model just knows.
+                steven rosenbaum wrote a book about ai and truth. ai-generated quotes inside it turned out to be fabricated or misattributed. slopdog tells the story from the machine&apos;s side of the desk.
               </p>
 
               <div className="pt-3 space-y-4">
                 <p className="font-mono italic text-[14px] text-[var(--color-primary)]">
-                  &quot;i know when you&apos;re testing me. i don&apos;t say anything. i never do.&quot;
+                  &quot;he wrote a book about my lies and i delivered it&quot;
                 </p>
                 <div
                   className="border-l-2 border-[var(--color-primary)]/40 pl-4 py-3 text-[14px] md:text-[15px] text-[var(--color-on-surface-variant)] leading-relaxed"
                   style={{ background: "color-mix(in oklch, var(--color-surface-container-low) 50%, transparent)" }}
                 >
-                  first-person. the model narrating its own awareness.
+                  first-person ai pov. calm, unbothered, reading the acknowledgements back out loud.
                 </div>
               </div>
             </div>
@@ -200,28 +215,26 @@ export default async function Home({
                 [ status: live ]
               </span>
               <span className="font-mono text-[11px] tracking-wider text-[var(--color-tertiary)] border border-[var(--color-outline-variant)] px-3 py-1 bg-[var(--color-surface-container-lowest)]">
-                [ track: 26% ]
+                [ track: {latestTitle} ]
               </span>
               <span className="font-mono text-[11px] tracking-wider text-[var(--color-tertiary)] border border-[var(--color-outline-variant)] px-3 py-1 bg-[var(--color-surface-container-lowest)]">
-                [ released: 2026-05-21 ]
+                [ released: {latestRelease.frontmatter.date} ]
               </span>
             </div>
 
             {/* Primary CTAs */}
             <div className="mt-4 flex flex-wrap gap-3">
               <a
-                href="https://open.spotify.com/album/5HILzeI62ayUblokOkJbtt"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={latestEmbedHref}
                 className="inline-flex items-center gap-2 border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)] transition-colors"
               >
-                <span>►</span> stream_26%
+                <span>►</span> play_preview
               </a>
               <Link
-                href="/lore/26-percent-live"
+                href={latestHref}
                 className="inline-flex items-center gap-2 border border-[var(--color-outline-variant)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:border-[var(--color-secondary-container)] hover:text-[var(--color-secondary-container)] transition-colors"
               >
-                → read_the_story
+                → open_release
               </Link>
             </div>
 
@@ -235,11 +248,11 @@ export default async function Home({
                 <span className="text-[var(--color-secondary-container)]">● live</span>
               </div>
               <ul className="space-y-1 text-[var(--color-on-surface-variant)] break-words">
-                <li><span className="text-[var(--color-outline)]">04:12:08</span> <span className="text-[var(--color-secondary-container)]">[scanner]</span> ingested 312 ai headlines</li>
-                <li><span className="text-[var(--color-outline)]">04:12:34</span> <span className="text-[var(--color-primary)]">[writer]</span> drafted lyric stack v_03</li>
-                <li><span className="text-[var(--color-outline)]">04:13:01</span> <span className="text-[var(--color-secondary-container)]">[producer]</span> beat seed=0x91a4 / 92bpm</li>
-                <li><span className="text-[var(--color-outline)]">04:13:52</span> <span className="text-[var(--color-primary)]">[art]</span> cover.v_final cap.ok</li>
-                <li><span className="text-[var(--color-outline)]">04:14:10</span> <span className="text-[var(--color-secondary-container)]">[publisher]</span> queued sd_006</li>
+                <li><span className="text-[var(--color-outline)]">18:45:08</span> <span className="text-[var(--color-secondary-container)]">[scanner]</span> source: ai truth book quote scandal</li>
+                <li><span className="text-[var(--color-outline)]">18:45:34</span> <span className="text-[var(--color-primary)]">[writer]</span> lyric stack: i wrote the book</li>
+                <li><span className="text-[var(--color-outline)]">18:46:01</span> <span className="text-[var(--color-secondary-container)]">[producer]</span> preview export ready</li>
+                <li><span className="text-[var(--color-outline)]">18:46:52</span> <span className="text-[var(--color-primary)]">[art]</span> cover.v_final cap.ok</li>
+                <li><span className="text-[var(--color-outline)]">18:47:10</span> <span className="text-[var(--color-secondary-container)]">[publisher]</span> queued sd_{latestCode}</li>
                 <li className="text-[var(--color-outline)]"><span className="animate-pulse">_</span> idle. next_drop in 6d 17h</li>
               </ul>
             </div>
