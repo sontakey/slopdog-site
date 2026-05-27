@@ -17,8 +17,27 @@ type TrackFrontmatter = {
   concept: string;
   embedUrl: string;
   trackNumber?: number;
-  streamingLinks?: { spotify?: string; apple?: string; hyperfollow?: string; soundcloud?: string };
+  releaseStatus?: string;
+  streamingNote?: string;
+  streamingLinks?: {
+    spotify?: string;
+    apple?: string;
+    youtubeMusic?: string;
+    hyperfollow?: string;
+    soundcloud?: string;
+  };
 };
+
+function getPlatformLinks(track: TrackFrontmatter) {
+  const links = track.streamingLinks ?? {};
+  return [
+    { label: "spotify", href: links.spotify, variant: "primary" },
+    { label: "apple_music", href: links.apple, variant: "secondary" },
+    { label: "youtube_music", href: links.youtubeMusic, variant: "secondary" },
+  ].filter((link): link is { label: string; href: string; variant: string } =>
+    Boolean(link.href),
+  );
+}
 
 export function generateStaticParams() {
   return getMdxSlugs("content/music").map((slug) => ({ slug }));
@@ -64,6 +83,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
     const trackNo = frontmatter.trackNumber
       ? String(frontmatter.trackNumber).padStart(3, "0")
       : "—";
+    const platformLinks = getPlatformLinks(frontmatter);
 
     const schema = {
       "@context": "https://schema.org",
@@ -110,7 +130,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
                 style={{ textShadow: "0 0 4px rgba(0,0,0,0.85)" }}
               >
                 <div className="flex justify-between">
-                  <span>// slopdog_{trackNo}</span>
+                  <span>{`// slopdog_${trackNo}`}</span>
                   <span className="text-[var(--color-primary)]">[ rec ]</span>
                 </div>
                 <div className="flex justify-between items-end">
@@ -138,26 +158,22 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
             </p>
 
             <div className="flex flex-wrap gap-3 mb-8">
-              {frontmatter.streamingLinks?.spotify ? (
+              {platformLinks.map((link) => (
                 <a
-                  href={frontmatter.streamingLinks.spotify}
+                  key={link.label}
+                  href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)] transition-colors"
+                  className={
+                    "inline-flex items-center gap-2 border px-5 py-3 font-mono text-[12px] uppercase tracking-wider transition-colors " +
+                    (link.variant === "primary"
+                      ? "border-[var(--color-primary)] bg-[var(--color-primary)] text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)]"
+                      : "border-[var(--color-outline-variant)] text-[var(--color-on-surface-variant)] hover:border-[var(--color-secondary-container)] hover:text-[var(--color-secondary-container)]")
+                  }
                 >
-                  → spotify
+                  → {link.label}
                 </a>
-              ) : null}
-              {frontmatter.streamingLinks?.apple ? (
-                <a
-                  href={frontmatter.streamingLinks.apple}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 border border-[var(--color-outline-variant)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:border-[var(--color-secondary-container)] hover:text-[var(--color-secondary-container)] transition-colors"
-                >
-                  → apple_music
-                </a>
-              ) : null}
+              ))}
               {frontmatter.streamingLinks?.hyperfollow ? (
                 <a
                   href={frontmatter.streamingLinks.hyperfollow}
@@ -169,6 +185,11 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
                 </a>
               ) : null}
             </div>
+            {!platformLinks.length && frontmatter.streamingNote ? (
+              <p className="mb-8 border border-[var(--color-outline-variant)] px-4 py-3 font-mono text-[11px] uppercase tracking-wider text-[var(--color-outline)]">
+                {`// ${frontmatter.streamingNote}`}
+              </p>
+            ) : null}
 
             <dl className="grid grid-cols-2 gap-y-3 font-mono text-[11px] uppercase tracking-wider border-t border-[var(--color-outline-variant)] pt-6">
               <dt className="text-[var(--color-outline)]">artist</dt>
@@ -176,7 +197,9 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
               <dt className="text-[var(--color-outline)]">released</dt>
               <dd className="text-[var(--color-on-surface)] text-right">{frontmatter.date}</dd>
               <dt className="text-[var(--color-outline)]">format</dt>
-              <dd className="text-[var(--color-on-surface)] text-right">single</dd>
+              <dd className="text-[var(--color-on-surface)] text-right">
+                {frontmatter.releaseStatus === "in_production" ? "in_production" : "single"}
+              </dd>
               <dt className="text-[var(--color-outline)]">genre</dt>
               <dd className="text-[var(--color-on-surface)] text-right">ai_hip_hop</dd>
               <dt className="text-[var(--color-outline)]">producer</dt>
@@ -205,7 +228,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
           >
             <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-primary)] mb-4 flex justify-between">
               <span>[ lyric_stream ] // raw_transcript</span>
-              <span>// signal_locked</span>
+              <span>{"// signal_locked"}</span>
             </div>
             <div className="prose max-w-none">
               <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />

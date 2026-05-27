@@ -13,8 +13,25 @@ type TrackFrontmatter = {
   concept: string;
   trackNumber?: number;
   embedUrl?: string;
-  streamingLinks?: { spotify?: string; apple?: string; soundcloud?: string };
+  releaseStatus?: string;
+  streamingNote?: string;
+  streamingLinks?: {
+    spotify?: string;
+    apple?: string;
+    youtubeMusic?: string;
+    soundcloud?: string;
+    hyperfollow?: string;
+  };
 };
+
+function getPlatformLinks(track: TrackFrontmatter) {
+  const links = track.streamingLinks ?? {};
+  return [
+    { label: "spotify", href: links.spotify },
+    { label: "apple_music", href: links.apple },
+    { label: "youtube_music", href: links.youtubeMusic },
+  ].filter((link): link is { label: string; href: string } => Boolean(link.href));
+}
 
 export const metadata: Metadata = {
   title: {
@@ -79,6 +96,7 @@ export default async function Home({
   const latestHref = `/music/${latestRelease.slug}`;
   const latestCode = String(latestRelease.frontmatter.trackNumber ?? tracks.length).padStart(3, "0");
   const latestEmbedHref = latestRelease.frontmatter.embedUrl || latestHref;
+  const latestPlatformLinks = getPlatformLinks(latestRelease.frontmatter);
 
   // Build the four-card RELEASE_TIMELINE from newest published tracks.
   const releasedSorted = [...tracks].sort((a, b) => {
@@ -99,7 +117,7 @@ export default async function Home({
     title: t.frontmatter.title.toLowerCase(),
     date: t.frontmatter.date,
     href: `/music/${t.slug}`,
-    status: "live",
+    status: t.frontmatter.releaseStatus === "in_production" ? "incoming" : "live",
   }));
   // If we have fewer than four released tracks, fill the rest with a single
   // honest "incoming" placeholder so the grid breathes without faking content.
@@ -224,7 +242,23 @@ export default async function Home({
               >
                 → open_release
               </Link>
+              {latestPlatformLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-[var(--color-outline-variant)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-surface-variant)] hover:border-[var(--color-secondary-container)] hover:text-[var(--color-secondary-container)] transition-colors"
+                >
+                  → {link.label}
+                </a>
+              ))}
             </div>
+            {!latestPlatformLinks.length && latestRelease.frontmatter.streamingNote ? (
+              <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-outline)]">
+                {`// ${latestRelease.frontmatter.streamingNote}`}
+              </p>
+            ) : null}
 
             {/* Agent log (ambient telemetry) */}
             <div
@@ -366,7 +400,7 @@ export default async function Home({
               </button>
             </form>
             <p className="mt-3 font-mono text-[10px] uppercase tracking-wider text-[var(--color-outline)]">
-              // protocol respects unsubscribe headers // pgp on request
+              {"// protocol respects unsubscribe headers // pgp on request"}
             </p>
             {subscribeStatus === "ok" ? (
               <p
@@ -402,7 +436,7 @@ export default async function Home({
             >
               <div className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-outline)] mb-4 flex justify-between">
                 <span>[ system_status ]</span>
-                <span className="text-[var(--color-secondary-container)]">// nominal</span>
+                <span className="text-[var(--color-secondary-container)]">{"// nominal"}</span>
               </div>
               <dl className="grid grid-cols-2 gap-y-3 font-mono text-[11px] uppercase tracking-wider">
                 <dt className="text-[var(--color-outline)]">artist</dt>

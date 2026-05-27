@@ -12,6 +12,7 @@ type TrackFrontmatter = {
   coverImage: string;
   concept: string;
   trackNumber?: number;
+  releaseStatus?: string;
 };
 
 export const metadata: Metadata = {
@@ -39,6 +40,10 @@ export default function MusicPage() {
   const tracks = getAllMdx<TrackFrontmatter>("content/music");
   const featured = tracks[0];
   const rest = tracks.slice(1);
+  const latestTrackNumber = tracks.reduce(
+    (max, t) => Math.max(max, t.frontmatter.trackNumber ?? 0),
+    tracks.length,
+  );
 
   return (
     <div className="px-4 md:px-16 pt-10 pb-24">
@@ -46,7 +51,7 @@ export default function MusicPage() {
       <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--color-outline)] mb-8 flex flex-wrap justify-between gap-2">
         <span>[ /music ] // discography_full // sort=newest_first</span>
         <span>
-          archive_count: <span className="text-[var(--color-secondary-container)]">{String(tracks.length).padStart(3, "0")}</span>
+          latest_id: <span className="text-[var(--color-secondary-container)]">{String(latestTrackNumber).padStart(3, "0")}</span>
         </span>
       </div>
 
@@ -67,7 +72,7 @@ export default function MusicPage() {
               sub={`${featured.frontmatter.date} // single`}
               image={featured.frontmatter.coverImage}
               badge="latest"
-              index={String(tracks.length).padStart(3, "0")}
+              index={String(featured.frontmatter.trackNumber ?? latestTrackNumber).padStart(3, "0")}
               variant="hero"
             />
           </div>
@@ -103,7 +108,8 @@ export default function MusicPage() {
 
           <ul className="divide-y divide-[var(--color-outline-variant)]">
             {rest.map((t, i) => {
-              const num = String(rest.length - i).padStart(3, "0");
+              const num = String(t.frontmatter.trackNumber ?? rest.length - i).padStart(3, "0");
+              const isInProduction = t.frontmatter.releaseStatus === "in_production";
               return (
                 <li key={t.slug}>
                   <Link
@@ -128,14 +134,14 @@ export default function MusicPage() {
                         {t.frontmatter.title.toLowerCase()}
                       </div>
                       <div className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-outline)] md:hidden mt-1">
-                        {t.frontmatter.date}
+                        {isInProduction ? "in_production" : t.frontmatter.date}
                       </div>
                     </div>
                     <div className="col-span-3 md:col-span-3 hidden md:block text-[11px] text-[var(--color-on-surface-variant)] line-clamp-2 leading-snug font-mono tracking-wide uppercase">
                       {t.frontmatter.concept}
                     </div>
                     <div className="col-span-4 md:col-span-2 text-right font-mono text-[11px] uppercase tracking-wider text-[var(--color-on-surface-variant)]">
-                      {t.frontmatter.date}
+                      {isInProduction ? "in_production" : t.frontmatter.date}
                     </div>
                   </Link>
                 </li>
