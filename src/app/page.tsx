@@ -162,18 +162,6 @@ export default async function Home({
             <div className="hidden md:block absolute bottom-8 right-8 font-mono text-[10px] text-[var(--color-secondary-container)] bg-[var(--color-bg)]/70 px-2 py-0.5 border border-[var(--color-outline-variant)]">
               cover.v_final · cap.ok
             </div>
-            {/* Glitched lower-third */}
-            <div
-              className="hidden md:block absolute left-6 right-6 bottom-12 font-display font-extrabold uppercase leading-none text-glitch text-[var(--color-on-surface)]"
-              data-text={latestTitle}
-              style={{
-                fontSize: "clamp(2rem, 5vw, 3.75rem)",
-                letterSpacing: "-0.04em",
-                textShadow: "0 0 12px rgba(0,0,0,0.85)",
-              }}
-            >
-              {latestTitleLower}
-            </div>
           </Link>
 
           {/* Right: release copy */}
