@@ -27,7 +27,11 @@ export function getMdxBySlug<TFrontmatter extends Record<string, unknown>>(
   };
 }
 
-export function getAllMdx<TFrontmatter extends Record<string, any>>(
+type DatedFrontmatter = Record<string, unknown> & {
+  date?: string | number | Date;
+};
+
+export function getAllMdx<TFrontmatter extends DatedFrontmatter>(
   dir: string,
 ): Array<{ slug: string; frontmatter: TFrontmatter }> {
   const slugs = getMdxSlugs(dir);

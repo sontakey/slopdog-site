@@ -119,7 +119,7 @@ export default async function BlogPostPage({
               <span>[ dispatch ]</span>
               <span>{frontmatter.date}</span>
               {frontmatter.tags?.slice(0, 3).map((t) => (
-                <span key={t} className="text-[var(--color-outline)]">// {t.toLowerCase()}</span>
+                <span key={t} className="text-[var(--color-outline)]">{`// ${t.toLowerCase()}`}</span>
               ))}
             </div>
             <h1
@@ -146,7 +146,7 @@ export default async function BlogPostPage({
               <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-3 font-mono text-[10px] uppercase tracking-wider text-[var(--color-on-surface)]"
                 style={{ textShadow: "0 0 4px rgba(0,0,0,0.85)" }}
               >
-                <span>// dispatch_cover</span>
+                <span>{"// dispatch_cover"}</span>
                 <span className="text-[var(--color-primary)] self-end">[ live ]</span>
               </div>
             </div>

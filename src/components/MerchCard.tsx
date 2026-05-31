@@ -60,7 +60,7 @@ export default function MerchCard({
           className="absolute inset-x-0 top-0 flex justify-between px-2 py-1.5 font-mono text-[9px] uppercase tracking-wider text-[var(--color-on-surface)]"
           style={{ textShadow: "0 0 4px rgba(0,0,0,0.85)" }}
         >
-          <span>// {slug}</span>
+          <span>{`// ${slug}`}</span>
           <span className={available ? "text-[var(--color-secondary-container)]" : "text-[var(--color-error)]"}>
             [ {available ? "stock" : "sold_out"} ]
           </span>

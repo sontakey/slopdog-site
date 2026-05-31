@@ -75,7 +75,7 @@ export default function BuyButton({
         )}
       </button>
       {error && (
-        <p className="mt-2 font-mono text-[11px] text-[var(--color-error)]">// {error.toLowerCase()}</p>
+        <p className="mt-2 font-mono text-[11px] text-[var(--color-error)]">{`// ${error.toLowerCase()}`}</p>
       )}
     </div>
   );

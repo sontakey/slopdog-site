@@ -42,7 +42,7 @@ export default function StaticAudioPlayer({
             {title}
           </div>
           <div className="truncate font-mono text-[11px] text-[var(--color-on-surface-variant)] uppercase tracking-wider">
-            {artist.toLowerCase()} // {album.toLowerCase()}
+            {`${artist.toLowerCase()} // ${album.toLowerCase()}`}
           </div>
         </div>
       </div>

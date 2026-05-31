@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function JsonLd({ schema }: { schema: Record<string, any> }) {
+export default function JsonLd({ schema }: { schema: Record<string, unknown> }) {
   return (
     <script
       type="application/ld+json"
