@@ -30,7 +30,6 @@ export default function Footer() {
               {[
                 ["/music", "music"],
                 ["/lore", "lore"],
-                ["/merch", "merch"],
                 ["/about", "about"],
               ].map(([href, label]) => (
                 <li key={href}>
