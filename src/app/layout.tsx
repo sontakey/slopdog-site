@@ -78,7 +78,7 @@ export default function RootLayout({
           data-key="EPsCfTpxNk01hmvRT2xvUw"
           strategy="afterInteractive"
         />
-        <main className="flex-1 relative z-10">{children}</main>
+        <main className="flex-1 relative z-10 w-full max-w-[1400px] mx-auto">{children}</main>
         <Footer />
       </body>
     </html>
