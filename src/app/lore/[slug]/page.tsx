@@ -114,7 +114,7 @@ export default async function BlogPostPage({
         </nav>
 
         <div className="grid lg:grid-cols-12 gap-10 mb-16">
-          <header className="lg:col-span-8 motion-fade-up">
+          <header className="lg:col-span-8 motion-fade-up self-start">
             <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-primary)] mb-4 flex flex-wrap gap-3">
               <span>[ dispatch ]</span>
               <span>{frontmatter.date}</span>
@@ -154,7 +154,7 @@ export default async function BlogPostPage({
         </div>
 
         <div className="grid lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-8 lg:col-start-3 motion-fade-up motion-delay-3 prose">
+          <div className="lg:col-span-7 motion-fade-up motion-delay-3 prose">
             <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />
           </div>
         </div>

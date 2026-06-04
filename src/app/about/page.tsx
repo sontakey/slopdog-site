@@ -100,7 +100,7 @@ export default function AboutPage() {
       </div>
 
       <div className="grid lg:grid-cols-12 gap-10 motion-fade-up motion-delay-3">
-        <div className="lg:col-span-8 lg:col-start-3 prose">
+        <div className="lg:col-span-7 prose">
           <ViewToggle humanContent={<Mdx source={content} />} markdownSource={content} />
         </div>
       </div>

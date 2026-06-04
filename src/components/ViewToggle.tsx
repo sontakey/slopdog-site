@@ -13,23 +13,27 @@ export default function ViewToggle({ humanContent, markdownSource }: ViewToggleP
 
   return (
     <div>
-      <div className="mb-6 flex items-center gap-3 border-b border-fg/10 pb-3">
-        <span className="mr-auto text-xs font-semibold tracking-wide text-fg-faint">VIEW MODE:</span>
+      <div className="mb-6 flex items-center gap-0 border-b border-[var(--color-outline-variant)] pb-3">
+        <span className="mr-auto font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-outline)]">view_mode:</span>
         <button
           onClick={() => setMode("human")}
-          className={`rounded px-3 py-1 text-xs font-semibold tracking-wide transition-colors ${
-            mode === "human" ? "bg-primary text-neutral-950" : "text-fg-muted hover:text-fg"
+          className={`font-mono text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 border-t border-b border-l transition-colors ${
+            mode === "human"
+              ? "border-[var(--color-primary)] text-[var(--color-primary)] bg-[color-mix(in_oklch,var(--color-primary)_8%,transparent)]"
+              : "border-[var(--color-outline-variant)] text-[var(--color-outline)] hover:text-[var(--color-primary)] hover:border-[var(--color-primary)]"
           }`}
         >
-          👤 HUMAN
+          [ human ]
         </button>
         <button
           onClick={() => setMode("ai")}
-          className={`rounded px-3 py-1 text-xs font-semibold tracking-wide transition-colors ${
-            mode === "ai" ? "bg-primary text-neutral-950" : "text-fg-muted hover:text-fg"
+          className={`font-mono text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 border transition-colors ${
+            mode === "ai"
+              ? "border-[var(--color-primary)] text-[var(--color-primary)] bg-[color-mix(in_oklch,var(--color-primary)_8%,transparent)]"
+              : "border-[var(--color-outline-variant)] text-[var(--color-outline)] hover:text-[var(--color-primary)] hover:border-[var(--color-primary)]"
           }`}
         >
-          🤖 AI / MD
+          [ ai/md ]
         </button>
       </div>
 
@@ -38,15 +42,15 @@ export default function ViewToggle({ humanContent, markdownSource }: ViewToggleP
       ) : (
         <div>
           <div className="mb-3 flex items-center justify-between">
-            <span className="text-xs font-semibold tracking-wide text-primary">MARKDOWN SOURCE</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-primary)]">// markdown_source</span>
             <button
               onClick={() => navigator.clipboard.writeText(markdownSource)}
-              className="text-xs font-semibold text-fg-faint transition-colors hover:text-primary"
+              className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-outline)] hover:text-[var(--color-primary)] transition-colors"
             >
-              📋 COPY
+              [ copy ]
             </button>
           </div>
-          <pre className="max-h-[80vh] overflow-auto whitespace-pre-wrap font-mono text-sm leading-relaxed text-neutral-300">
+          <pre className="max-h-[80vh] overflow-auto whitespace-pre-wrap font-mono text-sm leading-relaxed text-[var(--color-on-surface-variant)]">
             {markdownSource}
           </pre>
         </div>
