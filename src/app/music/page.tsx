@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import AlbumCard from "@/components/AlbumCard";
-import { getAllMdx } from "@/lib/mdx";
+import { getPublicMusicTracks } from "@/lib/music";
 import { SITE } from "@/lib/site";
 
 type TrackFrontmatter = {
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 };
 
 export default function MusicPage() {
-  const tracks = getAllMdx<TrackFrontmatter>("content/music");
+  const tracks = getPublicMusicTracks<TrackFrontmatter>();
   const featured = tracks[0];
   const rest = tracks.slice(1);
   const latestTrackNumber = tracks.reduce(

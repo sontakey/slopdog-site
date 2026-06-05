@@ -6,7 +6,8 @@ import Mdx from "@/components/Mdx";
 import JsonLd from "@/components/JsonLd";
 import ViewToggle from "@/components/ViewToggle";
 import BeatLicenseSection from "@/components/BeatLicenseSection";
-import { getAllMdx, getMdxBySlug, getMdxSlugs } from "@/lib/mdx";
+import { getMdxBySlug } from "@/lib/mdx";
+import { getPublicMusicTracks, isPublicMusicTrack } from "@/lib/music";
 import { SITE } from "@/lib/site";
 
 type TrackFrontmatter = {
@@ -40,7 +41,7 @@ function getPlatformLinks(track: TrackFrontmatter) {
 }
 
 export function generateStaticParams() {
-  return getMdxSlugs("content/music").map((slug) => ({ slug }));
+  return getPublicMusicTracks<TrackFrontmatter>().map((track) => ({ slug: track.slug }));
 }
 
 export async function generateMetadata({
@@ -49,7 +50,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const all = getAllMdx<TrackFrontmatter>("content/music");
+  const all = getPublicMusicTracks<TrackFrontmatter>();
   const track = all.find((t) => t.slug === slug);
   if (!track) return {};
 
@@ -79,10 +80,12 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
       slug,
     );
 
+    if (!isPublicMusicTrack({ frontmatter })) notFound();
+
     const url = new URL(`/music/${frontmatter.slug}`, SITE.url).toString();
     const trackNo = frontmatter.trackNumber
       ? String(frontmatter.trackNumber).padStart(3, "0")
-      : "—";
+      : "n/a";
     const platformLinks = getPlatformLinks(frontmatter);
 
     const schema = {

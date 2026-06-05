@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
-import { getAllMdx } from "@/lib/mdx";
+import { getPublicMusicTracks } from "@/lib/music";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
@@ -65,7 +65,7 @@ export default async function Home({
   const sp = (await searchParams) ?? {};
   const subscribeStatus =
     typeof sp.subscribe === "string" ? sp.subscribe : null;
-  const tracks = getAllMdx<TrackFrontmatter>("content/music");
+  const tracks = getPublicMusicTracks<TrackFrontmatter>();
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
     (process.env.NODE_ENV !== "production" ? "1x00000000000000000000AA" : null);
 

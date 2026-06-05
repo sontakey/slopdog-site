@@ -1,11 +1,12 @@
 import { MetadataRoute } from "next";
 import { getAllMdx } from "@/lib/mdx";
+import { getPublicMusicTracks } from "@/lib/music";
 import { SITE } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const tracks = getAllMdx<{ slug: string }>("content/music");
+  const tracks = getPublicMusicTracks();
   const posts = getAllMdx<{ slug: string }>("content/lore");
 
   const staticRoutes: MetadataRoute.Sitemap = [
