@@ -42,7 +42,7 @@ export default function ViewToggle({ humanContent, markdownSource }: ViewToggleP
       ) : (
         <div>
           <div className="mb-3 flex items-center justify-between">
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-primary)]">// markdown_source</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-primary)]">{"// markdown_source"}</span>
             <button
               onClick={() => navigator.clipboard.writeText(markdownSource)}
               className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-outline)] hover:text-[var(--color-primary)] transition-colors"

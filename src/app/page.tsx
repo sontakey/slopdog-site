@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import { getAllMdx } from "@/lib/mdx";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
@@ -65,6 +66,8 @@ export default async function Home({
   const subscribeStatus =
     typeof sp.subscribe === "string" ? sp.subscribe : null;
   const tracks = getAllMdx<TrackFrontmatter>("content/music");
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+    (process.env.NODE_ENV !== "production" ? "1x00000000000000000000AA" : null);
 
   const websiteSchema = {
     "@context": "https://schema.org",
@@ -135,6 +138,7 @@ export default async function Home({
     <div>
       <JsonLd schema={websiteSchema} />
       <JsonLd schema={musicGroupSchema} />
+      {turnstileSiteKey ? <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer /> : null}
 
       {/* HERO — latest release */}
       <section className="relative border-b border-[var(--color-outline-variant)]">
@@ -384,14 +388,28 @@ export default async function Home({
               early access to drops, hidden tracks, and the strange behind-the-scenes ai output that didn&apos;t make the cut. no spam. unsubscribe whenever the noise wins.
             </p>
             <form className="flex flex-col sm:flex-row gap-3 max-w-xl" action="/api/subscribe" method="post">
+              <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+                <label htmlFor="newsletter-website">website</label>
+                <input
+                  id="newsletter-website"
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
               <input
                 type="email"
                 name="email"
                 placeholder="email@protocol"
                 aria-label="email"
+                required
                 className="flex-1 border border-[var(--color-outline-variant)] px-4 py-3 font-mono text-[14px] text-[var(--color-on-surface)] outline-none focus:border-[var(--color-primary)] transition-colors"
                 style={{ background: "var(--color-bg)" }}
               />
+              {turnstileSiteKey ? (
+                <div className="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="dark" />
+              ) : null}
               <button
                 type="submit"
                 className="border border-[var(--color-primary)] bg-[var(--color-primary)] px-6 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)] transition-colors"
