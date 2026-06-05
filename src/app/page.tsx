@@ -140,7 +140,7 @@ export default async function Home({
       <JsonLd schema={musicGroupSchema} />
       {turnstileSiteKey ? <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer /> : null}
 
-      {/* HERO — latest release */}
+      {/* HERO: latest release */}
       <section className="relative border-b border-[var(--color-outline-variant)]">
         <div className="grid grid-cols-1 md:grid-cols-2 md:min-h-[80vh] items-stretch">
           {/* Left: latest cover art */}
@@ -165,7 +165,7 @@ export default async function Home({
                   "linear-gradient(to right, transparent 0%, transparent 60%, var(--color-bg) 100%)",
               }}
             />
-            {/* OS chrome — corner registration marks */}
+            {/* OS chrome: corner registration marks */}
             <div className="absolute inset-4 pointer-events-none">
               <span className="absolute top-0 left-0 w-4 h-4 border-t border-l border-[var(--color-primary)]" />
               <span className="absolute top-0 right-0 w-4 h-4 border-t border-r border-[var(--color-primary)]" />
@@ -371,7 +371,7 @@ export default async function Home({
         </div>
       </section>
 
-      {/* SYSTEM CARD — status sidebar promoted to a full strip */}
+      {/* SYSTEM CARD: status sidebar promoted to a full strip */}
       <section
         className="border-y border-[var(--color-outline-variant)] px-4 md:px-16 py-14 md:py-16"
         style={{ background: "var(--color-surface-container-lowest)" }}
@@ -387,7 +387,7 @@ export default async function Home({
             <p className="text-[16px] md:text-[17px] text-[var(--color-on-surface-variant)] max-w-xl mb-7 leading-relaxed">
               early access to drops, hidden tracks, and the strange behind-the-scenes ai output that didn&apos;t make the cut. no spam. unsubscribe whenever the noise wins.
             </p>
-            <form className="flex flex-col sm:flex-row gap-3 max-w-xl" action="/api/subscribe" method="post">
+            <form className="max-w-2xl" action="/api/subscribe" method="post">
               <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
                 <label htmlFor="newsletter-website">website</label>
                 <input
@@ -398,27 +398,47 @@ export default async function Home({
                   autoComplete="off"
                 />
               </div>
-              <input
-                type="email"
-                name="email"
-                placeholder="email@protocol"
-                aria-label="email"
-                required
-                className="flex-1 border border-[var(--color-outline-variant)] px-4 py-3 font-mono text-[14px] text-[var(--color-on-surface)] outline-none focus:border-[var(--color-primary)] transition-colors"
-                style={{ background: "var(--color-bg)" }}
-              />
-              {turnstileSiteKey ? (
-                <div className="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="dark" />
-              ) : null}
-              <button
-                type="submit"
-                className="border border-[var(--color-primary)] bg-[var(--color-primary)] px-6 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)] transition-colors"
+              <div
+                className="group border border-[var(--color-outline-variant)] bg-[var(--color-bg)] transition-colors focus-within:border-[var(--color-primary)]"
+                style={{ boxShadow: "inset 0 0 0 1px color-mix(in oklch, var(--color-primary) 8%, transparent)" }}
               >
-                → subscribe
-              </button>
+                <div className="flex flex-col sm:flex-row">
+                  <label htmlFor="newsletter-email" className="sr-only">email</label>
+                  <input
+                    id="newsletter-email"
+                    type="email"
+                    name="email"
+                    placeholder="email@protocol"
+                    aria-label="email"
+                    required
+                    className="min-w-0 flex-1 bg-transparent px-5 py-4 font-mono text-[14px] text-[var(--color-on-surface)] outline-none placeholder:text-[var(--color-outline)]"
+                  />
+                  <button
+                    type="submit"
+                    className="border-t border-[var(--color-outline-variant)] bg-[var(--color-primary)] px-6 py-4 font-mono text-[12px] uppercase tracking-[0.2em] text-[var(--color-on-primary)] transition-colors hover:bg-transparent hover:text-[var(--color-primary)] sm:border-l sm:border-t-0"
+                  >
+                    subscribe
+                  </button>
+                </div>
+                {turnstileSiteKey ? (
+                  <div className="border-t border-[var(--color-outline-variant)]/60 px-5 py-3">
+                    <div
+                      className="cf-turnstile"
+                      data-sitekey={turnstileSiteKey}
+                      data-theme="dark"
+                      data-size="compact"
+                      data-appearance="interaction-only"
+                    />
+                    <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] uppercase tracking-wider text-[var(--color-outline)]">
+                      <span>[ bot_gate: passive ]</span>
+                      <span className="text-[var(--color-secondary-container)]">[ unsubscribe: respected ]</span>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
             </form>
             <p className="mt-3 font-mono text-[10px] uppercase tracking-wider text-[var(--color-outline)]">
-              {"// protocol respects unsubscribe headers // pgp on request"}
+              {"// early drops // hidden tracks // no spam"}
             </p>
             {subscribeStatus === "ok" ? (
               <p
