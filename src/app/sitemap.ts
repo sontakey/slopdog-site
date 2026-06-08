@@ -3,11 +3,21 @@ import { getAllMdx } from "@/lib/mdx";
 import { getPublicMusicTracks } from "@/lib/music";
 import { SITE } from "@/lib/site";
 
+function toLastModified(date: unknown): Date {
+  if (typeof date !== "string" && typeof date !== "number" && !(date instanceof Date)) {
+    return new Date();
+  }
+
+  const parsed = new Date(date);
+  if (Number.isNaN(parsed.getTime())) return new Date();
+  return parsed;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
   const tracks = getPublicMusicTracks();
-  const posts = getAllMdx<{ slug: string }>("content/lore");
+  const posts = getAllMdx<{ slug: string; date?: string }>("content/lore");
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -44,14 +54,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const trackRoutes: MetadataRoute.Sitemap = tracks.map((t) => ({
     url: `${SITE.url}/music/${t.slug}`,
-    lastModified: now,
+    lastModified: toLastModified(t.frontmatter.date),
     changeFrequency: "monthly",
     priority: 0.6,
   }));
 
   const postRoutes: MetadataRoute.Sitemap = posts.map((p) => ({
     url: `${SITE.url}/lore/${p.slug}`,
-    lastModified: now,
+    lastModified: toLastModified(p.frontmatter.date),
     changeFrequency: "monthly",
     priority: 0.5,
   }));
