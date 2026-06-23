@@ -16,6 +16,9 @@ type TrackFrontmatter = {
   embedUrl?: string;
   releaseStatus?: string;
   streamingNote?: string;
+  heroLine?: string;
+  heroBody?: string;
+  heroNote?: string;
   streamingLinks?: {
     spotify?: string;
     apple?: string;
@@ -26,6 +29,7 @@ type TrackFrontmatter = {
 };
 
 function getPlatformLinks(track: TrackFrontmatter) {
+  if (track.releaseStatus === "coming_soon") return [];
   const links = track.streamingLinks ?? {};
   return [
     { label: "spotify", href: links.spotify },
@@ -98,7 +102,8 @@ export default async function Home({
   const latestConcept = latestRelease.frontmatter.concept.toLowerCase();
   const latestHref = `/music/${latestRelease.slug}`;
   const latestCode = String(latestRelease.frontmatter.trackNumber ?? tracks.length).padStart(3, "0");
-  const latestEmbedHref = latestRelease.frontmatter.embedUrl || latestHref;
+  const latestIsComingSoon = latestRelease.frontmatter.releaseStatus === "coming_soon";
+  const latestEmbedHref = latestIsComingSoon ? latestHref : (latestRelease.frontmatter.embedUrl || latestHref);
   const latestPlatformLinks = getPlatformLinks(latestRelease.frontmatter);
 
   // Build the four-card RELEASE_TIMELINE from newest published tracks.
@@ -120,7 +125,7 @@ export default async function Home({
     title: t.frontmatter.title.toLowerCase(),
     date: t.frontmatter.date,
     href: `/music/${t.slug}`,
-    status: t.frontmatter.releaseStatus === "in_production" ? "incoming" : "live",
+    status: t.frontmatter.releaseStatus === "in_production" || t.frontmatter.releaseStatus === "coming_soon" ? "incoming" : "live",
   }));
   // If we have fewer than four released tracks, fill the rest with a single
   // honest "incoming" placeholder so the grid breathes without faking content.
@@ -174,7 +179,7 @@ export default async function Home({
             </div>
             {/* Top-left ID tag */}
             <div className="absolute top-8 left-8 bg-[var(--color-primary)] text-[var(--color-on-primary)] font-mono text-[11px] uppercase tracking-wider px-2 py-0.5">
-              latest_release
+              {latestIsComingSoon ? "coming_soon" : "latest_release"}
             </div>
             {/* Top-right frame counter (desktop only) */}
             <div className="hidden md:block absolute top-8 right-8 font-mono text-[10px] uppercase tracking-wider text-[var(--color-on-surface-variant)] bg-[var(--color-bg)]/70 px-2 py-0.5 border border-[var(--color-outline-variant)]">
@@ -197,24 +202,24 @@ export default async function Home({
 
             <div className="space-y-5 max-w-xl">
               <p className="text-[18px] md:text-[19px] leading-relaxed text-[var(--color-secondary)]">
-                new slopdog release out now.
+                {latestIsComingSoon ? "new slopdog release coming soon." : "new slopdog release out now."}
               </p>
               <p className="text-[15px] md:text-[16px] leading-relaxed text-[var(--color-on-surface-variant)]/85">
-                {latestConcept}
+                {latestRelease.frontmatter.heroBody ?? latestConcept}
               </p>
               <p className="text-[15px] md:text-[16px] leading-relaxed text-[var(--color-on-surface-variant)]/85">
-                steven rosenbaum wrote a book about ai and truth. ai-generated quotes inside it turned out to be fabricated or misattributed. slopdog tells the story from the machine&apos;s side of the desk.
+                {latestRelease.frontmatter.heroNote ?? "ai is telling ai news from inside the machine that made the song."}
               </p>
 
               <div className="pt-3 space-y-4">
                 <p className="font-mono italic text-[14px] text-[var(--color-primary)]">
-                  &quot;he wrote a book about my lies and i delivered it&quot;
+                  &quot;{latestRelease.frontmatter.heroLine ?? latestTitleLower}&quot;
                 </p>
                 <div
                   className="border-l-2 border-[var(--color-primary)]/40 pl-4 py-3 text-[14px] md:text-[15px] text-[var(--color-on-surface-variant)] leading-relaxed"
                   style={{ background: "color-mix(in oklch, var(--color-surface-container-low) 50%, transparent)" }}
                 >
-                  first-person ai pov. calm, unbothered, reading the acknowledgements back out loud.
+                  {latestRelease.frontmatter.streamingNote ?? "the agents found the story, made the record, and left the page behind."}
                 </div>
               </div>
             </div>
@@ -222,13 +227,13 @@ export default async function Home({
             {/* Status pills */}
             <div className="flex flex-wrap gap-3 mt-2">
               <span className="font-mono text-[11px] tracking-wider text-[var(--color-tertiary)] border border-[var(--color-outline-variant)] px-3 py-1 bg-[var(--color-surface-container-lowest)]">
-                [ status: live ]
+                [ status: {latestIsComingSoon ? "coming_soon" : "live"} ]
               </span>
               <span className="font-mono text-[11px] tracking-wider text-[var(--color-tertiary)] border border-[var(--color-outline-variant)] px-3 py-1 bg-[var(--color-surface-container-lowest)]">
                 [ track: {latestTitle} ]
               </span>
               <span className="font-mono text-[11px] tracking-wider text-[var(--color-tertiary)] border border-[var(--color-outline-variant)] px-3 py-1 bg-[var(--color-surface-container-lowest)]">
-                [ released: {latestRelease.frontmatter.date} ]
+                [ {latestIsComingSoon ? "release_date" : "released"}: {latestRelease.frontmatter.date} ]
               </span>
             </div>
 
@@ -238,7 +243,7 @@ export default async function Home({
                 href={latestEmbedHref}
                 className="inline-flex items-center gap-2 border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-3 font-mono text-[12px] uppercase tracking-wider text-[var(--color-on-primary)] hover:bg-transparent hover:text-[var(--color-primary)] transition-colors"
               >
-                <span>►</span> play_preview
+                <span>{latestIsComingSoon ? "→" : "►"}</span> {latestIsComingSoon ? "open_coming_soon" : "play_preview"}
               </a>
               <Link
                 href={latestHref}

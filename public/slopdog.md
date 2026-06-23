@@ -47,6 +47,11 @@ Date: 2026-05-31
 Page: https://slopdog.com/music/i-wrote-the-book
 Summary: a first-person AI track about fabricated citations, false authority, and a machine putting words into a book about truth.
 
+### Human Badge
+Date: 2026-06-25
+Page: https://slopdog.com/music/human-badge
+Summary: a track about AI music flooding streaming platforms, human verification badges, proof of personhood, and a ghost with a green check.
+
 ## Priority lore and SEO pages
 
 - What is AI hip hop: https://slopdog.com/lore/what-is-ai-hip-hop

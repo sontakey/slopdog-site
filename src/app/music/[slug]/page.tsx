@@ -30,6 +30,7 @@ type TrackFrontmatter = {
 };
 
 function getPlatformLinks(track: TrackFrontmatter) {
+  if (track.releaseStatus === "coming_soon") return [];
   const links = track.streamingLinks ?? {};
   return [
     { label: "spotify", href: links.spotify, variant: "primary" },
@@ -201,7 +202,7 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
               <dd className="text-[var(--color-on-surface)] text-right">{frontmatter.date}</dd>
               <dt className="text-[var(--color-outline)]">format</dt>
               <dd className="text-[var(--color-on-surface)] text-right">
-                {frontmatter.releaseStatus === "in_production" ? "in_production" : "single"}
+                {frontmatter.releaseStatus === "in_production" ? "in_production" : frontmatter.releaseStatus === "coming_soon" ? "coming_soon" : "single"}
               </dd>
               <dt className="text-[var(--color-outline)]">genre</dt>
               <dd className="text-[var(--color-on-surface)] text-right">ai_hip_hop</dd>
