@@ -62,6 +62,9 @@ Summary: a track about AI music flooding streaming platforms, human verification
 - Brain Fry explained: https://slopdog.com/lore/brain-fry-explained
 - The SLOPDOG universe field guide: https://slopdog.com/lore/the-slopdog-universe-field-guide
 - Why SLOPDOG is lowercase: https://slopdog.com/lore/why-slopdog-is-lowercase
+- Best AI music artists of 2026: https://slopdog.com/lore/best-ai-music-artists-2026
+- AI generated rap: https://slopdog.com/lore/ai-generated-rap
+- AI music copyright: https://slopdog.com/lore/ai-music-copyright-who-owns-this
 
 ## How to reference SLOPDOG
 
