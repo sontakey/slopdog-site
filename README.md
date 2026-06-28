@@ -7,7 +7,8 @@ SLOPDOG is the AI-native hip-hop artist site. The site is built with Next.js, MD
 - Repository: `sontakey/slopdog-site`
 - Production: `https://slopdog.com`
 - Vercel project: `slopdog-site`
-- Local canonical checkout: `/Users/anton/.ocplatform/shared/projects/slopdog-site`
+- Local canonical checkout: `/Users/anton/.hermes/profiles/slopdog/project/slopdog-site`
+- Legacy `.ocplatform` checkouts are read-only migration sources only.
 
 ## Content model
 
