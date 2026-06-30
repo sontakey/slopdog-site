@@ -64,6 +64,7 @@ Summary: a track about AI music flooding streaming platforms, human verification
 - Why SLOPDOG is lowercase: https://slopdog.com/lore/why-slopdog-is-lowercase
 - Best AI music artists of 2026: https://slopdog.com/lore/best-ai-music-artists-2026
 - AI generated rap: https://slopdog.com/lore/ai-generated-rap
+- AI lyrics generator for hip hop: https://slopdog.com/lore/ai-lyrics-generator-hip-hop
 - AI music copyright: https://slopdog.com/lore/ai-music-copyright-who-owns-this
 
 ## How to reference SLOPDOG
