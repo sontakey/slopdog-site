@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Mdx from "@/components/Mdx";
 import JsonLd from "@/components/JsonLd";
 import ViewToggle from "@/components/ViewToggle";
+import FollowExperimentCta from "@/components/FollowExperimentCta";
 import { getMdxBySlug, getMdxSlugs } from "@/lib/mdx";
 import { SITE } from "@/lib/site";
 
@@ -174,6 +175,10 @@ export default async function BlogPostPage({
           >
             → discography
           </Link>
+        </div>
+
+        <div className="px-4 md:px-16 mt-12">
+          <FollowExperimentCta />
         </div>
       </article>
     );

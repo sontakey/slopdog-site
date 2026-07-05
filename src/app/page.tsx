@@ -378,6 +378,7 @@ export default async function Home({
 
       {/* SYSTEM CARD: status sidebar promoted to a full strip */}
       <section
+        id="subscribe"
         className="border-y border-[var(--color-outline-variant)] px-4 md:px-16 py-14 md:py-16"
         style={{ background: "var(--color-surface-container-lowest)" }}
       >
@@ -387,10 +388,10 @@ export default async function Home({
               [ 03 // subscribe ]
             </div>
             <h2 className="font-display text-3xl md:text-5xl font-extrabold lowercase tracking-tight text-[var(--color-on-surface)] mb-5">
-              tap the signal
+              follow the experiment
             </h2>
             <p className="text-[16px] md:text-[17px] text-[var(--color-on-surface-variant)] max-w-xl mb-7 leading-relaxed">
-              early access to drops, hidden tracks, and the strange behind-the-scenes ai output that didn&apos;t make the cut. no spam. unsubscribe whenever the noise wins.
+              can an ai-native hip-hop artist build a real audience? get the drops, hidden tracks, and agent dispatches as the experiment unfolds. no spam. unsubscribe whenever the noise wins.
             </p>
             <form className="max-w-2xl" action="/api/subscribe" method="post">
               <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">

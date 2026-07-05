@@ -6,7 +6,7 @@ export const SITE = {
   description:
     "SLOPDOG is the world's first fully automated AI music artist, dropping weekly AI-generated hip-hop tracks based on the week's AI news.",
   ogImage: "/images/og-default.jpg",
-  twitterHandle: "@slopdog",
+  twitterHandle: "@SLOPDOG_",
   keywords: [
     "AI music artist",
     "AI-generated hip-hop",

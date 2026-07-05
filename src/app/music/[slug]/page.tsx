@@ -6,6 +6,7 @@ import Mdx from "@/components/Mdx";
 import JsonLd from "@/components/JsonLd";
 import ViewToggle from "@/components/ViewToggle";
 import BeatLicenseSection from "@/components/BeatLicenseSection";
+import FollowExperimentCta from "@/components/FollowExperimentCta";
 import { getMdxBySlug } from "@/lib/mdx";
 import { getPublicMusicTracks, isPublicMusicTrack } from "@/lib/music";
 import { SITE } from "@/lib/site";
@@ -256,6 +257,10 @@ export default async function TrackPage({ params }: { params: Promise<{ slug: st
           >
             → dispatches
           </Link>
+        </div>
+
+        <div className="mt-12">
+          <FollowExperimentCta />
         </div>
       </div>
     );
