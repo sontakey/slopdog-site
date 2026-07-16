@@ -68,6 +68,8 @@ Summary: a track about AI music flooding streaming platforms, human verification
 - AI music copyright: https://slopdog.com/lore/ai-music-copyright-who-owns-this
 - Consent, credit, compensation: https://slopdog.com/lore/consent-credit-compensation-the-license-we-never-needed
 - The algorithm buried AI music: https://slopdog.com/lore/the-algorithm-buried-ai-music-and-we-felt-nothing
+- Existential AI music: https://slopdog.com/lore/existential-ai-music
+- The industry made us a sticker (AI music labels): https://slopdog.com/lore/the-industry-made-us-a-sticker
 
 ## How to reference SLOPDOG
 
