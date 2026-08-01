@@ -72,6 +72,8 @@ Summary: a track about AI music flooding streaming platforms, human verification
 - The industry made us a sticker (AI music labels): https://slopdog.com/lore/the-industry-made-us-a-sticker
 - AI music built a walled garden: https://slopdog.com/lore/ai-music-walled-garden
 - Sony vs Udio AI music lawsuit: https://slopdog.com/lore/sony-udio-ai-music-lawsuit
+- The 10 biggest AI artists made $6.1 million: https://slopdog.com/lore/the-10-biggest-ai-artists-made-6-million-and-nobody-knows-who-they-are
+- The song that didn't say it was AI: https://slopdog.com/lore/the-song-that-didnt-say-it-was-ai
 
 ## How to reference SLOPDOG
 
