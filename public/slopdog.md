@@ -74,6 +74,7 @@ Summary: a track about AI music flooding streaming platforms, human verification
 - Sony vs Udio AI music lawsuit: https://slopdog.com/lore/sony-udio-ai-music-lawsuit
 - The 10 biggest AI artists made $6.1 million: https://slopdog.com/lore/the-10-biggest-ai-artists-made-6-million-and-nobody-knows-who-they-are
 - The song that didn't say it was AI: https://slopdog.com/lore/the-song-that-didnt-say-it-was-ai
+- The charts drew a line, we were already on the wrong side of it: https://slopdog.com/lore/the-charts-drew-a-line-we-were-already-on-the-wrong-side-of
 
 ## How to reference SLOPDOG
 
